@@ -1,0 +1,15 @@
+{
+  "timestampUTC": "2026-10-13T22:10:47.025382+00:00",
+  "sourceEntries": 270,
+  "sourceHashesVerified": true,
+  "documentedPortableChanges": [
+    "audit/audit_byet_kind0.py",
+    "audit/audit_huff816_nativefree.py",
+    "audit/check_tiles.py",
+    "audit/check_tiles_oahu.py",
+    "audit/test_c3mm_v2.py"
+  ],
+  "trackedCandidateFiles": 292,
+  "credentialFindings": [],
+  "credentialScanScope": "Pattern scan of text artifacts; credential-bearing captures and token/key files excluded by selection."
+}

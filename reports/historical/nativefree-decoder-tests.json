@@ -1,0 +1,31 @@
+{
+  "byteLaneDirectories": 590,
+  "compressedLaneEntries": 12980,
+  "nativeXYZAnchorGoldenCompared": 223,
+  "sparseBitmapAnchorGoldenCompared": 21,
+  "unsupportedAnchorTiles": [],
+  "native12BitAnchorMaxGapMeters": 22.48,
+  "nativeAPIInvoked": false,
+  "validations": {
+    "tokyo": {
+      "tiles": 223,
+      "splatRecords": 736915,
+      "embeddedHEIC": 669,
+      "meshCompressedBytes": 6717914,
+      "splatCompressedBytes": 9808120,
+      "quantizationPatterns": 3,
+      "nativeGoldenCompared": 223
+    },
+    "oahu": {
+      "tiles": 72,
+      "splatRecords": 304527,
+      "embeddedHEIC": 216,
+      "meshCompressedBytes": 2004738,
+      "splatCompressedBytes": 4048875,
+      "quantizationPatterns": 1,
+      "nativeGoldenCompared": 0
+    }
+  },
+  "truncatedOrCorruptedRejected": 3,
+  "status": "TRICO frame and header decode; numeric XYZ/UV/face indices still compressed"
+}

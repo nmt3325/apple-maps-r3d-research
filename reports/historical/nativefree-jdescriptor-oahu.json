@@ -1,0 +1,102 @@
+{
+  "tiles": 72,
+  "decodedXYZLaneDirectories": 72,
+  "decodedAttributeLaneDirectories": 72,
+  "compressedJBytes": 4042003,
+  "laneKinds": {
+    "6": 428,
+    "1": 1807,
+    "2": 166,
+    "4": 622,
+    "5": 77,
+    "3": 35,
+    "0": 33
+  },
+  "note": "All byte ranges are encoded; decoded numeric Splat XYZ not yet available.",
+  "samples": [
+    {
+      "source": "s98_z20_x64551_y460816_h0.r3d",
+      "stream": 0,
+      "recordLaneBytes": 12,
+      "activeLanes": 3,
+      "firstBitmapBytes": 2,
+      "secondBitmapBytes": 1,
+      "descriptorBytes": 7,
+      "laneCompressedBytes": 31553,
+      "descriptors": [
+        {
+          "lane": 0,
+          "kind": 6,
+          "compressedBytes": 0,
+          "compressedOffset": 10
+        },
+        {
+          "lane": 1,
+          "kind": 6,
+          "compressedBytes": 10695,
+          "compressedOffset": 10
+        },
+        {
+          "lane": 2,
+          "kind": 1,
+          "compressedBytes": 0,
+          "compressedOffset": 10705
+        },
+        {
+          "lane": 3,
+          "kind": 1,
+          "compressedBytes": 0,
+          "compressedOffset": 10705
+        },
+        {
+          "lane": 4,
+          "kind": 6,
+          "compressedBytes": 0,
+          "compressedOffset": 10705
+        },
+        {
+          "lane": 5,
+          "kind": 6,
+          "compressedBytes": 10951,
+          "compressedOffset": 10705
+        },
+        {
+          "lane": 6,
+          "kind": 1,
+          "compressedBytes": 0,
+          "compressedOffset": 21656
+        },
+        {
+          "lane": 7,
+          "kind": 1,
+          "compressedBytes": 0,
+          "compressedOffset": 21656
+        },
+        {
+          "lane": 8,
+          "kind": 6,
+          "compressedBytes": 0,
+          "compressedOffset": 21656
+        },
+        {
+          "lane": 9,
+          "kind": 6,
+          "compressedBytes": 9907,
+          "compressedOffset": 21656
+        },
+        {
+          "lane": 10,
+          "kind": 1,
+          "compressedBytes": 0,
+          "compressedOffset": 31563
+        },
+        {
+          "lane": 11,
+          "kind": 1,
+          "compressedBytes": 0,
+          "compressedOffset": 31563
+        }
+      ]
+    }
+  ]
+}

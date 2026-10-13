@@ -1,0 +1,31 @@
+{
+  "analysisDate": "2026-10-14",
+  "method": "Static ARM64 BL imm26 analysis of previously captured 20,832-byte instruction slice; no Apple decoder run",
+  "sliceBase": "0x1b709c7b4",
+  "sliceBytes": 20832,
+  "bytesDecompressEntry": "0x1b709f3d0",
+  "bytesDecompressOffset": "0x2c1c",
+  "huff816CallsFromWrappers": 10,
+  "bytesDecompressCallCounts": {
+    "huff8_decompress": 9,
+    "huff16_decompress": 3
+  },
+  "huff8Callsites": [
+    "0x1b70a06e8",
+    "0x1b70a0980",
+    "0x1b70a0a14",
+    "0x1b70a0bf0",
+    "0x1b70a0c84",
+    "0x1b70a0e60",
+    "0x1b70a1008",
+    "0x1b70a1100",
+    "0x1b70a14e4"
+  ],
+  "huff16Callsites": [
+    "0x1b70a12f0",
+    "0x1b70a1578",
+    "0x1b70a16e0"
+  ],
+  "ABIObservation": "At callsites x0=input pointer, x1=input length, x2=output pointer, x3=expected output count; subsequent CMP x0,x3 tests return value against expected count. Verified in disassembly of five callsites, but not all paths.",
+  "limitations": "No BYET per-kind numeric reconstruction or native golden parity. Python audit helper saved but remote execution was blocked by safety checks; this independent static inspection was performed without running the helper."
+}

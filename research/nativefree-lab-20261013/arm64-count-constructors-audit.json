@@ -1,0 +1,117 @@
+{
+  "captureBytes": 20832,
+  "independentValidation": "JavaScript inert-byte audit",
+  "constructorChecksPassed": 7,
+  "failed": 0,
+  "rows": [
+    {
+      "pc": "0x1b70a0784",
+      "destination": "x28",
+      "spOffsets": [
+        248,
+        252,
+        254
+      ],
+      "lowFragmentOffset": 16,
+      "orr": {
+        "width": 64,
+        "dst": 28,
+        "a": 9,
+        "b": 13,
+        "lsl": 0
+      },
+      "valid": true
+    },
+    {
+      "pc": "0x1b70a0ab0",
+      "destination": "x28",
+      "spOffsets": [
+        224,
+        228,
+        230
+      ],
+      "lowFragmentOffset": 16,
+      "orr": {
+        "width": 64,
+        "dst": 28,
+        "a": 13,
+        "b": 9,
+        "lsl": 8
+      },
+      "valid": true
+    },
+    {
+      "pc": "0x1b70a0d20",
+      "destination": "x28",
+      "spOffsets": [
+        200,
+        204,
+        206
+      ],
+      "lowFragmentOffset": 16,
+      "orr": {
+        "width": 64,
+        "dst": 28,
+        "a": 13,
+        "b": 9,
+        "lsl": 8
+      },
+      "valid": true
+    },
+    {
+      "pc": "0x1b70a119c",
+      "destination": "x28",
+      "spOffsets": [
+        272,
+        276,
+        278
+      ],
+      "lowFragmentOffset": 16,
+      "orr": {
+        "width": 64,
+        "dst": 28,
+        "a": 13,
+        "b": 9,
+        "lsl": 8
+      },
+      "valid": true
+    },
+    {
+      "pc": "0x1b70a1428",
+      "destination": "x24",
+      "orr": {
+        "width": 64,
+        "dst": 24,
+        "a": 23,
+        "b": 28,
+        "lsl": 8
+      },
+      "valid": true
+    },
+    {
+      "pc": "0x1b70a152c",
+      "destination": "x24",
+      "orr": {
+        "width": 64,
+        "dst": 24,
+        "a": 23,
+        "b": 28,
+        "lsl": 8
+      },
+      "valid": true
+    },
+    {
+      "pc": "0x1b70a16ac",
+      "destination": "x24",
+      "orr": {
+        "width": 64,
+        "dst": 24,
+        "a": 28,
+        "b": 23,
+        "lsl": 8
+      },
+      "valid": true
+    }
+  ],
+  "limitation": "No CFG proof or BYET kind/count mapping; no Splat numeric parity"
+}

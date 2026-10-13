@@ -1,0 +1,138 @@
+{
+  "tiles": 223,
+  "nonemptyLaneKinds": {
+    "6": 645,
+    "2": 406,
+    "4": 929,
+    "1": 757,
+    "5": 348,
+    "3": 9,
+    "0": 78
+  },
+  "recognizedHuffmanHeaderFamilies": {
+    "0x24": 2370,
+    "0x61": 725
+  },
+  "firstMarkerLocations": {
+    "(6, 4, '0x24')": 518,
+    "(1, 4, '0x24')": 479,
+    "(4, 4, '0x24')": 349,
+    "(2, 4, '0x24')": 314,
+    "(5, 4, '0x24')": 221,
+    "(4, 2, '0x61')": 184,
+    "(4, 2, '0x24')": 183,
+    "(4, 3, '0x24')": 136,
+    "(1, 4, '0x61')": 124,
+    "(6, 5, '0x24')": 99,
+    "(1, 3, '0x61')": 88,
+    "(4, 3, '0x61')": 76,
+    "(2, 3, '0x61')": 66,
+    "(1, 2, '0x61')": 66,
+    "(5, 3, '0x61')": 62,
+    "(5, 3, '0x24')": 62,
+    "(2, 4, '0x61')": 24,
+    "(6, 4, '0x61')": 22,
+    "(3, 4, '0x24')": 6,
+    "(6, 3, '0x61')": 6,
+    "(5, 2, '0x24')": 3,
+    "(3, 3, '0x61')": 2,
+    "(2, 2, '0x61')": 2,
+    "(4, 4, '0x61')": 1
+  },
+  "unmarkedByKind": {
+    "0": 77
+  },
+  "warning": "Header signatures alone do not constitute decompression or parity of XYZ positions.",
+  "examples": [
+    {
+      "tile": "r3d_z18_x232833_y103203_h0.r3d",
+      "frame": 0,
+      "lane": 1,
+      "kind": 6,
+      "compressedBytes": 21153,
+      "huffCandidates": [
+        {
+          "relativeOffset": 5,
+          "family": "0x24",
+          "word": "0x24000000",
+          "lowFlag": 0
+        }
+      ]
+    },
+    {
+      "tile": "r3d_z18_x232833_y103203_h0.r3d",
+      "frame": 0,
+      "lane": 5,
+      "kind": 6,
+      "compressedBytes": 23077,
+      "huffCandidates": [
+        {
+          "relativeOffset": 5,
+          "family": "0x24",
+          "word": "0x24000000",
+          "lowFlag": 0
+        }
+      ]
+    },
+    {
+      "tile": "r3d_z18_x232833_y103203_h0.r3d",
+      "frame": 0,
+      "lane": 9,
+      "kind": 6,
+      "compressedBytes": 19012,
+      "huffCandidates": [
+        {
+          "relativeOffset": 5,
+          "family": "0x24",
+          "word": "0x24000000",
+          "lowFlag": 0
+        }
+      ]
+    },
+    {
+      "tile": "r3d_z18_x232833_y103203_h0.r3d",
+      "frame": 1,
+      "lane": 0,
+      "kind": 2,
+      "compressedBytes": 5674,
+      "huffCandidates": [
+        {
+          "relativeOffset": 4,
+          "family": "0x24",
+          "word": "0x24000000",
+          "lowFlag": 0
+        }
+      ]
+    },
+    {
+      "tile": "r3d_z18_x232833_y103203_h0.r3d",
+      "frame": 1,
+      "lane": 5,
+      "kind": 4,
+      "compressedBytes": 7922,
+      "huffCandidates": [
+        {
+          "relativeOffset": 4,
+          "family": "0x24",
+          "word": "0x24000000",
+          "lowFlag": 0
+        }
+      ]
+    },
+    {
+      "tile": "r3d_z18_x232833_y103203_h0.r3d",
+      "frame": 1,
+      "lane": 7,
+      "kind": 4,
+      "compressedBytes": 573,
+      "huffCandidates": [
+        {
+          "relativeOffset": 4,
+          "family": "0x24",
+          "word": "0x24000000",
+          "lowFlag": 0
+        }
+      ]
+    }
+  ]
+}

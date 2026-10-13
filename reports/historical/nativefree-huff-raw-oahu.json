@@ -1,0 +1,62 @@
+{
+  "tilesScanned": 72,
+  "rawHuffmanLaneSamples": 77,
+  "rawHuffmanByFrameAndLaneType": {
+    "(1, 1)": 43,
+    "(0, 6)": 17,
+    "(0, 3)": 2,
+    "(0, 1)": 4,
+    "(1, 2)": 2,
+    "(1, 3)": 5,
+    "(1, 6)": 4
+  },
+  "literalFilesWritten": 0,
+  "scope": "Huff816 literal payload extraction only; BYET integer delta stage remains encoded.",
+  "samples": [
+    {
+      "file": "s98_z20_x64551_y460818_h0.r3d",
+      "block": 1,
+      "lane": 16,
+      "kind": 1,
+      "compressedLaneBytes": 866,
+      "literalHuffmanBytes": 858,
+      "headerOffset": 4
+    },
+    {
+      "file": "s98_z20_x64551_y460818_h0.r3d",
+      "block": 1,
+      "lane": 28,
+      "kind": 1,
+      "compressedLaneBytes": 1158,
+      "literalHuffmanBytes": 1150,
+      "headerOffset": 4
+    },
+    {
+      "file": "s98_z20_x64553_y460816_h0.r3d",
+      "block": 0,
+      "lane": 1,
+      "kind": 6,
+      "compressedLaneBytes": 1913,
+      "literalHuffmanBytes": 1905,
+      "headerOffset": 4
+    },
+    {
+      "file": "s98_z20_x64553_y460816_h0.r3d",
+      "block": 0,
+      "lane": 9,
+      "kind": 6,
+      "compressedLaneBytes": 1933,
+      "literalHuffmanBytes": 1925,
+      "headerOffset": 4
+    },
+    {
+      "file": "s98_z20_x64553_y460816_h0.r3d",
+      "block": 1,
+      "lane": 16,
+      "kind": 1,
+      "compressedLaneBytes": 349,
+      "literalHuffmanBytes": 342,
+      "headerOffset": 3
+    }
+  ]
+}

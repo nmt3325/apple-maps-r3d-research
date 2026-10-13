@@ -1,0 +1,334 @@
+{
+  "inputFiles": 223,
+  "parsed": 223,
+  "rejected": [],
+  "totalNativeFreeSplatRecords": 736915,
+  "soupCompressedBytes": 9808120,
+  "meshCompressedBytes": 6717914,
+  "goldenMatches": 223,
+  "goldenMismatches": 0,
+  "goldenCoverage": 223,
+  "codecState": "Container and codecs identified; geometry and appearance bitstreams not yet decompressed",
+  "samples": [
+    {
+      "r3dVersion": 2,
+      "majorTags": [
+        1,
+        2,
+        3
+      ],
+      "geometryTagOrder": [
+        1,
+        1,
+        4,
+        2,
+        3
+      ],
+      "appearanceTagOrder": [
+        1,
+        1,
+        2,
+        3
+      ],
+      "textureTags": [
+        1,
+        3,
+        5,
+        6,
+        8
+      ],
+      "splatStream": {
+        "offset": 175,
+        "bytes": 116246,
+        "magic": "d122c907",
+        "codecVersion": 1,
+        "pointCount": 9559,
+        "channelCount": 8,
+        "quantizationSteps": [
+          0.16,
+          0.04,
+          0.01,
+          0.01,
+          0.01,
+          0.05,
+          0.05,
+          0.05,
+          0.05
+        ],
+        "blocks": [
+          {
+            "index": 0,
+            "relativeOffset": 59,
+            "bytes": 63273,
+            "role": "candidate positions (needs independent numerical verification)"
+          },
+          {
+            "index": 1,
+            "relativeOffset": 63335,
+            "bytes": 52911,
+            "role": "candidate eight attributes (needs independent numerical verification)"
+          }
+        ]
+      },
+      "meshStream": {
+        "offset": 116588,
+        "bytes": 59724,
+        "magic": "e1216624",
+        "codecVersion": 3,
+        "quantizationSteps": [
+          0.16,
+          0.25,
+          0.0349066
+        ]
+      },
+      "textureContainer": {
+        "offset": 176316,
+        "bytes": 284277
+      },
+      "file": "r3d_z18_x232833_y103203_h0.r3d",
+      "wireBytes": 460599,
+      "goldenNativeSplatCount": 9559,
+      "splatCountExactMatch": true
+    },
+    {
+      "r3dVersion": 2,
+      "majorTags": [
+        1,
+        2,
+        3
+      ],
+      "geometryTagOrder": [
+        1,
+        1,
+        4,
+        2,
+        3
+      ],
+      "appearanceTagOrder": [
+        1,
+        1,
+        2,
+        3
+      ],
+      "textureTags": [
+        1,
+        3,
+        5,
+        6,
+        8
+      ],
+      "splatStream": {
+        "offset": 175,
+        "bytes": 74448,
+        "magic": "d122c907",
+        "codecVersion": 1,
+        "pointCount": 5857,
+        "channelCount": 8,
+        "quantizationSteps": [
+          0.08,
+          0.04,
+          0.01,
+          0.01,
+          0.01,
+          0.05,
+          0.05,
+          0.05,
+          0.05
+        ],
+        "blocks": [
+          {
+            "index": 0,
+            "relativeOffset": 59,
+            "bytes": 41340,
+            "role": "candidate positions (needs independent numerical verification)"
+          },
+          {
+            "index": 1,
+            "relativeOffset": 41402,
+            "bytes": 33046,
+            "role": "candidate eight attributes (needs independent numerical verification)"
+          }
+        ]
+      },
+      "meshStream": {
+        "offset": 74790,
+        "bytes": 44701,
+        "magic": "e1216624",
+        "codecVersion": 3,
+        "quantizationSteps": [
+          0.08,
+          0.25,
+          0.0349066
+        ]
+      },
+      "textureContainer": {
+        "offset": 119495,
+        "bytes": 179280
+      },
+      "file": "r3d_z19_x465662_y206402_h0.r3d",
+      "wireBytes": 298781,
+      "goldenNativeSplatCount": 5857,
+      "splatCountExactMatch": true
+    },
+    {
+      "r3dVersion": 2,
+      "majorTags": [
+        1,
+        2,
+        3
+      ],
+      "geometryTagOrder": [
+        1,
+        1,
+        4,
+        2,
+        3
+      ],
+      "appearanceTagOrder": [
+        1,
+        1,
+        2,
+        3
+      ],
+      "textureTags": [
+        1,
+        3,
+        5,
+        6,
+        8
+      ],
+      "splatStream": {
+        "offset": 175,
+        "bytes": 82971,
+        "magic": "d122c907",
+        "codecVersion": 1,
+        "pointCount": 6566,
+        "channelCount": 8,
+        "quantizationSteps": [
+          0.08,
+          0.04,
+          0.01,
+          0.01,
+          0.01,
+          0.05,
+          0.05,
+          0.05,
+          0.05
+        ],
+        "blocks": [
+          {
+            "index": 0,
+            "relativeOffset": 59,
+            "bytes": 46510,
+            "role": "candidate positions (needs independent numerical verification)"
+          },
+          {
+            "index": 1,
+            "relativeOffset": 46572,
+            "bytes": 36399,
+            "role": "candidate eight attributes (needs independent numerical verification)"
+          }
+        ]
+      },
+      "meshStream": {
+        "offset": 83313,
+        "bytes": 66153,
+        "magic": "e1216624",
+        "codecVersion": 3,
+        "quantizationSteps": [
+          0.08,
+          0.25,
+          0.0349066
+        ]
+      },
+      "textureContainer": {
+        "offset": 149470,
+        "bytes": 261684
+      },
+      "file": "r3d_z19_x465662_y206403_h0.r3d",
+      "wireBytes": 411160,
+      "goldenNativeSplatCount": 6566,
+      "splatCountExactMatch": true
+    },
+    {
+      "r3dVersion": 2,
+      "majorTags": [
+        1,
+        2,
+        3
+      ],
+      "geometryTagOrder": [
+        1,
+        1,
+        4,
+        2,
+        3
+      ],
+      "appearanceTagOrder": [
+        1,
+        1,
+        2,
+        3
+      ],
+      "textureTags": [
+        1,
+        3,
+        5,
+        6,
+        8
+      ],
+      "splatStream": {
+        "offset": 175,
+        "bytes": 60674,
+        "magic": "d122c907",
+        "codecVersion": 1,
+        "pointCount": 4762,
+        "channelCount": 8,
+        "quantizationSteps": [
+          0.08,
+          0.04,
+          0.01,
+          0.01,
+          0.01,
+          0.05,
+          0.05,
+          0.05,
+          0.05
+        ],
+        "blocks": [
+          {
+            "index": 0,
+            "relativeOffset": 59,
+            "bytes": 34104,
+            "role": "candidate positions (needs independent numerical verification)"
+          },
+          {
+            "index": 1,
+            "relativeOffset": 34166,
+            "bytes": 26508,
+            "role": "candidate eight attributes (needs independent numerical verification)"
+          }
+        ]
+      },
+      "meshStream": {
+        "offset": 61016,
+        "bytes": 50869,
+        "magic": "e1216624",
+        "codecVersion": 3,
+        "quantizationSteps": [
+          0.08,
+          0.25,
+          0.0349066
+        ]
+      },
+      "textureContainer": {
+        "offset": 111889,
+        "bytes": 211921
+      },
+      "file": "r3d_z19_x465662_y206404_h0.r3d",
+      "wireBytes": 323816,
+      "goldenNativeSplatCount": 4762,
+      "splatCountExactMatch": true
+    }
+  ]
+}

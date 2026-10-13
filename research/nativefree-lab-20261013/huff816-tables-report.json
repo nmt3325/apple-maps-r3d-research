@@ -1,0 +1,557 @@
+{
+  "counts": {
+    "parsed_tree": 1462,
+    "literal": 962
+  },
+  "samples": [
+    {
+      "tile": "r3d_z18_x232833_y103203_h0.r3d",
+      "block": 1,
+      "kind": 2,
+      "lane": 0,
+      "compressed": 5674,
+      "marker": "0x61000002",
+      "wrap": {
+        "wrapperU32": 96,
+        "wrapperU64": 368
+      },
+      "stats": {
+        "symbols": 45,
+        "codeLengthWidth": 4,
+        "tableBits": 711,
+        "alignedBytes": 92,
+        "lengths": {
+          "10": 14,
+          "8": 10,
+          "9": 9,
+          "4": 5,
+          "7": 3,
+          "5": 3,
+          "1": 1
+        }
+      },
+      "firstEntries": [
+        {
+          "code": 583,
+          "bits": 10,
+          "symbol": 59
+        },
+        {
+          "code": 603,
+          "bits": 10,
+          "symbol": 63
+        },
+        {
+          "code": 604,
+          "bits": 10,
+          "symbol": 93
+        },
+        {
+          "code": 166,
+          "bits": 8,
+          "symbol": 95
+        },
+        {
+          "code": 602,
+          "bits": 10,
+          "symbol": 103
+        },
+        {
+          "code": 607,
+          "bits": 10,
+          "symbol": 110
+        },
+        {
+          "code": 322,
+          "bits": 9,
+          "symbol": 111
+        },
+        {
+          "code": 606,
+          "bits": 10,
+          "symbol": 115
+        }
+      ]
+    },
+    {
+      "tile": "r3d_z18_x232833_y103203_h0.r3d",
+      "block": 1,
+      "kind": 4,
+      "lane": 5,
+      "compressed": 7922,
+      "marker": "0x61000002",
+      "wrap": {
+        "wrapperU32": 88,
+        "wrapperU64": 312
+      },
+      "stats": {
+        "symbols": 40,
+        "codeLengthWidth": 4,
+        "tableBits": 654,
+        "alignedBytes": 84,
+        "lengths": {
+          "9": 22,
+          "7": 1,
+          "8": 7,
+          "4": 5,
+          "6": 1,
+          "5": 3,
+          "1": 1
+        }
+      },
+      "firstEntries": [
+        {
+          "code": 293,
+          "bits": 9,
+          "symbol": 31
+        },
+        {
+          "code": 418,
+          "bits": 9,
+          "symbol": 60
+        },
+        {
+          "code": 75,
+          "bits": 7,
+          "symbol": 63
+        },
+        {
+          "code": 441,
+          "bits": 9,
+          "symbol": 95
+        },
+        {
+          "code": 440,
+          "bits": 9,
+          "symbol": 111
+        },
+        {
+          "code": 148,
+          "bits": 8,
+          "symbol": 119
+        },
+        {
+          "code": 149,
+          "bits": 8,
+          "symbol": 123
+        },
+        {
+          "code": 439,
+          "bits": 9,
+          "symbol": 124
+        }
+      ]
+    },
+    {
+      "tile": "r3d_z18_x232833_y103203_h0.r3d",
+      "block": 1,
+      "kind": 4,
+      "lane": 7,
+      "compressed": 573,
+      "marker": "0x61000002",
+      "wrap": {
+        "wrapperU32": 128,
+        "wrapperU64": 356
+      },
+      "stats": {
+        "symbols": 59,
+        "codeLengthWidth": 4,
+        "tableBits": 984,
+        "alignedBytes": 124,
+        "lengths": {
+          "1": 1,
+          "5": 6,
+          "9": 34,
+          "8": 15,
+          "4": 3
+        }
+      },
+      "firstEntries": [
+        {
+          "code": 0,
+          "bits": 1,
+          "symbol": 0
+        },
+        {
+          "code": 21,
+          "bits": 5,
+          "symbol": 1
+        },
+        {
+          "code": 500,
+          "bits": 9,
+          "symbol": 2
+        },
+        {
+          "code": 17,
+          "bits": 5,
+          "symbol": 3
+        },
+        {
+          "code": 258,
+          "bits": 9,
+          "symbol": 5
+        },
+        {
+          "code": 20,
+          "bits": 5,
+          "symbol": 6
+        },
+        {
+          "code": 499,
+          "bits": 9,
+          "symbol": 7
+        },
+        {
+          "code": 133,
+          "bits": 8,
+          "symbol": 10
+        }
+      ]
+    },
+    {
+      "tile": "r3d_z18_x232833_y103203_h0.r3d",
+      "block": 1,
+      "kind": 4,
+      "lane": 9,
+      "compressed": 7842,
+      "marker": "0x61000002",
+      "wrap": {
+        "wrapperU32": 100,
+        "wrapperU64": 340
+      },
+      "stats": {
+        "symbols": 46,
+        "codeLengthWidth": 4,
+        "tableBits": 759,
+        "alignedBytes": 96,
+        "lengths": {
+          "10": 14,
+          "9": 13,
+          "6": 1,
+          "8": 8,
+          "4": 5,
+          "7": 1,
+          "5": 3,
+          "1": 1
+        }
+      },
+      "firstEntries": [
+        {
+          "code": 515,
+          "bits": 10,
+          "symbol": 15
+        },
+        {
+          "code": 340,
+          "bits": 9,
+          "symbol": 31
+        },
+        {
+          "code": 341,
+          "bits": 9,
+          "symbol": 46
+        },
+        {
+          "code": 342,
+          "bits": 9,
+          "symbol": 56
+        },
+        {
+          "code": 343,
+          "bits": 9,
+          "symbol": 60
+        },
+        {
+          "code": 43,
+          "bits": 6,
+          "symbol": 63
+        },
+        {
+          "code": 512,
+          "bits": 10,
+          "symbol": 95
+        },
+        {
+          "code": 513,
+          "bits": 10,
+          "symbol": 109
+        }
+      ]
+    },
+    {
+      "tile": "r3d_z18_x232833_y103203_h0.r3d",
+      "block": 1,
+      "kind": 4,
+      "lane": 11,
+      "compressed": 573,
+      "marker": "0x61000002",
+      "wrap": {
+        "wrapperU32": 128,
+        "wrapperU64": 356
+      },
+      "stats": {
+        "symbols": 59,
+        "codeLengthWidth": 4,
+        "tableBits": 984,
+        "alignedBytes": 124,
+        "lengths": {
+          "1": 1,
+          "5": 6,
+          "9": 34,
+          "8": 15,
+          "4": 3
+        }
+      },
+      "firstEntries": [
+        {
+          "code": 0,
+          "bits": 1,
+          "symbol": 0
+        },
+        {
+          "code": 21,
+          "bits": 5,
+          "symbol": 1
+        },
+        {
+          "code": 500,
+          "bits": 9,
+          "symbol": 2
+        },
+        {
+          "code": 17,
+          "bits": 5,
+          "symbol": 3
+        },
+        {
+          "code": 258,
+          "bits": 9,
+          "symbol": 5
+        },
+        {
+          "code": 20,
+          "bits": 5,
+          "symbol": 6
+        },
+        {
+          "code": 499,
+          "bits": 9,
+          "symbol": 7
+        },
+        {
+          "code": 133,
+          "bits": 8,
+          "symbol": 10
+        }
+      ]
+    },
+    {
+      "tile": "r3d_z18_x232833_y103203_h0.r3d",
+      "block": 1,
+      "kind": 4,
+      "lane": 13,
+      "compressed": 7722,
+      "marker": "0x61000002",
+      "wrap": {
+        "wrapperU32": 124,
+        "wrapperU64": 380
+      },
+      "stats": {
+        "symbols": 59,
+        "codeLengthWidth": 4,
+        "tableBits": 956,
+        "alignedBytes": 120,
+        "lengths": {
+          "10": 10,
+          "9": 27,
+          "8": 6,
+          "6": 2,
+          "7": 5,
+          "4": 3,
+          "5": 5,
+          "1": 1
+        }
+      },
+      "firstEntries": [
+        {
+          "code": 578,
+          "bits": 10,
+          "symbol": 7
+        },
+        {
+          "code": 294,
+          "bits": 9,
+          "symbol": 15
+        },
+        {
+          "code": 460,
+          "bits": 9,
+          "symbol": 31
+        },
+        {
+          "code": 461,
+          "bits": 9,
+          "symbol": 47
+        },
+        {
+          "code": 167,
+          "bits": 8,
+          "symbol": 60
+        },
+        {
+          "code": 321,
+          "bits": 9,
+          "symbol": 61
+        },
+        {
+          "code": 581,
+          "bits": 10,
+          "symbol": 62
+        },
+        {
+          "code": 58,
+          "bits": 6,
+          "symbol": 63
+        }
+      ]
+    },
+    {
+      "tile": "r3d_z18_x232833_y103203_h0.r3d",
+      "block": 1,
+      "kind": 4,
+      "lane": 15,
+      "compressed": 573,
+      "marker": "0x61000002",
+      "wrap": {
+        "wrapperU32": 128,
+        "wrapperU64": 356
+      },
+      "stats": {
+        "symbols": 59,
+        "codeLengthWidth": 4,
+        "tableBits": 984,
+        "alignedBytes": 124,
+        "lengths": {
+          "1": 1,
+          "5": 6,
+          "9": 34,
+          "8": 15,
+          "4": 3
+        }
+      },
+      "firstEntries": [
+        {
+          "code": 0,
+          "bits": 1,
+          "symbol": 0
+        },
+        {
+          "code": 21,
+          "bits": 5,
+          "symbol": 1
+        },
+        {
+          "code": 500,
+          "bits": 9,
+          "symbol": 2
+        },
+        {
+          "code": 17,
+          "bits": 5,
+          "symbol": 3
+        },
+        {
+          "code": 258,
+          "bits": 9,
+          "symbol": 5
+        },
+        {
+          "code": 20,
+          "bits": 5,
+          "symbol": 6
+        },
+        {
+          "code": 499,
+          "bits": 9,
+          "symbol": 7
+        },
+        {
+          "code": 133,
+          "bits": 8,
+          "symbol": 10
+        }
+      ]
+    },
+    {
+      "tile": "r3d_z18_x232833_y103203_h0.r3d",
+      "block": 1,
+      "kind": 2,
+      "lane": 16,
+      "compressed": 5282,
+      "marker": "0x61000002",
+      "wrap": {
+        "wrapperU32": 172,
+        "wrapperU64": 536
+      },
+      "stats": {
+        "symbols": 83,
+        "codeLengthWidth": 4,
+        "tableBits": 1324,
+        "alignedBytes": 168,
+        "lengths": {
+          "9": 14,
+          "10": 36,
+          "7": 8,
+          "8": 16,
+          "4": 2,
+          "5": 6,
+          "1": 1
+        }
+      },
+      "firstEntries": [
+        {
+          "code": 187,
+          "bits": 9,
+          "symbol": 10
+        },
+        {
+          "code": 268,
+          "bits": 10,
+          "symbol": 19
+        },
+        {
+          "code": 269,
+          "bits": 10,
+          "symbol": 22
+        },
+        {
+          "code": 270,
+          "bits": 10,
+          "symbol": 23
+        },
+        {
+          "code": 271,
+          "bits": 10,
+          "symbol": 31
+        },
+        {
+          "code": 280,
+          "bits": 10,
+          "symbol": 59
+        },
+        {
+          "code": 281,
+          "bits": 10,
+          "symbol": 61
+        },
+        {
+          "code": 32,
+          "bits": 7,
+          "symbol": 63
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

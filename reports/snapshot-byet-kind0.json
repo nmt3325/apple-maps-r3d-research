@@ -1,0 +1,24 @@
+{
+  "tilesWithNativeGoldens": 223,
+  "kind0CoordinateLanesTested": 21,
+  "kind0LanesExactlyMatchingNativeLowByte": 20,
+  "pointComparisons": 4029,
+  "exactPointComparisons": 3732,
+  "kind0LanesWithExactly3xPointCountInputBytes": 21,
+  "mismatches": [
+    {
+      "tile": "r3d_z20_x931336_y412807_h1.r3d",
+      "pointCount": 297,
+      "lane": 8,
+      "axis": 2,
+      "byteIndex": 0,
+      "matchingPoints": 0,
+      "differenceHistogram": {
+        "1": 297
+      },
+      "originHeaderHex": "0877065cfeff5afefff5ff",
+      "originCodec": "sparse-bitmap-sign-extension"
+    }
+  ],
+  "scope": "Golden comparison of the first N bytes only. It does not decode the remaining lane bytes, other BYET kinds, or complete XYZ values."
+}

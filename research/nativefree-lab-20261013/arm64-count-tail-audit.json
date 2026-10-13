@@ -1,0 +1,81 @@
+{
+  "source": "Independent JS analysis of pre-existing inert ARM64 byte slice; Python script not executed",
+  "captureBytes": 20832,
+  "windows": 4,
+  "instructionChecks": 25,
+  "failed": [],
+  "formulaEquivalenceVectors": 1024,
+  "sevenByteTailFormula": "little_endian_u56(fragment) << 8",
+  "x13Provenance": "unknown: cannot assert low byte or per-kind Huff output count",
+  "rows": [
+    {
+      "pc": "0x1b70a0784",
+      "spOffsets": [
+        248,
+        252,
+        254
+      ],
+      "mode": "shifted_u32",
+      "checks": {
+        "byte_load": true,
+        "half_load": true,
+        "pack_u24": true,
+        "word_load": true,
+        "lsl8_ubfm": true,
+        "join56": true,
+        "combine_x13": true
+      }
+    },
+    {
+      "pc": "0x1b70a0ab0",
+      "spOffsets": [
+        224,
+        228,
+        230
+      ],
+      "mode": "shifted_u56",
+      "checks": {
+        "byte_load": true,
+        "half_load": true,
+        "pack_u24": true,
+        "word_load": true,
+        "join56": true,
+        "combine_x13": true
+      }
+    },
+    {
+      "pc": "0x1b70a0d20",
+      "spOffsets": [
+        200,
+        204,
+        206
+      ],
+      "mode": "shifted_u56",
+      "checks": {
+        "byte_load": true,
+        "half_load": true,
+        "pack_u24": true,
+        "word_load": true,
+        "join56": true,
+        "combine_x13": true
+      }
+    },
+    {
+      "pc": "0x1b70a119c",
+      "spOffsets": [
+        272,
+        276,
+        278
+      ],
+      "mode": "shifted_u56",
+      "checks": {
+        "byte_load": true,
+        "half_load": true,
+        "pack_u24": true,
+        "word_load": true,
+        "join56": true,
+        "combine_x13": true
+      }
+    }
+  ]
+}

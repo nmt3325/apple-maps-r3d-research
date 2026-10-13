@@ -1,0 +1,210 @@
+{
+  "files": 72,
+  "validR3D": 72,
+  "imageCount": 216,
+  "imageBytes": 4149602,
+  "nativeByteComparison": {
+    "passed": 0,
+    "failed": 0,
+    "checked": 0
+  },
+  "errors": [],
+  "samples": [
+    {
+      "sourceFile": "s98_z20_x64551_y460816_h0.r3d",
+      "bytes": 154787,
+      "r3dVersion": 2,
+      "rotationDeterminant": 1.0,
+      "ecefTranslation": [
+        -5506456.085,
+        -2242883.89,
+        2300732.531
+      ],
+      "images": [
+        {
+          "index": 0,
+          "byteOffset": 84598,
+          "bytes": 47403,
+          "sha256": "468adcd6d79850cff7514352a511e9982000f9a1e7463923fb72a20acf39c688",
+          "boxTypes": [
+            "ftyp",
+            "meta",
+            "mdat"
+          ],
+          "exactNativeMatch": null
+        },
+        {
+          "index": 1,
+          "byteOffset": 132046,
+          "bytes": 14759,
+          "sha256": "85f023c8c4ced1eca8737da56204105767499ea7ca41d2ea8f90cb957e09008e",
+          "boxTypes": [
+            "ftyp",
+            "meta",
+            "mdat"
+          ],
+          "exactNativeMatch": null
+        },
+        {
+          "index": 2,
+          "byteOffset": 146822,
+          "bytes": 7955,
+          "sha256": "7b0bd2b0c380b6302b1ca006bc12bbec934be3772ec68f417df238413a9c0b4b",
+          "boxTypes": [
+            "ftyp",
+            "meta",
+            "mdat"
+          ],
+          "exactNativeMatch": null
+        }
+      ]
+    },
+    {
+      "sourceFile": "s98_z20_x64551_y460817_h0.r3d",
+      "bytes": 150243,
+      "r3dVersion": 2,
+      "rotationDeterminant": 1.0,
+      "ecefTranslation": [
+        -5506467.992,
+        -2242888.741,
+        2300699.526
+      ],
+      "images": [
+        {
+          "index": 0,
+          "byteOffset": 68168,
+          "bytes": 56419,
+          "sha256": "5d1ff40af89919715669947ce2991461aace207db2cbb54061f9a2810177580e",
+          "boxTypes": [
+            "ftyp",
+            "meta",
+            "mdat"
+          ],
+          "exactNativeMatch": null
+        },
+        {
+          "index": 1,
+          "byteOffset": 124632,
+          "bytes": 12848,
+          "sha256": "e8b90504cb037a07e6c56343041cf96c9b8bdd8914531bd7da5c8e533af7ac5b",
+          "boxTypes": [
+            "ftyp",
+            "meta",
+            "mdat"
+          ],
+          "exactNativeMatch": null
+        },
+        {
+          "index": 2,
+          "byteOffset": 137498,
+          "bytes": 12735,
+          "sha256": "7124274560f6eefeeba1d1bec9b1ab2ed43f0f72e8901426ee941f27a62b8533",
+          "boxTypes": [
+            "ftyp",
+            "meta",
+            "mdat"
+          ],
+          "exactNativeMatch": null
+        }
+      ]
+    },
+    {
+      "sourceFile": "s98_z20_x64551_y460818_h0.r3d",
+      "bytes": 173025,
+      "r3dVersion": 2,
+      "rotationDeterminant": 1.0,
+      "ecefTranslation": [
+        -5506479.899,
+        -2242893.591,
+        2300666.522
+      ],
+      "images": [
+        {
+          "index": 0,
+          "byteOffset": 79897,
+          "bytes": 69171,
+          "sha256": "91a3c7a56867f992feba13ae98fad4e0d20e47ca52db60ebd03e8a57118fe358",
+          "boxTypes": [
+            "ftyp",
+            "meta",
+            "mdat"
+          ],
+          "exactNativeMatch": null
+        },
+        {
+          "index": 1,
+          "byteOffset": 149113,
+          "bytes": 14382,
+          "sha256": "214592d644fd07dc897acb949bef21290b13307637a197e9511840bd77525430",
+          "boxTypes": [
+            "ftyp",
+            "meta",
+            "mdat"
+          ],
+          "exactNativeMatch": null
+        },
+        {
+          "index": 2,
+          "byteOffset": 163513,
+          "bytes": 9502,
+          "sha256": "12771b398de03ee3c6447983985280ce8c951cbff1bf672f8893ef5de5b135b2",
+          "boxTypes": [
+            "ftyp",
+            "meta",
+            "mdat"
+          ],
+          "exactNativeMatch": null
+        }
+      ]
+    },
+    {
+      "sourceFile": "s98_z20_x64551_y460819_h0.r3d",
+      "bytes": 147541,
+      "r3dVersion": 2,
+      "rotationDeterminant": 1.0,
+      "ecefTranslation": [
+        -5506491.807,
+        -2242898.441,
+        2300633.517
+      ],
+      "images": [
+        {
+          "index": 0,
+          "byteOffset": 104327,
+          "bytes": 27355,
+          "sha256": "04bf9f1939ce6bca236b9702e419191c0eec771e7b4236c59af9bfb613e94eae",
+          "boxTypes": [
+            "ftyp",
+            "meta",
+            "mdat"
+          ],
+          "exactNativeMatch": null
+        },
+        {
+          "index": 1,
+          "byteOffset": 131726,
+          "bytes": 8107,
+          "sha256": "fa5db75e1494d37ab6b0ec40961501d3b4ae02e071b885d12ad5a37062b68c14",
+          "boxTypes": [
+            "ftyp",
+            "meta",
+            "mdat"
+          ],
+          "exactNativeMatch": null
+        },
+        {
+          "index": 2,
+          "byteOffset": 139850,
+          "bytes": 7681,
+          "sha256": "897d288992f5bc6bbda31b7bc3a22cd7c9e9daf5cf97a27b0310a38c5bc1447c",
+          "boxTypes": [
+            "ftyp",
+            "meta",
+            "mdat"
+          ],
+          "exactNativeMatch": null
+        }
+      ]
+    }
+  ]
+}

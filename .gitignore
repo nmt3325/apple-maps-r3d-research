@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+node_modules/
+.venv/
+release-assets/
+reports/generated/
+*.mitm
+*.har
+*.token
+.env
+.env.*

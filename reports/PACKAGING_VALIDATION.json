@@ -1,0 +1,93 @@
+{
+  "timestampUTC": "2026-10-13T22:08:02.530888+00:00",
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "codec",
+        "audit",
+        "native-harness",
+        "snapshots",
+        "research"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "codec/huff816_nativefree.py"
+      ],
+      "exitCode": 0,
+      "stdout": "PASS Huff816 parser bounds and malformed-input checks\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "audit/test_nativefree_r3d.py"
+      ],
+      "exitCode": 0,
+      "stdout": "tokyo {'tiles': 223, 'splatRecords': 736915, 'embeddedHEIC': 669, 'meshCompressedBytes': 6717914, 'splatCompressedBytes': 9808120, 'quantizationPatterns': 3, 'nativeGoldenCompared': 223}\noahu {'tiles': 72, 'splatRecords': 304527, 'embeddedHEIC': 216, 'meshCompressedBytes': 2004738, 'splatCompressedBytes': 4048875, 'quantizationPatterns': 1, 'nativeGoldenCompared': 0}\nQuantized XYZ native-fixture verified: 223 tiles (202 direct + 21 sparse bitmap); maximum XYZ min offset 22.48 meters; unsupported []\nBYET/J lane directory parity 590 streams / 12980 lane entries exact partition\nPASS: frame boundaries, 3 HEIC atlases, 8 Splat channels, quantization tables, original Splat counts on 295 tiles, 3 corrupt input tests\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "audit/test_c3mm_v2.py"
+      ],
+      "exitCode": 0,
+      "stdout": "s100_z13_x7276_y3225.c3mm tags [0, 8, 9, 1, 5, 6] rawBytes 129940\ns100_z13_x7276_y3225_h0.c3mm tags [0, 8, 9, 1, 5, 6] rawBytes 129940\ns100_z9_x454_y201_h0.c3mm tags [4, 0, 8, 9, 1, 5, 6] rawBytes 87730\ns100_z9_x454_y201_h0.c3mm tags [4, 0, 8, 9, 1, 5, 6] rawBytes 87730\ns100_z13_x504_y3600.c3mm tags [0, 8, 9, 1, 5, 6] rawBytes 79452\ns100_z13_x7275_y3226.c3mm tags [0, 8, 9, 1, 5, 6] rawBytes 117936\nPASS 6 files 38 sections\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "audit/audit_huff816_nativefree.py",
+        "/opt/flyover-viewer/native-r3d",
+        "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/fresh_signed/oahu_hilton_20261013/area_z20",
+        "--report",
+        "reports/generated/huff816.json"
+      ],
+      "exitCode": 0,
+      "stdout": "{\n  \"/opt/flyover-viewer/native-r3d\": {\n    \"tiles\": 223,\n    \"counts\": {\n      \"literal_inside_huff8_wrapper\": 899,\n      \"literal_inside_wrapper_bytes\": 6123675,\n      \"compressed_huff816_frames_decoded\": 1471,\n      \"decoded_output_bytes\": 234572,\n      \"('wrapper_tag', 0)\": 1450,\n      \"literal_huff816_dispatch\": 224,\n      \"literal_huff816_payload_bytes\": 143198,\n      \"direct_huff816_frames_decoded\": 500,\n      \"direct_huff816_output_bytes\": 336779,\n      \"no_header_candidate\": 77,\n      \"('wrapper_tag', 1)\": 21,\n      \"other_or_unbounded_frame\": 1\n    },\n    \"samples\": [\n      {\n        \"tile\": \"r3d_z18_x232833_y103203_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 0,\n        \"byet_kind\": 2,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 368,\n        \"output_bytes_decoded\": 368,\n        \"table_symbols\": 45,\n        \"table_bits\": 711,\n        \"first_16_bytes\": \"ffffffffffffffffffffffffffffffff\"\n      },\n      {\n        \"tile\": \"r3d_z18_x232833_y103203_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 5,\n        \"byet_kind\": 4,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 312,\n        \"output_bytes_decoded\": 312,\n        \"table_symbols\": 40,\n        \"table_bits\": 654,\n        \"first_16_bytes\": \"ffffffffffffffffffffffffffffffff\"\n      },\n      {\n        \"tile\": \"r3d_z18_x232833_y103203_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 7,\n        \"byet_kind\": 4,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 356,\n        \"output_bytes_decoded\": 356,\n        \"table_symbols\": 59,\n        \"table_bits\": 984,\n        \"first_16_bytes\": \"0000000000000000b00100060000801a\"\n      },\n      {\n        \"tile\": \"r3d_z18_x232833_y103203_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 9,\n        \"byet_kind\": 4,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 340,\n        \"output_bytes_decoded\": 340,\n        \"table_symbols\": 46,\n        \"table_bits\": 759,\n        \"first_16_bytes\": \"fffffffffffffffffffbffefdfffdfff\"\n      },\n      {\n        \"tile\": \"r3d_z18_x232833_y103203_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 11,\n        \"byet_kind\": 4,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 356,\n        \"output_bytes_decoded\": 356,\n        \"table_symbols\": 59,\n        \"table_bits\": 984,\n        \"first_16_bytes\": \"0000000000000000b00100060000801a\"\n      },\n      {\n        \"tile\": \"r3d_z18_x232833_y103203_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 13,\n        \"byet_kind\": 4,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 380,\n        \"output_bytes_decoded\": 380,\n        \"table_symbols\": 59,\n        \"table_bits\": 956,\n        \"first_16_bytes\": \"fffffffffbffefffffdffffeffffffff\"\n      },\n      {\n        \"tile\": \"r3d_z18_x232833_y103203_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 15,\n        \"byet_kind\": 4,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 356,\n        \"output_bytes_decoded\": 356,\n        \"table_symbols\": 59,\n        \"table_bits\": 984,\n        \"first_16_bytes\": \"0000000000000000b00100060000801a\"\n      },\n      {\n        \"tile\": \"r3d_z18_x232833_y103203_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 16,\n        \"byet_kind\": 2,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 536,\n        \"output_bytes_decoded\": 536,\n        \"table_symbols\": 83,\n        \"table_bits\": 1324,\n        \"first_16_bytes\": \"efefefefffffffdffffffffffffffdff\"\n      },\n      {\n        \"tile\": \"r3d_z18_x232833_y103203_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 20,\n        \"byet_kind\": 1,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 704,\n        \"output_bytes_decoded\": 704,\n        \"table_symbols\": 118,\n        \"table_bits\": 1878,\n        \"first_16_bytes\": \"ffffffffffff8fefff6befffff3eba3f\"\n      },\n      {\n        \"tile\": \"r3d_z18_x232833_y103203_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 24,\n        \"byet_kind\": 2,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 560,\n        \"output_bytes_decoded\": 560,\n        \"table_symbols\": 78,\n        \"table_bits\": 1240,\n        \"first_16_bytes\": \"fefeeffffffffbff6fe6fffffffffffd\"\n      },\n      {\n        \"tile\": \"r3d_z18_x232833_y103203_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 28,\n        \"byet_kind\": 1,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 576,\n        \"output_bytes_decoded\": 576,\n        \"table_symbols\": 114,\n        \"table_bits\": 1823,\n        \"first_16_bytes\": \"efc0fbfdfefffffefeffbfdffffdffbe\"\n      },\n      {\n        \"tile\": \"r3d_z19_x465662_y206402_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 0,\n        \"byet_kind\": 2,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 240,\n        \"output_bytes_decoded\": 240,\n        \"table_symbols\": 37,\n        \"table_bits\": 575,\n        \"first_16_bytes\": \"ffff7ffff7fffff7ffffffffffffffff\"\n      }\n    ],\n    \"rejections\": [],\n    \"scope\": \"Huff816 byte decode only; BYET predictor and float reconstruction remain separate.\"\n  },\n  \"/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/fresh_signed/oahu_hilton_20261013/area_z20\": {\n    \"tiles\": 72,\n    \"counts\": {\n      \"literal_inside_huff8_wrapper\": 237,\n      \"literal_inside_wrapper_bytes\": 2461828,\n      \"compressed_huff816_frames_decoded\": 554,\n      \"decoded_output_bytes\": 104160,\n      \"('wrapper_tag', 0)\": 452,\n      \"('wrapper_tag', 1)\": 102,\n      \"direct_huff816_frames_decoded\": 134,\n      \"direct_huff816_output_bytes\": 64191,\n      \"literal_huff816_dispatch\": 77,\n      \"literal_huff816_payload_bytes\": 54017,\n      \"no_header_candidate\": 33\n    },\n    \"samples\": [\n      {\n        \"tile\": \"s98_z20_x64551_y460816_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 0,\n        \"byet_kind\": 2,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 156,\n        \"output_bytes_decoded\": 156,\n        \"table_symbols\": 36,\n        \"table_bits\": 573,\n        \"first_16_bytes\": \"fffffffffffff7fffffffffffff7ffff\"\n      },\n      {\n        \"tile\": \"s98_z20_x64551_y460816_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 5,\n        \"byet_kind\": 4,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 116,\n        \"output_bytes_decoded\": 116,\n        \"table_symbols\": 21,\n        \"table_bits\": 304,\n        \"first_16_bytes\": \"ffffffffffffffffffffffffffffffff\"\n      },\n      {\n        \"tile\": \"s98_z20_x64551_y460816_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 7,\n        \"byet_kind\": 4,\n        \"wrapper_tag\": 1,\n        \"output_bytes_requested\": 64,\n        \"output_bytes_decoded\": 64,\n        \"table_symbols\": 4,\n        \"table_bits\": 47,\n        \"first_16_bytes\": \"00000000000000000000000000000000\"\n      },\n      {\n        \"tile\": \"s98_z20_x64551_y460816_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 9,\n        \"byet_kind\": 5,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 96,\n        \"output_bytes_decoded\": 96,\n        \"table_symbols\": 15,\n        \"table_bits\": 215,\n        \"first_16_bytes\": \"ffffffffffffffffffffffffffffffff\"\n      },\n      {\n        \"tile\": \"s98_z20_x64551_y460816_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 11,\n        \"byet_kind\": 4,\n        \"wrapper_tag\": 1,\n        \"output_bytes_requested\": 64,\n        \"output_bytes_decoded\": 64,\n        \"table_symbols\": 4,\n        \"table_bits\": 47,\n        \"first_16_bytes\": \"00000000000000000000000000000000\"\n      },\n      {\n        \"tile\": \"s98_z20_x64551_y460816_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 13,\n        \"byet_kind\": 5,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 112,\n        \"output_bytes_decoded\": 112,\n        \"table_symbols\": 18,\n        \"table_bits\": 260,\n        \"first_16_bytes\": \"ffffffffffffffffffffffffffffffff\"\n      },\n      {\n        \"tile\": \"s98_z20_x64551_y460816_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 15,\n        \"byet_kind\": 4,\n        \"wrapper_tag\": 1,\n        \"output_bytes_requested\": 64,\n        \"output_bytes_decoded\": 64,\n        \"table_symbols\": 4,\n        \"table_bits\": 47,\n        \"first_16_bytes\": \"00000000000000000000000000000000\"\n      },\n      {\n        \"tile\": \"s98_z20_x64551_y460816_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 16,\n        \"byet_kind\": 2,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 268,\n        \"output_bytes_decoded\": 268,\n        \"table_symbols\": 75,\n        \"table_bits\": 1173,\n        \"first_16_bytes\": \"fffffffffffffffffff7fb5fff6ffff5\"\n      },\n      {\n        \"tile\": \"s98_z20_x64551_y460816_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 20,\n        \"byet_kind\": 2,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 236,\n        \"output_bytes_decoded\": 236,\n        \"table_symbols\": 62,\n        \"table_bits\": 985,\n        \"first_16_bytes\": \"f7dfdf7ffff9fdbfffdf9fffffbfefff\"\n      },\n      {\n        \"tile\": \"s98_z20_x64551_y460816_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 24,\n        \"byet_kind\": 2,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 220,\n        \"output_bytes_decoded\": 220,\n        \"table_symbols\": 55,\n        \"table_bits\": 869,\n        \"first_16_bytes\": \"efefefefeffdfffcfffdffeffffbfdff\"\n      },\n      {\n        \"tile\": \"s98_z20_x64551_y460816_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 28,\n        \"byet_kind\": 1,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 188,\n        \"output_bytes_decoded\": 188,\n        \"table_symbols\": 52,\n        \"table_bits\": 833,\n        \"first_16_bytes\": \"ffffffffffffffffffffffffffffffff\"\n      },\n      {\n        \"tile\": \"s98_z20_x64551_y460817_h0.r3d\",\n        \"soup\": 1,\n        \"lane\": 0,\n        \"byet_kind\": 1,\n        \"wrapper_tag\": 0,\n        \"output_bytes_requested\": 92,\n        \"output_bytes_decoded\": 92,\n        \"table_symbols\": 25,\n        \"table_bits\": 373,\n        \"first_16_bytes\": \"ffffffffffffffffffffff8fff7dffff\"\n      }\n    ],\n    \"rejections\": [],\n    \"scope\": \"Huff816 byte decode only; BYET predictor and float reconstruction remain separate.\"\n  }\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "audit/audit_byet_kind0.py",
+        "/opt/flyover-viewer/native-r3d",
+        "/opt/flyover-viewer/decoded-native/all-223",
+        "--report",
+        "reports/generated/byet-kind0.json"
+      ],
+      "exitCode": 0,
+      "stdout": "{\n  \"tilesWithNativeGoldens\": 223,\n  \"kind0CoordinateLanesTested\": 21,\n  \"kind0LanesExactlyMatchingNativeLowByte\": 20,\n  \"pointComparisons\": 4029,\n  \"exactPointComparisons\": 3732,\n  \"kind0LanesWithExactly3xPointCountInputBytes\": 21,\n  \"mismatches\": [\n    {\n      \"tile\": \"r3d_z20_x931336_y412807_h1.r3d\",\n      \"pointCount\": 297,\n      \"lane\": 8,\n      \"axis\": 2,\n      \"byteIndex\": 0,\n      \"matchingPoints\": 0,\n      \"differenceHistogram\": {\n        \"1\": 297\n      },\n      \"originHeaderHex\": \"0877065cfeff5afefff5ff\",\n      \"originCodec\": \"sparse-bitmap-sign-extension\"\n    }\n  ],\n  \"scope\": \"Golden comparison of the first N bytes only. It does not decode the remaining lane bytes, other BYET kinds, or complete XYZ values.\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "audit/verify_original_mesh.py"
+      ],
+      "exitCode": 0,
+      "stdout": "mesh tiles 223 triangles 1922693 vertices 1203476 failures []\nmean normals length min/max 1.0 1.0\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "/opt/flyover-viewer/test_c3m_uv_regression.py"
+      ],
+      "exitCode": 0,
+      "stdout": "UV regression PASS: 223 original tiles + legacy OBJ convention + ThreeJS orientation + trimesh GLB roundtrip\n",
+      "stderr": ""
+    }
+  ],
+  "allPassed": true
+}

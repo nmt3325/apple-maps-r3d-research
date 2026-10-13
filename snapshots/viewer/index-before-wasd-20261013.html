@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flyover 27 | CT104 Captured Data Viewer</title><link rel="icon" href="data:," />
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#081221;color:#e9f2ff;font:14px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif}
+#app{display:grid;grid-template-columns:320px minmax(0,1fr);height:100dvh;min-height:450px}aside{z-index:2;background:#0e1a2b;border-right:1px solid #263d56;padding:22px 20px;overflow-y:auto}main{position:relative;min-width:0}#view{height:100%;width:100%;display:block;touch-action:none}.kicker{color:#65c7fa;text-transform:uppercase;letter-spacing:.14em;font-weight:700;font-size:10px}.brand{font-size:21px;font-weight:750;letter-spacing:-.5px;margin:7px 0 3px}.sub{color:#99acc4;font-size:12px}.meta{margin:20px 0;display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#14253a;border:1px solid #243b56;border-radius:12px;padding:12px}.stat strong{font-size:24px;display:block;font-variant-numeric:tabular-nums}.stat span{font-size:11px;color:#94a9c2}.hr{border-top:1px solid #26394f;margin:18px 0}.row{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:12px 0}.row label{font-size:13px}input[type=range]{width:100%;accent-color:#42c8ff}input[type=checkbox]{accent-color:#49c9f1;width:17px;height:17px;cursor:pointer}.tiny{font-size:11px;color:#a3b4ca}.pill{display:inline-block;color:#a9e5e2;background:#133f41;border-radius:99px;padding:3px 9px;font-size:11px}.key{font-size:12px;color:#adc0d8;padding:4px 0}.key i{width:9px;height:9px;display:inline-block;border-radius:50%;margin-right:9px}.tile{display:flex;align-items:center;gap:10px;background:#15273a;border:1px solid #27415b;border-radius:9px;margin:8px 0;padding:7px}.tile img{width:65px;height:65px;object-fit:cover;border-radius:5px}.tile div{font-size:11px;color:#a9bdd2}.tile strong{font-size:12px;color:#e8f5ff}.toolbar{position:absolute;left:18px;top:16px;right:18px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;pointer-events:none}.chip{pointer-events:auto;background:#0d1d30c9;border:1px solid #38516c;border-radius:8px;color:#e9f4fc;padding:9px 13px;font-size:12px;backdrop-filter:blur(8px)}button{cursor:pointer}.reset{background:#266084;border:1px solid #64a5c9;color:#fff}.bottom{position:absolute;bottom:18px;left:18px;right:18px;display:flex;justify-content:space-between;gap:12px;align-items:end;pointer-events:none}.bottom>*{background:#0b1b2bdc;border:1px solid #314661;border-radius:10px;padding:10px 13px;color:#bad0e3;font-size:12px;max-width:510px}#error{color:#ffc29f}.right{max-width:55%}a{color:#76d4fc}#tip{position:absolute;display:none;pointer-events:none;padding:9px 12px;background:#0b1c2eec;border:1px solid #5cc6f6;border-radius:7px;max-width:240px;z-index:3;font-size:12px}
+@media(max-width:750px){#app{display:block}aside{height:auto;max-height:43dvh;overflow:auto;padding:12px 15px}main{height:57dvh}.meta{grid-template-columns:repeat(4,1fr);margin:9px 0}.stat strong{font-size:17px}.stat{padding:8px}.stat span{font-size:9px}.brand{font-size:16px}.hr{margin:11px 0}.toolbar{top:9px;left:9px}.bottom{bottom:8px;left:8px;right:8px}.right{display:none}}
+
+#menuToggle,#sideBackdrop{display:none}
+@media(max-width:740px){
+  #app{display:block;height:100dvh;min-height:0}
+  #app main{width:100vw;height:100dvh}
+  #app aside{position:fixed;top:0;left:0;bottom:0;height:100vh;max-height:100vh;min-height:100vh;width:min(86vw,350px);max-width:350px;z-index:11;transform:translateX(-103%);transition:transform .2s ease;background:#0e1a2b;padding-top:66px;box-shadow:8px 0 26px #0007}
+  body.sidebar-open #app aside{transform:translateX(0)}
+  #menuToggle{display:block;position:fixed;top:10px;left:10px;z-index:14;font-size:13px;background:#245b80;border:1px solid #67a9c9;color:white;border-radius:9px;padding:9px 12px}
+  body.sidebar-open #sideBackdrop{display:block;position:fixed;inset:0;background:#0009;z-index:10}
+  .toolbar{top:59px;left:10px;right:10px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;max-width:calc(100vw - 20px);padding-bottom:8px}
+  .toolbar .chip{flex:none;white-space:nowrap}
+  .bottom{bottom:10px;left:10px;right:10px}
+  .bottom>*{font-size:10px;max-width:65%;padding:6px 8px}
+  #view{height:100dvh}
+}
+</style>
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}</script>
+</head><body><button type="button" id="menuToggle" aria-expanded="false" aria-controls="flySide">☰ 設定</button><div id="sideBackdrop"></div><div id="app"><aside id="flySide">
+  <div class="kicker">APPLE MAPS · iOS 27 · CT104</div>
+  <div class="brand">Flyover Hybrid Reconstruction</div>
+  <div class="sub">純正C3Mテクスチャ付きポリゴンとR3D三角Splatを重ねて表示</div>
+  <p><span class="pill">✓ 保存データをローカル描画</span></p>
+  <div class="meta">
+   <div class="stat"><strong id="nTiles">—</strong><span>解析済み3Dタイル</span></div>
+   <div class="stat"><strong id="nHeight">—</strong><span>16bit標高ラスタ</span></div>
+   <div class="stat"><strong>98</strong><span>3D候補スタイル</span></div>
+   <div class="stat"><strong>100</strong><span>C3MM v2スタイル</span></div>
+  </div>
+  <div class="hr"></div>
+  <div class="kicker">可視化レイヤー</div>
+
+  <div class="hr"></div>
+  <div class="kicker">純正テクスチャ付きポリゴン</div>
+  <div class="row"><label for="originalC3M">Apple純正C3Mポリゴン＋UV＋HEICテクスチャ</label><input checked type="checkbox" id="originalC3M"></div>
+  <div class="row"><label for="c3mLOD">表示するメッシュのLOD</label>
+    <select id="c3mLOD" style="max-width:190px;padding:6px;color:#e4f3ff;background:#182b42;border:1px solid #345671;border-radius:8px">
+      <option value="19">z19 広域（21タイル）</option>
+      <option value="20-near">z20 高精細（近くの50タイル）</option>
+      <option value="20-all">z20 全201タイル（高負荷）</option>
+      <option value="18">z18 広域（1タイル）</option>
+    </select>
+  </div>
+  <div class="row"><button class="chip" id="refreshC3m">ポリゴン読み込み</button></div>
+  <div class="tiny" id="c3mStatus">純正ポリゴンとHEICアトラスを読み込みます。</div>
+  <div class="tiny">UVと頂点座標は元データ。HEICをJPEGへ変換した実テクスチャを貼り付けます。</div>
+  <div class="row"><label for="realNativeTriangles">Apple純正の三角Splat形状（417,650個）</label><input checked type="checkbox" id="realNativeTriangles"></div>
+  <div class="row"><label for="sortNativeTriangles">半透明Splatを奥行き順に並べる</label><input checked type="checkbox" id="sortNativeTriangles"></div>
+  <div class="tiny" id="sortTriangleState">カメラに合わせて三角形の前後関係を計算します。</div>
+  <div class="tiny">実際の3頂点・RGBAを使用。ソフトな透過合成は再実装です。</div>
+  <div class="row"><label for="allNative">従来の円形点群と比較</label><input type="checkbox" id="allNative"></div>
+  <div class="row"><label for="shadeNormals">復元した法線で簡易ライティング</label><input type="checkbox" id="shadeNormals"></div>
+  <div class="tiny">法線は純正R3Dから復号済み。ライトの向き・強さは比較用の設定です。</div>
+  <div class="tiny">736,915点のうち透明度0を除いて描画。RGB・アルファはApple純正属性。</div>
+  <div class="row"><label for="nativePoints">1タイルの純正R3D（4,099点）</label><input type="checkbox" id="nativePoints"></div>
+  <div class="tiny">位置は実データ。RGB・アルファは実データ。R3D法線は復元済み。Splatの回転・共分散・正確な大きさは未復元。</div>
+  <div class="row"><label for="terrain">保存PNGを高さサーフェス表示</label><input checked type="checkbox" id="terrain"></div>
+  <div class="row"><label for="clipTerrain">補助メッシュをR3D取得範囲に限定</label><input checked type="checkbox" id="clipTerrain"></div>
+  <div class="row"><label for="splats">高さラスタから生成した疑似Gaussian表示</label><input type="checkbox" id="splats"></div>
+  <div class="row"><label for="points">Style 98の3Dタイル位置</label><input checked type="checkbox" id="points"></div>
+  <div class="row"><label for="grid">メートル格子</label><input checked type="checkbox" id="grid"></div>
+  <div class="row"><label for="wire">ワイヤーフレーム表示</label><input type="checkbox" id="wire"></div>
+  <div class="hr"></div>
+  <div class="row"><label for="scale">補助メッシュの高さ倍率（R3D校正済み）</label><strong id="scaleVal">1.0×</strong></div>
+  <input id="scale" type="range" min="0" max="3" step=".05" value="1">
+  <div class="tiny">保存されたR3D座標の標高とPNG値を照合し、h ≈ 51.68 + 0.788 × PNG値に校正しました（推定値）。</div>
+  <div class="row"><label for="splatOpacity">Apple式 alphaPreFactor（係数は未特定）</label><strong id="splatOpacityVal">81</strong></div>
+  <input type="range" id="splatOpacity" min="1" max="400" step="1" value="81">
+  <div class="tiny">Metalの原式を使い、係数AとCの実際の値は未特定のため手動調整できます。</div>
+  <div class="row"><label for="splatExponent">Apple式 alphaConcentration（係数は未特定）</label><strong id="splatExponentVal">1.00</strong></div>
+  <input type="range" id="splatExponent" min="0.25" max="2.5" step="0.1" value="1.0">
+  <div class="row"><label for="nativeRadius">R3Dの表示半径（近似）</label><strong id="nativeRadiusVal">2.6×</strong></div>
+  <input id="nativeRadius" type="range" min="600" max="6200" step="200" value="2600">
+  <div class="tiny">点の広がりだけを調整します。Apple本来の共分散行列ではありません。</div>
+  <div class="hr"></div>
+  <div class="kicker">凡例</div>
+  <div class="key"><i style="background:#48d7c8"></i>Style 98 / 高さレイヤー h=0</div>
+  <div class="key"><i style="background:#fbac65"></i>Style 98 / 高さレイヤー h=1</div>
+  <div class="key"><i style="background:#33ddff"></i>純正R3Dデコーダーの実測点（RGB/Alpha復号済み）</div>
+  <div class="key"><i style="background:#66c37b"></i>16-bit PNGラスタ（サーフェス）</div>
+  <div class="hr"></div>
+  <div class="kicker">地形ラスタの保存内容</div>
+  <div id="tiles"></div>
+  <div class="hr"></div>
+
+  <div class="kicker">Apple純正 C3M + R3D 保存モデル</div>
+  <div class="tiny"><a href="./Apple-Flyover-iOS27-original-textured-C3M-plus-R3D-splats-19.glb" download>純正テクスチャ付きポリゴン＋Splat・z19 GLB（58.6 MB）</a></div>
+  <div class="tiny" style="margin-top:7px"><a href="./Apple-Flyover-iOS27-original-HEIC-textured-C3M-20.glb" download>純正高精細z20ポリゴン・201タイルGLB（152.8 MB）</a></div>
+  <div class="tiny" style="margin-top:7px"><a href="./Apple-Flyover-iOS27-original-textured-C3M-plus-R3D-splats-20.glb" download>純正高精細ポリゴン＋Splat・z20統合GLB</a></div>
+  <div class="tiny">メッシュとHEIC画像・UVはApple純正R3Dから復元。GLBでは独自Splat透過シェーダーを再現できないため、写真測量風の見え方は専用ビューアで確認してください。</div>
+  <div class="hr"></div>
+  <div class="kicker">旧形式・比較用ファイル</div>
+  <div class="tiny"><a href="./Flyover-captured-heightfield.glb" download>GLB形式で復元済み3D地形を取得 (4.7 MB)</a></div>
+  <div class="tiny" style="margin-top:7px"><a href="./Flyover-height-derived-gaussian-preview.ply" download>Gaussian PLY近似モデルを取得（約13.4 MB）</a></div>
+  <div class="tiny">PLYはstyle=99の高さ情報から生成したもので、style=98の元Splatではありません。</div>
+  <div class="tiny" style="margin-top:7px"><a href="./data/Apple-R3D-native-4099-colored-points.ply" download>純正R3Dの色付き点群PLYを取得（約130 KB）</a></div>
+  <div class="tiny">4,099点の位置・RGB・不透明度は実データ由来です。残る形状パラメータは意味を解析中。</div>
+  <div class="tiny" style="margin-top:7px"><a href="./Apple-Flyover-iOS27-native-417650-triangles.glb" download>純正三角Splat 417,650面のGLBモデルを取得（25.1 MB）</a></div>
+  <div class="tiny" style="margin-top:7px"><a href="./Apple-Flyover-hybrid-native-splats-calibrated-proxy.glb" download>2レイヤーのハイブリッドGLB（27.6 MB）</a></div>
+  <div class="tiny">この旧GLBのみ高さPNGから作った代替メッシュです。上記の新しいC3Mモデルは純正メッシュです。</div>
+  <div class="tiny" style="margin-top:7px"><a href="./Apple-R3D-native-all-223-colored-points.ply" download>全736,915点・全223タイルの純正R3Dカラー点群PLY（23.6 MB）</a></div>
+  <div class="tiny" style="margin-top:7px"><a href="./Apple-R3D-native-visible-417650.glb" download>可視417,650点のカラー点群GLB（6.7 MB）</a></div>
+  <div class="tiny" style="margin-top:7px"><a href="./Apple-R3D-native-all-223-with-normals.ply" download>法線付き全736,915点のカラーPLY（32.4 MB）</a></div>
+  <div class="hr"></div>
+  <div class="tiny">現在のハイブリッドでは、純正HEICテクスチャ付きC3Mポリゴンと純正三角R3D Splatを表示できます。両者とも元データ由来ですが、最終合成の係数・ライティングはApple Mapsと完全一致ではありません。</div>
+</aside><main>
+ <div id="view"></div>
+ <div class="toolbar"><button class="chip reset" id="modeNativeOnly">R3Dのみ</button><button class="chip" id="modeHybrid">ハイブリッド</button><button class="chip" id="focusAllNative">全R3Dカラー点群へ移動</button><button class="chip" id="focusCloseNative">建物へ接近</button><button class="chip" id="focusNative">1タイルを拡大</button><button class="chip reset" id="focus">東京ドーム周辺に移動</button><button class="chip" id="all">全域表示</button><span class="chip" id="status">データ読み込み中…</span></div>
+ <div class="bottom"><div id="detail">ドラッグで回転 • スクロールで拡大 • 右ドラッグで移動<br><span class="tiny">ポイントをクリックするとタイル情報を表示します</span></div><div class="right" id="error">R3Dの純正三角Splat頂点と独立した高さ地形。透過合成は再実装</div></div>
+ <div id="tip"></div>
+</main></div>
+<script>
+(()=>{const btn=document.getElementById('menuToggle'),back=document.getElementById('sideBackdrop');
+const toggle=(state)=>{document.body.classList.toggle('sidebar-open',state);btn.setAttribute('aria-expanded',String(state));btn.textContent=state?'✕ 閉じる':'☰ 設定'};
+btn.addEventListener('click',()=>toggle(!document.body.classList.contains('sidebar-open')));
+back.addEventListener('click',()=>toggle(false));
+document.querySelector('.toolbar').addEventListener('click',()=>{if(document.body.classList.contains('sidebar-open'))toggle(false)});
+})();
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/OrbitControls.js';
+const viewport=document.getElementById('view'), status=document.getElementById('status'),info=document.getElementById('detail');
+let data=null,scene,camera,renderer,ctrl,points=[],terrains=[],splatClouds=[],grid=null,mpp=3.88,cx=0,cz=0,objects=[],terrainMaterials=[];
+const ray=new THREE.Raycaster(),pointer=new THREE.Vector2(),tip=document.getElementById('tip');
+const loader=async(path)=>{const r=await fetch(path,{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status+' '+path);return r};
+const setStatus=(s)=>{status.textContent=s};
+function position(px,pz,h=0){return new THREE.Vector3(px*mpp-cx,h,pz*mpp-cz)}
+function styleHeightAt(px,pz){for(let t of terrains){let x=(px-(t.x-t.minX)*512)/512,y=(pz-(t.y-t.minY)*512)/512;
+ if(x>=0 && x<1 && y>=0 && y<1){let i=Math.min(255,Math.round(x*255)),j=Math.min(255,Math.round(y*255));return t.heights[j*256+i]}}
+ return 0}
+function resetCamera(full=false){let dens=data.style98Records.filter(r=>r.z===20);let px=(dens.reduce((s,r)=>s+r.x,0)/dens.length/64-MINX)*512;let pz=(dens.reduce((s,r)=>s+r.y,0)/dens.length/64-MINY)*512;
+ let focus=full?new THREE.Vector3(0,0,0):position(px,pz,45);
+ ctrl.target.copy(focus);camera.position.copy(focus).add(new THREE.Vector3(full?3100:950,full?2050:750,full?3100:950));camera.near=1;camera.far=45000;camera.updateProjectionMatrix();ctrl.update()}
+let MINX,MINY,MAXX,MAXY;
+async function init(){
+data=await (await loader('./data/dataset.json')).json();
+document.getElementById('nTiles').textContent=data.style98Records.length;document.getElementById('nHeight').textContent=data.style99Tiles.length;
+MINX=Math.min(...data.style99Tiles.map(t=>t.x));MINY=Math.min(...data.style99Tiles.map(t=>t.y));MAXX=Math.max(...data.style99Tiles.map(t=>t.x));MAXY=Math.max(...data.style99Tiles.map(t=>t.y));
+cx=(MAXX-MINX+1)*512*mpp/2;cz=(MAXY-MINY+1)*512*mpp/2;
+scene=new THREE.Scene();scene.background=new THREE.Color('#081827');scene.fog=new THREE.FogExp2('#081827',.00011);
+camera=new THREE.PerspectiveCamera(55,viewport.clientWidth/viewport.clientHeight,1,45000);renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});renderer.localClippingEnabled=true;
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.65));renderer.setSize(viewport.clientWidth,viewport.clientHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;viewport.appendChild(renderer.domElement);
+ctrl=new OrbitControls(camera,renderer.domElement);ctrl.enableDamping=true;ctrl.dampingFactor=.07;ctrl.minDistance=45;ctrl.maxDistance=18000;ctrl.maxPolarAngle=Math.PI/2.04;
+scene.add(new THREE.HemisphereLight(0xb4ddff,0x18202b,2.0));let sunlight=new THREE.DirectionalLight(0xffebd4,2.0);sunlight.position.set(-1400,2000,1800);scene.add(sunlight);
+const tilesDiv=document.getElementById('tiles');
+for(const meta of data.style99Tiles){
+ let box=document.createElement('div');box.className='tile';box.innerHTML=`<img alt="16bit heightfield preview" src="./data/${meta.preview}"><div><strong>z${meta.z} · ${meta.x}/${meta.y}</strong><br>512×512 · uint16<br>範囲 ${meta.rasterMin}–${meta.rasterMax}</div>`;tilesDiv.appendChild(box);
+ let resp=await loader('./data/'+meta.file);let buffer=await resp.arrayBuffer(),heights=new Uint16Array(buffer);if(heights.length!==256*256)throw new Error('heightmap binary wrong length');
+ let t={...meta,heights,minX:MINX,minY:MINY};terrains.push(t);
+ const meshRes=256,verts=new Float32Array(meshRes*meshRes*3),colors=new Float32Array(meshRes*meshRes*3),idx=[];
+ for(let j=0;j<meshRes;j++)for(let i=0;i<meshRes;i++){
+  let v=j*meshRes+i;let px=(meta.x-MINX+i/(meshRes-1))*512,pz=(meta.y-MINY+j/(meshRes-1))*512;
+  let pos=position(px,pz);let val=heights[v];verts[3*v]=pos.x;verts[3*v+1]=51.68+val*0.788;verts[3*v+2]=pos.z;
+  let c=new THREE.Color().setHSL(.33- .24*Math.min(1,val/220),.31+val/700,.21+Math.min(1,val/260)*.32);
+  colors[3*v]=c.r;colors[3*v+1]=c.g;colors[3*v+2]=c.b;
+ }
+ for(let j=0;j<meshRes-1;j++)for(let i=0;i<meshRes-1;i++){const a=j*meshRes+i,b=a+1,c=a+meshRes,d=c+1;idx.push(a,c,b,b,c,d)}
+ const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(verts,3));geo.setAttribute('color',new THREE.BufferAttribute(colors,3));geo.setIndex(idx);geo.computeVertexNormals();geo.userData.original=heights;
+ let mat=new THREE.MeshLambertMaterial({side:THREE.DoubleSide,vertexColors:true,wireframe:false});let mesh=new THREE.Mesh(geo,mat);mesh.userData={type:'terrain',name:`z${meta.z} x${meta.x} y${meta.y}`};scene.add(mesh);terrainMaterials.push(mat);objects.push(mesh)
+}
+function updateHeights(){let m=Number(document.getElementById('scale').value);document.getElementById('scaleVal').textContent=m.toFixed(2)+'×';objects.forEach((mesh,k)=>{const p=mesh.geometry.getAttribute('position'),h=mesh.geometry.userData.original;for(let i=0;i<h.length;i++)p.setY(i,51.68+h[i]*0.788*m);p.needsUpdate=true;mesh.geometry.computeVertexNormals()});
+points.forEach(p=>{p.position.y=p.userData.originalHeight*m+18+(p.userData.record.h*12)});splatClouds.forEach(p=>{const v=p.geometry.getAttribute("position"),h=p.userData.heights;for(let k=0;k<h.length;k++)v.setY(k,h[k]*m);v.needsUpdate=true})}
+let sphereGeo=new THREE.SphereGeometry(8,8,6),pMats=[new THREE.MeshBasicMaterial({color:0x52efe0}),new THREE.MeshBasicMaterial({color:0xffa35e})];
+for(let r of data.style98Records){let px=(r.x/Math.pow(2,r.z-14)-MINX)*512,pz=(r.y/Math.pow(2,r.z-14)-MINY)*512;let h=styleHeightAt(px,pz);let mesh=new THREE.Mesh(sphereGeo,pMats[Math.min(r.h,1)]);mesh.position.copy(position(px,pz,h*2+18+(r.h*12)));mesh.userData={type:'tile98',record:r,originalHeight:h};scene.add(mesh);points.push(mesh)}
+const gridHelper=new THREE.GridHelper(6000,48,0x446680,0x1c4053);gridHelper.position.y=-2;gridHelper.rotation.y=0;scene.add(gridHelper);grid=gridHelper;
+// Gaussian-style point splats synthesized ONLY from observed 16-bit elevation rasters.
+// This is an interactive rendering approximation, not decoded native Apple Gaussian data.
+const gaussVertex=`
+  attribute vec3 tint; varying vec3 vTint;
+  uniform float uRadius;
+  void main(){
+    vTint=tint;
+    vec4 p=modelViewMatrix*vec4(position,1.0);
+    gl_Position=projectionMatrix*p;
+    gl_PointSize=clamp(uRadius*1750.0/max(15.0,-p.z),1.5,48.0);
+  }`;
+const gaussFragment=`
+  precision highp float;
+  varying vec3 vTint;
+  void main(){
+    vec2 uv=(gl_PointCoord*2.0-1.0);
+    float d=dot(uv,uv);
+    if(d>1.0)discard;
+    float alpha=exp(-5.0*d)*0.70;
+    gl_FragColor=vec4(vTint,alpha);
+  }`;
+for(let index=0;index<objects.length;index++){
+ const base=objects[index].geometry;
+ const vertices=new Float32Array(base.getAttribute('position').array);
+ const tints=new Float32Array(base.getAttribute('color').array);
+ const geom=new THREE.BufferGeometry();
+ geom.setAttribute('position',new THREE.BufferAttribute(vertices,3));
+ geom.setAttribute('tint',new THREE.BufferAttribute(tints,3));
+ const shader=new THREE.ShaderMaterial({
+  uniforms:{uRadius:{value:5.0}},
+  vertexShader:gaussVertex,fragmentShader:gaussFragment,
+  transparent:true,depthTest:true,depthWrite:false,
+  blending:THREE.NormalBlending
+ });
+ const g=new THREE.Points(geom,shader);
+ g.frustumCulled=false;g.visible=false;
+ g.userData={heights:base.userData.original};
+ splatClouds.push(g);scene.add(g);
+}
+document.getElementById('splats').addEventListener('change',e=>{
+ const show=e.target.checked;
+ splatClouds.forEach(c=>c.visible=show);
+ // Use cloud-only mode by default when splats are enabled, to avoid occlusion by the original meshes.
+ objects.forEach(m=>m.visible=!show);
+ document.getElementById('terrain').checked=!show;
+ document.getElementById('error').textContent=show?'Gaussian描画: 実キャプチャの高さ値から再サンプリングした近似スプラット。style=98の3DGSの復号ではありません。':'※未解析の3DGSではなく、復号済みの高さラスタを表示中';
+});
+
+
+// VERIFIED native Apple R3D XYZ from iOS27 VectorKit (no invented geometry).
+// Original RGB and alpha decoded from Apple createSplats, sprite size still diagnostic.
+const nativeMeta=await (await loader('./data/native-r3d.json')).json();
+const nativeRaw=await (await loader('./data/'+nativeMeta.filename)).arrayBuffer();
+const nativeXYZ=new Float32Array(nativeRaw);
+if(nativeXYZ.length!==nativeMeta.count*3)throw new Error('Native XYZ length mismatch');
+const nativeGeom=new THREE.BufferGeometry();
+nativeGeom.setAttribute('position',new THREE.BufferAttribute(nativeXYZ,3));
+const nativeRGBAData=await (await loader('./data/native_R3D_z20_x931324_y412804_h0_4099_rgba_shape.bin')).arrayBuffer();
+const nativePacked=new Float32Array(nativeRGBAData);
+if(nativePacked.length!==nativeMeta.count*8)throw new Error('Native RGBA length mismatch');
+const nativeColor=new Float32Array(nativeMeta.count*4);
+for(let i=0;i<nativeMeta.count;i++) {
+ for(let j=0;j<4;j++)nativeColor[i*4+j]=nativePacked[i*8+j];
+}
+nativeGeom.setAttribute('nativeRGBA',new THREE.BufferAttribute(nativeColor,4));
+nativeGeom.computeBoundingSphere();
+const nativeMaterial=new THREE.ShaderMaterial({
+ vertexShader:'attribute vec4 nativeRGBA;varying vec4 vRGBA;void main(){vRGBA=nativeRGBA;vec4 eye=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*eye;gl_PointSize=clamp(1400.0/max(12.0,-eye.z),2.2,25.0);}',
+ fragmentShader:'precision mediump float;varying vec4 vRGBA;void main(){vec2 q=2.0*gl_PointCoord-1.0;float r=dot(q,q);if(r>1.0||vRGBA.a<=0.0)discard;gl_FragColor=vec4(vRGBA.rgb,vRGBA.a*exp(-3.5*r));}',
+ transparent:true,depthTest:false,depthWrite:false,blending:THREE.NormalBlending
+});
+const nativePoints=new THREE.Points(nativeGeom,nativeMaterial);
+nativePoints.frustumCulled=false;nativePoints.renderOrder=999;
+nativePoints.userData={type:'native-R3D',count:nativeMeta.count,z:nativeMeta.z,x:nativeMeta.x,y:nativeMeta.y,h:nativeMeta.h};
+scene.add(nativePoints);
+document.getElementById('nativePoints').addEventListener('change',e=>{nativePoints.visible=e.target.checked});
+document.getElementById('focusNative').onclick=()=>{
+ const c=nativeMeta.center;
+ ctrl.target.set(c[0],c[1],c[2]);
+ camera.position.set(c[0]+100,c[1]+75,c[2]+100);ctrl.update();
+ document.getElementById('nativePoints').checked=true;nativePoints.visible=true;
+ info.textContent='Apple純正 R3D から展開した '+nativeMeta.count.toLocaleString()+' 点の位置。RGB・透明度は復号済み。粒径は仮設定。';
+};
+
+// FULL Apple native R3D point cloud: 223 captured style98 tiles.
+// Position / RGB / opacity come exclusively from iOS27 VectorKit.
+// The billboard Gaussian radius is a diagnostic display approximation; native covariance not decoded.
+const nativeAllMeta=await (await loader('./data/native-all.json')).json();
+const [allPositionRaw,allColorRaw,allShapeRaw,allNormalRaw]=await Promise.all([
+ loader('./data/'+nativeAllMeta.renderFiles.positions).then(r=>r.arrayBuffer()),
+ loader('./data/'+nativeAllMeta.renderFiles.rgba).then(r=>r.arrayBuffer()),
+ loader('./data/'+nativeAllMeta.renderFiles.shape).then(r=>r.arrayBuffer()),
+ loader('./data/native-223-visible-normals.bin').then(r=>r.arrayBuffer())
+]);
+const allPositions=new Float32Array(allPositionRaw);
+const allColors=new Uint8Array(allColorRaw);
+const allShapes=new Float32Array(allShapeRaw);
+const allNormals=new Float32Array(allNormalRaw);
+if(allPositions.length/3!==nativeAllMeta.visibleAlphaNonzero ||
+ allColors.length/4!==nativeAllMeta.visibleAlphaNonzero ||
+ allShapes.length/4!==nativeAllMeta.visibleAlphaNonzero ||
+ allNormals.length/3!==nativeAllMeta.visibleAlphaNonzero)
+ throw new Error('223 R3D tiles attribute counts differ');
+const allGeo=new THREE.BufferGeometry();
+allGeo.setAttribute('position',new THREE.BufferAttribute(allPositions,3));
+allGeo.setAttribute('nativeRGBA',new THREE.BufferAttribute(allColors,4,true));
+allGeo.setAttribute('rawShape',new THREE.BufferAttribute(allShapes,4));
+allGeo.setAttribute('nativeNormal',new THREE.BufferAttribute(allNormals,3));
+allGeo.computeBoundingSphere();
+const allMaterial=new THREE.ShaderMaterial({
+ uniforms:{pixelSize:{value:2600.0},useNormalLight:{value:0.0}},
+ vertexShader:'attribute vec4 nativeRGBA;attribute vec4 rawShape;attribute vec3 nativeNormal;uniform float pixelSize;uniform float useNormalLight;varying vec4 vRGBA;void main(){float light=max(0.2,dot(normalize(nativeNormal),normalize(vec3(-0.2,0.9,0.4))));float k=mix(1.0,0.55+0.55*light,useNormalLight);vRGBA=vec4(nativeRGBA.rgb*k,nativeRGBA.a);vec4 eye=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*eye;gl_PointSize=clamp(pixelSize/max(12.0,-eye.z),1.5,26.0);}',
+ fragmentShader:'precision mediump float;varying vec4 vRGBA;void main(){vec2 q=gl_PointCoord*2.0-1.0;float t=dot(q,q);if(t>1.0||vRGBA.a<=0.0)discard;gl_FragColor=vec4(vRGBA.rgb,vRGBA.a*exp(-4.0*t));}',
+ transparent:true,depthTest:false,depthWrite:false,blending:THREE.NormalBlending
+});
+const nativeAll=new THREE.Points(allGeo,allMaterial);
+nativeAll.frustumCulled=false;
+nativeAll.renderOrder=1000;
+nativeAll.userData={type:'native-R3D-all',count:nativeAllMeta.visibleAlphaNonzero};
+scene.add(nativeAll);
+nativePoints.visible=false;
+points.forEach(p=>p.visible=false);
+document.getElementById('points').checked=false;
+document.getElementById('allNative').addEventListener('change',e=>nativeAll.visible=e.target.checked);
+document.getElementById('shadeNormals').addEventListener('change',e=>allMaterial.uniforms.useNormalLight.value=e.target.checked?1.0:0.0);
+// Actual iOS27 VectorKit createSplats output: 3 real XYZ vertices and one packed RGBA per triangle.
+// Only smooth edge transparency is approximated (barycentric-product exponent + normalized factor).
+const nativeTrianglesMeta=await (await loader('./data/native-triangle-splats.json')).json();
+// Clip the calibrated but NON-original PNG heightfield to the region actually captured
+// and decoded as native R3D splats. Avoid showing unsupported giant polygon spikes elsewhere.
+const bbox=nativeTrianglesMeta;
+const terrainMargin=55;
+const xmin=bbox.min[0]-terrainMargin,xmax=bbox.max[0]+terrainMargin;
+const zmin=bbox.min[2]-terrainMargin,zmax=bbox.max[2]+terrainMargin;
+const pngCropPlanes=[
+ new THREE.Plane(new THREE.Vector3(1,0,0),-xmin),
+ new THREE.Plane(new THREE.Vector3(-1,0,0),xmax),
+ new THREE.Plane(new THREE.Vector3(0,0,1),-zmin),
+ new THREE.Plane(new THREE.Vector3(0,0,-1),zmax)
+];
+terrainMaterials.forEach(m=>{m.clippingPlanes=pngCropPlanes;m.needsUpdate=true});
+document.getElementById('clipTerrain').addEventListener('change',e=>{
+ terrainMaterials.forEach(m=>{m.clippingPlanes=e.target.checked?pngCropPlanes:null;m.needsUpdate=true});
+});
+
+const [nativeTriPositionsRaw,nativeTriColorsRaw]=await Promise.all([
+ loader('./data/'+nativeTrianglesMeta.sourceFiles.triangles).then(r=>r.arrayBuffer()),
+ loader('./data/'+nativeTrianglesMeta.sourceFiles.color).then(r=>r.arrayBuffer())
+]);
+const triPositions=new Float32Array(nativeTriPositionsRaw);
+const triColors=new Uint8Array(nativeTriColorsRaw);
+const triCount=nativeTrianglesMeta.splatTrianglesVisible;
+if(triCount!==417650 || triPositions.length!==triCount*9 || triColors.length!==triCount*4)
+ throw new Error('Native createSplats buffer sizes invalid');
+const triColorVerts=new Uint8Array(triCount*12);
+const triBary=new Uint8Array(triCount*9);
+const triNormalVerts=new Float32Array(triCount*9);
+for(let i=0;i<triCount;i++){
+ const k=i*12,s=i*4,base=i*9,nn=i*3;
+ for(let v=0;v<3;v++){
+  triColorVerts.set(triColors.subarray(s,s+4),k+4*v);
+  triNormalVerts.set(allNormals.subarray(nn,nn+3),base+3*v);
+ }
+ triBary[base]=255;triBary[base+4]=255;triBary[base+8]=255;
+}
+const nativeTriangleGeo=new THREE.BufferGeometry();
+nativeTriangleGeo.setAttribute('position',new THREE.BufferAttribute(triPositions,3));
+nativeTriangleGeo.setAttribute('nativeRGBA',new THREE.BufferAttribute(triColorVerts,4,true));
+nativeTriangleGeo.setAttribute('bary',new THREE.BufferAttribute(triBary,3,true));
+nativeTriangleGeo.setAttribute('nativeNormal',new THREE.BufferAttribute(triNormalVerts,3));
+nativeTriangleGeo.computeBoundingSphere();
+// Apple sorts its SplatOrders per draw. Unlike one giant unsorted transparent mesh,
+// WebGL source-over blending must draw approximate back-to-front.
+const nativeTriangleCenters=new Float32Array(triCount*3);
+const nativeTriangleDepths=new Float32Array(triCount);
+const nativeTriangleOrder=new Uint32Array(triCount);
+const nativeTriangleIndices=new Uint32Array(triCount*3);
+for(let i=0;i<triCount;i++){
+ const o=i*9,p=i*3;
+ nativeTriangleCenters[p]=(triPositions[o]+triPositions[o+3]+triPositions[o+6])/3;
+ nativeTriangleCenters[p+1]=(triPositions[o+1]+triPositions[o+4]+triPositions[o+7])/3;
+ nativeTriangleCenters[p+2]=(triPositions[o+2]+triPositions[o+5]+triPositions[o+8])/3;
+ nativeTriangleOrder[i]=i;
+ nativeTriangleIndices[p]=p;nativeTriangleIndices[p+1]=p+1;nativeTriangleIndices[p+2]=p+2;
+}
+const nativeTriangleIndexAttribute=new THREE.BufferAttribute(nativeTriangleIndices,1);
+nativeTriangleIndexAttribute.setUsage(THREE.DynamicDrawUsage);
+nativeTriangleGeo.setIndex(nativeTriangleIndexAttribute);
+let triangleSortTimer=null;
+let triangleSortMs=0;
+let triangleSortCount=0;
+function sortNativeTriangles(){
+ if(!document.getElementById('sortNativeTriangles').checked)return;
+ const view=new THREE.Vector3().subVectors(ctrl.target,camera.position).normalize();
+ const x=view.x,y=view.y,z=view.z;
+ for(let i=0;i<triCount;i++){
+  const j=i*3;
+  nativeTriangleDepths[i]=nativeTriangleCenters[j]*x+nativeTriangleCenters[j+1]*y+nativeTriangleCenters[j+2]*z;
+ }
+ const now=performance.now();
+ nativeTriangleOrder.sort((a,b)=>nativeTriangleDepths[b]-nativeTriangleDepths[a]);
+ for(let i=0;i<triCount;i++){
+  const idx=3*i,src=3*nativeTriangleOrder[i];
+  nativeTriangleIndices[idx]=src;
+  nativeTriangleIndices[idx+1]=src+1;
+  nativeTriangleIndices[idx+2]=src+2;
+ }
+ nativeTriangleIndexAttribute.needsUpdate=true;
+ triangleSortCount++;
+ triangleSortMs=performance.now()-now;
+ document.getElementById('sortTriangleState').textContent='奥から順に '+triCount.toLocaleString()+' 面を並べ替えました（'+Math.round(triangleSortMs)+' ms）';
+}
+function requestNativeSort(){
+ if(triangleSortTimer!==null)clearTimeout(triangleSortTimer);
+ triangleSortTimer=setTimeout(()=>{triangleSortTimer=null;sortNativeTriangles()},280);
+}
+ctrl.addEventListener('end',requestNativeSort);
+document.getElementById('sortNativeTriangles').addEventListener('change',e=>{
+ if(e.target.checked)requestNativeSort();
+ else{
+  for(let i=0;i<nativeTriangleIndices.length;i++)nativeTriangleIndices[i]=i;
+  nativeTriangleIndexAttribute.needsUpdate=true;
+  document.getElementById('sortTriangleState').textContent='並べ替えを無効化しました';
+ }
+});
+
+const nativeTriangleMat=new THREE.ShaderMaterial({
+ uniforms:{splatExponent:{value:1.0},useNormalLight:{value:0.0},alphaPreFactor:{value:81.0}},
+ vertexShader:'attribute vec4 nativeRGBA;attribute vec3 bary;attribute vec3 nativeNormal;varying vec4 vRGBA;varying vec3 vBary;uniform float useNormalLight;void main(){float ndotl=max(0.0,dot(normalize(nativeNormal),normalize(vec3(-0.2,0.9,0.4))));float light=mix(1.0,0.35+0.65*ndotl,useNormalLight);vRGBA=vec4(nativeRGBA.rgb*light,nativeRGBA.a);vBary=bary;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',
+ fragmentShader:'precision highp float;varying vec4 vRGBA;varying vec3 vBary;uniform float splatExponent;uniform float alphaPreFactor;void main(){float prod=vBary.x*vBary.y*vBary.z;if(prod<=0.0||vRGBA.a<=0.0)discard;float coverage=pow(prod,splatExponent);gl_FragColor=vec4(vRGBA.rgb,min(0.99,vRGBA.a*coverage*alphaPreFactor));}',
+ transparent:true,depthTest:true,depthWrite:false,side:THREE.DoubleSide,blending:THREE.NormalBlending
+});
+const nativeTriangleMesh=new THREE.Mesh(nativeTriangleGeo,nativeTriangleMat);
+nativeTriangleMesh.frustumCulled=false;
+nativeTriangleMesh.renderOrder=999;
+nativeTriangleMesh.userData={type:'Apple-Native-Triangular-Splats',triangleCount:triCount};
+scene.add(nativeTriangleMesh);
+document.getElementById('realNativeTriangles').addEventListener('change',e=>nativeTriangleMesh.visible=e.target.checked);
+document.getElementById('splatOpacity').addEventListener('input',e=>{nativeTriangleMat.uniforms.alphaPreFactor.value=+e.target.value;document.getElementById('splatOpacityVal').textContent=String(+e.target.value);});
+document.getElementById('splatExponent').addEventListener('input',e=>{
+ nativeTriangleMat.uniforms.splatExponent.value=+e.target.value;
+ document.getElementById('splatExponentVal').textContent=(+e.target.value).toFixed(2);
+});
+document.getElementById('shadeNormals').addEventListener('change',e=>{
+ nativeTriangleMat.uniforms.useNormalLight.value=e.target.checked?1.0:0.0;
+});
+
+// ORIGINAL APPLE R3D C3M textured polygon layer.
+// XYZ, UV, normals and 3 independent triangle-corner indices from iOS27 native decoder.
+// Each tile's JPEG is a browser conversion of its one-to-one Apple HEIC texture atlas.
+const c3mManifest=await (await loader('./data/native-c3m.json')).json();
+const c3mGroup=new THREE.Group();
+c3mGroup.name='Apple-original-C3M-UV-textured-polygon-meshes';
+scene.add(c3mGroup);
+const c3mTextureLoader=new THREE.TextureLoader();
+const c3mCache=new Map();
+let c3mLoadGeneration=0;
+let c3mModeIsHybrid=false;
+const c3mStatus=document.getElementById('c3mStatus');
+function selectC3mTiles(){
+ const selected=document.getElementById('c3mLOD').value;
+ if(selected==='19')return c3mManifest.tiles.filter(t=>t.z===19);
+ if(selected==='18')return c3mManifest.tiles.filter(t=>t.z===18);
+ if(selected==='20-all')return c3mManifest.tiles.filter(t=>t.z===20);
+ const center=ctrl.target;
+ return c3mManifest.tiles.filter(t=>t.z===20).sort((a,b)=>{
+  const da=(a.center[0]-center.x)**2+(a.center[2]-center.z)**2;
+  const db=(b.center[0]-center.x)**2+(b.center[2]-center.z)**2;
+  return da-db;
+ }).slice(0,50);
+}
+async function loadOneNativeC3m(tile){
+ if(c3mCache.has(tile.id))return c3mCache.get(tile.id);
+ const raw=await(await loader('./c3m-geometry/'+tile.geometry)).arrayBuffer();
+ const header=new DataView(raw);
+ const magic=header.getUint32(0,true),n=header.getUint32(4,true),faces=header.getUint32(8,true);
+ if(magic!==0x4d33434d || n!==tile.vertices || faces!==tile.triangles || raw.byteLength!==16+n*32+faces*12)
+  throw new Error('C3M geometry bytes mismatch: '+tile.id);
+ let off=16;
+ const pos=new Float32Array(raw,off,n*3);off+=n*12;
+ const uv=new Float32Array(raw,off,n*2);off+=n*8;
+ const normals=new Float32Array(raw,off,n*3);off+=n*12;
+ const indices=new Uint32Array(raw,off,faces*3);
+ const geo=new THREE.BufferGeometry();
+ geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+ geo.setAttribute('uv',new THREE.BufferAttribute(uv,2));
+ geo.setAttribute('normal',new THREE.BufferAttribute(normals,3));
+ geo.setIndex(new THREE.BufferAttribute(indices,1));
+ geo.computeBoundingSphere();
+ const texture=await c3mTextureLoader.loadAsync('./'+tile.texture);
+ // The original C3M UVs use the same bottom-left V convention as the legacy
+ // Flyover OBJ exporter. Three.js TextureLoader must flip decoded HEIC JPEGs.
+ // flipY=false incorrectly mapped roofs and windows onto unrelated faces.
+ texture.flipY=true;
+ texture.colorSpace=THREE.SRGBColorSpace;
+ texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
+ const mat=new THREE.MeshBasicMaterial({map:texture,side:THREE.DoubleSide,depthWrite:true});
+ const mesh=new THREE.Mesh(geo,mat);
+ mesh.name='ORIGINAL_C3M_'+tile.id;
+ mesh.userData={source:'iOS27 VectorKit R3D C3M',tile};
+ mesh.visible=false;
+ c3mGroup.add(mesh);
+ c3mCache.set(tile.id,mesh);
+ return mesh;
+}
+function updateC3mLayerVisibility(){
+ const requested=document.getElementById('originalC3M').checked;
+ const active=c3mModeIsHybrid && requested;
+ c3mGroup.visible=active;
+ for(const m of c3mCache.values())m.visible=active && m.userData.selected===true;
+ // Once true textured C3M is enabled, suppress the artificial PNG height mesh;
+ // it remains available through the independent toggle when C3M is unchecked.
+ objects.forEach(m=>m.visible=c3mModeIsHybrid && !requested && document.getElementById('terrain').checked);
+}
+async function reloadNativeC3m(){
+ const seq=++c3mLoadGeneration;
+ const selected=selectC3mTiles();
+ const wanted=new Set(selected.map(t=>t.id));
+ for(const [id,mesh] of c3mCache)mesh.userData.selected=wanted.has(id);
+ let loaded=0,faces=0,errors=[];
+ c3mStatus.textContent='純正C3M '+selected.length+'タイル読み込み中…';
+ const queue=selected.slice();
+ async function worker(){
+  while(queue.length){
+   if(seq!==c3mLoadGeneration)return;
+   const t=queue.shift();
+   try{
+    const mesh=await loadOneNativeC3m(t);
+    if(seq!==c3mLoadGeneration)return;
+    mesh.userData.selected=true;loaded++;faces+=t.triangles;
+    if(loaded%4===0||loaded===selected.length)c3mStatus.textContent=
+      'C3M '+loaded+'/'+selected.length+'タイル · '+faces.toLocaleString()+'面';
+   }catch(e){errors.push(t.id+' '+e.message)}
+  }
+ }
+ await Promise.all(Array.from({length:Math.min(4,selected.length)},worker));
+ if(seq!==c3mLoadGeneration)return;
+ updateC3mLayerVisibility();
+ c3mStatus.textContent=errors.length? 'C3M '+loaded+'/'+selected.length+'タイル、失敗'+errors.length+
+  '（'+errors[0]+'）':'純正テクスチャ付きC3M '+loaded+'タイル / '+faces.toLocaleString()+'三角形を表示';
+ if(loaded>0)setStatus('✓ 純正C3M＋純正R3D Splat：'+faces.toLocaleString()+'ポリゴン / 417,650 Splat');
+}
+document.getElementById('originalC3M').addEventListener('change',updateC3mLayerVisibility);
+document.getElementById('c3mLOD').addEventListener('change',reloadNativeC3m);
+document.getElementById('refreshC3m').onclick=reloadNativeC3m;
+
+function setNativeViewMode(hybrid) {
+ c3mModeIsHybrid=hybrid;
+ objects.forEach(m=>m.visible=hybrid);
+ document.getElementById('terrain').checked=hybrid;
+ splatClouds.forEach(c=>c.visible=false);
+ document.getElementById('splats').checked=false;
+ points.forEach(p=>p.visible=false);
+ document.getElementById('points').checked=false;
+ grid.visible=false;document.getElementById('grid').checked=false;
+ nativePoints.visible=false;document.getElementById('nativePoints').checked=false;
+ nativeAll.visible=false;document.getElementById('allNative').checked=false;
+ nativeTriangleMesh.visible=true;document.getElementById('realNativeTriangles').checked=true;
+ updateC3mLayerVisibility();
+ document.getElementById('error').textContent=hybrid ?
+  'Apple純正HEICテクスチャ付きC3Mポリゴン＋純正R3D三角Splat（両レイヤーがオリジナル）':
+  'Apple純正R3D三角Splatの頂点・RGBAのみを表示。透過合成は再実装。';
+}
+document.getElementById('modeNativeOnly').onclick=()=>setNativeViewMode(false);
+document.getElementById('modeHybrid').onclick=()=>setNativeViewMode(true);
+document.getElementById('nativeRadius').addEventListener('input',e=>{allMaterial.uniforms.pixelSize.value=+e.target.value;document.getElementById('nativeRadiusVal').textContent=(+e.target.value/1000).toFixed(1)+'×';});
+document.getElementById('focusCloseNative').onclick=()=>{ctrl.target.set(98.45,67.5,262.72);camera.position.set(278.45,197.5,442.72);ctrl.update();setNativeViewMode(false);requestNativeSort()};
+document.getElementById('focusAllNative').onclick=()=>{
+ const lo=nativeAllMeta.boundsMin,hi=nativeAllMeta.boundsMax;
+ const mx=(lo[0]+hi[0])/2,my=(lo[1]+hi[1])/2,mz=(lo[2]+hi[2])/2;
+ ctrl.target.set(mx,my,mz);
+ camera.position.set(mx+560,my+480,mz+560);ctrl.update();
+ nativeTriangleMesh.visible=true;document.getElementById('realNativeTriangles').checked=true;
+ info.textContent='Apple純正R3D 223タイル／全736,915点、透明度0を除く417,650点を表示中。RGB/Alphaは実際のデータ、三角形の頂点とRGBAは純正、縁のソフト処理は再実装。';
+};
+
+resetCamera(false);
+document.getElementById('focusCloseNative').click();
+requestNativeSort();
+reloadNativeC3m().then(()=>document.getElementById('modeHybrid').click());
+document.getElementById('terrain').addEventListener('change',e=>{objects.forEach(m=>m.visible=e.target.checked)});
+document.getElementById('points').addEventListener('change',e=>{points.forEach(m=>m.visible=e.target.checked)});
+document.getElementById('wire').addEventListener('change',e=>{terrainMaterials.forEach(m=>m.wireframe=e.target.checked)});
+document.getElementById('grid').addEventListener('change',e=>grid.visible=e.target.checked);
+document.getElementById('scale').addEventListener('input',updateHeights);
+document.getElementById('focus').onclick=()=>resetCamera(false);document.getElementById('all').onclick=()=>resetCamera(true);
+renderer.domElement.addEventListener('click',e=>{const rect=renderer.domElement.getBoundingClientRect();pointer.x=(e.clientX-rect.left)/rect.width*2-1;pointer.y=-(e.clientY-rect.top)/rect.height*2+1;ray.setFromCamera(pointer,camera);const hits=ray.intersectObjects(points.filter(p=>p.visible),false);if(hits.length){const r=hits[0].object.userData.record;info.innerHTML=`選択: <b>Style 98 / z${r.z}, x${r.x}, y${r.y}, h${r.h}</b><br>位置 ${r.lat.toFixed(6)}N, ${r.lon.toFixed(6)}E · 数量フィールド ${r.countField.toLocaleString()} · ${(r.bytes/1024).toFixed(1)} KiB`}});
+window.addEventListener('resize',()=>{const w=viewport.clientWidth,h=viewport.clientHeight;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h)});
+window.__flyDebug={scene,camera,renderer,ctrl,points,terrains,splatClouds,nativePoints,nativeMeta,nativeAll,nativeAllMeta,nativeTriangleMesh,nativeTriangleMat,nativeTrianglesMeta,sortNativeTriangles,c3mManifest,c3mGroup,c3mCache,reloadNativeC3m,objects,grid,resetCamera,position};setStatus('✓ 純正三角Splat 417,650個／223タイル・オリジナルRGBA');
+function tick(){requestAnimationFrame(tick);ctrl.update();renderer.render(scene,camera)}tick();
+}
+init().catch(e=>{setStatus('表示エラー');document.getElementById('error').textContent='エラー: '+e.message;console.error(e)});
+</script></body></html>

@@ -1,0 +1,511 @@
+{
+  "files": 6,
+  "recognizedBlocks": 36,
+  "successfulBlocks": 36,
+  "samples": [
+    {
+      "file": "exports/capture-validation-a/s100_z13_x7276_y3225.c3mm",
+      "fileBytes": 27742,
+      "blocks": [
+        {
+          "offset": 22,
+          "recordOffset": 13,
+          "recordBytes": 319,
+          "method": 1,
+          "declaredRawBytes": 1040,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 1040,
+          "sizeMatches": true,
+          "sha256": "076dc6c5a7d0df9c1702c995ccc5e94b9085db4888835db26ee3bc1223bece2d",
+          "prefix": "1160360100c0c6010014010100000000",
+          "eof": false
+        },
+        {
+          "offset": 341,
+          "recordOffset": 332,
+          "recordBytes": 47,
+          "method": 1,
+          "declaredRawBytes": 2058,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 2058,
+          "sizeMatches": true,
+          "sha256": "a21852f129e37ea6b9bb541744e1b2c77d08d5ea3941de4272aa8d148e6261b1",
+          "prefix": "0101ed01000000000000ed0100000000",
+          "eof": false
+        },
+        {
+          "offset": 388,
+          "recordOffset": 379,
+          "recordBytes": 40,
+          "method": 1,
+          "declaredRawBytes": 1030,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 1030,
+          "sizeMatches": true,
+          "sha256": "a9f4880374acdf388f474084132fbb76b98d84d390327ec3168952e99a117511",
+          "prefix": "01010200000002000000020000000200",
+          "eof": false
+        },
+        {
+          "offset": 428,
+          "recordOffset": 419,
+          "recordBytes": 4905,
+          "method": 1,
+          "declaredRawBytes": 62646,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 62646,
+          "sizeMatches": true,
+          "sha256": "b69864eea0060d626bbe3e12c81569c41e918eec5356af70c4174f9c8cd637d5",
+          "prefix": "597a0000550055005500000000000000",
+          "eof": false
+        },
+        {
+          "offset": 5333,
+          "recordOffset": 5324,
+          "recordBytes": 435,
+          "method": 1,
+          "declaredRawBytes": 1037,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 1037,
+          "sizeMatches": true,
+          "sha256": "a4a3232994643333f1ba16b96d5fa038b13ec08ef0cbdb3598187170fce2aeaa",
+          "prefix": "54064ac1c0dfbd43081e00c0001e0078",
+          "eof": false
+        },
+        {
+          "offset": 5768,
+          "recordOffset": 5759,
+          "recordBytes": 21984,
+          "method": 1,
+          "declaredRawBytes": 62129,
+          "missingTrailingBytes": 1,
+          "decodedBytes": 62129,
+          "sizeMatches": true,
+          "sha256": "aec7aadddf7292b6a7885db3c5260d4f14d44a4556a220a6b1cf7ff133320e6e",
+          "prefix": "04060002020002000401000000000400",
+          "eof": false
+        }
+      ]
+    },
+    {
+      "file": "exports/capture-validation-b/s100_z13_x7276_y3225_h0.c3mm",
+      "fileBytes": 27742,
+      "blocks": [
+        {
+          "offset": 22,
+          "recordOffset": 13,
+          "recordBytes": 319,
+          "method": 1,
+          "declaredRawBytes": 1040,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 1040,
+          "sizeMatches": true,
+          "sha256": "076dc6c5a7d0df9c1702c995ccc5e94b9085db4888835db26ee3bc1223bece2d",
+          "prefix": "1160360100c0c6010014010100000000",
+          "eof": false
+        },
+        {
+          "offset": 341,
+          "recordOffset": 332,
+          "recordBytes": 47,
+          "method": 1,
+          "declaredRawBytes": 2058,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 2058,
+          "sizeMatches": true,
+          "sha256": "a21852f129e37ea6b9bb541744e1b2c77d08d5ea3941de4272aa8d148e6261b1",
+          "prefix": "0101ed01000000000000ed0100000000",
+          "eof": false
+        },
+        {
+          "offset": 388,
+          "recordOffset": 379,
+          "recordBytes": 40,
+          "method": 1,
+          "declaredRawBytes": 1030,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 1030,
+          "sizeMatches": true,
+          "sha256": "a9f4880374acdf388f474084132fbb76b98d84d390327ec3168952e99a117511",
+          "prefix": "01010200000002000000020000000200",
+          "eof": false
+        },
+        {
+          "offset": 428,
+          "recordOffset": 419,
+          "recordBytes": 4905,
+          "method": 1,
+          "declaredRawBytes": 62646,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 62646,
+          "sizeMatches": true,
+          "sha256": "b69864eea0060d626bbe3e12c81569c41e918eec5356af70c4174f9c8cd637d5",
+          "prefix": "597a0000550055005500000000000000",
+          "eof": false
+        },
+        {
+          "offset": 5333,
+          "recordOffset": 5324,
+          "recordBytes": 435,
+          "method": 1,
+          "declaredRawBytes": 1037,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 1037,
+          "sizeMatches": true,
+          "sha256": "a4a3232994643333f1ba16b96d5fa038b13ec08ef0cbdb3598187170fce2aeaa",
+          "prefix": "54064ac1c0dfbd43081e00c0001e0078",
+          "eof": false
+        },
+        {
+          "offset": 5768,
+          "recordOffset": 5759,
+          "recordBytes": 21984,
+          "method": 1,
+          "declaredRawBytes": 62129,
+          "missingTrailingBytes": 1,
+          "decodedBytes": 62129,
+          "sizeMatches": true,
+          "sha256": "aec7aadddf7292b6a7885db3c5260d4f14d44a4556a220a6b1cf7ff133320e6e",
+          "prefix": "04060002020002000401000000000400",
+          "eof": false
+        }
+      ]
+    },
+    {
+      "file": "exports/capture-validation-b/s100_z9_x454_y201_h0.c3mm",
+      "fileBytes": 15856,
+      "blocks": [
+        {
+          "offset": 37,
+          "recordOffset": 28,
+          "recordBytes": 287,
+          "method": 1,
+          "declaredRawBytes": 1024,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 1024,
+          "sizeMatches": true,
+          "sha256": "71cef0e44d5e8192544cf26a7fa6d6552caeb897ec2dcb28c48b0ac8a264d446",
+          "prefix": "0d60130000601c000010fd000000f000",
+          "eof": false
+        },
+        {
+          "offset": 324,
+          "recordOffset": 315,
+          "recordBytes": 60,
+          "method": 1,
+          "declaredRawBytes": 2026,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 2026,
+          "sizeMatches": true,
+          "sha256": "4dfeb3d84022eaa7bf53700db688a66abc7052623abc1bb6a0aa2327f89b9a90",
+          "prefix": "fd00ed01000000000000ed0100000000",
+          "eof": false
+        },
+        {
+          "offset": 384,
+          "recordOffset": 375,
+          "recordBytes": 40,
+          "method": 1,
+          "declaredRawBytes": 1014,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 1014,
+          "sizeMatches": true,
+          "sha256": "e53d982fa50a6a1bef65257b8e54aced320ccf329ee385f7006df76129390706",
+          "prefix": "fd000200000002000000020000000200",
+          "eof": false
+        },
+        {
+          "offset": 424,
+          "recordOffset": 415,
+          "recordBytes": 624,
+          "method": 1,
+          "declaredRawBytes": 41572,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 41572,
+          "sizeMatches": true,
+          "sha256": "61b90c6915b44228c0553cc4d1a4e086e8f852b57ecdd85bae992e96fd1b4d6c",
+          "prefix": "30510000fe00ee00fe00ff00ea00ff00",
+          "eof": false
+        },
+        {
+          "offset": 1048,
+          "recordOffset": 1039,
+          "recordBytes": 505,
+          "method": 1,
+          "declaredRawBytes": 1021,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 1021,
+          "sizeMatches": true,
+          "sha256": "eae72356d52922195e48943e29fb647e76c540430cb38e45db405262b2990c79",
+          "prefix": "664f54c2f19d7544082d009200300086",
+          "eof": false
+        },
+        {
+          "offset": 1553,
+          "recordOffset": 1544,
+          "recordBytes": 14313,
+          "method": 1,
+          "declaredRawBytes": 41063,
+          "missingTrailingBytes": 1,
+          "decodedBytes": 41063,
+          "sizeMatches": true,
+          "sha256": "be5b497b2b90b2b85da45cdfc8081dc46b0a14c742c8765ec2dc449a2202a492",
+          "prefix": "04000100000300000700020004010400",
+          "eof": false
+        }
+      ]
+    },
+    {
+      "file": "exports/tower-missing-check/s100_z9_x454_y201_h0.c3mm",
+      "fileBytes": 15856,
+      "blocks": [
+        {
+          "offset": 37,
+          "recordOffset": 28,
+          "recordBytes": 287,
+          "method": 1,
+          "declaredRawBytes": 1024,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 1024,
+          "sizeMatches": true,
+          "sha256": "71cef0e44d5e8192544cf26a7fa6d6552caeb897ec2dcb28c48b0ac8a264d446",
+          "prefix": "0d60130000601c000010fd000000f000",
+          "eof": false
+        },
+        {
+          "offset": 324,
+          "recordOffset": 315,
+          "recordBytes": 60,
+          "method": 1,
+          "declaredRawBytes": 2026,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 2026,
+          "sizeMatches": true,
+          "sha256": "4dfeb3d84022eaa7bf53700db688a66abc7052623abc1bb6a0aa2327f89b9a90",
+          "prefix": "fd00ed01000000000000ed0100000000",
+          "eof": false
+        },
+        {
+          "offset": 384,
+          "recordOffset": 375,
+          "recordBytes": 40,
+          "method": 1,
+          "declaredRawBytes": 1014,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 1014,
+          "sizeMatches": true,
+          "sha256": "e53d982fa50a6a1bef65257b8e54aced320ccf329ee385f7006df76129390706",
+          "prefix": "fd000200000002000000020000000200",
+          "eof": false
+        },
+        {
+          "offset": 424,
+          "recordOffset": 415,
+          "recordBytes": 624,
+          "method": 1,
+          "declaredRawBytes": 41572,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 41572,
+          "sizeMatches": true,
+          "sha256": "61b90c6915b44228c0553cc4d1a4e086e8f852b57ecdd85bae992e96fd1b4d6c",
+          "prefix": "30510000fe00ee00fe00ff00ea00ff00",
+          "eof": false
+        },
+        {
+          "offset": 1048,
+          "recordOffset": 1039,
+          "recordBytes": 505,
+          "method": 1,
+          "declaredRawBytes": 1021,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 1021,
+          "sizeMatches": true,
+          "sha256": "eae72356d52922195e48943e29fb647e76c540430cb38e45db405262b2990c79",
+          "prefix": "664f54c2f19d7544082d009200300086",
+          "eof": false
+        },
+        {
+          "offset": 1553,
+          "recordOffset": 1544,
+          "recordBytes": 14313,
+          "method": 1,
+          "declaredRawBytes": 41063,
+          "missingTrailingBytes": 1,
+          "decodedBytes": 41063,
+          "sizeMatches": true,
+          "sha256": "be5b497b2b90b2b85da45cdfc8081dc46b0a14c742c8765ec2dc449a2202a492",
+          "prefix": "04000100000300000700020004010400",
+          "eof": false
+        }
+      ]
+    },
+    {
+      "file": "fresh_signed/oahu_hilton_20261013/s100_z13_x504_y3600.c3mm",
+      "fileBytes": 16440,
+      "blocks": [
+        {
+          "offset": 22,
+          "recordOffset": 13,
+          "recordBytes": 300,
+          "method": 1,
+          "declaredRawBytes": 872,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 872,
+          "sizeMatches": true,
+          "sha256": "6233abddbe671bc6c18e337cfdbcaa245036c8ca350b29e6ddc1f5db275a447d",
+          "prefix": "11f01e0100801f000014d70000070000",
+          "eof": false
+        },
+        {
+          "offset": 322,
+          "recordOffset": 313,
+          "recordBytes": 46,
+          "method": 1,
+          "declaredRawBytes": 1722,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 1722,
+          "sizeMatches": true,
+          "sha256": "6bb436efc823531a73f7543be39015dbbdcf6cd0bf114e2340a5f10a64a0e136",
+          "prefix": "d7007002000000000000700200000000",
+          "eof": false
+        },
+        {
+          "offset": 368,
+          "recordOffset": 359,
+          "recordBytes": 40,
+          "method": 1,
+          "declaredRawBytes": 862,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 862,
+          "sizeMatches": true,
+          "sha256": "1dbe6b91126718e583561b356764464c97b37ef91b8e9b05fe86e8ac5bbb4dc0",
+          "prefix": "d7000200000002000000020000000200",
+          "eof": false
+        },
+        {
+          "offset": 408,
+          "recordOffset": 399,
+          "recordBytes": 1502,
+          "method": 1,
+          "declaredRawBytes": 37780,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 37780,
+          "sizeMatches": true,
+          "sha256": "0fa18021597dca1fd71bfa29f1877b3bb458a1b064cc1c957d9bd108b616b1d5",
+          "prefix": "c8490000ea00ee00ee0000000000ff00",
+          "eof": false
+        },
+        {
+          "offset": 1910,
+          "recordOffset": 1901,
+          "recordBytes": 337,
+          "method": 1,
+          "declaredRawBytes": 869,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 869,
+          "sizeMatches": true,
+          "sha256": "3356c223e58ebbb42c9973083cdff7ab4b7b26ebd7c2672353d631e6912dca21",
+          "prefix": "c16a91c25ebb7943084300ba004300b9",
+          "eof": false
+        },
+        {
+          "offset": 2247,
+          "recordOffset": 2238,
+          "recordBytes": 14203,
+          "method": 1,
+          "declaredRawBytes": 37347,
+          "missingTrailingBytes": 1,
+          "decodedBytes": 37347,
+          "sizeMatches": true,
+          "sha256": "6c3ac2b62bb48edcb246e1e16dd64793fb02ab3d72a7b315c4eabb19615b4446",
+          "prefix": "04060009000b00030201040704070001",
+          "eof": false
+        }
+      ]
+    },
+    {
+      "file": "fresh_signed/tokyo_tower/s100_z13_x7275_y3226.c3mm",
+      "fileBytes": 26212,
+      "blocks": [
+        {
+          "offset": 22,
+          "recordOffset": 13,
+          "recordBytes": 327,
+          "method": 1,
+          "declaredRawBytes": 1048,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 1048,
+          "sizeMatches": true,
+          "sha256": "e85e64793d39fc2e49c79dc9108470914ac2f0e5717500c47ae92abf3fadb3a8",
+          "prefix": "1150360100b0c6010014030100000000",
+          "eof": false
+        },
+        {
+          "offset": 349,
+          "recordOffset": 340,
+          "recordBytes": 48,
+          "method": 1,
+          "declaredRawBytes": 2074,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 2074,
+          "sizeMatches": true,
+          "sha256": "70bdae1dede1368db4d37cf73d1ba3740bd361b734dbd19574d54f9c22cd8f10",
+          "prefix": "0301ed01000000000000ed0100000000",
+          "eof": false
+        },
+        {
+          "offset": 397,
+          "recordOffset": 388,
+          "recordBytes": 40,
+          "method": 1,
+          "declaredRawBytes": 1038,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 1038,
+          "sizeMatches": true,
+          "sha256": "5c1d986501f2dc55d1e6ed79718f66b27839033c889d95c8017ddedda5796708",
+          "prefix": "03010200000002000000020000000200",
+          "eof": false
+        },
+        {
+          "offset": 437,
+          "recordOffset": 428,
+          "recordBytes": 4174,
+          "method": 1,
+          "declaredRawBytes": 56626,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 56626,
+          "sizeMatches": true,
+          "sha256": "e28260959d5f3433fd7e39a8f22adc048e5d30dbbde0601b2af1dfd6d2ef5a89",
+          "prefix": "976e0000550055005500000000000000",
+          "eof": false
+        },
+        {
+          "offset": 4611,
+          "recordOffset": 4602,
+          "recordBytes": 453,
+          "method": 1,
+          "declaredRawBytes": 1045,
+          "missingTrailingBytes": 0,
+          "decodedBytes": 1045,
+          "sizeMatches": true,
+          "sha256": "d19de71f0eb39f6932a1a4aa7a32973a5e9b62e0353d89ae6976a2c587336cda",
+          "prefix": "1b3cbe4111f1c343080800c9000800bc",
+          "eof": false
+        },
+        {
+          "offset": 5064,
+          "recordOffset": 5055,
+          "recordBytes": 21158,
+          "method": 1,
+          "declaredRawBytes": 56105,
+          "missingTrailingBytes": 1,
+          "decodedBytes": 56105,
+          "sizeMatches": true,
+          "sha256": "3f99f291762c0bb739a4b2166815ac91ebc79115921ea7f8c46fba721b4929cf",
+          "prefix": "04000101040105010301060101010401",
+          "eof": false
+        }
+      ]
+    }
+  ]
+}

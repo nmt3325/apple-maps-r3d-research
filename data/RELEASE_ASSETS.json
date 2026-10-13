@@ -1,0 +1,43 @@
+{
+  "snapshotUTC": "2026-10-13T22:09:03.815105+00:00",
+  "assets": [
+    {
+      "file": "tokyo-r3d.tar.gz",
+      "files": 224,
+      "sourceBytes": 34993311,
+      "archiveBytes": 34769559,
+      "sha256": "68498fc28d598a19c1f794463c770620ad12e3bcbdeced347a2f56f266c6cad2"
+    },
+    {
+      "file": "oahu-and-fetch-results.tar.gz",
+      "files": 165,
+      "sourceBytes": 34968648,
+      "archiveBytes": 26197653,
+      "sha256": "e6319904c18e9ccd1bb5e75da12708fc3426e55476f070d4207ccfcd702037fe"
+    },
+    {
+      "file": "native-goldens.tar.gz",
+      "files": 2234,
+      "sourceBytes": 190890683,
+      "archiveBytes": 81033382,
+      "sha256": "88428868a873bb5bd279fc4d6da15092e6fc1dab77c731d603482dd5a7a07470"
+    },
+    {
+      "file": "viewer-assets-and-exports.tar.gz",
+      "files": 496,
+      "sourceBytes": 675820977,
+      "archiveBytes": 452110140,
+      "sha256": "c6162542d56126bfb86841ccbdcdee837b8ff1e20598b7fad309fb109d4030fc"
+    },
+    {
+      "file": "nativefree-intermediates.tar.gz",
+      "files": 3219,
+      "sourceBytes": 86007907,
+      "archiveBytes": 82346197,
+      "sha256": "11071c49aa22f01910cdc538e6dd28d64d2d9ab1841b94c6ca49d7b413bc4d14"
+    }
+  ],
+  "excluded": [
+    "Credential-bearing .mitm/.har captures, ingest.token, key stores, installed node_modules/Ghidra/JDK/Unicorn, duplicate source .tar archives."
+  ]
+}

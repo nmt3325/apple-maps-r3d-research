@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-13",
+  "decoder": "huff816_nativefree.py",
+  "corpus": {
+    "tokyo": {
+      "tiles": 223,
+      "wrapped_compressed_frames": 1471,
+      "wrapped_output_bytes": 234572,
+      "direct_compressed_frames": 500,
+      "direct_output_bytes": 336779,
+      "literal_wrapped_lanes": 899,
+      "literal_direct_lanes": 224,
+      "no_header_candidate_lanes": 77,
+      "unclassified_candidates": 1
+    },
+    "oahu_hilton": {
+      "tiles": 72,
+      "wrapped_compressed_frames": 554,
+      "wrapped_output_bytes": 104160,
+      "direct_compressed_frames": 134,
+      "direct_output_bytes": 64191,
+      "literal_wrapped_lanes": 237,
+      "literal_direct_lanes": 77,
+      "no_header_candidate_lanes": 33,
+      "unclassified_candidates": 0
+    }
+  },
+  "totals": {
+    "compressed_huff816_frames_decoded": 2659,
+    "decoded_output_bytes": 739702,
+    "literal_huff816_lanes": 1437,
+    "huff816_decode_rejections": 0
+  },
+  "validation": {
+    "synthetic_two_symbol_roundtrip": "passed",
+    "wrapped_frame_roundtrip": "passed",
+    "literal_dispatch_roundtrip": "passed",
+    "malformed_input_rejection": "passed",
+    "native_intermediate_byte_parity": "not yet verified",
+    "complete_BYET_J_reconstruction": "not yet implemented"
+  },
+  "byet_kind0_native_golden_audit": {
+    "report": "byet-kind0-native-golden-report.json",
+    "tiles_with_native_goldens": 223,
+    "kind0_coordinate_lanes_tested": 21,
+    "kind0_lanes_exactly_matching_native_low_byte": 20,
+    "point_byte_comparisons": 4029,
+    "exact_point_byte_comparisons": 3732,
+    "all_tested_kind0_lanes_have_3x_point_count_input_bytes": true,
+    "one_unresolved_sparse_origin_lane": {
+      "tile": "r3d_z20_x931336_y412807_h1.r3d",
+      "lane": 8,
+      "difference": "+1 for all 297 points"
+    },
+    "scope": "Only the first N byte segment was compared; this is not complete coordinate reconstruction."
+  }
+}

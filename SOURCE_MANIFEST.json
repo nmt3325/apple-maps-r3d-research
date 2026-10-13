@@ -1,0 +1,1626 @@
+{
+  "snapshotUTC": "2026-10-13T22:03:37.826223+00:00",
+  "sourceFiles": [
+    {
+      "source": "/opt/flyover-viewer/NATIVEFREE_HUFF_DECOMPILER_STATUS.md",
+      "repositoryPath": "snapshots/viewer/NATIVEFREE_HUFF_DECOMPILER_STATUS.md",
+      "bytes": 4504,
+      "sha256": "e823dece8f0d92fecdbd25550368e030beaecf21f1f8216f17714180e34de0a6"
+    },
+    {
+      "source": "/opt/flyover-viewer/PROGRESS_NEW.md",
+      "repositoryPath": "snapshots/viewer/PROGRESS_NEW.md",
+      "bytes": 2726,
+      "sha256": "9ab0bff32df5721ac5dd60c3d4fee74b9f8ef1048f711613bd651e6ea9c9bec9"
+    },
+    {
+      "source": "/opt/flyover-viewer/build_dataset.py",
+      "repositoryPath": "snapshots/viewer/build_dataset.py",
+      "bytes": 4126,
+      "sha256": "caa0a44f59418ec6c8dd9577453816c71e07c1e6560a32a90c713cf8343acad9"
+    },
+    {
+      "source": "/opt/flyover-viewer/build_full_native.py",
+      "repositoryPath": "snapshots/viewer/build_full_native.py",
+      "bytes": 6876,
+      "sha256": "22c8cda2d77c491de5be04b6502899cea3f1e471ff4188c8caa985f883e9043b"
+    },
+    {
+      "source": "/opt/flyover-viewer/build_native_c3m_geometry.py",
+      "repositoryPath": "snapshots/viewer/build_native_c3m_geometry.py",
+      "bytes": 5767,
+      "sha256": "74b26d5f675f108ac92b3bdea27ad2e920fa972429cc0dd3c5129d77867aff6c"
+    },
+    {
+      "source": "/opt/flyover-viewer/build_native_triangle_splats.py",
+      "repositoryPath": "snapshots/viewer/build_native_triangle_splats.py",
+      "bytes": 4244,
+      "sha256": "d3f87b45462e073f610e67289d5f71b66d65d6560c60e1a714f0308e3c1b4ec7"
+    },
+    {
+      "source": "/opt/flyover-viewer/compare_uv_orientation.cjs",
+      "repositoryPath": "snapshots/viewer/compare_uv_orientation.cjs",
+      "bytes": 1506,
+      "sha256": "3fada62ac466f772fccb1090a54c62f2881213c95a5f6015452359b4cfe104f9"
+    },
+    {
+      "source": "/opt/flyover-viewer/convert_native_texture_atlases.py",
+      "repositoryPath": "snapshots/viewer/convert_native_texture_atlases.py",
+      "bytes": 1078,
+      "sha256": "e5ec798a3e102ec9fbc82ac338667d31b7a9d73d788ed8c86e8c3a57d4a890e5"
+    },
+    {
+      "source": "/opt/flyover-viewer/diagnostic.cjs",
+      "repositoryPath": "snapshots/viewer/diagnostic.cjs",
+      "bytes": 2006,
+      "sha256": "21b9dab0eda32bfa3614055545723bc6b6d07b40c49efd8cd09af599b94809ca"
+    },
+    {
+      "source": "/opt/flyover-viewer/export_gaussian_from_height.py",
+      "repositoryPath": "snapshots/viewer/export_gaussian_from_height.py",
+      "bytes": 1911,
+      "sha256": "d5dcd93b56b91d5bed7848b3aac9fbbe857354de7193768e4f33bc66e53be53e"
+    },
+    {
+      "source": "/opt/flyover-viewer/export_heightfield.py",
+      "repositoryPath": "snapshots/viewer/export_heightfield.py",
+      "bytes": 1644,
+      "sha256": "599fd20f2a88f66473ed4db47cc62f30d377a3b5101ccc31c027c2c706a123b6"
+    },
+    {
+      "source": "/opt/flyover-viewer/export_hybrid_glb.py",
+      "repositoryPath": "snapshots/viewer/export_hybrid_glb.py",
+      "bytes": 1604,
+      "sha256": "ca7b63fd86ecd0a43e43d50c8c1bf136fa750401844ab14b65df9a7132d96f65"
+    },
+    {
+      "source": "/opt/flyover-viewer/export_native_octnorm.py",
+      "repositoryPath": "snapshots/viewer/export_native_octnorm.py",
+      "bytes": 3230,
+      "sha256": "460a58818610adb280facd68ccb244b4816473cea03d850849cd60d24bd3a0c8"
+    },
+    {
+      "source": "/opt/flyover-viewer/export_native_rgba.py",
+      "repositoryPath": "snapshots/viewer/export_native_rgba.py",
+      "bytes": 2746,
+      "sha256": "3dd281b29ca9a3065a375aafc7a1124c5b2be39fd464ab1361e37dea24fa2616"
+    },
+    {
+      "source": "/opt/flyover-viewer/export_native_tiles_for_replay.py",
+      "repositoryPath": "snapshots/viewer/export_native_tiles_for_replay.py",
+      "bytes": 1387,
+      "sha256": "49a6cb069bcf4b06cbc2238771ff93f116d8fe0f425f67cd77128d7a6390a382"
+    },
+    {
+      "source": "/opt/flyover-viewer/export_original_hybrid_glb.py",
+      "repositoryPath": "snapshots/viewer/export_original_hybrid_glb.py",
+      "bytes": 1474,
+      "sha256": "0180a63d6e51f1818a998e580bfb7386534791f678443fc4ebdcfce6f90ed576"
+    },
+    {
+      "source": "/opt/flyover-viewer/export_original_textured_c3m.py",
+      "repositoryPath": "snapshots/viewer/export_original_textured_c3m.py",
+      "bytes": 2508,
+      "sha256": "b75c4041cdd5b8155ab0e3ce1164ae9f9e4ff25e78d2f7734eabf5eb8b7a2fd5"
+    },
+    {
+      "source": "/opt/flyover-viewer/extract_native_r3d.py",
+      "repositoryPath": "snapshots/viewer/extract_native_r3d.py",
+      "bytes": 1594,
+      "sha256": "44409b6bb7da0a2ea13c6539118898aee69cb9653d075bc1a429f98a3084007a"
+    },
+    {
+      "source": "/opt/flyover-viewer/full-native-test.cjs",
+      "repositoryPath": "snapshots/viewer/full-native-test.cjs",
+      "bytes": 1298,
+      "sha256": "0dac2d7bbea81d3e6f2dfbc2394d044365d3c4a08abe0f611a162aca4729fc83"
+    },
+    {
+      "source": "/opt/flyover-viewer/full_native_ui.js",
+      "repositoryPath": "snapshots/viewer/full_native_ui.js",
+      "bytes": 2898,
+      "sha256": "79c6e7966ebcb254e49599e827cda615ecbd3424783d6b51675e3373ffd62d76"
+    },
+    {
+      "source": "/opt/flyover-viewer/gaussian_fragment.js",
+      "repositoryPath": "snapshots/viewer/gaussian_fragment.js",
+      "bytes": 2088,
+      "sha256": "b9fbf53097e5f48e75f37b143d8cc40a1f55b1debcac02ddcab6ef914f405275"
+    },
+    {
+      "source": "/opt/flyover-viewer/georef_native.py",
+      "repositoryPath": "snapshots/viewer/georef_native.py",
+      "bytes": 2420,
+      "sha256": "9366abbb18b8c5a5fb8133fe4ebd60684fcb4d7f16210d21134c3244c84f91c9"
+    },
+    {
+      "source": "/opt/flyover-viewer/index-before-depthsort.html",
+      "repositoryPath": "snapshots/viewer/index-before-depthsort.html",
+      "bytes": 31585,
+      "sha256": "4be6ce7b3c59a8b0870d67a82affdba87b847503ccd433dd975537420b7e2414"
+    },
+    {
+      "source": "/opt/flyover-viewer/index-before-original-textured-c3m.html",
+      "repositoryPath": "snapshots/viewer/index-before-original-textured-c3m.html",
+      "bytes": 36217,
+      "sha256": "8c71f0987d862b545a4a9709dfb1819448b53ee8db1c1cd708e52a5dcfd93862"
+    },
+    {
+      "source": "/opt/flyover-viewer/index-before-wasd-20261013.html",
+      "repositoryPath": "snapshots/viewer/index-before-wasd-20261013.html",
+      "bytes": 45271,
+      "sha256": "31720b39eff41306985cfea51ab7156f140e82a08ab65dd2ae52a25de78fab47"
+    },
+    {
+      "source": "/opt/flyover-viewer/ingest.py",
+      "repositoryPath": "snapshots/viewer/ingest.py",
+      "bytes": 1133,
+      "sha256": "0443f43e34568c2e45b5f0fe80137836fa35481aeed8fcb5c6d083e37d9f21a8"
+    },
+    {
+      "source": "/opt/flyover-viewer/link_hybrid_export.py",
+      "repositoryPath": "snapshots/viewer/link_hybrid_export.py",
+      "bytes": 669,
+      "sha256": "e0eb3eef4113f9dfd35a06cead1ab1c151b3776f6c14d41af999826c050ceee6"
+    },
+    {
+      "source": "/opt/flyover-viewer/native-diagnostic.cjs",
+      "repositoryPath": "snapshots/viewer/native-diagnostic.cjs",
+      "bytes": 1163,
+      "sha256": "4939a3c32bef768d126342c7c7fe29e2dd21c1e8a8ab440bffd2b8af65610e80"
+    },
+    {
+      "source": "/opt/flyover-viewer/native-only-test.cjs",
+      "repositoryPath": "snapshots/viewer/native-only-test.cjs",
+      "bytes": 881,
+      "sha256": "6d986966ea9ddc2d1843fb1c9b4606267eb120ebe15af8ff98dcba56e0ea0f2c"
+    },
+    {
+      "source": "/opt/flyover-viewer/native_c3m_layer.js",
+      "repositoryPath": "snapshots/viewer/native_c3m_layer.js",
+      "bytes": 4967,
+      "sha256": "204fffa577789e4ef2d49f0d52c4d0ae6b2ed8da99ffb3bdcb4871a8fb3ae49c"
+    },
+    {
+      "source": "/opt/flyover-viewer/native_splat_ui.js",
+      "repositoryPath": "snapshots/viewer/native_splat_ui.js",
+      "bytes": 1859,
+      "sha256": "efd090edbeffd42dfa132ca93622a559933ad5a05e6e1fab3b9863826944281f"
+    },
+    {
+      "source": "/opt/flyover-viewer/native_triangle_ui.js",
+      "repositoryPath": "snapshots/viewer/native_triangle_ui.js",
+      "bytes": 3436,
+      "sha256": "ae7f8fe707ccc77c4e50dd4baab110edb36759a83c88dadeb24ecd77b99825ca"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_byet_jbitmap.py",
+      "repositoryPath": "snapshots/viewer/nativefree_byet_jbitmap.py",
+      "bytes": 341,
+      "sha256": "2c5735f7154725719ae069c4958e0a69d49c0900be8caba76eb58ee89bdd0f6e"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_byet_jdescriptor.py",
+      "repositoryPath": "snapshots/viewer/nativefree_byet_jdescriptor.py",
+      "bytes": 5224,
+      "sha256": "1b3babbb0d81a151696d5ed2c2d4f623453920a35e41e8f23fb2c5840ae3ad59"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_byet_origin.py",
+      "repositoryPath": "snapshots/viewer/nativefree_byet_origin.py",
+      "bytes": 2076,
+      "sha256": "e0a315ddc8d4427d892bdaf267ef832df2d1117f338db86bdce11f81dd895334"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_extract_heic.py",
+      "repositoryPath": "snapshots/viewer/nativefree_extract_heic.py",
+      "bytes": 5571,
+      "sha256": "b1d5851205fbebdbd05ea3bcffcea6d6890529f4cb979474f3dd59cd4496feea"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_georef_anchors.py",
+      "repositoryPath": "snapshots/viewer/nativefree_georef_anchors.py",
+      "bytes": 2952,
+      "sha256": "d25a0cd19f14fe64be2661686214b04c11352fa63b66731389e86bf52f16d7bd"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_huff816_raw_strict.py",
+      "repositoryPath": "snapshots/viewer/nativefree_huff816_raw_strict.py",
+      "bytes": 2754,
+      "sha256": "fcae8e691d34c1e21b860cabe608b7cd7505dd770e0e77171b472f26e5b82830"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_huff_raw.py",
+      "repositoryPath": "snapshots/viewer/nativefree_huff_raw.py",
+      "bytes": 3341,
+      "sha256": "6c727a5d4ed27df253810efa8c79bc3b9c1a30d873fa02aa8f3bf78cdf68316c"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_huffman_header.py",
+      "repositoryPath": "snapshots/viewer/nativefree_huffman_header.py",
+      "bytes": 3745,
+      "sha256": "1f64c52c9c7aeecc4914cf96ed1f52fce227548124bdbdf968783fedf080ee6f"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_prepare_region.py",
+      "repositoryPath": "snapshots/viewer/nativefree_prepare_region.py",
+      "bytes": 5454,
+      "sha256": "bc6c8c41f7ca3612db35dcd458a65f7eff6552a7ddfa2cf77216a64798c73c84"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_r3d_codec_streams.py",
+      "repositoryPath": "snapshots/viewer/nativefree_r3d_codec_streams.py",
+      "bytes": 10345,
+      "sha256": "b7ae050daa3db3802a62d45d3adcb7c35152a8e7eb2695d914f233894211a1e7"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_r3d_field_tree.py",
+      "repositoryPath": "snapshots/viewer/nativefree_r3d_field_tree.py",
+      "bytes": 1287,
+      "sha256": "f04e52581d223fc6f8229deb1c59b6ce8db949dadabfc1fd408c4239f9b6b215"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_trico_size.py",
+      "repositoryPath": "snapshots/viewer/nativefree_trico_size.py",
+      "bytes": 2333,
+      "sha256": "b6bd84191b98820b094f3b543e48dbfa50b2e0d0c9109e43915e37f2043102c5"
+    },
+    {
+      "source": "/opt/flyover-viewer/patch_apple_alpha.py",
+      "repositoryPath": "snapshots/viewer/patch_apple_alpha.py",
+      "bytes": 1506,
+      "sha256": "0b84fc0dc026015f1cbc6640df860025f9b578580fc770f5b25c63a1ed765167"
+    },
+    {
+      "source": "/opt/flyover-viewer/patch_calibrate_terrain.py",
+      "repositoryPath": "snapshots/viewer/patch_calibrate_terrain.py",
+      "bytes": 697,
+      "sha256": "dd566a08d51fd44d368dc0dc0b5afcc24494f4f06776f6eb4ef08f5fc98c7a0e"
+    },
+    {
+      "source": "/opt/flyover-viewer/patch_terrain_crop.py",
+      "repositoryPath": "snapshots/viewer/patch_terrain_crop.py",
+      "bytes": 2146,
+      "sha256": "c74cc00e4a00e6b1a73257d998acc970ae7579e2980ac48c79218785ef2f7610"
+    },
+    {
+      "source": "/opt/flyover-viewer/replay_saved_native_r3d.py",
+      "repositoryPath": "snapshots/viewer/replay_saved_native_r3d.py",
+      "bytes": 2676,
+      "sha256": "114930f1c48cc9a9cf7c909139581d1845dbb5ae54b20381f41816c0ba9f8de9"
+    },
+    {
+      "source": "/opt/flyover-viewer/test-close.cjs",
+      "repositoryPath": "snapshots/viewer/test-close.cjs",
+      "bytes": 967,
+      "sha256": "650e74ddd18e3969a4d0ca456deb99ae52572754404ecef1d7a4379e30dc1a14"
+    },
+    {
+      "source": "/opt/flyover-viewer/test-depthsort.cjs",
+      "repositoryPath": "snapshots/viewer/test-depthsort.cjs",
+      "bytes": 1422,
+      "sha256": "66dc2ed1d3f9434f4f3bb2de08cf44b961c02bcc8fb17f3dd50f6563de97a09a"
+    },
+    {
+      "source": "/opt/flyover-viewer/test_c3m_uv_regression.py",
+      "repositoryPath": "snapshots/viewer/test_c3m_uv_regression.py",
+      "bytes": 2045,
+      "sha256": "ddc4911bfe660728bafa754017bbe6f60a624ad60e54c5ea7ae8326dae0a591b"
+    },
+    {
+      "source": "/opt/flyover-viewer/test_c3m_z20.cjs",
+      "repositoryPath": "snapshots/viewer/test_c3m_z20.cjs",
+      "bytes": 1402,
+      "sha256": "e1d441a2108baa3c8451d81bfe3725f99f3996cde5ba04c33adf1bb2d7b01b25"
+    },
+    {
+      "source": "/opt/flyover-viewer/test_mobile_c3m.cjs",
+      "repositoryPath": "snapshots/viewer/test_mobile_c3m.cjs",
+      "bytes": 1670,
+      "sha256": "8d5320ed3c66ddc89a048dcef61176396f3c227505542f28baccc2f2b544146f"
+    },
+    {
+      "source": "/opt/flyover-viewer/test_mobile_menu_fast.cjs",
+      "repositoryPath": "snapshots/viewer/test_mobile_menu_fast.cjs",
+      "bytes": 866,
+      "sha256": "9db3973880a7ea710fac8b015b7e94f7f10c221d4e184224ff53dfedc8e72567"
+    },
+    {
+      "source": "/opt/flyover-viewer/test_native_ui.cjs",
+      "repositoryPath": "snapshots/viewer/test_native_ui.cjs",
+      "bytes": 1302,
+      "sha256": "3bc54bb6d42b08063e23cccee06f4653d5cdb49e0bf4a6c6cec347ee6563ab0a"
+    },
+    {
+      "source": "/opt/flyover-viewer/test_nativefree_r3d.py",
+      "repositoryPath": "snapshots/viewer/test_nativefree_r3d.py",
+      "bytes": 7417,
+      "sha256": "377587418e06235ad823365bb992322e8a2ec070ba627943ff1463457b081b3c"
+    },
+    {
+      "source": "/opt/flyover-viewer/test_textured_c3m.cjs",
+      "repositoryPath": "snapshots/viewer/test_textured_c3m.cjs",
+      "bytes": 1587,
+      "sha256": "9fd4de50b526af310cb599918e085834e54f4cd0cfd08cdc21190e0abdc6622b"
+    },
+    {
+      "source": "/opt/flyover-viewer/test_wasd_flight.cjs",
+      "repositoryPath": "snapshots/viewer/test_wasd_flight.cjs",
+      "bytes": 3068,
+      "sha256": "9d6cd77f2050d0d68cd59e4ef27fe01d5f742ac1be5e507f123ecbbfd49424f7"
+    },
+    {
+      "source": "/opt/flyover-viewer/true-triangle-test.cjs",
+      "repositoryPath": "snapshots/viewer/true-triangle-test.cjs",
+      "bytes": 1838,
+      "sha256": "c4fabd818c7c26943e35ab07fa41bd2f990bf51b1c21735840ade065cdd66a53"
+    },
+    {
+      "source": "/opt/flyover-viewer/wasd_free_flight.js",
+      "repositoryPath": "snapshots/viewer/wasd_free_flight.js",
+      "bytes": 7120,
+      "sha256": "8397849e91bd15ccf5e93d74e0eec301249c770ac3b38360fccc091a8f5bf3d1"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_byet_jbitmap.py",
+      "repositoryPath": "codec/nativefree_byet_jbitmap.py",
+      "bytes": 341,
+      "sha256": "2c5735f7154725719ae069c4958e0a69d49c0900be8caba76eb58ee89bdd0f6e"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_byet_jdescriptor.py",
+      "repositoryPath": "codec/nativefree_byet_jdescriptor.py",
+      "bytes": 5224,
+      "sha256": "1b3babbb0d81a151696d5ed2c2d4f623453920a35e41e8f23fb2c5840ae3ad59"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_byet_origin.py",
+      "repositoryPath": "codec/nativefree_byet_origin.py",
+      "bytes": 2076,
+      "sha256": "e0a315ddc8d4427d892bdaf267ef832df2d1117f338db86bdce11f81dd895334"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_extract_heic.py",
+      "repositoryPath": "codec/nativefree_extract_heic.py",
+      "bytes": 5571,
+      "sha256": "b1d5851205fbebdbd05ea3bcffcea6d6890529f4cb979474f3dd59cd4496feea"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_georef_anchors.py",
+      "repositoryPath": "codec/nativefree_georef_anchors.py",
+      "bytes": 2952,
+      "sha256": "d25a0cd19f14fe64be2661686214b04c11352fa63b66731389e86bf52f16d7bd"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_huff816_raw_strict.py",
+      "repositoryPath": "codec/nativefree_huff816_raw_strict.py",
+      "bytes": 2754,
+      "sha256": "fcae8e691d34c1e21b860cabe608b7cd7505dd770e0e77171b472f26e5b82830"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_huff_raw.py",
+      "repositoryPath": "codec/nativefree_huff_raw.py",
+      "bytes": 3341,
+      "sha256": "6c727a5d4ed27df253810efa8c79bc3b9c1a30d873fa02aa8f3bf78cdf68316c"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_huffman_header.py",
+      "repositoryPath": "codec/nativefree_huffman_header.py",
+      "bytes": 3745,
+      "sha256": "1f64c52c9c7aeecc4914cf96ed1f52fce227548124bdbdf968783fedf080ee6f"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_prepare_region.py",
+      "repositoryPath": "codec/nativefree_prepare_region.py",
+      "bytes": 5454,
+      "sha256": "bc6c8c41f7ca3612db35dcd458a65f7eff6552a7ddfa2cf77216a64798c73c84"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_r3d_codec_streams.py",
+      "repositoryPath": "codec/nativefree_r3d_codec_streams.py",
+      "bytes": 10345,
+      "sha256": "b7ae050daa3db3802a62d45d3adcb7c35152a8e7eb2695d914f233894211a1e7"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_r3d_field_tree.py",
+      "repositoryPath": "codec/nativefree_r3d_field_tree.py",
+      "bytes": 1287,
+      "sha256": "f04e52581d223fc6f8229deb1c59b6ce8db949dadabfc1fd408c4239f9b6b215"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree_trico_size.py",
+      "repositoryPath": "codec/nativefree_trico_size.py",
+      "bytes": 2333,
+      "sha256": "b6bd84191b98820b094f3b543e48dbfa50b2e0d0c9109e43915e37f2043102c5"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/huff816_nativefree.py",
+      "repositoryPath": "codec/huff816_nativefree.py",
+      "bytes": 7237,
+      "sha256": "8fea74a59728ef563522e4c493cd202e9631ea29516ef049d9f15de8a0cb81be"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/c3mm_v2_parser.py",
+      "repositoryPath": "codec/c3mm_v2_parser.py",
+      "bytes": 4677,
+      "sha256": "b2883bdc11b3072c204bba677f4280ffbaef40b82dfa4426d2c6f561d9d99afc"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/audit_byet_kind0.py",
+      "repositoryPath": "audit/audit_byet_kind0.py",
+      "bytes": 5275,
+      "sha256": "6820191874333bf4302b21cbd4109a477f1bb62166a55ebff02d712b9066c996"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/audit_huff816_nativefree.py",
+      "repositoryPath": "audit/audit_huff816_nativefree.py",
+      "bytes": 7985,
+      "sha256": "804f78c091ea91dcb0197a35a9df16527913dcbe0fb1fcdfe0b3c8d408121f09"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/c3mm_v2_blocks.py",
+      "repositoryPath": "audit/c3mm_v2_blocks.py",
+      "bytes": 1936,
+      "sha256": "bc6c86d9a01c1fe34aabef8ddcf5b6503876860271e6aa46aaec93ea12f81a63"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/c3mm_v2_sequential.py",
+      "repositoryPath": "audit/c3mm_v2_sequential.py",
+      "bytes": 2336,
+      "sha256": "efdd1ad425a342037cc54f0fe501ef230509958f50ea9d0a7e2bc63f57f2b3ed"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/check_tiles.py",
+      "repositoryPath": "audit/check_tiles.py",
+      "bytes": 667,
+      "sha256": "b29f0b03d5b67477996a0c1e779411d3c7a47c5a72ec9f27cd1961558ba1dd33"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/check_tiles_oahu.py",
+      "repositoryPath": "audit/check_tiles_oahu.py",
+      "bytes": 677,
+      "sha256": "0b95a5cd8a68bac3190a84f3479111cd90313a3592b0c0dd77e23d61334b8b65"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/metadata_check.py",
+      "repositoryPath": "audit/metadata_check.py",
+      "bytes": 620,
+      "sha256": "cb7103e81d6afb034d6113747af64a198bfa005f14977cc6f0f00fcd1f768baa"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/probe_c3mm_v2.py",
+      "repositoryPath": "audit/probe_c3mm_v2.py",
+      "bytes": 652,
+      "sha256": "0f093cc7ce0d1b463dbb4264872b2e37b5dd4e3285161cdf556143111873b7d0"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/test_c3mm_v2.py",
+      "repositoryPath": "audit/test_c3mm_v2.py",
+      "bytes": 480,
+      "sha256": "81261bd50b6c654d72120c70bd78153212648b9d50efa1731b9f19e985f3b3de"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/verify_original_mesh.py",
+      "repositoryPath": "audit/verify_original_mesh.py",
+      "bytes": 1208,
+      "sha256": "17be98e71dedf6ebbdfed786a01c2464a0a42eb9df85c9e53488f144fb387fe6"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/README.md",
+      "repositoryPath": "research/independent-audit/README.md",
+      "bytes": 9807,
+      "sha256": "9fc543b4fa3d1e18ca8b301597de4ce78a0a1fed4f8834d825ba414b66f3325e"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/audit_byet_kind0.py",
+      "repositoryPath": "research/independent-audit/audit_byet_kind0.py",
+      "bytes": 5275,
+      "sha256": "6820191874333bf4302b21cbd4109a477f1bb62166a55ebff02d712b9066c996"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/audit_huff816_nativefree.py",
+      "repositoryPath": "research/independent-audit/audit_huff816_nativefree.py",
+      "bytes": 7985,
+      "sha256": "804f78c091ea91dcb0197a35a9df16527913dcbe0fb1fcdfe0b3c8d408121f09"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/byet-kind0-native-golden-report.json",
+      "repositoryPath": "research/independent-audit/byet-kind0-native-golden-report.json",
+      "bytes": 731,
+      "sha256": "6903087ea4e3e0cf694ec87fcd29b7de295092556d02b0edf86a3b8bbf7fad08"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/c3mm-v2-block-report.json",
+      "repositoryPath": "research/independent-audit/c3mm-v2-block-report.json",
+      "bytes": 16527,
+      "sha256": "cf66ecadb195987ebc20717b79b17f863f86e8015bae78228da641feeddf3a96"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/c3mm-v2-sequential-report.json",
+      "repositoryPath": "research/independent-audit/c3mm-v2-sequential-report.json",
+      "bytes": 21496,
+      "sha256": "c6b908861cdcbcfe218f5a3dda1e304f00b0c8d16742395829e5db4ed4a0a8b7"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/c3mm_v2_blocks.py",
+      "repositoryPath": "research/independent-audit/c3mm_v2_blocks.py",
+      "bytes": 1936,
+      "sha256": "bc6c86d9a01c1fe34aabef8ddcf5b6503876860271e6aa46aaec93ea12f81a63"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/c3mm_v2_parser.py",
+      "repositoryPath": "research/independent-audit/c3mm_v2_parser.py",
+      "bytes": 4677,
+      "sha256": "b2883bdc11b3072c204bba677f4280ffbaef40b82dfa4426d2c6f561d9d99afc"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/c3mm_v2_sequential.py",
+      "repositoryPath": "research/independent-audit/c3mm_v2_sequential.py",
+      "bytes": 2336,
+      "sha256": "efdd1ad425a342037cc54f0fe501ef230509958f50ea9d0a7e2bc63f57f2b3ed"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/check_tiles.py",
+      "repositoryPath": "research/independent-audit/check_tiles.py",
+      "bytes": 667,
+      "sha256": "b29f0b03d5b67477996a0c1e779411d3c7a47c5a72ec9f27cd1961558ba1dd33"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/check_tiles_oahu.py",
+      "repositoryPath": "research/independent-audit/check_tiles_oahu.py",
+      "bytes": 677,
+      "sha256": "0b95a5cd8a68bac3190a84f3479111cd90313a3592b0c0dd77e23d61334b8b65"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/__init__.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/__init__.py",
+      "bytes": 301,
+      "sha256": "9ad32123bca674cf205c308fd4d0d2a4db877c9dc2afac4feab7c84c8cf7043b"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/arm64_const.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/arm64_const.py",
+      "bytes": 7540,
+      "sha256": "92f91a2b0a36cd34deee16db4f8da4ac0c9ae35c3ea1089296e5ef9d170a5be9"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/arm_const.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/arm_const.py",
+      "bytes": 4091,
+      "sha256": "44fdb7a9f7a9d8c62be07fefaf21e20060813b2a503b6228e378e6bbff7f7b41"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/m68k_const.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/m68k_const.py",
+      "bytes": 1092,
+      "sha256": "7503e32454751bf66bdf1fcb19dd847537bcf6a5538e18125d8f53d8d448fed9"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/mips_const.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/mips_const.py",
+      "bytes": 4923,
+      "sha256": "3a04993d82610ea5f492af2d74fa79d849224a044ac0448281033ee331b58dac"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/ppc_const.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/ppc_const.py",
+      "bytes": 10476,
+      "sha256": "154aaa45f947dab3e488e58e74ad99a09c8d772766c561ff92ecb85cdedd61af"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/riscv_const.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/riscv_const.py",
+      "bytes": 6984,
+      "sha256": "278e10baf05cfb7c8675475081ae7f2d2037616c79cb907d51963aa2c5b490e4"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/s390x_const.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/s390x_const.py",
+      "bytes": 3922,
+      "sha256": "54d7026dd70b5bfca1d02e00e7a58d652eaa974b9ea980ba49ed4b80911b9fde"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/sparc_const.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/sparc_const.py",
+      "bytes": 3246,
+      "sha256": "bcdb0491b6e42c647b104ee53d61610504a97831302dd5280fd2123e05572e95"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/tricore_const.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/tricore_const.py",
+      "bytes": 3075,
+      "sha256": "1b6005a147d77a3fc1ab5c81fc878eeac3b9bb0b68d518e4a4226830d1356c4c"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/unicorn.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/unicorn.py",
+      "bytes": 307,
+      "sha256": "e823b17649d0610c6f52b665902ac9dc46962785feebcac8465a0d7c477f25b7"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/unicorn_const.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/unicorn_const.py",
+      "bytes": 3109,
+      "sha256": "556c6a27336dc6dd3e0d49348951bde17e1b0f69166f2217773e6b3a7199f45d"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/unicorn_py2.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/unicorn_py2.py",
+      "bytes": 38617,
+      "sha256": "66e2555d679e4f56a0117c2b8de0895a0a138fa3827e3a8a3621255e348d145a"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/unicorn_py3/__init__.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/unicorn_py3/__init__.py",
+      "bytes": 23,
+      "sha256": "ee70d3a7de9ea545406d727436ee835f9d644aeb7428f0e4f1510f9190b28726"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/unicorn_py3/arch/__init__.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/unicorn_py3/arch/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/unicorn_py3/arch/arm.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/unicorn_py3/arch/arm.py",
+      "bytes": 3998,
+      "sha256": "c28693f90d8681c091f0ff92caed0a290350a969ea0a38343bb843a26b726711"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/unicorn_py3/arch/arm64.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/unicorn_py3/arch/arm64.py",
+      "bytes": 4891,
+      "sha256": "62963378864bae452f7cd2a784ddcd64ab6bdc8a6a69e033d48e8faaab0b2515"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/unicorn_py3/arch/intel.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/unicorn_py3/arch/intel.py",
+      "bytes": 5283,
+      "sha256": "8a04281923b5f4dd65ce5f122e222bd86df3e8efc7eae99086e0d372fd7a1a75"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/unicorn_py3/arch/types.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/unicorn_py3/arch/types.py",
+      "bytes": 2665,
+      "sha256": "2e103854e371ef576680073f44ead45b8177a73c450a6125e609b7c54e0bc844"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/unicorn_py3/unicorn.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/unicorn_py3/unicorn.py",
+      "bytes": 52722,
+      "sha256": "62ffe84341f4288e309040e06555b81798031817d32fd19a945e250813f872f0"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/codec-deps/unicorn/x86_const.py",
+      "repositoryPath": "research/independent-audit/codec-deps/unicorn/x86_const.py",
+      "bytes": 39977,
+      "sha256": "3b33c55b97503ab25e8ed8bbe576c1cee693f495df6785b04adc1c8ab47a79c4"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/huff816-nativefree-report.json",
+      "repositoryPath": "research/independent-audit/huff816-nativefree-report.json",
+      "bytes": 9822,
+      "sha256": "b3f36625b40ff4c3190989a6cf4ef8ef0fde0351ccc9539696a21f9339a64cf8"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/huff816_nativefree.py",
+      "repositoryPath": "research/independent-audit/huff816_nativefree.py",
+      "bytes": 7237,
+      "sha256": "8fea74a59728ef563522e4c493cd202e9631ea29516ef049d9f15de8a0cb81be"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/huffman-families.json",
+      "repositoryPath": "research/independent-audit/huffman-families.json",
+      "bytes": 2912,
+      "sha256": "4c4c749cefbebba5c61f60b566c59b05da11bbbe6094e64f81ac9d5e0bb95988"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/metadata_check.py",
+      "repositoryPath": "research/independent-audit/metadata_check.py",
+      "bytes": 620,
+      "sha256": "cb7103e81d6afb034d6113747af64a198bfa005f14977cc6f0f00fcd1f768baa"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/probe_c3mm_v2.py",
+      "repositoryPath": "research/independent-audit/probe_c3mm_v2.py",
+      "bytes": 652,
+      "sha256": "0f093cc7ce0d1b463dbb4264872b2e37b5dd4e3285161cdf556143111873b7d0"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/test.py",
+      "repositoryPath": "research/independent-audit/test.py",
+      "bytes": 61,
+      "sha256": "63122ab8e2cee0784a48eac91a65688c570368795977b221edb98cf80b68614a"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/test_c3mm_v2.py",
+      "repositoryPath": "research/independent-audit/test_c3mm_v2.py",
+      "bytes": 480,
+      "sha256": "81261bd50b6c654d72120c70bd78153212648b9d50efa1731b9f19e985f3b3de"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/verify_original_mesh.py",
+      "repositoryPath": "research/independent-audit/verify_original_mesh.py",
+      "bytes": 1208,
+      "sha256": "17be98e71dedf6ebbdfed786a01c2464a0a42eb9df85c9e53488f144fb387fe6"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-analysis-20261013/CHECKPOINT_20261013_EVENING.md",
+      "repositoryPath": "research/nativefree-analysis-20261013/CHECKPOINT_20261013_EVENING.md",
+      "bytes": 2612,
+      "sha256": "7705e4fa78802d7ec0a532cdb7fde7555b9d3d70adbe9255b99eafa8b10da7a3"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-analysis-20261013/huff816_probe.py",
+      "repositoryPath": "research/nativefree-analysis-20261013/huff816_probe.py",
+      "bytes": 168,
+      "sha256": "c4f37fac958214e2b2731275af12a4342e6c33f781b4af86e62b3b34fd7f941c"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-analysis-20261013/inspect_lanes.py",
+      "repositoryPath": "research/nativefree-analysis-20261013/inspect_lanes.py",
+      "bytes": 799,
+      "sha256": "f95889318d375be7cb775bb453f2be7f47060924ea62ead5827c7577b14d5485"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-research-20261013-2215/CHECKPOINT.md",
+      "repositoryPath": "research/nativefree-research-20261013-2215/CHECKPOINT.md",
+      "bytes": 4566,
+      "sha256": "587aaa3aec813ce46f00569b8333107c149c0e405be6ce59dd7d2edf31a87800"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-research-20261013-2215/analyze_prefix.py",
+      "repositoryPath": "research/nativefree-research-20261013-2215/analyze_prefix.py",
+      "bytes": 1412,
+      "sha256": "eb4db62f5cad64df64fd666cca11f5c468966c50435064d305e6eb0b531ecb3f"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-research-20261013-2215/audit_huff8.py",
+      "repositoryPath": "research/nativefree-research-20261013-2215/audit_huff8.py",
+      "bytes": 3765,
+      "sha256": "8794dd9834e25eb8515eac0ca2e1cb8c1726723ae0d1749a9c5d70519a05cc51"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-research-20261013-2215/audit_huff_length.py",
+      "repositoryPath": "research/nativefree-research-20261013-2215/audit_huff_length.py",
+      "bytes": 1759,
+      "sha256": "1742f0df3143d9aa992f3e062c798854a52057d6dbb14af40aac50b1f4a16640"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-research-20261013-2215/audit_huff_table.py",
+      "repositoryPath": "research/nativefree-research-20261013-2215/audit_huff_table.py",
+      "bytes": 1727,
+      "sha256": "59a7149e5565eb35f11a8497a7ae50b572b532a55588dddd5a991fddfe804980"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-research-20261013-2215/audit_huff_table_oahu.py",
+      "repositoryPath": "research/nativefree-research-20261013-2215/audit_huff_table_oahu.py",
+      "bytes": 1820,
+      "sha256": "0ecbe686eee9552a881079c6d417bfe037a6a7d507575adb3104f3863e20abdf"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-research-20261013-2215/audit_prefixfree.py",
+      "repositoryPath": "research/nativefree-research-20261013-2215/audit_prefixfree.py",
+      "bytes": 156,
+      "sha256": "11cb6f310f11f40e94ebb1dc8aaa100f449181e8119179a9e88e607d91acffa8"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-research-20261013-2215/check_kind0.py",
+      "repositoryPath": "research/nativefree-research-20261013-2215/check_kind0.py",
+      "bytes": 628,
+      "sha256": "9f90fedb62f6efe7932889c7ebd3ae3763ceb34c3ddb6f5c0664739ac412256b"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-research-20261013-2215/check_wrapper_lengths.py",
+      "repositoryPath": "research/nativefree-research-20261013-2215/check_wrapper_lengths.py",
+      "bytes": 1421,
+      "sha256": "53b35998817582cc3d37183b2a91d57a2d77f2361656f41b03d6606b0f0da475"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-research-20261013-2215/envelope_inventory.py",
+      "repositoryPath": "research/nativefree-research-20261013-2215/envelope_inventory.py",
+      "bytes": 2774,
+      "sha256": "7a63bdbd2dc458bdc9e45c7326ef13c08f4756916c41a764f3f7b3e8f12441de"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-research-20261013-2215/envelopes.json",
+      "repositoryPath": "research/nativefree-research-20261013-2215/envelopes.json",
+      "bytes": 37990,
+      "sha256": "954ed8cdd981b7854ea031e7110fbe3f8617ec9655333f57278f6417978a7134"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-research-20261013-2215/huff816_decode_experimental.py",
+      "repositoryPath": "research/nativefree-research-20261013-2215/huff816_decode_experimental.py",
+      "bytes": 1045,
+      "sha256": "5b2cced7756097f9e4ec53df8dee73ade825152548b345905a78619ef9934f14"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-research-20261013-2215/huff816_table_audit.json",
+      "repositoryPath": "research/nativefree-research-20261013-2215/huff816_table_audit.json",
+      "bytes": 15110,
+      "sha256": "fa7ef1c5f737dcc8848c4d58ef8272962cc69ca672303f9182beaf5b877e6528"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-research-20261013-2215/huff816_table_audit_oahu.json",
+      "repositoryPath": "research/nativefree-research-20261013-2215/huff816_table_audit_oahu.json",
+      "bytes": 21083,
+      "sha256": "b18a3465ca40de77b80eb217b1e9e75720015b522c331019ec44ec74a1771cc9"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-research-20261013-2215/huff816_table_probe.py",
+      "repositoryPath": "research/nativefree-research-20261013-2215/huff816_table_probe.py",
+      "bytes": 1435,
+      "sha256": "bc00ca2e7061b4f78ad41fdfe4253bfd556ccf5c7e3e900397cf8832284404de"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-research-20261013-2215/huff8_audit.json",
+      "repositoryPath": "research/nativefree-research-20261013-2215/huff8_audit.json",
+      "bytes": 5044,
+      "sha256": "3da476e796ae1d8740ba5b4e824633508839c1fc5cd77557ea6271286fd58301"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-research-20261013-2215/huff8_mode0_literal.py",
+      "repositoryPath": "research/nativefree-research-20261013-2215/huff8_mode0_literal.py",
+      "bytes": 1837,
+      "sha256": "4c9f8a5b984625d8b9b54d29efc654114b678c55a4f506bf6f92f6689443baff"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-research-20261013-2215/test_huff816_compressed.py",
+      "repositoryPath": "research/nativefree-research-20261013-2215/test_huff816_compressed.py",
+      "bytes": 894,
+      "sha256": "cd2b78d4952f209b5c811e85faa9a5356de5020c05a744b1dae5380fa716ac4c"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/CHECKPOINT_20261013_2334JST.md",
+      "repositoryPath": "research/nativefree-lab-20261013/CHECKPOINT_20261013_2334JST.md",
+      "bytes": 4931,
+      "sha256": "258ca7aa68f28c5a34057bee6b1a848b65670a9b0bd0da2b4f40604cde24c97f"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/CHECKPOINT_20261014_0051JST.md",
+      "repositoryPath": "research/nativefree-lab-20261013/CHECKPOINT_20261014_0051JST.md",
+      "bytes": 3435,
+      "sha256": "184cc6616bfe6c40f81a02479f0209304f9a7233ab6d77502c9ed45c79196232"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/CHECKPOINT_20261014_0237JST.md",
+      "repositoryPath": "research/nativefree-lab-20261013/CHECKPOINT_20261014_0237JST.md",
+      "bytes": 190,
+      "sha256": "612653a210c514d45e1d3a1c33a44182b141c169d3bc4915364ec78e92fbd2cb"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/CHECKPOINT_20261014_0240JST.md",
+      "repositoryPath": "research/nativefree-lab-20261013/CHECKPOINT_20261014_0240JST.md",
+      "bytes": 2899,
+      "sha256": "7bb3e9c0d651417e513e7b2a6dfc5fc25a75745e34501a091f4de26011357122"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/CHECKPOINT_20261014_0324JST.md",
+      "repositoryPath": "research/nativefree-lab-20261013/CHECKPOINT_20261014_0324JST.md",
+      "bytes": 3269,
+      "sha256": "9a52fa375d52a79ce2090d24ae97de5daac7456b35e4a031ce83295ef7101b4d"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/CHECKPOINT_20261014_0442JST.md",
+      "repositoryPath": "research/nativefree-lab-20261013/CHECKPOINT_20261014_0442JST.md",
+      "bytes": 1587,
+      "sha256": "80cb54833b5fd17b2207e15e130d3cfd0fcf07dcc597ec14625045beb996e219"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/CHECKPOINT_20261014_CALLSITES.md",
+      "repositoryPath": "research/nativefree-lab-20261013/CHECKPOINT_20261014_CALLSITES.md",
+      "bytes": 4509,
+      "sha256": "6c7ba28d9044997067a76fc5bf50a118a7cc217397aac62c8b173d41ce5362f7"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/CHECKPOINT_20261014_COUNT_CONSTRUCTORS.md",
+      "repositoryPath": "research/nativefree-lab-20261013/CHECKPOINT_20261014_COUNT_CONSTRUCTORS.md",
+      "bytes": 3523,
+      "sha256": "56b520c1730986fd808f01a06020967e05164bb699df93f88e2bf4a03a26cd6c"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/CHECKPOINT_20261014_COUNT_TAIL.md",
+      "repositoryPath": "research/nativefree-lab-20261013/CHECKPOINT_20261014_COUNT_TAIL.md",
+      "bytes": 797,
+      "sha256": "fdaa42122e9cbc80232ef2cac729c667254ddb16f04ed48459c573762747bfea"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/CHECKPOINT_AUTOMATION_NOTE.md",
+      "repositoryPath": "research/nativefree-lab-20261013/CHECKPOINT_AUTOMATION_NOTE.md",
+      "bytes": 73,
+      "sha256": "a5c25395da96892c855c9b4edf554619ee362742a1f9a138c1eb3497abedd9ac"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/DecompileBytes.java",
+      "repositoryPath": "research/nativefree-lab-20261013/DecompileBytes.java",
+      "bytes": 1471,
+      "sha256": "6ea45c395cf56dcae4b6c150640104b73c91a17cf3286f12a2ffaf52879df3d8"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/README.md",
+      "repositoryPath": "research/nativefree-lab-20261013/README.md",
+      "bytes": 87,
+      "sha256": "0dc1fc9f8af1c72ca1853eb4c87c503076f92443f54d1c383c8deb489641d4c3"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/analyze_huff_count.py",
+      "repositoryPath": "research/nativefree-lab-20261013/analyze_huff_count.py",
+      "bytes": 1457,
+      "sha256": "49b7cb7c0adaeeb01005d42cc721050cea60c5a3709028b0fc4b8455570144d5"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/arm64-count-constructors-audit.json",
+      "repositoryPath": "research/nativefree-lab-20261013/arm64-count-constructors-audit.json",
+      "bytes": 2046,
+      "sha256": "c6a100355bce37af87ae4b74f17353c25281c987c8db0a63d02689883f1654e7"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/arm64-count-tail-audit.json",
+      "repositoryPath": "research/nativefree-lab-20261013/arm64-count-tail-audit.json",
+      "bytes": 1707,
+      "sha256": "2e1f93a064dfd7e1a408cf4b0c9512f3727f81cd97a695a4f07effd31fdaefc2"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/arm64_callsite_audit.py",
+      "repositoryPath": "research/nativefree-lab-20261013/arm64_callsite_audit.py",
+      "bytes": 2506,
+      "sha256": "97ed444366288f0d72756e162948bb628a50a602ece48b8ab98705e6808c266f"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/arm64_count_constructors.py",
+      "repositoryPath": "research/nativefree-lab-20261013/arm64_count_constructors.py",
+      "bytes": 3656,
+      "sha256": "3733ff1e4ce43fd95cf3066fc5f6850bd9cab1f838e8c6d2f1d8ea1abeaed081"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/arm64_count_tail.py",
+      "repositoryPath": "research/nativefree-lab-20261013/arm64_count_tail.py",
+      "bytes": 3827,
+      "sha256": "b01666446be98c66a6ea48eaa7bfb14583f17bfd92804c9b3b876cc2cc4aa413"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/codec-slice-arm64.b64",
+      "repositoryPath": "research/nativefree-lab-20261013/codec-slice-arm64.b64",
+      "bytes": 27777,
+      "sha256": "c6eeeae2d150e3f9c85dc9f193f4097d0733b3686d4758145bff5dfc31ec9ea6"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/disasm_bytes.py",
+      "repositoryPath": "research/nativefree-lab-20261013/disasm_bytes.py",
+      "bytes": 1249,
+      "sha256": "e5134ffeb5e004d45e3e40488c1d70f1ddac331a7f08c86abd5e6a76fbf21f3d"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/huff816-tables-report.json",
+      "repositoryPath": "research/nativefree-lab-20261013/huff816-tables-report.json",
+      "bytes": 10206,
+      "sha256": "235b8e5ad0515d89e287cf83bdaa09935066c0be0a68ec94ace09e6d96c93649"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/huff816_envelope.py",
+      "repositoryPath": "research/nativefree-lab-20261013/huff816_envelope.py",
+      "bytes": 1598,
+      "sha256": "cac43286959d4b15ed87a7072167f4a1b5a8b99b8d0cf4518e3f69ac78ede528"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/huff816_wrapper_decode.py",
+      "repositoryPath": "research/nativefree-lab-20261013/huff816_wrapper_decode.py",
+      "bytes": 1330,
+      "sha256": "a65f9342dd9887557e6cb9d37f536872a755971a5e1a48f3898fc26850b4a882"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/huff_callsites_20261014.json",
+      "repositoryPath": "research/nativefree-lab-20261013/huff_callsites_20261014.json",
+      "bytes": 1175,
+      "sha256": "aa961e893eb5d51cb6d424ef9e9a0fa88b61606e30838a9a3630a79a07e2972f"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/huff_x3_provenance.py",
+      "repositoryPath": "research/nativefree-lab-20261013/huff_x3_provenance.py",
+      "bytes": 3344,
+      "sha256": "52b7eb91dfa37aa24fb2adca883a240a3f409a9ff7df38ba2c13221c0be206c3"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/inspect_lanes.py",
+      "repositoryPath": "research/nativefree-lab-20261013/inspect_lanes.py",
+      "bytes": 1025,
+      "sha256": "cf141a1f3477b60ad9f3c2e7f94d5c1e1c509fcf457ebde83a523ca4fc884207"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/nativefree_huff816.py",
+      "repositoryPath": "research/nativefree-lab-20261013/nativefree_huff816.py",
+      "bytes": 4933,
+      "sha256": "55a0d7b4982b2857fbc2ba10e2c3667ce302f862442170f699bc45d3ed46d1be"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/test_arm64_count_constructors.py",
+      "repositoryPath": "research/nativefree-lab-20261013/test_arm64_count_constructors.py",
+      "bytes": 1242,
+      "sha256": "223b9b29ddd1c7e74ed2ec8f65f0904ce848575b394659010f5e7aa9f6b9fd52"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/test_huff816_corpus_regression.py",
+      "repositoryPath": "research/nativefree-lab-20261013/test_huff816_corpus_regression.py",
+      "bytes": 756,
+      "sha256": "71ebd464f66c044baeb1486dbd58f46a54fd291f6cd8bf25c6bceb2e72e41d7a"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/test_huff816_decode.py",
+      "repositoryPath": "research/nativefree-lab-20261013/test_huff816_decode.py",
+      "bytes": 1514,
+      "sha256": "3afbc40aed0d389a5ac2d98b613f2978ab42902aa1c9f9399b5f7f43d455f9ee"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/test_huff816_envelope.py",
+      "repositoryPath": "research/nativefree-lab-20261013/test_huff816_envelope.py",
+      "bytes": 1037,
+      "sha256": "ff02516ec07847d0e29afc5183e75463000937d18a0ff8e2f3998a17ffab7aed"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/test_huff816_envelope_corpus.py",
+      "repositoryPath": "research/nativefree-lab-20261013/test_huff816_envelope_corpus.py",
+      "bytes": 1721,
+      "sha256": "82224514c90c7d772eab7b0a4b363b7c319688d526c9e6e5b24eb2c573931c52"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/test_huff816_tables.py",
+      "repositoryPath": "research/nativefree-lab-20261013/test_huff816_tables.py",
+      "bytes": 2703,
+      "sha256": "1a62ea3ec6b9b342ed8a93581c023b79b322da1e13be282785cf31d5d5dfd429"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/test_huff816_wrapper_decode.py",
+      "repositoryPath": "research/nativefree-lab-20261013/test_huff816_wrapper_decode.py",
+      "bytes": 988,
+      "sha256": "00ba29ac498b7edb993cf7fbce8006f5de9ecca27c54fe9fef92e5a8d8299e5d"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-lab-20261013/test_huff_x3_provenance.py",
+      "repositoryPath": "research/nativefree-lab-20261013/test_huff_x3_provenance.py",
+      "bytes": 1069,
+      "sha256": "acebcaa94cd0ac28dea81d5f9f0dc9100c1bcea21691ab8660479db8e244e181"
+    },
+    {
+      "source": "/opt/flyover-viewer/ghidra-lab/DecompileHuff.java",
+      "repositoryPath": "research/ghidra/DecompileHuff.java",
+      "bytes": 2025,
+      "sha256": "9095a065cbae7cd95c6b8fc16d83d6c276f700134041edcc1cc784813f694c27"
+    },
+    {
+      "source": "/opt/flyover-viewer/ghidra-lab/output/huff8_decompress.c",
+      "repositoryPath": "research/ghidra/output/huff8_decompress.c",
+      "bytes": 57820,
+      "sha256": "d04e16686d8a37df967b9285f44092ab17a552dd926263b626d98b195675ff70"
+    },
+    {
+      "source": "/opt/flyover-viewer/ghidra-lab/output/huff16_decompress.c",
+      "repositoryPath": "research/ghidra/output/huff16_decompress.c",
+      "bytes": 49214,
+      "sha256": "3c0e8c22ede76d732826f8beaa5f247e5617a9b7554ca2f98b5517b8cbb0cdd7"
+    },
+    {
+      "source": "/opt/flyover-viewer/ghidra-lab/output/huff816_decompress.c",
+      "repositoryPath": "research/ghidra/output/huff816_decompress.c",
+      "bytes": 39080,
+      "sha256": "077aa72b1528911b58d33e0d26ab3622105d87d489d44ed6a58b69fe70830482"
+    },
+    {
+      "source": "/opt/flyover-viewer/ghidra-lab/huffman-arm64.bin",
+      "repositoryPath": "research/ghidra/huffman-arm64.bin",
+      "bytes": 5912,
+      "sha256": "8a9d0cb3c014c460342795c0a0291157561661c866fd018f449fbc349f403659"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-oahu-report.json",
+      "repositoryPath": "reports/historical/nativefree-oahu-report.json",
+      "bytes": 5116,
+      "sha256": "26db0861f30e9426cb7d37d0637372ca9d42c4829a1d9ed6b4f53c82ced6ae18"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-decoder-tests.json",
+      "repositoryPath": "reports/historical/nativefree-decoder-tests.json",
+      "bytes": 884,
+      "sha256": "98c869731ec36ecf0d4ab6be6e380d49177a70ea95fd3eb1a22d5bccc3b39f72"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-huffman-oahu.json",
+      "repositoryPath": "reports/historical/nativefree-huffman-oahu.json",
+      "bytes": 2897,
+      "sha256": "f740614e37432b9f0c901f41c723c17f3e51cea60197b18236ab317aa1ada8c9"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-trico-oahu.json",
+      "repositoryPath": "reports/historical/nativefree-trico-oahu.json",
+      "bytes": 10019,
+      "sha256": "dd86dc559f84065797ce13f00f799419687d69bfdf7049ab4f7b5504bb845f38"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-huff-raw-oahu.json",
+      "repositoryPath": "reports/historical/nativefree-huff-raw-oahu.json",
+      "bytes": 1389,
+      "sha256": "642d85742c3acc13f6c769a8a012c36190d8758cc61196d56d7d780f7ea2b996"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-huff-raw-tokyo.json",
+      "repositoryPath": "reports/historical/nativefree-huff-raw-tokyo.json",
+      "bytes": 1413,
+      "sha256": "a8141625c38a0d42098921fc077a6950a53da88c980353328d8836ddff9ade76"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-huffman-tokyo.json",
+      "repositoryPath": "reports/historical/nativefree-huffman-tokyo.json",
+      "bytes": 2912,
+      "sha256": "4c4c749cefbebba5c61f60b566c59b05da11bbbe6094e64f81ac9d5e0bb95988"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-verified-tokyo.json",
+      "repositoryPath": "reports/historical/nativefree-verified-tokyo.json",
+      "bytes": 5134,
+      "sha256": "22b1881abd62468039b07832108dab597d3f7a73d8543b96845e53c785e85236"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-trico-tokyo.json",
+      "repositoryPath": "reports/historical/nativefree-trico-tokyo.json",
+      "bytes": 6878,
+      "sha256": "ccce9e5dbdb51348d258a0e47cbc83e50622f116a731e39ffca8f091ef46d64e"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-jdescriptor-oahu.json",
+      "repositoryPath": "reports/historical/nativefree-jdescriptor-oahu.json",
+      "bytes": 2213,
+      "sha256": "1e1e396b28002d4a231bd1aa6b53519fd3756de8a91495416bd0aa71b6158c61"
+    },
+    {
+      "source": "/opt/flyover-viewer/nativefree-jdescriptor-tokyo.json",
+      "repositoryPath": "reports/historical/nativefree-jdescriptor-tokyo.json",
+      "bytes": 2221,
+      "sha256": "e767826dddeee13dfe45218171788e85f24d5ef6cb64a2f07a8897c895170067"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/c3mm-v2-sequential-report.json",
+      "repositoryPath": "reports/historical/c3mm-v2-sequential-report.json",
+      "bytes": 21496,
+      "sha256": "c6b908861cdcbcfe218f5a3dda1e304f00b0c8d16742395829e5db4ed4a0a8b7"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/huffman-families.json",
+      "repositoryPath": "reports/historical/huffman-families.json",
+      "bytes": 2912,
+      "sha256": "4c4c749cefbebba5c61f60b566c59b05da11bbbe6094e64f81ac9d5e0bb95988"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/huff816-nativefree-report.json",
+      "repositoryPath": "reports/historical/huff816-nativefree-report.json",
+      "bytes": 9822,
+      "sha256": "b3f36625b40ff4c3190989a6cf4ef8ef0fde0351ccc9539696a21f9339a64cf8"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/c3mm-v2-block-report.json",
+      "repositoryPath": "reports/historical/c3mm-v2-block-report.json",
+      "bytes": 16527,
+      "sha256": "cf66ecadb195987ebc20717b79b17f863f86e8015bae78228da641feeddf3a96"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-r3d-independent-audit-20261013/byet-kind0-native-golden-report.json",
+      "repositoryPath": "reports/historical/byet-kind0-native-golden-report.json",
+      "bytes": 731,
+      "sha256": "6903087ea4e3e0cf694ec87fcd29b7de295092556d02b0edf86a3b8bbf7fad08"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/FLYOVER_R3D_RESEARCH.md",
+      "repositoryPath": "docs/historical/FLYOVER_R3D_RESEARCH.md",
+      "bytes": 13528,
+      "sha256": "0302fe0de3b361ee3d0fc1297e89e6c2ce645603021ba6893a1338d0a59b38b0"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/NATIVEFREE_R3D_STATUS.md",
+      "repositoryPath": "docs/historical/NATIVEFREE_R3D_STATUS.md",
+      "bytes": 3488,
+      "sha256": "37fef17b4c452a5bc59ee2b5a4e875e03471a0173cdb00eff6b7b30e6b54dc2c"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/NATIVEFREE_R3D_PROGRESS_20261013.md",
+      "repositoryPath": "docs/historical/NATIVEFREE_R3D_PROGRESS_20261013.md",
+      "bytes": 12462,
+      "sha256": "ed1cbf9dd4a8adbc214d469baf465d743841413bfd6ed7edfcc0b25b1d70b802"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/index.html",
+      "repositoryPath": "viewer/www/index.html",
+      "bytes": 55428,
+      "sha256": "4f6f1f46b24d54bcf99548b974e58ab354f210b20dfdf334534fbb81a0403438"
+    },
+    {
+      "source": "/opt/flyover-viewer/package.json",
+      "repositoryPath": "viewer/package.json",
+      "bytes": 86,
+      "sha256": "bc282db33bc20d0dbfaf9e26164e8669c932331b20712cc59d00a7bd8e9901d4"
+    },
+    {
+      "source": "/opt/flyover-viewer/package-lock.json",
+      "repositoryPath": "viewer/package-lock.json",
+      "bytes": 912,
+      "sha256": "84504ecc657ff45df07db2089311215628acef820e64c071d647f746e3bc7f38"
+    },
+    {
+      "source": "/opt/flyover-viewer/node_modules/three/LICENSE",
+      "repositoryPath": "viewer/third-party/three/LICENSE",
+      "bytes": 1081,
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
+    },
+    {
+      "source": "/opt/flyover-viewer/node_modules/playwright-core/LICENSE",
+      "repositoryPath": "viewer/third-party/playwright-core/LICENSE",
+      "bytes": 11601,
+      "sha256": "45873d00a0dd243596deb4aa23b2493b3d1f0671921bf2538ea431d7380220eb"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/NEW_CAPTURE_20261013_1913.md",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/NEW_CAPTURE_20261013_1913.md",
+      "bytes": 2531,
+      "sha256": "4997492fb3e955168cb0d5766b81a54e5a5d4c69fc8b7ee0524267a6b7cac66a"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/README.md",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/README.md",
+      "bytes": 2082,
+      "sha256": "8ce004b2b811d5ff1340017973d3e319ef8e25980e3079523c90a09d184db9cd"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/capture_extract_basic.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/capture_extract_basic.py",
+      "bytes": 1194,
+      "sha256": "7b0c8ef9c4ea16ae7fd3ab89469cf1c53d8d8b43e0ee20a551eeadb6f3401250"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/capture_extract_v2.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/capture_extract_v2.py",
+      "bytes": 1982,
+      "sha256": "8f47a2becc4917f99e1143f2dabb51f608a9df6155004bf015dac1a302472175"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/capture_summary.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/capture_summary.py",
+      "bytes": 1219,
+      "sha256": "85252576024ab903d65993350d984efd6bf85545c3264a230a00667a902e3437"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/combine_layers.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/combine_layers.py",
+      "bytes": 858,
+      "sha256": "da5873150aafc44c14a65d0c22fdc29b25dea1cb5a3d61efad886ac7f9e877c8"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/export_height_mesh.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/export_height_mesh.py",
+      "bytes": 1825,
+      "sha256": "916d7dbd9f81427a4fd368c624ac58567dc61ee0c36c997614775f2ba1b30175"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/export_native_subset.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/export_native_subset.py",
+      "bytes": 1926,
+      "sha256": "44a26ea82383a43b6721f9d9096325922ecdabd86eb56bb9d2423da6c993c863"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/fetch_area_98.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/fetch_area_98.py",
+      "bytes": 4886,
+      "sha256": "78150fe1d66ea7a528ddcfc76eb313df8552dd2dbf664e5c05b95e296d9d9d14"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/fetch_one_tile.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/fetch_one_tile.py",
+      "bytes": 3824,
+      "sha256": "772a7b14d84001b1494931abe87e22f1e3573ad46438407cf0e5b2bd096459d5"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/geo_ops.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/geo_ops.py",
+      "bytes": 866,
+      "sha256": "9922fb002174b36781f0eb5342cd4fa71b376da81a50d880d92857c4c4602150"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/headers_info.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/headers_info.py",
+      "bytes": 385,
+      "sha256": "77b331dfe73159219a85dc28d26959dd36fbbd6b2bcda05bfcd43030b1c5ef73"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/key_reuse_stats.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/key_reuse_stats.py",
+      "bytes": 863,
+      "sha256": "5a8ba05169fb169bdfd908e6f80d31c8b9984c34b135227d5a2979b05a9e93ef"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/new_capture_report.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/new_capture_report.py",
+      "bytes": 2766,
+      "sha256": "b6f8d3f15afc0e9d2b5d10f375f82fcfa1c141d9b952e0f796a39f28f44abfb7"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/oahu_hilton_130m.plan.json",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/oahu_hilton_130m.plan.json",
+      "bytes": 14080,
+      "sha256": "15832a02ace5f7f1d4aa93c8260b10e1b34285b806baec70d63b33ce5b812c9f"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/original-capture-area.plan.json",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/original-capture-area.plan.json",
+      "bytes": 6382,
+      "sha256": "0303c4a32fe4bd2d30a4719a830cd04893b0963966bf1cfcef2ad0872c2430ec"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/probe_fresh_exact.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/probe_fresh_exact.py",
+      "bytes": 1764,
+      "sha256": "b15272f85a3e98a52a6b4fa303c0768ebd365ecb0d0443619ec48f3abb04964c"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/probe_fresh_modify_coordinate.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/probe_fresh_modify_coordinate.py",
+      "bytes": 1571,
+      "sha256": "a58ad184b71ae5aa87ca73067c25bc37ae7c26f417879ddaec9e02e1ddbd82dc"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/probe_fresh_signer.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/probe_fresh_signer.py",
+      "bytes": 3183,
+      "sha256": "5a08818a0fb04fa0656db2cdae62cd959ac4e528358e0b5fd5a28b63d5d45047"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/probe_legacy_token_offline.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/probe_legacy_token_offline.py",
+      "bytes": 1669,
+      "sha256": "49a384dc106b0d51d83c668b0ac6ecc03389c03fb6afcb8476e9b30f1cd146e2"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/probe_original.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/probe_original.py",
+      "bytes": 1171,
+      "sha256": "858a8bc8c1a73d2f8155866c9e624dde92afd2112c6adbffb96a886603737cb4"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/probe_plain_structure.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/probe_plain_structure.py",
+      "bytes": 1641,
+      "sha256": "8af4a7cfe18bdb8a173efb510e70069beb2b42b7cf3b651a1555f92485a59f64"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/probe_single.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/probe_single.py",
+      "bytes": 1811,
+      "sha256": "12d7f118c9d27aa65173794ebd9dcc5dfa60c211ef75fe83062bba4ff866cb9f"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/safe_capture_structure.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/safe_capture_structure.py",
+      "bytes": 1929,
+      "sha256": "259fa495caccee40865731edb9bdb878a215f3e7fa032d0093091a15beebf528"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/safe_key_timing.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/safe_key_timing.py",
+      "bytes": 1094,
+      "sha256": "b9cf704b4adb3156f019e0d30f577e0f50957bc3ab1c9c343a970759b3847fdb"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/tile_plan.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/tile_plan.py",
+      "bytes": 2570,
+      "sha256": "d0f22a2178669e35972919965f2d16f0cb8ec8ef23596a4325bcd6e3852fe9dd"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/tokyo-dome.plan.json",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/tokyo-dome.plan.json",
+      "bytes": 5632,
+      "sha256": "c2d2576f8242993e2159dd157d20dfb93910c10fad18fb47a7bba03f11078372"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/tokyo-tower.plan.json",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/tokyo-tower.plan.json",
+      "bytes": 7799,
+      "sha256": "cbe56896029f700292d100071ede71b55b01f65de3bd53b04dbb19d55c3c3582"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/apple-maps-region-fetch-lab-20261013/verify_hilton_r3d.py",
+      "repositoryPath": "snapshots/apple-maps-region-fetch-lab-20261013/verify_hilton_r3d.py",
+      "bytes": 1435,
+      "sha256": "9e2194dc9c08dda137714facc25a62500bc5aade1b87e434c2f55a2bb65f5193"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/flyover-capture-analysis/decode_style98_header.py",
+      "repositoryPath": "snapshots/flyover-capture-analysis/decode_style98_header.py",
+      "bytes": 3132,
+      "sha256": "f393ec62dab4708d9f5bbdb4e97c8692ba575fbde89b96286b4c674f7d998482"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/flyover-capture-analysis/inspect_flows.py",
+      "repositoryPath": "snapshots/flyover-capture-analysis/inspect_flows.py",
+      "bytes": 2369,
+      "sha256": "bfab6239f63c618f3304d791ef047055571cf43602246447fec8092b51db9243"
+    },
+    {
+      "source": "/root/.desktop-mcp/linux-4ebec5ed/work/flyover-capture-analysis/inspect_formats.py",
+      "repositoryPath": "snapshots/flyover-capture-analysis/inspect_formats.py",
+      "bytes": 2113,
+      "sha256": "26241e5b29cf750f06e3d110ab7faac2708da1144d8ae2adc37636e742b9144b"
+    },
+    {
+      "source": "/Users/denken/.desktop-mcp/mac-6dd4602a/work/ios27-vectorkit-analysis/decoder-harness/build.sh",
+      "repositoryPath": "native-harness/decoder-harness/build.sh",
+      "bytes": 641,
+      "sha256": "2b9d93380d9632554b163db67ac69aef2444cf9629918de7d4425267f98a3ae1"
+    },
+    {
+      "source": "/Users/denken/.desktop-mcp/mac-6dd4602a/work/ios27-vectorkit-analysis/decoder-harness/main.mm",
+      "repositoryPath": "native-harness/decoder-harness/main.mm",
+      "bytes": 22886,
+      "sha256": "566f6cb30c24498857dad1d40372013d6f979c01a222b4c7c2024cfb80da7735"
+    },
+    {
+      "source": "/Users/denken/.desktop-mcp/mac-6dd4602a/work/ios27-vectorkit-analysis/find_xrefs.py",
+      "repositoryPath": "native-harness/find_xrefs.py",
+      "bytes": 2020,
+      "sha256": "a5e2c8c9b7fff3d47fda97b7a11420b64d946ca30b128f948b671cf50e5bc19d"
+    },
+    {
+      "source": "/Users/denken/.desktop-mcp/mac-6dd4602a/work/ios27-vectorkit-analysis/macho_xrefs.py",
+      "repositoryPath": "native-harness/macho_xrefs.py",
+      "bytes": 1712,
+      "sha256": "f2c4dbc96c0079234c6f0429b19f5869c747415c24035acd8ce608554de5a393"
+    },
+    {
+      "source": "/Users/denken/.desktop-mcp/mac-6dd4602a/work/ios27-vectorkit-analysis/r3d_calls.py",
+      "repositoryPath": "native-harness/r3d_calls.py",
+      "bytes": 1441,
+      "sha256": "5d37fbe5f03bc89e708207550b32f5ddf7442653f5dd525c34686502464fad9e"
+    },
+    {
+      "source": "/Users/denken/.desktop-mcp/mac-6dd4602a/work/ios27-vectorkit-analysis/r3d_codec_call_sites.py",
+      "repositoryPath": "native-harness/r3d_codec_call_sites.py",
+      "bytes": 698,
+      "sha256": "fdcae045defe28db9c8a04dbcac0e668fe7b4433414cbf85992d09f81bcf714a"
+    },
+    {
+      "source": "/Users/denken/.desktop-mcp/mac-6dd4602a/work/ios27-vectorkit-analysis/r3d_read_mem_callgraph.py",
+      "repositoryPath": "native-harness/r3d_read_mem_callgraph.py",
+      "bytes": 1095,
+      "sha256": "46c9960f90c665124b1fa8984bc3ffdd6425a453e165fac7a78c6e30881bd6b8"
+    },
+    {
+      "source": "/Users/denken/.desktop-mcp/mac-6dd4602a/work/ios27-vectorkit-analysis/trace_hybrid_decoder.py",
+      "repositoryPath": "native-harness/trace_hybrid_decoder.py",
+      "bytes": 1230,
+      "sha256": "ef0563b8295e4ce58fc69035f50315c150062c48c5192d5895eb8707b9181491"
+    },
+    {
+      "source": "/workspace/scratch/0cf1e1f0b378/huffman_work/README.md",
+      "repositoryPath": "research/chat-huffman-work/README.md",
+      "bytes": 2439,
+      "sha256": "8e42def5d2c58a5ea24969052ef65040280b8f161cbd09d42c8ce8ffdebda89a"
+    },
+    {
+      "source": "/workspace/scratch/0cf1e1f0b378/huffman_work/audit_byet_kind0.py",
+      "repositoryPath": "research/chat-huffman-work/audit_byet_kind0.py",
+      "bytes": 5275,
+      "sha256": "6820191874333bf4302b21cbd4109a477f1bb62166a55ebff02d712b9066c996"
+    },
+    {
+      "source": "/workspace/scratch/0cf1e1f0b378/huffman_work/audit_huff816_nativefree.py",
+      "repositoryPath": "research/chat-huffman-work/audit_huff816_nativefree.py",
+      "bytes": 7985,
+      "sha256": "804f78c091ea91dcb0197a35a9df16527913dcbe0fb1fcdfe0b3c8d408121f09"
+    },
+    {
+      "source": "/workspace/scratch/0cf1e1f0b378/huffman_work/byet-kind0-native-golden-report.json",
+      "repositoryPath": "research/chat-huffman-work/byet-kind0-native-golden-report.json",
+      "bytes": 731,
+      "sha256": "6903087ea4e3e0cf694ec87fcd29b7de295092556d02b0edf86a3b8bbf7fad08"
+    },
+    {
+      "source": "/workspace/scratch/0cf1e1f0b378/huffman_work/huff816_nativefree.py",
+      "repositoryPath": "research/chat-huffman-work/huff816_nativefree.py",
+      "bytes": 7237,
+      "sha256": "8fea74a59728ef563522e4c493cd202e9631ea29516ef049d9f15de8a0cb81be"
+    },
+    {
+      "source": "/workspace/scratch/0cf1e1f0b378/huffman_work/results.json",
+      "repositoryPath": "research/chat-huffman-work/results.json",
+      "bytes": 1903,
+      "sha256": "362a05b5e93c99c5df0ee9f16a30d801df7c255a7a845827a03420d54000c050"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/nativefree/HUFF816_NEXT_STEPS.txt",
+      "repositoryPath": "snapshots/viewer/www-nativefree/HUFF816_NEXT_STEPS.txt",
+      "bytes": 536,
+      "sha256": "36176de6227ad04e4a958563393acf7aff9594c92f115c770440c749bcdb281c"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/nativefree/HUFF_STATUS.md",
+      "repositoryPath": "snapshots/viewer/www-nativefree/HUFF_STATUS.md",
+      "bytes": 3855,
+      "sha256": "394f19dd13784898960d668e963e581841ce731c8182d658c55db2805ec9cf5b"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/nativefree/nativefree_byet_jbitmap.py",
+      "repositoryPath": "snapshots/viewer/www-nativefree/nativefree_byet_jbitmap.py",
+      "bytes": 341,
+      "sha256": "2c5735f7154725719ae069c4958e0a69d49c0900be8caba76eb58ee89bdd0f6e"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/nativefree/nativefree_byet_jdescriptor.py",
+      "repositoryPath": "snapshots/viewer/www-nativefree/nativefree_byet_jdescriptor.py",
+      "bytes": 5224,
+      "sha256": "1b3babbb0d81a151696d5ed2c2d4f623453920a35e41e8f23fb2c5840ae3ad59"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/nativefree/nativefree_byet_origin.py",
+      "repositoryPath": "snapshots/viewer/www-nativefree/nativefree_byet_origin.py",
+      "bytes": 2076,
+      "sha256": "e0a315ddc8d4427d892bdaf267ef832df2d1117f338db86bdce11f81dd895334"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/nativefree/nativefree_extract_heic.py",
+      "repositoryPath": "snapshots/viewer/www-nativefree/nativefree_extract_heic.py",
+      "bytes": 5571,
+      "sha256": "b1d5851205fbebdbd05ea3bcffcea6d6890529f4cb979474f3dd59cd4496feea"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/nativefree/nativefree_georef_anchors.py",
+      "repositoryPath": "snapshots/viewer/www-nativefree/nativefree_georef_anchors.py",
+      "bytes": 2952,
+      "sha256": "d25a0cd19f14fe64be2661686214b04c11352fa63b66731389e86bf52f16d7bd"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/nativefree/nativefree_huff816_raw_strict.py",
+      "repositoryPath": "snapshots/viewer/www-nativefree/nativefree_huff816_raw_strict.py",
+      "bytes": 2754,
+      "sha256": "fcae8e691d34c1e21b860cabe608b7cd7505dd770e0e77171b472f26e5b82830"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/nativefree/nativefree_huff_raw.py",
+      "repositoryPath": "snapshots/viewer/www-nativefree/nativefree_huff_raw.py",
+      "bytes": 3341,
+      "sha256": "6c727a5d4ed27df253810efa8c79bc3b9c1a30d873fa02aa8f3bf78cdf68316c"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/nativefree/nativefree_huffman_header.py",
+      "repositoryPath": "snapshots/viewer/www-nativefree/nativefree_huffman_header.py",
+      "bytes": 3745,
+      "sha256": "1f64c52c9c7aeecc4914cf96ed1f52fce227548124bdbdf968783fedf080ee6f"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/nativefree/nativefree_prepare_region.py",
+      "repositoryPath": "snapshots/viewer/www-nativefree/nativefree_prepare_region.py",
+      "bytes": 5454,
+      "sha256": "bc6c8c41f7ca3612db35dcd458a65f7eff6552a7ddfa2cf77216a64798c73c84"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/nativefree/nativefree_r3d_codec_streams.py",
+      "repositoryPath": "snapshots/viewer/www-nativefree/nativefree_r3d_codec_streams.py",
+      "bytes": 10345,
+      "sha256": "b7ae050daa3db3802a62d45d3adcb7c35152a8e7eb2695d914f233894211a1e7"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/nativefree/nativefree_r3d_field_tree.py",
+      "repositoryPath": "snapshots/viewer/www-nativefree/nativefree_r3d_field_tree.py",
+      "bytes": 1287,
+      "sha256": "f04e52581d223fc6f8229deb1c59b6ce8db949dadabfc1fd408c4239f9b6b215"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/nativefree/nativefree_trico_size.py",
+      "repositoryPath": "snapshots/viewer/www-nativefree/nativefree_trico_size.py",
+      "bytes": 2333,
+      "sha256": "b6bd84191b98820b094f3b543e48dbfa50b2e0d0c9109e43915e37f2043102c5"
+    },
+    {
+      "source": "/opt/flyover-viewer/www/nativefree/test_nativefree_r3d.py",
+      "repositoryPath": "snapshots/viewer/www-nativefree/test_nativefree_r3d.py",
+      "bytes": 7417,
+      "sha256": "377587418e06235ad823365bb992322e8a2ec070ba627943ff1463457b081b3c"
+    }
+  ],
+  "note": "Source hashes describe the originals. audit/ has documented import/path portability changes; snapshots/ and research/ preserve original sources."
+}

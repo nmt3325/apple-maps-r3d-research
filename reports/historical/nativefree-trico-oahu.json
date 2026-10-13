@@ -1,0 +1,422 @@
+{
+  "inputFiles": 72,
+  "parsed": 72,
+  "rejected": [],
+  "totalNativeFreeSplatRecords": 304527,
+  "soupCompressedBytes": 4048875,
+  "meshCompressedBytes": 2004738,
+  "goldenMatches": 0,
+  "goldenMismatches": 0,
+  "goldenCoverage": 0,
+  "codecState": "Container and codecs identified; geometry and appearance bitstreams not yet decompressed",
+  "samples": [
+    {
+      "r3dVersion": 2,
+      "majorTags": [
+        1,
+        2,
+        3
+      ],
+      "geometryTagOrder": [
+        1,
+        1,
+        4,
+        2,
+        3
+      ],
+      "appearanceTagOrder": [
+        1,
+        1,
+        2,
+        3
+      ],
+      "textureTags": [
+        1,
+        3,
+        5,
+        6,
+        8
+      ],
+      "splatStream": {
+        "offset": 175,
+        "bytes": 53262,
+        "magic": "d122c907",
+        "codecVersion": 1,
+        "pointCount": 3938,
+        "channelCount": 8,
+        "quantizationSteps": [
+          0.04,
+          0.04,
+          0.01,
+          0.01,
+          0.01,
+          0.05,
+          0.05,
+          0.05,
+          0.05
+        ],
+        "blocks": [
+          {
+            "index": 0,
+            "relativeOffset": 59,
+            "bytes": 31581,
+            "role": "first quantized float block (Apple reader requests XYZ coordinates)",
+            "quantizedHeader": 12,
+            "lowerAnchorXYZMeters": [
+              -19.48,
+              -19.04,
+              -56.68
+            ],
+            "originCodec": "int32-le",
+            "byet": {
+              "codec": "BYET -> J byte-plane compressor (not yet decoded)",
+              "modeFlag": 128,
+              "codecMarker": "004a",
+              "headerBytes": 15,
+              "compressedPayloadRelativeOffset": 77,
+              "compressedPayloadBytes": 31563
+            }
+          },
+          {
+            "index": 1,
+            "relativeOffset": 31643,
+            "bytes": 21619,
+            "role": "second quantized float block (Apple reader requests 8 attribute channels)",
+            "quantizedHeader": 10,
+            "byet": {
+              "codec": "BYET -> J byte-plane compressor (not yet decoded)",
+              "modeFlag": 128,
+              "codecMarker": "004a",
+              "headerBytes": 13,
+              "compressedPayloadRelativeOffset": 31659,
+              "compressedPayloadBytes": 21603
+            }
+          }
+        ]
+      },
+      "meshStream": {
+        "offset": 53604,
+        "bytes": 30974,
+        "magic": "e1216624",
+        "codecVersion": 3,
+        "quantizationSteps": [
+          0.04,
+          0.25,
+          0.0349066
+        ]
+      },
+      "textureContainer": {
+        "offset": 84582,
+        "bytes": 70199
+      },
+      "file": "s98_z20_x64551_y460816_h0.r3d",
+      "wireBytes": 154787
+    },
+    {
+      "r3dVersion": 2,
+      "majorTags": [
+        1,
+        2,
+        3
+      ],
+      "geometryTagOrder": [
+        1,
+        1,
+        4,
+        2,
+        3
+      ],
+      "appearanceTagOrder": [
+        1,
+        1,
+        2,
+        3
+      ],
+      "textureTags": [
+        1,
+        3,
+        5,
+        6,
+        8
+      ],
+      "splatStream": {
+        "offset": 175,
+        "bytes": 34859,
+        "magic": "d122c907",
+        "codecVersion": 1,
+        "pointCount": 2489,
+        "channelCount": 8,
+        "quantizationSteps": [
+          0.04,
+          0.04,
+          0.01,
+          0.01,
+          0.01,
+          0.05,
+          0.05,
+          0.05,
+          0.05
+        ],
+        "blocks": [
+          {
+            "index": 0,
+            "relativeOffset": 59,
+            "bytes": 20128,
+            "role": "first quantized float block (Apple reader requests XYZ coordinates)",
+            "quantizedHeader": 12,
+            "lowerAnchorXYZMeters": [
+              -19.04,
+              -18.92,
+              -39.0
+            ],
+            "originCodec": "int32-le",
+            "byet": {
+              "codec": "BYET -> J byte-plane compressor (not yet decoded)",
+              "modeFlag": 128,
+              "codecMarker": "004a",
+              "headerBytes": 15,
+              "compressedPayloadRelativeOffset": 77,
+              "compressedPayloadBytes": 20110
+            }
+          },
+          {
+            "index": 1,
+            "relativeOffset": 20189,
+            "bytes": 14670,
+            "role": "second quantized float block (Apple reader requests 8 attribute channels)",
+            "quantizedHeader": 10,
+            "byet": {
+              "codec": "BYET -> J byte-plane compressor (not yet decoded)",
+              "modeFlag": 128,
+              "codecMarker": "004a",
+              "headerBytes": 13,
+              "compressedPayloadRelativeOffset": 20205,
+              "compressedPayloadBytes": 14654
+            }
+          }
+        ]
+      },
+      "meshStream": {
+        "offset": 35201,
+        "bytes": 32947,
+        "magic": "e1216624",
+        "codecVersion": 3,
+        "quantizationSteps": [
+          0.04,
+          0.25,
+          0.0349066
+        ]
+      },
+      "textureContainer": {
+        "offset": 68152,
+        "bytes": 82085
+      },
+      "file": "s98_z20_x64551_y460817_h0.r3d",
+      "wireBytes": 150243
+    },
+    {
+      "r3dVersion": 2,
+      "majorTags": [
+        1,
+        2,
+        3
+      ],
+      "geometryTagOrder": [
+        1,
+        1,
+        4,
+        2,
+        3
+      ],
+      "appearanceTagOrder": [
+        1,
+        1,
+        2,
+        3
+      ],
+      "textureTags": [
+        1,
+        3,
+        5,
+        6,
+        8
+      ],
+      "splatStream": {
+        "offset": 175,
+        "bytes": 28494,
+        "magic": "d122c907",
+        "codecVersion": 1,
+        "pointCount": 1978,
+        "channelCount": 8,
+        "quantizationSteps": [
+          0.04,
+          0.04,
+          0.01,
+          0.01,
+          0.01,
+          0.05,
+          0.05,
+          0.05,
+          0.05
+        ],
+        "blocks": [
+          {
+            "index": 0,
+            "relativeOffset": 59,
+            "bytes": 17140,
+            "role": "first quantized float block (Apple reader requests XYZ coordinates)",
+            "quantizedHeader": 12,
+            "lowerAnchorXYZMeters": [
+              -19.12,
+              -18.8,
+              -56.4
+            ],
+            "originCodec": "int32-le",
+            "byet": {
+              "codec": "BYET -> J byte-plane compressor (not yet decoded)",
+              "modeFlag": 128,
+              "codecMarker": "004a",
+              "headerBytes": 15,
+              "compressedPayloadRelativeOffset": 77,
+              "compressedPayloadBytes": 17122
+            }
+          },
+          {
+            "index": 1,
+            "relativeOffset": 17201,
+            "bytes": 11293,
+            "role": "second quantized float block (Apple reader requests 8 attribute channels)",
+            "quantizedHeader": 10,
+            "byet": {
+              "codec": "BYET -> J byte-plane compressor (not yet decoded)",
+              "modeFlag": 128,
+              "codecMarker": "004a",
+              "headerBytes": 13,
+              "compressedPayloadRelativeOffset": 17217,
+              "compressedPayloadBytes": 11277
+            }
+          }
+        ]
+      },
+      "meshStream": {
+        "offset": 28836,
+        "bytes": 51041,
+        "magic": "e1216624",
+        "codecVersion": 3,
+        "quantizationSteps": [
+          0.04,
+          0.25,
+          0.0349066
+        ]
+      },
+      "textureContainer": {
+        "offset": 79881,
+        "bytes": 93138
+      },
+      "file": "s98_z20_x64551_y460818_h0.r3d",
+      "wireBytes": 173025
+    },
+    {
+      "r3dVersion": 2,
+      "majorTags": [
+        1,
+        2,
+        3
+      ],
+      "geometryTagOrder": [
+        1,
+        1,
+        4,
+        2,
+        3
+      ],
+      "appearanceTagOrder": [
+        1,
+        1,
+        2,
+        3
+      ],
+      "textureTags": [
+        1,
+        3,
+        5,
+        6,
+        8
+      ],
+      "splatStream": {
+        "offset": 175,
+        "bytes": 85915,
+        "magic": "d122c907",
+        "codecVersion": 1,
+        "pointCount": 6574,
+        "channelCount": 8,
+        "quantizationSteps": [
+          0.04,
+          0.04,
+          0.01,
+          0.01,
+          0.01,
+          0.05,
+          0.05,
+          0.05,
+          0.05
+        ],
+        "blocks": [
+          {
+            "index": 0,
+            "relativeOffset": 59,
+            "bytes": 51265,
+            "role": "first quantized float block (Apple reader requests XYZ coordinates)",
+            "quantizedHeader": 12,
+            "lowerAnchorXYZMeters": [
+              -18.96,
+              -19.4,
+              -51.64
+            ],
+            "originCodec": "int32-le",
+            "byet": {
+              "codec": "BYET -> J byte-plane compressor (not yet decoded)",
+              "modeFlag": 128,
+              "codecMarker": "004a",
+              "headerBytes": 15,
+              "compressedPayloadRelativeOffset": 77,
+              "compressedPayloadBytes": 51247
+            }
+          },
+          {
+            "index": 1,
+            "relativeOffset": 51327,
+            "bytes": 34588,
+            "role": "second quantized float block (Apple reader requests 8 attribute channels)",
+            "quantizedHeader": 10,
+            "byet": {
+              "codec": "BYET -> J byte-plane compressor (not yet decoded)",
+              "modeFlag": 128,
+              "codecMarker": "004a",
+              "headerBytes": 13,
+              "compressedPayloadRelativeOffset": 51343,
+              "compressedPayloadBytes": 34572
+            }
+          }
+        ]
+      },
+      "meshStream": {
+        "offset": 86257,
+        "bytes": 18050,
+        "magic": "e1216624",
+        "codecVersion": 3,
+        "quantizationSteps": [
+          0.04,
+          0.25,
+          0.0349066
+        ]
+      },
+      "textureContainer": {
+        "offset": 104311,
+        "bytes": 43224
+      },
+      "file": "s98_z20_x64551_y460819_h0.r3d",
+      "wireBytes": 147541
+    }
+  ]
+}

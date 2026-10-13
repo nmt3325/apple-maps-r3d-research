@@ -1,0 +1,13 @@
+name: Offline codec checks
+on: [push, workflow_dispatch]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m compileall -q codec audit native-harness snapshots research
+      - run: python codec/huff816_nativefree.py
+      - run: PYTHONPATH=codec python -c "from audit.test_nativefree_r3d import test_compact_size; test_compact_size(); print('PASS compact-size roundtrip')"
