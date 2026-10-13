@@ -1,0 +1,13 @@
+test_byte_predictors (audit.test_numeric_codec.NumericCodecTests.test_byte_predictors) ... ok
+test_closed_triangle_predictor (audit.test_numeric_codec.NumericCodecTests.test_closed_triangle_predictor) ... ok
+test_long_transition_block (audit.test_numeric_codec.NumericCodecTests.test_long_transition_block) ... ok
+test_origin_crosses_channel_boundary (audit.test_numeric_codec.NumericCodecTests.test_origin_crosses_channel_boundary) ... ok
+test_original_numeric_fixture_and_corruption (audit.test_numeric_codec.NumericCodecTests.test_original_numeric_fixture_and_corruption) ... ok
+test_paired_predictors (audit.test_numeric_codec.NumericCodecTests.test_paired_predictors) ... ok
+test_special_floats_precede_origin (audit.test_numeric_codec.NumericCodecTests.test_special_floats_precede_origin) ... ok
+test_truncated_and_inconsistent_lanes (audit.test_numeric_codec.NumericCodecTests.test_truncated_and_inconsistent_lanes) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.099s
+
+OK

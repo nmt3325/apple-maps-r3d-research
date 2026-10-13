@@ -11,3 +11,4 @@ jobs:
       - run: python -m compileall -q codec audit native-harness snapshots research
       - run: python codec/huff816_nativefree.py
       - run: PYTHONPATH=codec python -c "from audit.test_nativefree_r3d import test_compact_size; test_compact_size(); print('PASS compact-size roundtrip')"
+      - run: python -m unittest audit.test_numeric_codec -v

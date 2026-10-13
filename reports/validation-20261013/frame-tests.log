@@ -1,0 +1,5 @@
+tokyo {'tiles': 223, 'splatRecords': 736915, 'embeddedHEIC': 669, 'meshCompressedBytes': 6717914, 'splatCompressedBytes': 9808120, 'quantizationPatterns': 3, 'nativeGoldenCompared': 223}
+oahu {'tiles': 72, 'splatRecords': 304527, 'embeddedHEIC': 216, 'meshCompressedBytes': 2004738, 'splatCompressedBytes': 4048875, 'quantizationPatterns': 1, 'nativeGoldenCompared': 0}
+Quantized XYZ native-fixture verified: 223 tiles (202 direct + 21 sparse bitmap); maximum XYZ min offset 22.48 meters; unsupported []
+BYET/J lane directory parity 590 streams / 12980 lane entries exact partition
+PASS: frame boundaries, 3 HEIC atlases, 8 Splat channels, quantization tables, original Splat counts on 295 tiles, 3 corrupt input tests

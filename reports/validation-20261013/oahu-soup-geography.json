@@ -1,0 +1,1730 @@
+{
+  "tiles": 72,
+  "records": 304527,
+  "finiteXYZ": true,
+  "missingColorComponents": 4137,
+  "scope": "Independent soup decode only; original polygon and viewer not yet generated",
+  "nativeGoldenInput": false,
+  "results": [
+    {
+      "tile": "s98_z20_x64551_y460816_h0.r3d",
+      "inputSHA256": "d06bab6ecfa1adb68094d243a2051dea56c62dafd19367f47a0e7cbbce3b4e24",
+      "records": 3938,
+      "vertexCount": 11814,
+      "attributeCount": 31504,
+      "missingColorsByChannel": {
+        "1": 3,
+        "2": 3,
+        "3": 3
+      },
+      "geodeticMin": [
+        -157.83818472880017,
+        21.283920074180966,
+        16.68001875001937
+      ],
+      "geodeticMax": [
+        -157.83781738811004,
+        21.284267613299455,
+        56.680002408102155
+      ],
+      "xyzSHA256": "34f7c14449b8924974acd17b6f6303d8b133fa32d646507f6c75749c147d206b",
+      "attributesSHA256": "ff46f4cf76676a26f36bd20498b73e5428732253b27ff4ae85e8e10cba2a74b1"
+    },
+    {
+      "tile": "s98_z20_x64551_y460817_h0.r3d",
+      "inputSHA256": "c310e034886851ee989085d133662dab65a8606d692b165e876d0adb32d52dc1",
+      "records": 2489,
+      "vertexCount": 7467,
+      "attributeCount": 19912,
+      "missingColorsByChannel": {
+        "1": 20,
+        "2": 20,
+        "3": 20
+      },
+      "geodeticMin": [
+        -157.8381835721602,
+        21.28360414253346,
+        17.720017180778086
+      ],
+      "geodeticMax": [
+        -157.83781546108958,
+        21.283950597828603,
+        39.00003640726209
+      ],
+      "xyzSHA256": "85c79a46911d88e05e7293eba218f949ec5bad02f4173ab7775cee2f1636cb12",
+      "attributesSHA256": "bb5786ea4521c95c355c699f37baf1c0fdba908ce634205497ca89bb86c69922"
+    },
+    {
+      "tile": "s98_z20_x64551_y460818_h0.r3d",
+      "inputSHA256": "0cd02e667ef241ee7fd694c2b4b3cf2b6b43ed73661d761e8b1b985761bd0bba",
+      "records": 1978,
+      "vertexCount": 5934,
+      "attributeCount": 15824,
+      "missingColorsByChannel": {
+        "1": 17,
+        "2": 17,
+        "3": 17
+      },
+      "geodeticMin": [
+        -157.83818241548383,
+        21.283283513229147,
+        17.200009004212916
+      ],
+      "geodeticMax": [
+        -157.8378216291697,
+        21.283627078608912,
+        56.4000059813261
+      ],
+      "xyzSHA256": "a7b4a7e21fd48015f37365f12851431449f4c874960e0af150ec8f7bd285944a",
+      "attributesSHA256": "71b93ffb23382c22ea042245941e8f29647d9f78a77a8aaa1432f3142b8a1492"
+    },
+    {
+      "tile": "s98_z20_x64551_y460819_h0.r3d",
+      "inputSHA256": "7f5271101432c9ce828c9759cbd3c26abd6fc50cb9df6b438a8096ea2fb525b1",
+      "records": 6574,
+      "vertexCount": 19722,
+      "attributeCount": 52592,
+      "missingColorsByChannel": {
+        "1": 3,
+        "2": 3,
+        "3": 3
+      },
+      "geodeticMin": [
+        -157.83818819634004,
+        21.28296505125868,
+        17.20003305375576
+      ],
+      "geodeticMax": [
+        -157.83781738952126,
+        21.2833089782002,
+        51.640040344558656
+      ],
+      "xyzSHA256": "8a0a749cf8e7d9ff61cee2ba143f395b5adee0110c4c807b3276f59d82798eeb",
+      "attributesSHA256": "b199fb4172bd94f5bf5080cd61eeb1c87c8be6085c61d3c3cba2c749e80b5805"
+    },
+    {
+      "tile": "s98_z20_x64551_y460820_h0.r3d",
+      "inputSHA256": "29de5e5dac2a3cf526d73df28b76b355926062da4454ee5d745964cd3a8ef302",
+      "records": 7716,
+      "vertexCount": 23148,
+      "attributeCount": 61728,
+      "missingColorsByChannel": {
+        "1": 9,
+        "2": 9,
+        "3": 9
+      },
+      "geodeticMin": [
+        -157.8381831854747,
+        21.282644420699487,
+        17.120006929151714
+      ],
+      "geodeticMax": [
+        -157.83781738957452,
+        21.282988708862423,
+        35.92000938486308
+      ],
+      "xyzSHA256": "b9c8b41d4d53cd8e659ebaa00eef17415da1b3459fc3efd3eb84db332fa3a3c1",
+      "attributesSHA256": "77425cb1fabed1f68571de28698c189bc123bdc50028af15fa5a60fa8b9e38d5"
+    },
+    {
+      "tile": "s98_z20_x64551_y460821_h0.r3d",
+      "inputSHA256": "0de55d22f7fcfffb84eb39e0264e4bfab987cce73387d17f78431a5b311e2335",
+      "records": 3502,
+      "vertexCount": 10506,
+      "attributeCount": 28016,
+      "missingColorsByChannel": {
+        "1": 6,
+        "2": 6,
+        "3": 6
+      },
+      "geodeticMin": [
+        -157.83818819606276,
+        21.28232234560592,
+        18.640024667605758
+      ],
+      "geodeticMax": [
+        -157.83781584794158,
+        21.282667716730614,
+        64.15999868046492
+      ],
+      "xyzSHA256": "b6979cf9562954b2fbf1abe21bf6168a09c58eba8cce5befdfe0272a08538e25",
+      "attributesSHA256": "ecbdd1997d3c985e900f8a08fd60449afbcf3795f7a0e191224c259514f67908"
+    },
+    {
+      "tile": "s98_z20_x64551_y460822_h0.r3d",
+      "inputSHA256": "e1535a36b9bbc59b670e82ab53879f13f8b1340a7852baef5206941964797630",
+      "records": 6851,
+      "vertexCount": 20553,
+      "attributeCount": 54808,
+      "missingColorsByChannel": {
+        "1": 15,
+        "2": 15,
+        "3": 15
+      },
+      "geodeticMin": [
+        -157.83818511185328,
+        21.28200388053356,
+        17.120034613646567
+      ],
+      "geodeticMax": [
+        -157.83781546319986,
+        21.282347806617935,
+        64.40000979416072
+      ],
+      "xyzSHA256": "ed0876ad2979ccdaadd083aac9d740abfdf220f8da42302c98b0af7b4c971d06",
+      "attributesSHA256": "3fc9b2230211f1e66957e951b069c7a82c39eebeaaf2dee892ecca547554fc3f"
+    },
+    {
+      "tile": "s98_z20_x64551_y460823_h0.r3d",
+      "inputSHA256": "8c66d07a43ff7a895d251a440c7e8bc24230d0f1aa6c3017758cdd77413bc363",
+      "records": 8062,
+      "vertexCount": 24186,
+      "attributeCount": 64496,
+      "missingColorsByChannel": {
+        "1": 41,
+        "2": 41,
+        "3": 41
+      },
+      "geodeticMin": [
+        -157.83818434060237,
+        21.2817081754384,
+        16.440019820816815
+      ],
+      "geodeticMax": [
+        -157.83782085968696,
+        21.282031871092492,
+        46.00002561882138
+      ],
+      "xyzSHA256": "d42939c879f24738df18fee3c885c101e8bb3a36982e4d5417e5df6731876213",
+      "attributesSHA256": "3b938e66c6c190dfb0d796bde33c39811195462c82dc56765cdc79ad98d999dc"
+    },
+    {
+      "tile": "s98_z20_x64551_y460824_h0.r3d",
+      "inputSHA256": "b5a3a70e57ee69d2361199ea4c5c85155a97eceaefd4ecedc3554b0a0e72ccb6",
+      "records": 2605,
+      "vertexCount": 7815,
+      "attributeCount": 20840,
+      "missingColorsByChannel": {
+        "1": 86,
+        "2": 86,
+        "3": 86
+      },
+      "geodeticMin": [
+        -157.83818202770763,
+        21.28136514349515,
+        16.600019483827055
+      ],
+      "geodeticMax": [
+        -157.8378316524744,
+        21.281697871567726,
+        38.44001273531467
+      ],
+      "xyzSHA256": "45e1c62219dffee864cfdaee35ceeb445dc56b454d958a936b273ecf7bf51a17",
+      "attributesSHA256": "9b77893d2522045554a3d3af4f63aa361ada886495a0bc2a082d89e540cc8088"
+    },
+    {
+      "tile": "s98_z20_x64552_y460816_h0.r3d",
+      "inputSHA256": "040adc00dc6351b7871f6c482145cf4a4143b2170ce769712c200e8e54a55991",
+      "records": 2869,
+      "vertexCount": 8607,
+      "attributeCount": 22952,
+      "missingColorsByChannel": {
+        "1": 15,
+        "2": 15,
+        "3": 15
+      },
+      "geodeticMin": [
+        -157.8378417915102,
+        21.283923325786457,
+        17.080010772682726
+      ],
+      "geodeticMax": [
+        -157.83748254569693,
+        21.28427267128983,
+        46.720005340874195
+      ],
+      "xyzSHA256": "22a0feefa276a6658153bb12057c3c3f243e168aa80c77e7d99953881227ccec",
+      "attributesSHA256": "57df2858a0b9d410d596cf965a1d257ce995af5fa270ead9cad64f804cb9b563"
+    },
+    {
+      "tile": "s98_z20_x64552_y460817_h0.r3d",
+      "inputSHA256": "9f0dcd8fdeef4d515b758ff7e5b222f4ca459dd4c5561ab96ebec9e62b5a6344",
+      "records": 2415,
+      "vertexCount": 7245,
+      "attributeCount": 19320,
+      "missingColorsByChannel": {
+        "1": 122,
+        "2": 122,
+        "3": 122
+      },
+      "geodeticMin": [
+        -157.83784371867048,
+        21.28360233615994,
+        21.56004637852311
+      ],
+      "geodeticMax": [
+        -157.8374759934626,
+        21.28395059748617,
+        48.360016690567136
+      ],
+      "xyzSHA256": "6331ee4aa3c8a8ba9514e446f91c274dcb11974d5dff849d782602c7cd58247e",
+      "attributesSHA256": "a1c5533d104a409fe968ac20562b944ee745e5e49828b87d20c375819b377535"
+    },
+    {
+      "tile": "s98_z20_x64552_y460818_h0.r3d",
+      "inputSHA256": "193833857344169fe8dc6dbc2ad0ebf71bf49ce93813b07386592f01f1194ab0",
+      "records": 2133,
+      "vertexCount": 6399,
+      "attributeCount": 17064,
+      "missingColorsByChannel": {
+        "1": 35,
+        "2": 35,
+        "3": 35
+      },
+      "geodeticMin": [
+        -157.83783716510393,
+        21.283282790974955,
+        31.960023396648467
+      ],
+      "geodeticMax": [
+        -157.83747136845773,
+        21.283633581480505,
+        44.52000766526908
+      ],
+      "xyzSHA256": "0370c017bcc5afe57c68ff5c86cf9689847e430b475468129cc8eff5d386884e",
+      "attributesSHA256": "715e8bbb7435fd4018b72919f85a900bd9ce5534b155401703672f70005b5306"
+    },
+    {
+      "tile": "s98_z20_x64552_y460819_h0.r3d",
+      "inputSHA256": "f3f5c4ea6d06ed3afee1c2bee30aeb6daf8f7f7149e9d1d03a7e4be5da3c50aa",
+      "records": 2922,
+      "vertexCount": 8766,
+      "attributeCount": 23376,
+      "missingColorsByChannel": {
+        "1": 31,
+        "2": 31,
+        "3": 31
+      },
+      "geodeticMin": [
+        -157.83784140470092,
+        21.282961438445813,
+        17.04003047849983
+      ],
+      "geodeticMax": [
+        -157.83747676493488,
+        21.283310422906567,
+        40.48000449035317
+      ],
+      "xyzSHA256": "a4d8927b879c7dd667596f87ab9d5d136596b616d530d19506e067fd19c688f4",
+      "attributesSHA256": "0f990da3a17939f74c52a5e09d41aa9c6a1921eff377a01ee0644544db7be14b"
+    },
+    {
+      "tile": "s98_z20_x64552_y460820_h0.r3d",
+      "inputSHA256": "bf2493cc9688b3e9be1a3dc716d84ecae70aaf3d6098f5688a4645c1c7731fce",
+      "records": 5500,
+      "vertexCount": 16500,
+      "attributeCount": 44000,
+      "missingColorsByChannel": {
+        "1": 18,
+        "2": 18,
+        "3": 18
+      },
+      "geodeticMin": [
+        -157.83784217547046,
+        21.28263936292128,
+        16.920038847252727
+      ],
+      "geodeticMax": [
+        -157.83746867063786,
+        21.28299051540212,
+        36.76001719944179
+      ],
+      "xyzSHA256": "7a02d0520fd8a911fa41c907e3f7250dfaea1a04a43691be9acfe0d3d70271bd",
+      "attributesSHA256": "4623168acb61e9369373c7c9e6452259363708f315937cbfbddf3a7292bbe2b4"
+    },
+    {
+      "tile": "s98_z20_x64552_y460821_h0.r3d",
+      "inputSHA256": "bcf89d605cbb73883a82222bbbf6bc1937f616cc2d58b54beeda181b2d93a33a",
+      "records": 5328,
+      "vertexCount": 15984,
+      "attributeCount": 42624,
+      "missingColorsByChannel": {
+        "1": 24,
+        "2": 24,
+        "3": 24
+      },
+      "geodeticMin": [
+        -157.83784140364293,
+        21.28231981600189,
+        18.360010465607047
+      ],
+      "geodeticMax": [
+        -157.8374725255803,
+        21.2826695230563,
+        48.56001351028681
+      ],
+      "xyzSHA256": "bab4db25ab67abd64f3d8a6f23258692fc99ed8f19824fbef5564a2b74841ed3",
+      "attributesSHA256": "f5ca861d743cb7b4715f8a7346838e8159812d5d61485d234663c6710fd757ec"
+    },
+    {
+      "tile": "s98_z20_x64552_y460822_h0.r3d",
+      "inputSHA256": "67d8c4eb379acaeee595965aa1f7a7b8a53e7e38bd2046426af808636b64096c",
+      "records": 7466,
+      "vertexCount": 22398,
+      "attributeCount": 59728,
+      "missingColorsByChannel": {
+        "1": 24,
+        "2": 24,
+        "3": 24
+      },
+      "geodeticMin": [
+        -157.83784371653675,
+        21.282012550753645,
+        16.840005695819855
+      ],
+      "geodeticMax": [
+        -157.83747522412318,
+        21.28234997480994,
+        47.640018607489765
+      ],
+      "xyzSHA256": "adae5e8ca4242d223d2018f3a1060746454b28ac6e280dd644224a8e85969d70",
+      "attributesSHA256": "08c4cf9a6992f350c519e2d5a54ffe9b8b09ebbe29f5bfd69b4b84067b61fc03"
+    },
+    {
+      "tile": "s98_z20_x64552_y460823_h0.r3d",
+      "inputSHA256": "7259b3f4b4f1c2c3da1d9dbc001934fdc0b4af3b80f369fa70fe9ca9c4acf051",
+      "records": 6934,
+      "vertexCount": 20802,
+      "attributeCount": 55472,
+      "missingColorsByChannel": {
+        "1": 57,
+        "2": 57,
+        "3": 57
+      },
+      "geodeticMin": [
+        -157.83784333076946,
+        21.28168288656787,
+        16.640024493448436
+      ],
+      "geodeticMax": [
+        -157.83747252599,
+        21.282019949692877,
+        40.96001026779413
+      ],
+      "xyzSHA256": "03886d6c32c6873c7fbfbd81826f2cf4dd24590c613c1d53eb803bd24e8930b0",
+      "attributesSHA256": "302facba681bec1a5cb29959ba900bbd9c7193f18ab2ad792bda1f778d15277a"
+    },
+    {
+      "tile": "s98_z20_x64552_y460824_h0.r3d",
+      "inputSHA256": "b6c38ef39a7f372017d3a3b189e4763281673c690f3dcdf9fdb64f5056804b50",
+      "records": 8856,
+      "vertexCount": 26568,
+      "attributeCount": 70848,
+      "missingColorsByChannel": {
+        "1": 195,
+        "2": 195,
+        "3": 195
+      },
+      "geodeticMin": [
+        -157.8378267560458,
+        21.281365866347862,
+        16.720014510676265
+      ],
+      "geodeticMax": [
+        -157.83747214113941,
+        21.28170834809521,
+        37.080017026513815
+      ],
+      "xyzSHA256": "5219c2a172b577a57e4ca245428ad75aeb5c154c3747bce7aa27522728f04f55",
+      "attributesSHA256": "de08b96f9ec9ae68e92f543978f074af27d254e5e609c68c6db5953bc52c06e8"
+    },
+    {
+      "tile": "s98_z20_x64553_y460816_h0.r3d",
+      "inputSHA256": "b6872a378b05661da7a0e32e9db6880426876ad8543fb0d86f9e8472b728254d",
+      "records": 668,
+      "vertexCount": 2004,
+      "attributeCount": 5344,
+      "missingColorsByChannel": {
+        "1": 6,
+        "2": 6,
+        "3": 6
+      },
+      "geodeticMin": [
+        -157.83749615577852,
+        21.283933079953126,
+        19.720040634274483
+      ],
+      "geodeticMax": [
+        -157.83715194304736,
+        21.284270142270717,
+        42.080026153475046
+      ],
+      "xyzSHA256": "1c70fdf5722a87981c1aca2b5da9acabaa5325149fce24fd60c72bccde4eca20",
+      "attributesSHA256": "19a7867deed66cb5023e9704cfcbafc04b91f94e2fbfa8e252a3027a9362a646"
+    },
+    {
+      "tile": "s98_z20_x64553_y460817_h0.r3d",
+      "inputSHA256": "4215fa696d2e343af9e86bad430589375310f2324301e2a35786dee2aac5529c",
+      "records": 689,
+      "vertexCount": 2067,
+      "attributeCount": 5512,
+      "missingColorsByChannel": {
+        "1": 12,
+        "2": 12,
+        "3": 12
+      },
+      "geodeticMin": [
+        -157.83749731186336,
+        21.28362437354168,
+        32.160022399388254
+      ],
+      "geodeticMax": [
+        -157.8372513908696,
+        21.283941565305376,
+        75.9600438196212
+      ],
+      "xyzSHA256": "2f0d57d68601906a811dd48ed5c14ee814ec1238cd819d9c361e73da6fdabdf9",
+      "attributesSHA256": "ec4e213d5b4183556edca3a8665d6b61339e3cfde7f519926088e4a0a0e395a3"
+    },
+    {
+      "tile": "s98_z20_x64553_y460818_h0.r3d",
+      "inputSHA256": "a6f2801ca23215932f85ee0e4897b5b150e2e8c713e048931d8c75b2d2219e22",
+      "records": 538,
+      "vertexCount": 1614,
+      "attributeCount": 4304,
+      "missingColorsByChannel": {
+        "1": 15,
+        "2": 15,
+        "3": 15
+      },
+      "geodeticMin": [
+        -157.83750309293617,
+        21.28329001618234,
+        32.56002919655293
+      ],
+      "geodeticMax": [
+        -157.83712573288736,
+        21.28354037440309,
+        42.760000434704125
+      ],
+      "xyzSHA256": "5e7cf87ff4f3c1972b334946ebcd77433a588eb93bec61da929fd151d4b64b8d",
+      "attributesSHA256": "a4418ce592f61c576472e6b05e6e4f93f185519bd4e898fab45352f2501ece44"
+    },
+    {
+      "tile": "s98_z20_x64553_y460819_h0.r3d",
+      "inputSHA256": "dafa96172ea52c6ccaeaaa8e0dee7bef849babd2291d39fb1d241a29568b4129",
+      "records": 3801,
+      "vertexCount": 11403,
+      "attributeCount": 30408,
+      "missingColorsByChannel": {
+        "1": 11,
+        "2": 11,
+        "3": 11
+      },
+      "geodeticMin": [
+        -157.83749654012988,
+        21.282964689738154,
+        17.720031808130443
+      ],
+      "geodeticMax": [
+        -157.83712688927642,
+        21.283302113750516,
+        39.160024251788855
+      ],
+      "xyzSHA256": "f7499b4ee83d4dd1d79e35807491ba3148f783c1bb88f704568a890cd899238c",
+      "attributesSHA256": "123c0870ab95e70a675f2bfcf9002995618e0c8d21591c3c5fb9627267ffc574"
+    },
+    {
+      "tile": "s98_z20_x64553_y460820_h0.r3d",
+      "inputSHA256": "1ebcb311200cf1adbed56a32848cdd8e9f1dcc72a8dd387abb2ae45762d6f09f",
+      "records": 7188,
+      "vertexCount": 21564,
+      "attributeCount": 57504,
+      "missingColorsByChannel": {
+        "1": 27,
+        "2": 27,
+        "3": 27
+      },
+      "geodeticMin": [
+        -157.83750463444278,
+        21.282644059526206,
+        17.7600059164688
+      ],
+      "geodeticMax": [
+        -157.83713035885668,
+        21.28298798648514,
+        38.360029763542116
+      ],
+      "xyzSHA256": "17fe570c9500dea664359b59f8757faf7b5138483cee1d2e027f5b2f3ea61d54",
+      "attributesSHA256": "0527854a77f43af67abb35590c1bd8a9db5a3c7c342068a5514e5ab30b577692"
+    },
+    {
+      "tile": "s98_z20_x64553_y460821_h0.r3d",
+      "inputSHA256": "f80d1499e5c9a09e05220bda5763d4d4e32e033f935f888c6f12cb84ae21000d",
+      "records": 3006,
+      "vertexCount": 9018,
+      "attributeCount": 24048,
+      "missingColorsByChannel": {
+        "1": 13,
+        "2": 13,
+        "3": 13
+      },
+      "geodeticMin": [
+        -157.83750386311218,
+        21.282319815642538,
+        18.480016271583736
+      ],
+      "geodeticMax": [
+        -157.83712881714573,
+        21.28267024564948,
+        32.08001658786088
+      ],
+      "xyzSHA256": "0cfe37e43dee0f2711ab55dce39c030631bd099a56c5496b9325dab4ea2744f1",
+      "attributesSHA256": "b4b6f5b8b59f5d1461def2b22ee781f462a03b7c2b35ac4509e95d945c16500f"
+    },
+    {
+      "tile": "s98_z20_x64553_y460822_h0.r3d",
+      "inputSHA256": "349b70872b998e24d0355f351bd33b8e75fa7d6d1706553f5292fe051c078452",
+      "records": 4923,
+      "vertexCount": 14769,
+      "attributeCount": 39384,
+      "missingColorsByChannel": {
+        "1": 11,
+        "2": 11,
+        "3": 11
+      },
+      "geodeticMin": [
+        -157.83749808087643,
+        21.282003880273635,
+        17.000024248845875
+      ],
+      "geodeticMax": [
+        -157.8371299740574,
+        21.282347084921486,
+        38.72003566939384
+      ],
+      "xyzSHA256": "2ee7dd6372a98dc004b935d6201181c3a2fdfec86c41631f7dc1f4d2096b39e2",
+      "attributesSHA256": "10e9a1e54c59c1d41ab24894751a99e73df94c69ffb29b1f12393a5a681fc744"
+    },
+    {
+      "tile": "s98_z20_x64553_y460823_h0.r3d",
+      "inputSHA256": "2382d1e747f494bb4700e729d69d635dd760c6ddcbf53d08c500a0410abd8787",
+      "records": 3464,
+      "vertexCount": 10392,
+      "attributeCount": 27712,
+      "missingColorsByChannel": {
+        "1": 18,
+        "2": 18,
+        "3": 18
+      },
+      "geodeticMin": [
+        -157.83750000770826,
+        21.281683609428406,
+        17.080017232336104
+      ],
+      "geodeticMax": [
+        -157.83712958873153,
+        21.282029703993285,
+        44.24000255018473
+      ],
+      "xyzSHA256": "e9d8ee0862b5f9b5a63173383f618503ecd081eec5774c6e9df2686974e7d970",
+      "attributesSHA256": "40239a4e668d419d9641ae54937c3f76561cdf2335a33e14838931f9615fc5b8"
+    },
+    {
+      "tile": "s98_z20_x64553_y460824_h0.r3d",
+      "inputSHA256": "fe6bac1061f0e2303d12e40a00e830fa66f5bf44c2a9c45fe9ff2a89dc9effe7",
+      "records": 4996,
+      "vertexCount": 14988,
+      "attributeCount": 39968,
+      "missingColorsByChannel": {
+        "1": 35,
+        "2": 35,
+        "3": 35
+      },
+      "geodeticMin": [
+        -157.83750116388026,
+        21.281363337444535,
+        16.800026843324304
+      ],
+      "geodeticMax": [
+        -157.83713228762906,
+        21.281705458071198,
+        36.68003677763045
+      ],
+      "xyzSHA256": "4d30d1c84d8106351daea2735035782159e7266dccad43be2863c7035536ede2",
+      "attributesSHA256": "5036df20219b8ae177dda407b1c4b83a983bd5cebb50dad8a6894fdc069add73"
+    },
+    {
+      "tile": "s98_z20_x64554_y460816_h0.r3d",
+      "inputSHA256": "84c144bd0fc45218b25b9e37966f07d5acc35bd3ff619650f5f6715a87ce8ddf",
+      "records": 564,
+      "vertexCount": 1692,
+      "attributeCount": 4512,
+      "missingColorsByChannel": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "geodeticMin": [
+        -157.83715321821393,
+        21.283951865872496,
+        17.40000230167061
+      ],
+      "geodeticMax": [
+        -157.8367870340299,
+        21.284261110831622,
+        44.52002875972539
+      ],
+      "xyzSHA256": "3f93d675d8eb91f3ede6e6ee9bff4832fe0414a13542cd31a7802447a51ca3d0",
+      "attributesSHA256": "56be1054320e7406e75684883552bcdfa417a91d6eff460c2e68165813e9197e"
+    },
+    {
+      "tile": "s98_z20_x64554_y460817_h0.r3d",
+      "inputSHA256": "b4e3fb448bb245889ab77fff2fd82554b079c066e71492562f152a744e31b103",
+      "records": 142,
+      "vertexCount": 426,
+      "attributeCount": 1136,
+      "missingColorsByChannel": {
+        "1": 4,
+        "2": 4,
+        "3": 4
+      },
+      "geodeticMin": [
+        -157.83714242534523,
+        21.283634127857866,
+        39.720039679668844
+      ],
+      "geodeticMax": [
+        -157.8368005261848,
+        21.283939759623017,
+        43.32002017274499
+      ],
+      "xyzSHA256": "613679c6d89b8c9e8e7768b01562c95de01b4322fd1a6f220a00b5f10608d9e7",
+      "attributesSHA256": "1484a86f62dfaca07b94bf3ffc91759a6d65b81900b4316528ecba68a623499d"
+    },
+    {
+      "tile": "s98_z20_x64554_y460818_h0.r3d",
+      "inputSHA256": "bcb86f7a99630769f11c463e9ca5e09edcfdc36fe7d22cf02d45a7080b9a2739",
+      "records": 1311,
+      "vertexCount": 3933,
+      "attributeCount": 10488,
+      "missingColorsByChannel": {
+        "1": 10,
+        "2": 10,
+        "3": 10
+      },
+      "geodeticMin": [
+        -157.8371563011348,
+        21.283283513129216,
+        20.360037327744067
+      ],
+      "geodeticMax": [
+        -157.83678819183152,
+        21.28357433350011,
+        42.680002563633025
+      ],
+      "xyzSHA256": "504b17831bc70c0872a11e0fdb80858a2aaad0fe17bf4ff1dedad5f5ea0d4cde",
+      "attributesSHA256": "5e920e9a2b80d73cda53199cadfd89cf815f953e78c565f118dd3dd7e1de86b6"
+    },
+    {
+      "tile": "s98_z20_x64554_y460819_h0.r3d",
+      "inputSHA256": "bb9c615fa0bf3da71c5af6c73c4d70ffc06e45f3f10f1e50bcdd0f894c6645af",
+      "records": 11305,
+      "vertexCount": 33915,
+      "attributeCount": 90440,
+      "missingColorsByChannel": {
+        "1": 29,
+        "2": 29,
+        "3": 29
+      },
+      "geodeticMin": [
+        -157.83715668680188,
+        21.28296396738422,
+        18.68001103680581
+      ],
+      "geodeticMax": [
+        -157.83678395173766,
+        21.283306448952985,
+        38.080003971233964
+      ],
+      "xyzSHA256": "5cd5b8745a3919494a27d560eae077ccc23c49529768623f17d6d1795d8b3b7e",
+      "attributesSHA256": "c325ebeaa9c50a5a7b14f77f83071a71067a7f272d6d81b30a043edd590aa794"
+    },
+    {
+      "tile": "s98_z20_x64554_y460820_h0.r3d",
+      "inputSHA256": "bcdeb9361be467e317df3e10cd2c422eee3e9a4f36013cd5c4f3b48fc16d756b",
+      "records": 7847,
+      "vertexCount": 23541,
+      "attributeCount": 62776,
+      "missingColorsByChannel": {
+        "1": 8,
+        "2": 8,
+        "3": 8
+      },
+      "geodeticMin": [
+        -157.83715552977864,
+        21.282643336845965,
+        18.00003640167415
+      ],
+      "geodeticMax": [
+        -157.83678510841858,
+        21.282993044089363,
+        41.24002320598811
+      ],
+      "xyzSHA256": "06d9b18ffb1646f24a558f6decb466a3ee6a9ca10e6551895f51199626b7e781",
+      "attributesSHA256": "bc9c443240a54539f34195b34b52cc74eefc11850e78282194e50a06a9212ecf"
+    },
+    {
+      "tile": "s98_z20_x64554_y460821_h0.r3d",
+      "inputSHA256": "e0430f0583e461014d87e21b953ed57efa0f656ffee79f474654d433ed07b1e5",
+      "records": 8158,
+      "vertexCount": 24474,
+      "attributeCount": 65264,
+      "missingColorsByChannel": {
+        "1": 9,
+        "2": 9,
+        "3": 9
+      },
+      "geodeticMin": [
+        -157.83715360242303,
+        21.282322705803328,
+        17.60001823399216
+      ],
+      "geodeticMax": [
+        -157.83678163992823,
+        21.282669161457157,
+        41.120008677244186
+      ],
+      "xyzSHA256": "188af78111b9addd9154fda543569186bc00b7b6600ec211f82973f7485c4da2",
+      "attributesSHA256": "1e75ddb209a108252cbce208da9580b3d4e4ebdf747d2aa3e73ec7b270c3831d"
+    },
+    {
+      "tile": "s98_z20_x64554_y460822_h0.r3d",
+      "inputSHA256": "039e25b930e4d41bed7ea23b09f299b6811efb498814571397bbfdeada810ad0",
+      "records": 4190,
+      "vertexCount": 12570,
+      "attributeCount": 33520,
+      "missingColorsByChannel": {
+        "1": 11,
+        "2": 11,
+        "3": 11
+      },
+      "geodeticMin": [
+        -157.83715206006565,
+        21.282006047938896,
+        17.199999102391303
+      ],
+      "geodeticMax": [
+        -157.83678472400106,
+        21.282350336424056,
+        38.52003406640142
+      ],
+      "xyzSHA256": "4922ce03cf35e257b1795f5d05976b2049b703f44f6c0a543968d65073807f08",
+      "attributesSHA256": "a9a039f5e2fa9007390f6fcea4cca945b0c80a3622d15c7a88d4ef0c3689027f"
+    },
+    {
+      "tile": "s98_z20_x64554_y460823_h0.r3d",
+      "inputSHA256": "e33b14a2730a76b01ddf16332023a8abe52d48111da4cf25777a210fecb61f8e",
+      "records": 987,
+      "vertexCount": 2961,
+      "attributeCount": 7896,
+      "missingColorsByChannel": {
+        "1": 8,
+        "2": 8,
+        "3": 8
+      },
+      "geodeticMin": [
+        -157.83715552868242,
+        21.28177103616625,
+        17.720000879839063
+      ],
+      "geodeticMax": [
+        -157.8367878083247,
+        21.28202717455844,
+        43.880036300979555
+      ],
+      "xyzSHA256": "60680935b7a066aaf2b0e93cdcbbb681010dddb5e68083874789757511a68aaa",
+      "attributesSHA256": "ffe089d9f8ceead42526f513784d9d98769d004b49bd0be5fed86575825af781"
+    },
+    {
+      "tile": "s98_z20_x64554_y460824_h0.r3d",
+      "inputSHA256": "54f6eb34c2836cd5c75ca02169998162d0cc44303d7fbf7958222823aa8559fd",
+      "records": 4242,
+      "vertexCount": 12726,
+      "attributeCount": 33936,
+      "missingColorsByChannel": {
+        "1": 45,
+        "2": 45,
+        "3": 45
+      },
+      "geodeticMin": [
+        -157.83715205948198,
+        21.28136153095568,
+        16.720005873590708
+      ],
+      "geodeticMax": [
+        -157.83678511034967,
+        21.281701122454656,
+        41.800007618032396
+      ],
+      "xyzSHA256": "c563dd37b902b9059b2116c2027b39165787aacb8b5f53361dc13580ebaa0afe",
+      "attributesSHA256": "d70acbecd08599673b6347be8713043d18408fd04bcbe7add4ecbafca87507d8"
+    },
+    {
+      "tile": "s98_z20_x64555_y460816_h0.r3d",
+      "inputSHA256": "b380eeecadb1d08aaa2ceaabd7b680cd5385848dc7e93007880f866229508c7a",
+      "records": 2721,
+      "vertexCount": 8163,
+      "attributeCount": 21768,
+      "missingColorsByChannel": {
+        "1": 10,
+        "2": 10,
+        "3": 10
+      },
+      "geodeticMin": [
+        -157.83681066725606,
+        21.28392693858954,
+        16.96001690812409
+      ],
+      "geodeticMax": [
+        -157.83644332631724,
+        21.284264001168285,
+        51.56003045383841
+      ],
+      "xyzSHA256": "dfdc7efa78f32410ca35c6235473c4ea39ddea1542202973123f2f56913f9057",
+      "attributesSHA256": "8967421a16932780e8beb1bb733a8b88401d057730979fae6444186671b8bea1"
+    },
+    {
+      "tile": "s98_z20_x64555_y460817_h0.r3d",
+      "inputSHA256": "2e8f97831fd3736d18038bbace1b0d5ce6a2e7abc8170e84ef6f77d80fb1dfa1",
+      "records": 393,
+      "vertexCount": 1179,
+      "attributeCount": 3144,
+      "missingColorsByChannel": {
+        "1": 3,
+        "2": 3,
+        "3": 3
+      },
+      "geodeticMin": [
+        -157.83678406953572,
+        21.28361136791715,
+        38.120024607516825
+      ],
+      "geodeticMax": [
+        -157.83644255605617,
+        21.28394842988763,
+        48.72002592589706
+      ],
+      "xyzSHA256": "35297a2a20f1ff4c7b20c46be4072bfc373ca03381a3a8bfe079ae407c4d98d5",
+      "attributesSHA256": "5f167abb527bd2fb937c9b73a3920aecceb2dc6eb74f907321b69ee7074923c9"
+    },
+    {
+      "tile": "s98_z20_x64555_y460818_h0.r3d",
+      "inputSHA256": "e38107f750c00af6b7111d112955654b37eb989c7e660eb3ffacdde7de5f6324",
+      "records": 1340,
+      "vertexCount": 4020,
+      "attributeCount": 10720,
+      "missingColorsByChannel": {
+        "1": 14,
+        "2": 14,
+        "3": 14
+      },
+      "geodeticMin": [
+        -157.8368137494787,
+        21.28328929352404,
+        18.36002287082374
+      ],
+      "geodeticMax": [
+        -157.83644563964057,
+        21.28362093692383,
+        41.20004352554679
+      ],
+      "xyzSHA256": "0e33d6282453413c8584a20c016d129b1909c2650250ebea3920369f3dfe2356",
+      "attributesSHA256": "8dba800f7c93bd463189e5ae84b63b3748a866f8acf54140e5f766f6a2879aa2"
+    },
+    {
+      "tile": "s98_z20_x64555_y460819_h0.r3d",
+      "inputSHA256": "8950750873fdd9872be7905a908db298be489e4ac6968c06d96f4be03860f74d",
+      "records": 6065,
+      "vertexCount": 18195,
+      "attributeCount": 48520,
+      "missingColorsByChannel": {},
+      "geodeticMin": [
+        -157.83681259305612,
+        21.28296396732352,
+        17.40002543106675
+      ],
+      "geodeticMax": [
+        -157.83644024439096,
+        21.283311145869202,
+        49.64002599846572
+      ],
+      "xyzSHA256": "5dd1417de01eb26fad794d27fe02db64e2cec23bcc43b471e499daf591d282e4",
+      "attributesSHA256": "38c6e2688eda7cb561955ff5ea3e137609eaf7a597408589e56bfdd08b252e2a"
+    },
+    {
+      "tile": "s98_z20_x64555_y460820_h0.r3d",
+      "inputSHA256": "5f23ecaecdb596ea804285311ddce6f1ef3fb04ce6a9bf579a68048bbc9f1a39",
+      "records": 3447,
+      "vertexCount": 10341,
+      "attributeCount": 27576,
+      "missingColorsByChannel": {
+        "1": 9,
+        "2": 9,
+        "3": 9
+      },
+      "geodeticMin": [
+        -157.8368145201597,
+        21.282644420877187,
+        17.920016368851066
+      ],
+      "geodeticMax": [
+        -157.8364637571651,
+        21.282990876438383,
+        54.44001018255949
+      ],
+      "xyzSHA256": "7d867e16a88435fd35a6e2d5d8dfe0f489594a94035ac0c8e48d27a9bbf9bbb1",
+      "attributesSHA256": "9528bfa26f4cbb3987b93a92b4561dea89ad92c113b328672465163a5aa51ee2"
+    },
+    {
+      "tile": "s98_z20_x64555_y460821_h0.r3d",
+      "inputSHA256": "eceee95b8e50c5b2640610b0a70043d23d49dd4725e67f791462febebb06451c",
+      "records": 6467,
+      "vertexCount": 19401,
+      "attributeCount": 51736,
+      "missingColorsByChannel": {
+        "1": 31,
+        "2": 31,
+        "3": 31
+      },
+      "geodeticMin": [
+        -157.8368133631163,
+        21.282325234631664,
+        17.680017965845764
+      ],
+      "geodeticMax": [
+        -157.8364437135993,
+        21.282664826291715,
+        55.480020086281
+      ],
+      "xyzSHA256": "a1a44b0c5239b390ddd2079e35a5b03fa914a7be26877a265ca997d4bb299890",
+      "attributesSHA256": "e387fdc6c91d10296ded52ceb44a985dd7b03ce48366a45b012d1e66851b3548"
+    },
+    {
+      "tile": "s98_z20_x64555_y460822_h0.r3d",
+      "inputSHA256": "3e0586b77e0b63efd981a604aeff09ae52095e001d1b9c439b53e66a00991196",
+      "records": 3192,
+      "vertexCount": 9576,
+      "attributeCount": 25536,
+      "missingColorsByChannel": {
+        "1": 3,
+        "2": 3,
+        "3": 3
+      },
+      "geodeticMin": [
+        -157.83681490458096,
+        21.28200496426955,
+        17.320013376884162
+      ],
+      "geodeticMax": [
+        -157.83644641184466,
+        21.282348530055096,
+        38.0400173868984
+      ],
+      "xyzSHA256": "8c00b7ed9474b4635656beedf26170d3332b486f464070214e5470a13f20f186",
+      "attributesSHA256": "c5f394cbe57f652345576fb98ae575af433ae4b74d43f8c634f67a4711af11ea"
+    },
+    {
+      "tile": "s98_z20_x64555_y460823_h0.r3d",
+      "inputSHA256": "d1f41b1314429d6ca497a77b997cbddfe1876032e4f216a5b050a176a89a89f2",
+      "records": 1684,
+      "vertexCount": 5052,
+      "attributeCount": 13472,
+      "missingColorsByChannel": {
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "geodeticMin": [
+        -157.83681027849397,
+        21.281682525732005,
+        17.160013801418245
+      ],
+      "geodeticMax": [
+        -157.83644602730118,
+        21.28202572989339,
+        46.880001217126846
+      ],
+      "xyzSHA256": "cc841ac7902a9f85d10c14d7ac666e95a4be2b968ec33c2a3de4836127e71b5e",
+      "attributesSHA256": "0bd990f2ca0aec8643652f53063e0912aac403b4b085364c4d360d9b378057d7"
+    },
+    {
+      "tile": "s98_z20_x64555_y460824_h0.r3d",
+      "inputSHA256": "7ce58c368f7aedf83860c401d53be64727d28704bb55b72f52d495d07c47bfb9",
+      "records": 11768,
+      "vertexCount": 35304,
+      "attributeCount": 94144,
+      "missingColorsByChannel": {
+        "1": 11,
+        "2": 11,
+        "3": 11
+      },
+      "geodeticMin": [
+        -157.83680835101956,
+        21.281363337518084,
+        17.04001434519887
+      ],
+      "geodeticMax": [
+        -157.8364429438631,
+        21.281713044417884,
+        57.24004520382732
+      ],
+      "xyzSHA256": "3b990b46aa4e7b484843df62872ff5bed9e2057e13083ad00df719885368e10d",
+      "attributesSHA256": "97f5bfb759987f57d6621f7ef49e54132bb4d6d94945a61dc46e50ab7b759597"
+    },
+    {
+      "tile": "s98_z20_x64556_y460816_h0.r3d",
+      "inputSHA256": "cf48a4ee0703780cf9781c1d87c6118010d20f85ce3296481453dcd78f180958",
+      "records": 2395,
+      "vertexCount": 7185,
+      "attributeCount": 19160,
+      "missingColorsByChannel": {
+        "1": 13,
+        "2": 13,
+        "3": 13
+      },
+      "geodeticMin": [
+        -157.83647196946134,
+        21.283924771432115,
+        17.520021425560117
+      ],
+      "geodeticMax": [
+        -157.83610539956675,
+        21.28427158763283,
+        65.80000857450068
+      ],
+      "xyzSHA256": "534a8321581d1c7ea67d6bdc1d9c2d21772fc53adc98ef2ac36032ab0861c70e",
+      "attributesSHA256": "434d3eb5d297095b45781138c506a6f6571b21f9e41d66656c7d9a63c843c79e"
+    },
+    {
+      "tile": "s98_z20_x64556_y460817_h0.r3d",
+      "inputSHA256": "2781fbb675219ff36361c55c10d1e86b9e54e829bdb607a38db88d287089ffe7",
+      "records": 2399,
+      "vertexCount": 7197,
+      "attributeCount": 19192,
+      "missingColorsByChannel": {
+        "1": 29,
+        "2": 29,
+        "3": 29
+      },
+      "geodeticMin": [
+        -157.83646888514667,
+        21.283601252267918,
+        18.200020813383162
+      ],
+      "geodeticMax": [
+        -157.83610578638192,
+        21.283948429778885,
+        65.72000996675342
+      ],
+      "xyzSHA256": "26e9dbe1fd1925fa9b5dec8aee97673ef0b00eadc090a91fb16d76b172ab6e3a",
+      "attributesSHA256": "b7dbdf88381ac9eadecd0341928f1eb306b6992f47f099346ea9eff7a4fddb6a"
+    },
+    {
+      "tile": "s98_z20_x64556_y460818_h0.r3d",
+      "inputSHA256": "6cc36d48222bc8497d604342f0044ab63f908fb4cfb01498d0e16c29c7377783",
+      "records": 5679,
+      "vertexCount": 17037,
+      "attributeCount": 45432,
+      "missingColorsByChannel": {
+        "1": 4,
+        "2": 4,
+        "3": 4
+      },
+      "geodeticMin": [
+        -157.83647351054915,
+        21.2832849581976,
+        17.000023251399398
+      ],
+      "geodeticMax": [
+        -157.83609769112448,
+        21.2836288850771,
+        38.560033820569515
+      ],
+      "xyzSHA256": "108ceae5125181979585b405c6fa54556f46f328c0b8e920a2301ccc7e6a84a3",
+      "attributesSHA256": "43f5361b8f28a40afd56920801cbc96f1e6a66b0be76755ac729c3176c3483b1"
+    },
+    {
+      "tile": "s98_z20_x64556_y460819_h0.r3d",
+      "inputSHA256": "2fc3f52d2ab476f0bb13f4fb4c9f022b781b7f8a44ce6c0ec8d3b26b8f7da80b",
+      "records": 2578,
+      "vertexCount": 7734,
+      "attributeCount": 20624,
+      "missingColorsByChannel": {
+        "1": 7,
+        "2": 7,
+        "3": 7
+      },
+      "geodeticMin": [
+        -157.83647004129114,
+        21.283016712396766,
+        17.160011642612517
+      ],
+      "geodeticMax": [
+        -157.83610231697696,
+        21.283310784382785,
+        46.16002372279763
+      ],
+      "xyzSHA256": "bdde2be83c066521d5fb1d3915776d75743fabf3310b1430fe10750b58d4afed",
+      "attributesSHA256": "e67e37d37b28594d2e8afbfb7d13649d8a7db3f15132af23daad76be05b0f558"
+    },
+    {
+      "tile": "s98_z20_x64556_y460820_h0.r3d",
+      "inputSHA256": "d490e331d6d17db4228c9bbf7fa481ba43d5b6550bb536d7aaacca046078df67",
+      "records": 303,
+      "vertexCount": 909,
+      "attributeCount": 2424,
+      "missingColorsByChannel": {
+        "1": 14,
+        "2": 14,
+        "3": 14
+      },
+      "geodeticMin": [
+        -157.83646811330405,
+        21.282644059691467,
+        18.480017696507275
+      ],
+      "geodeticMax": [
+        -157.83611272515293,
+        21.282865516686684,
+        53.64000592101365
+      ],
+      "xyzSHA256": "850e7c2047af9cec49c9f59c5b87300e77025ede03550e9c8d20edb0d2f29d3b",
+      "attributesSHA256": "8e2eeda7f9cb6ea64a5db0cd4a99ccc1366d56ec31f5ff2b7eba004cb66a5c4b"
+    },
+    {
+      "tile": "s98_z20_x64556_y460821_h0.r3d",
+      "inputSHA256": "dfdfcdc893f4ec5a168cbe7783e54728358f60d8b248b03e55762356ae3886cb",
+      "records": 3110,
+      "vertexCount": 9330,
+      "attributeCount": 24880,
+      "missingColorsByChannel": {
+        "1": 4,
+        "2": 4,
+        "3": 4
+      },
+      "geodeticMin": [
+        -157.8364723529266,
+        21.282324873434412,
+        17.27999937068671
+      ],
+      "geodeticMax": [
+        -157.8361027036204,
+        21.282665187930515,
+        44.12002247385681
+      ],
+      "xyzSHA256": "a2a3c8fecc5815cf3f6d454b304f2e3b9e944f7d08a5906a0e3fecb961eef028",
+      "attributesSHA256": "bf7a6db0773e7d415f2511965e1163082e61898c2e2443f75760621f2690d1ed"
+    },
+    {
+      "tile": "s98_z20_x64556_y460822_h0.r3d",
+      "inputSHA256": "56537bd55d6ec986c8869d7aeb0b459cde05f23213c41796105dc9efe8a32cb8",
+      "records": 810,
+      "vertexCount": 2430,
+      "attributeCount": 6480,
+      "missingColorsByChannel": {
+        "1": 4,
+        "2": 4,
+        "3": 4
+      },
+      "geodeticMin": [
+        -157.83646387300772,
+        21.282006409218166,
+        16.840004318393767
+      ],
+      "geodeticMax": [
+        -157.8361003913951,
+        21.282351781341255,
+        40.52000760752708
+      ],
+      "xyzSHA256": "5cc39d740121e39f17a13341fbf13f781494b3e803f792f11a25be65305a8dc6",
+      "attributesSHA256": "b6aee178e2323c47505cb98aa971a07c364c2131286a81b19ef0554d1173b76e"
+    },
+    {
+      "tile": "s98_z20_x64556_y460823_h0.r3d",
+      "inputSHA256": "f08156c8784574c09e2d6419216b496418208b447b709815fa45384207be9294",
+      "records": 6280,
+      "vertexCount": 18840,
+      "attributeCount": 50240,
+      "missingColorsByChannel": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "geodeticMin": [
+        -157.83646811193796,
+        21.281681802975115,
+        16.560021379962564
+      ],
+      "geodeticMax": [
+        -157.8361019333003,
+        21.282026091271113,
+        54.56003725063056
+      ],
+      "xyzSHA256": "e4d078bd67ce837119a5ce503d83c173812dca66e3e7742c63e5722bcfc3d601",
+      "attributesSHA256": "f250f2e5e388e08047b39781ab0ce388130e85e5bf260d2f78141fd202a32dc9"
+    },
+    {
+      "tile": "s98_z20_x64556_y460824_h0.r3d",
+      "inputSHA256": "f36c966c467b15c81344aab4e834cc8d5cf76d4d57bac4f6a4760d996d10001e",
+      "records": 9008,
+      "vertexCount": 27024,
+      "attributeCount": 72064,
+      "missingColorsByChannel": {
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "geodeticMin": [
+        -157.83647196625807,
+        21.28136839526646,
+        16.960022980347276
+      ],
+      "geodeticMax": [
+        -157.83610000671774,
+        21.281712322033627,
+        40.36001128703356
+      ],
+      "xyzSHA256": "c23818729a1816619b2d7b3384312cb3afacc588b04ad9023881ad8fc6e113a0",
+      "attributesSHA256": "6a8b157a376f518e427a7bc108d9eb458d66ccd8a8b817e4046fe516ecfb3c02"
+    },
+    {
+      "tile": "s98_z20_x64557_y460816_h0.r3d",
+      "inputSHA256": "957bb6ac00f420827cfd2ed0f5b9427b238067ddd4a68313eb5bbeda0226d3e3",
+      "records": 4358,
+      "vertexCount": 13074,
+      "attributeCount": 34864,
+      "missingColorsByChannel": {
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "geodeticMin": [
+        -157.83612710531776,
+        21.2839244093261,
+        17.56001573521644
+      ],
+      "geodeticMax": [
+        -157.83575436803952,
+        21.284269781378743,
+        55.800030164420605
+      ],
+      "xyzSHA256": "f645f03db67ff2aa51abcc610a3e82f84f05a71aa2ac5cb86a784bc91ad0e4ab",
+      "attributesSHA256": "baa4398ace00078a76baa532b3896f1a72fb79861f66a50016f0d89093947f32"
+    },
+    {
+      "tile": "s98_z20_x64557_y460817_h0.r3d",
+      "inputSHA256": "6071936b64b072ad20965628cdf6dc0bc169511183928e4958f5c35ff36d0bb0",
+      "records": 3171,
+      "vertexCount": 9513,
+      "attributeCount": 25368,
+      "missingColorsByChannel": {
+        "1": 17,
+        "2": 17,
+        "3": 17
+      },
+      "geodeticMin": [
+        -157.83611900934724,
+        21.283600890662402,
+        17.520029139705002
+      ],
+      "geodeticMax": [
+        -157.83575552496714,
+        21.28395023665858,
+        66.00000090245157
+      ],
+      "xyzSHA256": "8158155be5a64ffc50be69c86b047fd6c1c028fd283ca5f1656d120d73180c1a",
+      "attributesSHA256": "5ca114d31f6bfb3920a4129e88924cf15ef9b5a66ec46274cc2651b006e30d0a"
+    },
+    {
+      "tile": "s98_z20_x64557_y460818_h0.r3d",
+      "inputSHA256": "35ded240db1b4abf9a4ed353552fbb58946b6e225386ef4c2affc202424b3d98",
+      "records": 6211,
+      "vertexCount": 18633,
+      "attributeCount": 49688,
+      "missingColorsByChannel": {
+        "1": 23,
+        "2": 23,
+        "3": 23
+      },
+      "geodeticMin": [
+        -157.8361274900571,
+        21.28328351309606,
+        17.280002838931978
+      ],
+      "geodeticMax": [
+        -157.83575436896868,
+        21.283629607826846,
+        42.56001413054764
+      ],
+      "xyzSHA256": "4935abda3caaefabb8bfd2dbb377d4165ce123580ea067064d9477f94878ec93",
+      "attributesSHA256": "864abd135a787a81a547851b30664beb96b794b01d9ca6303b39fe8c9bc7ca5f"
+    },
+    {
+      "tile": "s98_z20_x64557_y460819_h0.r3d",
+      "inputSHA256": "87ba172c76865d33b69b16122fed2f47ce0c11b038c5017b01f7c99ba812ecb7",
+      "records": 657,
+      "vertexCount": 1971,
+      "attributeCount": 5256,
+      "missingColorsByChannel": {
+        "1": 8,
+        "2": 8,
+        "3": 8
+      },
+      "geodeticMin": [
+        -157.83612170784514,
+        21.28297950206472,
+        19.280032059177756
+      ],
+      "geodeticMax": [
+        -157.8357655473082,
+        21.283309339507515,
+        45.68003112915903
+      ],
+      "xyzSHA256": "ec2fa9834166d15dfdee1712127f25f57660ee3373215abd4d84206e99a2298d",
+      "attributesSHA256": "e6efd35e0e503f1f2e1948d67f75001a53ab1e455f115166455624e3fc7f34f0"
+    },
+    {
+      "tile": "s98_z20_x64557_y460820_h0.r3d",
+      "inputSHA256": "2aeb099991ad8bf8ec4d7759b0e6250a935e0ee3e3ca53e7ff01869590f9fb22",
+      "records": 770,
+      "vertexCount": 2310,
+      "attributeCount": 6160,
+      "missingColorsByChannel": {
+        "1": 6,
+        "2": 6,
+        "3": 6
+      },
+      "geodeticMin": [
+        -157.83612401937935,
+        21.282642614671705,
+        32.72002535685897
+      ],
+      "geodeticMax": [
+        -157.83575552620601,
+        21.282979315582892,
+        59.96001020912081
+      ],
+      "xyzSHA256": "7e877f9594b15f27de111aed4048ba9915abc0e6a830086b85d8b6e7740604dc",
+      "attributesSHA256": "1d6ffcf915659f2793d49c0bc3b271e3637c499bb0fac41f64305e46e49386c9"
+    },
+    {
+      "tile": "s98_z20_x64557_y460821_h0.r3d",
+      "inputSHA256": "bf63d1fe599dc54e719ee9217c4fcf1d35e1b510951db8c975587bfe00d640f5",
+      "records": 1632,
+      "vertexCount": 4896,
+      "attributeCount": 13056,
+      "missingColorsByChannel": {
+        "1": 18,
+        "2": 18,
+        "3": 18
+      },
+      "geodeticMin": [
+        -157.8361236339784,
+        21.282331376833348,
+        18.160007891245186
+      ],
+      "geodeticMax": [
+        -157.8357597669487,
+        21.28266771624267,
+        53.40000814665109
+      ],
+      "xyzSHA256": "a674e0595f91e05906704452232b901c08944baec192fc8a1d5dea984a01f1a1",
+      "attributesSHA256": "06b79c027c7e5fd8ad1c5f80f0841417e4e162cd637c7adc5783e612b5ab0148"
+    },
+    {
+      "tile": "s98_z20_x64557_y460822_h0.r3d",
+      "inputSHA256": "af7e79df34f5363bcf1fd1629524049e674ed9fc5d4d77bdb47503c106802e85",
+      "records": 4309,
+      "vertexCount": 12927,
+      "attributeCount": 34472,
+      "missingColorsByChannel": {
+        "1": 8,
+        "2": 8,
+        "3": 8
+      },
+      "geodeticMin": [
+        -157.83612633134314,
+        21.282005325548393,
+        16.76000695489347
+      ],
+      "geodeticMax": [
+        -157.83575398499733,
+        21.28234563936712,
+        48.08000378496945
+      ],
+      "xyzSHA256": "3b6c72918f124ba8ceee0d06ca5bcae26dea62a2767921645a8e45f5d6dc8bd4",
+      "attributesSHA256": "8e4b975d6f2b0a630393cdff8928ca5b0856fc59ba6071d864b5e9ff490a7cec"
+    },
+    {
+      "tile": "s98_z20_x64557_y460823_h0.r3d",
+      "inputSHA256": "0cb6f5159e5b2d40f863dfc946cf6e1e633c2c119fd9ab712aa9cc3ae2bca8f6",
+      "records": 8167,
+      "vertexCount": 24501,
+      "attributeCount": 65336,
+      "missingColorsByChannel": {
+        "1": 38,
+        "2": 38,
+        "3": 38
+      },
+      "geodeticMin": [
+        -157.83612517514428,
+        21.28168180284511,
+        17.200011051259935
+      ],
+      "geodeticMax": [
+        -157.83575783946463,
+        21.282032593915982,
+        44.96002729050815
+      ],
+      "xyzSHA256": "007486bbb5adcecf27ff2266cfcef7110ecf4e87cb162240cf562581e36f9168",
+      "attributesSHA256": "f650218f49478967679d5a99ed3ea07ea42ab1a513cbafa3f4bb195a444febc6"
+    },
+    {
+      "tile": "s98_z20_x64557_y460824_h0.r3d",
+      "inputSHA256": "f0dabe34990fdbc776efe04b6bb2bb31aac7e76bb03b182171fe9698ec944fd5",
+      "records": 8091,
+      "vertexCount": 24273,
+      "attributeCount": 64728,
+      "missingColorsByChannel": {
+        "1": 20,
+        "2": 20,
+        "3": 20
+      },
+      "geodeticMin": [
+        -157.8361271016255,
+        21.281363698618858,
+        16.520012099295855
+      ],
+      "geodeticMax": [
+        -157.83575205830587,
+        21.28170943208301,
+        43.64002817962319
+      ],
+      "xyzSHA256": "418fcccf62e269844e5fc5b8313511f231787c583244b96dc498be842e1b3bc1",
+      "attributesSHA256": "9255bbe606ae877a889168269ddc8dc3ccb2c4abea0cc5d2c96339730055a7c7"
+    },
+    {
+      "tile": "s98_z20_x64558_y460816_h0.r3d",
+      "inputSHA256": "64f52d28ef1d317e4f30aedfb0d3878c12cc4a452f4ba3638e54eb368f168be0",
+      "records": 7872,
+      "vertexCount": 23616,
+      "attributeCount": 62976,
+      "missingColorsByChannel": {},
+      "geodeticMin": [
+        -157.8357845536242,
+        21.283924047894843,
+        16.56000490114093
+      ],
+      "geodeticMax": [
+        -157.83540988869302,
+        21.28426689109927,
+        35.64005000144243
+      ],
+      "xyzSHA256": "3316ff91ce40cdfebdfdcd7fe893b795bf77ed9005a173706878f8a5fb76e810",
+      "attributesSHA256": "920e3ad1f4cae2177e833a89605c320ce99dac5161ec280fd06aadbcbee9c7e2"
+    },
+    {
+      "tile": "s98_z20_x64558_y460817_h0.r3d",
+      "inputSHA256": "aa229f4a5b0e63d5614738194cadd59c70aa42f3e91152a9aaedd5caa917d84d",
+      "records": 5517,
+      "vertexCount": 16551,
+      "attributeCount": 44136,
+      "missingColorsByChannel": {
+        "1": 2,
+        "2": 2,
+        "3": 2
+      },
+      "geodeticMin": [
+        -157.83578647994338,
+        21.283602335997315,
+        16.44000114314258
+      ],
+      "geodeticMax": [
+        -157.83541374348547,
+        21.283949875468625,
+        37.32000804133713
+      ],
+      "xyzSHA256": "1698ccddfc143eb66044925470817ba6bbfbc3d91395d67e82c4f52b0b58ab76",
+      "attributesSHA256": "ace483f1fbeae01cdea35fce97149f0eb751439937d39820b8a5a43e3c63fcc3"
+    },
+    {
+      "tile": "s98_z20_x64558_y460818_h0.r3d",
+      "inputSHA256": "2452f10d307622bcdca73ca41358861dd82f974123e79273013e0dc8f848b595",
+      "records": 7377,
+      "vertexCount": 22131,
+      "attributeCount": 59016,
+      "missingColorsByChannel": {
+        "1": 8,
+        "2": 8,
+        "3": 8
+      },
+      "geodeticMin": [
+        -157.8357806980798,
+        21.28328315205522,
+        16.320009130053222
+      ],
+      "geodeticMax": [
+        -157.83544072589208,
+        21.283631413942544,
+        33.84003035724163
+      ],
+      "xyzSHA256": "1cde935694fd961c448d424acb657e4e8ae9e058acbe27af8cb4fc9875cd5e8b",
+      "attributesSHA256": "82d4ef8a91e8aab4b5ba38bc2c9aa7949762e0403f2ac813541a673ef7d67975"
+    },
+    {
+      "tile": "s98_z20_x64558_y460819_h0.r3d",
+      "inputSHA256": "57dbb564295f6fd32f91082b05d0f061806818a65fdf4c3a0299b052048aead6",
+      "records": 2370,
+      "vertexCount": 7110,
+      "attributeCount": 18960,
+      "missingColorsByChannel": {
+        "1": 16,
+        "2": 16,
+        "3": 16
+      },
+      "geodeticMin": [
+        -157.8357733737984,
+        21.28296577380834,
+        16.800033586099744
+      ],
+      "geodeticMax": [
+        -157.83541721366242,
+        21.283310422970068,
+        35.600024490617216
+      ],
+      "xyzSHA256": "b63d5a88ee13a96e4fcd875fc86444fcd5f1d5bf7d678c8ff3e0b1606c2ef434",
+      "attributesSHA256": "0411fdf1c80065d75fdcaa7a373700c464864f82af1fa9d1b6907178785d50a1"
+    },
+    {
+      "tile": "s98_z20_x64558_y460820_h0.r3d",
+      "inputSHA256": "2b0fb33c886190adf59e96b7f20d70fe337127bd20c6677180ae5d9b2d49c7df",
+      "records": 626,
+      "vertexCount": 1878,
+      "attributeCount": 5008,
+      "missingColorsByChannel": {
+        "1": 3,
+        "2": 3,
+        "3": 3
+      },
+      "geodeticMin": [
+        -157.83578108223108,
+        21.282702223769128,
+        25.280044302344322
+      ],
+      "geodeticMax": [
+        -157.83541490165808,
+        21.28298762504876,
+        46.48001735750586
+      ],
+      "xyzSHA256": "3d57a7cf7d3c5b5d2b258e81a32a66c74538376818663ccd3e2bb3e7f386c867",
+      "attributesSHA256": "4dd88d29e61eb62ffab2a02443bf5dfaba913fa914a65386c5a1c3f2b3b0f1b6"
+    },
+    {
+      "tile": "s98_z20_x64558_y460821_h0.r3d",
+      "inputSHA256": "535daa07652633ed6e273ecd159a97c6307bd32385c1a91911fc99a444798867",
+      "records": 2660,
+      "vertexCount": 7980,
+      "attributeCount": 21280,
+      "missingColorsByChannel": {
+        "1": 13,
+        "2": 13,
+        "3": 13
+      },
+      "geodeticMin": [
+        -157.8357810814193,
+        21.28232559657772,
+        16.8400268079713
+      ],
+      "geodeticMax": [
+        -157.8354106620917,
+        21.282659045634546,
+        52.5200309921056
+      ],
+      "xyzSHA256": "21caa26099872c30a66bb83d9bf74e3ebd62e8a390a3bc54ef07c5d6123d0b11",
+      "attributesSHA256": "386f49805749e2c61bff2a751a55a153dc28c4ba83b8b7cfabaa258143f2e047"
+    },
+    {
+      "tile": "s98_z20_x64558_y460822_h0.r3d",
+      "inputSHA256": "38326b371fda9ea11b0e32223a99c0e90b1dede7de86b257138bbd068c6eb282",
+      "records": 7772,
+      "vertexCount": 23316,
+      "attributeCount": 62176,
+      "missingColorsByChannel": {
+        "1": 6,
+        "2": 6,
+        "3": 6
+      },
+      "geodeticMin": [
+        -157.83578185238633,
+        21.28200351939963,
+        17.040019068866968
+      ],
+      "geodeticMax": [
+        -157.8354110474676,
+        21.282350697044375,
+        46.28003031667322
+      ],
+      "xyzSHA256": "8046e24253199997be98dbeea93a51101c7c914bce939b171e94abfb6b3f2580",
+      "attributesSHA256": "97d0123e4063026cc4aea0a45f53cf14d76f5e4d80ff240c7926427afcb14049"
+    },
+    {
+      "tile": "s98_z20_x64558_y460823_h0.r3d",
+      "inputSHA256": "dfe487538fd0f26fedd78ea22ed8fcbaac3fbbc513f133208ad7a1fdd0de3ff2",
+      "records": 4697,
+      "vertexCount": 14091,
+      "attributeCount": 37576,
+      "missingColorsByChannel": {
+        "1": 16,
+        "2": 16,
+        "3": 16
+      },
+      "geodeticMin": [
+        -157.83578416500112,
+        21.281681080321448,
+        20.36003826279193
+      ],
+      "geodeticMax": [
+        -157.83541528784772,
+        21.28202789737265,
+        44.960001843981445
+      ],
+      "xyzSHA256": "3a3d7924217f342431764974a1ce3b71997382a32e17c4c588d9982cd65e57bf",
+      "attributesSHA256": "b3ce295819c29fca7a23cf9153d10f1c38df3ee068442724263589fb6fb62a60"
+    },
+    {
+      "tile": "s98_z20_x64558_y460824_h0.r3d",
+      "inputSHA256": "a99b6d94a230986ffc2ed4a9eb1f628c6b5d4e5552815d279609804977fe3932",
+      "records": 2474,
+      "vertexCount": 7422,
+      "attributeCount": 19792,
+      "missingColorsByChannel": {
+        "1": 11,
+        "2": 11,
+        "3": 11
+      },
+      "geodeticMin": [
+        -157.83578647720253,
+        21.281370201475724,
+        19.800024232827127
+      ],
+      "geodeticMax": [
+        -157.83540873578931,
+        21.28171304450829,
+        36.56000998895615
+      ],
+      "xyzSHA256": "d6acd8247c3208e1b8f667870bdeb218621148a88a56527e45d07271da7cea0a",
+      "attributesSHA256": "f1c7f8ada3f3cfa5e89365f987953d53740f6181d73f50bfe2bf728f0f6c40f8"
+    }
+  ]
+}

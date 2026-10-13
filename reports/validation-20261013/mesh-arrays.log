@@ -1,0 +1,98 @@
+20/223 r3d_z19_x465666_y206407_h0.r3d exact 
+40/223 r3d_z20_x931327_y412807_h1.r3d exact 
+60/223 r3d_z20_x931329_y412801_h0.r3d exact 
+80/223 r3d_z20_x931330_y412803_h0.r3d explained-normal-rounding 
+100/223 r3d_z20_x931331_y412806_h0.r3d exact 
+120/223 r3d_z20_x931332_y412809_h1.r3d exact 
+140/223 r3d_z20_x931333_y412813_h0.r3d explained-normal-rounding 
+160/223 r3d_z20_x931335_y412801_h0.r3d exact 
+180/223 r3d_z20_x931336_y412803_h0.r3d exact 
+200/223 r3d_z20_x931337_y412805_h0.r3d explained-normal-rounding 
+220/223 r3d_z20_x931339_y412807_h0.r3d exact 
+{
+  "scope": "All six polygon arrays and original primary HEIC per tile",
+  "floatPolicy": "Bit exact except normal Y differences individually explained by Decimal sine and adjacent native float32 rounding; maximum 1 ULP and 5.960464477539063e-8 absolute",
+  "nativeRuntimeInvoked": false,
+  "goldensUsedOnlyForComparison": true,
+  "tiles": 223,
+  "statuses": {
+    "explained-normal-rounding": 100,
+    "exact": 123
+  },
+  "elapsedSeconds": 56.172,
+  "command": [
+    "audit/audit_mesh_arrays.py",
+    "/opt/flyover-viewer/native-r3d",
+    "/opt/flyover-viewer/decoded-native/c3m-all-223",
+    "--report",
+    "reports/validation-20261013/mesh-arrays.json",
+    "--workers",
+    "2"
+  ],
+  "arrays": {
+    "positions_f32": {
+      "floatCount": 3172779,
+      "indexCount": 0,
+      "bitMismatches": 0,
+      "nonFinite": 0,
+      "bytes": 0,
+      "maxULP": 0,
+      "maxAbsoluteError": 0.0
+    },
+    "uv_f32": {
+      "floatCount": 2405452,
+      "indexCount": 0,
+      "bitMismatches": 0,
+      "nonFinite": 0,
+      "bytes": 0,
+      "maxULP": 0,
+      "maxAbsoluteError": 0.0
+    },
+    "normals_f32": {
+      "floatCount": 3175104,
+      "indexCount": 0,
+      "bitMismatches": 271,
+      "nonFinite": 0,
+      "bytes": 0,
+      "maxULP": 1,
+      "maxAbsoluteError": 5.960464477539063e-08
+    },
+    "faces": {
+      "floatCount": 0,
+      "indexCount": 5768079,
+      "bitMismatches": 0,
+      "nonFinite": 0,
+      "bytes": 0,
+      "maxULP": 0,
+      "maxAbsoluteError": 0
+    },
+    "uv_indices": {
+      "floatCount": 0,
+      "indexCount": 5768079,
+      "bitMismatches": 0,
+      "nonFinite": 0,
+      "bytes": 0,
+      "maxULP": 0,
+      "maxAbsoluteError": 0
+    },
+    "normal_indices": {
+      "floatCount": 0,
+      "indexCount": 5768079,
+      "bitMismatches": 0,
+      "nonFinite": 0,
+      "bytes": 0,
+      "maxULP": 0,
+      "maxAbsoluteError": 0
+    },
+    "texture": {
+      "floatCount": 0,
+      "indexCount": 0,
+      "bitMismatches": 0,
+      "nonFinite": 0,
+      "bytes": 12402125,
+      "maxULP": 0,
+      "maxAbsoluteError": 0,
+      "exactImages": 223
+    }
+  }
+}

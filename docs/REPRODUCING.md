@@ -1,5 +1,7 @@
 # 再現と検証
 
+現在の全数値decoderは[INDEPENDENT_DECODER.md](INDEPENDENT_DECODER.md)のコマンドで実行する。以下のフレーム/HUFF中間検証と区別する。東京全配列golden比較は`audit_soup_arrays.py`と`audit_mesh_arrays.py`。Oahu72は`nativefree_decode_r3d.py`で原本から出力できる。
+
 ## データ不要のcheck
 
 ```bash

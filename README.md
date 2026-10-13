@@ -2,7 +2,9 @@
 
 Apple Maps iOS 27のR3Dを調査し、**元のテクスチャ付きポリゴンとsoft triangle Splatを復元・表示する研究**の成果をまとめたスナップショットです。2026-10-14 JST時点。
 
-**東京のネイティブ復号済みハイブリッド表示は実現済みです。Linuxだけで新規R3Dからポリゴン・Splat数値を完全復号する処理は未完成です。** soft triangle Splatを通常の楕円3D Gaussian Splattingと同一とは断定していません。
+**Linuxの独立decoderで元ポリゴンとSplatの全数値復号を実装し、東京223タイルの全配列照合を通しました。取得から自由移動表示までの統合とOahuの表示検証は未完成で、主要目標は未達です。** soft triangle Splatを通常の楕円3D Gaussian Splattingと同一とは断定していません。
+
+主要目標は任意の緯度・経度・範囲からLinuxだけで取得・完全復号・自由移動表示まで実行することです。[6項目の完了条件](docs/ACCEPTANCE.md)をすべて満たした場合に達成と判定します。公式表示とのpixel一致、正確なLOD、タイル累積・色変換の完全再現は別の追加目標として追跡します。
 
 ## 現在の成果
 
@@ -13,12 +15,15 @@ Apple Maps iOS 27のR3Dを調査し、**元のテクスチャ付きポリゴン�
 | 元のC3Mポリゴン | 223タイル、1,922,693面、223枚の元HEICアトラス | XYZ・面・UV・法線・テクスチャ取得済み |
 | ハイブリッド表示 | 元のポリゴン＋Splat、UV上下方向修正、WASD・Q/E飛行 | 動作検証済み |
 | Oahu Hilton取得 | 72 R3D、304,527 Splatレコード、216 HEIC | 新規取得・ヘッダー/画像抽出済み |
+| Linux独立Splat復号 | 東京223、XYZ 6,632,235 float・8属性5,895,320 float・material20 14,738,300 byte | 全配列bit/byte完全一致 |
+| Linux独立ポリゴン復号 | 東京223、XYZ・UV・位置/UV/法線index・223 primary HEIC | bit/byte完全一致 |
+| Linux独立ポリゴン法線 | 3,175,104 float中271個に1 ULP差 | 全差異をDecimal三角関数で説明、最大絶対誤差5.96e-8 |
 | Linux R3Dフレーム解析 | 東京223＋Oahu72、590 BYET/Jストリーム、12,980レーン | 境界・長さ・ヘッダー検証済み |
 | HEIC抽出 | 計885画像、東京primary atlas 223件がnative出力と一致 | native-free |
-| HUFF復号 | 2,659圧縮候補、739,702出力byte、復号reject 0 | 指定/推定出力長による中間復号。native中間byteとの一致は未証明 |
-| BYET kind 0 | 21座標レーン中20で先頭N byteがnative低位byteと一致 | 残り2N byteと1つのZ原点差は未解決 |
+| 過去HUFF中間監査 | 2,659圧縮候補、739,702出力byte、復号reject 0 | 探索履歴。現在の数値decoderは実際のsymbol数を原本から復元 |
+| BYET/J kind0..6 | 数値復号とtriangle/属性/mesh全配列照合 | 原点差と3*N byteの意味も解決 |
 | C3MM v2 | 6サンプル・36 LZMA区画、タイルz/x/y復元 | 構造解析済み、階層意味は一部未解決 |
-| 新規地域のLinuxのみでの完全3D復元 | Splat XYZ/属性、TRICO mesh XYZ/面/UV | 未完成 |
+| 新規地域のLinuxのみでの完全3D復元 | Oahu72を原本だけから数値復号。304,527 Splat、581,186元ポリゴン面 | 数値復号済み、ハイブリッド表示検証は未完了 |
 
 HUFFの別研究では2,424個の0x24 envelope内で1,462圧縮table＋962 literalを検証しています。上記2,659件とは走査対象・候補検出方法が違い、件数を単純に比較できません。出力長の意味・呼び出し元からの値は引き続き要検証です。
 
@@ -50,9 +55,11 @@ PYTHONPATH=codec python3 -c "from audit.test_nativefree_r3d import test_compact_
 python3 codec/nativefree_r3d_codec_streams.py /path/to/tile.r3d
 python3 codec/nativefree_extract_heic.py /path/to/r3d_directory --out-dir /path/to/heic
 python3 codec/c3mm_v2_parser.py /path/to/tile.c3mm
+python3 codec/nativefree_decode_r3d.py /path/to/r3d_directory --out-dir output/decoded --workers 4
+python3 -m unittest audit.test_numeric_codec -v
 ```
 
-[再現手順](docs/REPRODUCING.md) / [成果と限界](docs/STATUS.md) / [バイナリ形式](docs/FORMAT.md) / [次の作業](docs/CONTINUATION.md) / [元データと保存範囲](docs/PROVENANCE.md)
+[独立decoderと全配列検証](docs/INDEPENDENT_DECODER.md) / [再現手順](docs/REPRODUCING.md) / [成果と限界](docs/STATUS.md) / [バイナリ形式](docs/FORMAT.md) / [次の作業](docs/CONTINUATION.md) / [元データと保存範囲](docs/PROVENANCE.md)
 
 ## 注意する区別
 

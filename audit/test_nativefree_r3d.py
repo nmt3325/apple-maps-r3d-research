@@ -106,7 +106,7 @@ def main():
                 if gap is not None:
                     anchor_counts+=1
                     anchor_gaps.extend(gap)
-                    if info["splatStream"]["blocks"][0]["originCodec"]=="sparse-bitmap-sign-extension":
+                    if info["splatStream"]["blocks"][0]["originCodec"]=="byte-transition-bitmap":
                         sparse_anchor_counts+=1
                 else:
                     unsupported_tiles.append(f.name)

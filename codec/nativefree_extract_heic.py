@@ -17,6 +17,29 @@ MAGIC=bytes.fromhex("3d96592e")
 R3D_TRANSFORM_MARK=bytes.fromhex("01010100016a")
 TYPES={b"heic",b"heix",b"hevc",b"hevx",b"mif1",b"msf1"}
 
+def image_dimensions(image:bytes):
+    """Read the single spatial extent property in the original HEIC atlas."""
+    extents=[]
+    def visit(start,end,depth=0):
+        if depth>8:raise ValueError("HEIC metadata nesting exceeds limit")
+        at=start
+        while at<end:
+            box=iso_box(image,at)
+            if box is None or at+box[0]>end:
+                raise ValueError("Invalid HEIC box boundary")
+            size,kind=box
+            header=16 if image[at:at+4]==b'\0\0\0\1' else 8
+            if kind==b'ispe':
+                if size!=header+12:raise ValueError("Invalid HEIC ispe property")
+                extents.append(struct.unpack_from('>2I',image,at+header+4))
+            elif kind in (b'meta',b'iprp',b'ipco'):
+                visit(at+header+(4 if kind==b'meta' else 0),at+size,depth+1)
+            at+=size
+    visit(0,len(image))
+    if len(extents)!=1 or not all(0<v<=32768 for v in extents[0]):
+        raise ValueError("Unsupported HEIC spatial extent properties")
+    return extents[0]
+
 def iso_box(buf:bytes,start:int):
     if start+8>len(buf):return None
     size=int.from_bytes(buf[start:start+4],"big")
@@ -64,6 +87,7 @@ def metadata(blob:bytes):
     start=offset+len(R3D_TRANSFORM_MARK)
     if start+12*8>len(blob):raise ValueError("Truncated transform")
     data=struct.unpack_from("<12d",blob,start)
+    if not all(math.isfinite(v) for v in data):raise ValueError("Nonfinite R3D transform")
     matrix=data[:9];origin=data[9:]
     norm=math.sqrt(sum(t*t for t in origin))
     det=(matrix[0]*(matrix[4]*matrix[8]-matrix[5]*matrix[7])

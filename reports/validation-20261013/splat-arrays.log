@@ -1,0 +1,61 @@
+10/223 r3d_z19_x465663_y206404_h0.r3d exact 
+20/223 r3d_z19_x465666_y206407_h0.r3d exact 
+30/223 r3d_z20_x931326_y412806_h1.r3d exact 
+40/223 r3d_z20_x931327_y412807_h1.r3d exact 
+50/223 r3d_z20_x931328_y412805_h0.r3d exact 
+60/223 r3d_z20_x931329_y412801_h0.r3d exact 
+70/223 r3d_z20_x931329_y412809_h0.r3d exact 
+80/223 r3d_z20_x931330_y412803_h0.r3d exact 
+90/223 r3d_z20_x931330_y412812_h1.r3d exact 
+100/223 r3d_z20_x931331_y412806_h0.r3d exact 
+110/223 r3d_z20_x931332_y412802_h0.r3d exact 
+120/223 r3d_z20_x931332_y412809_h1.r3d exact 
+130/223 r3d_z20_x931333_y412803_h1.r3d exact 
+140/223 r3d_z20_x931333_y412813_h0.r3d exact 
+150/223 r3d_z20_x931334_y412807_h1.r3d exact 
+160/223 r3d_z20_x931335_y412801_h0.r3d exact 
+170/223 r3d_z20_x931335_y412809_h0.r3d exact 
+180/223 r3d_z20_x931336_y412803_h0.r3d exact 
+190/223 r3d_z20_x931336_y412809_h1.r3d exact 
+200/223 r3d_z20_x931337_y412805_h0.r3d exact 
+210/223 r3d_z20_x931338_y412803_h0.r3d exact 
+220/223 r3d_z20_x931339_y412807_h0.r3d exact 
+{
+  "scope": "All TRICO soup triangle XYZ, eight attributes and packed RGBA/material20; polygon mesh tested separately",
+  "nativeRuntimeInvoked": false,
+  "goldensUsedOnlyForComparison": true,
+  "tiles": 223,
+  "exactTiles": 223,
+  "mismatchTiles": 0,
+  "errors": 0,
+  "elapsedSeconds": 51.47,
+  "command": [
+    "audit/audit_soup_arrays.py",
+    "/opt/flyover-viewer/native-r3d",
+    "/opt/flyover-viewer/decoded-native/all-223",
+    "--report",
+    "reports/validation-20261013/splat-arrays.json",
+    "--workers",
+    "2"
+  ],
+  "arrays": {
+    "triangles": {
+      "floatCount": 6632235,
+      "bitMismatches": 0,
+      "nonFinite": 0,
+      "matchingNaNSentinels": 0,
+      "unexpectedNonFinite": 0
+    },
+    "attributes": {
+      "floatCount": 5895320,
+      "bitMismatches": 0,
+      "nonFinite": 32958,
+      "matchingNaNSentinels": 32958,
+      "unexpectedNonFinite": 0
+    },
+    "material": {
+      "bytes": 14738300,
+      "byteMismatches": 0
+    }
+  }
+}

@@ -12,7 +12,7 @@ Verified by testing 590/590 captured Splat coordinate and attribute streams:
 - A type 4/6 can mark the previous lane as part of an encoded multi-byte group.
 - Every lane's compressed byte count sums to exactly all remaining file bytes,
   no trailing padding, on all 590 genuine streams from Tokyo and Hawaii.
-Types 0..6 are recognized for framing only. Per-lane decompression is pending.
+This module frames types 0..6; nativefree_bytes.py performs numeric decoding.
 """
 from __future__ import annotations
 from collections import Counter
@@ -22,12 +22,19 @@ from nativefree_r3d_codec_streams import dissect
 from nativefree_trico_size import read_size
 
 def split_j(src:bytes,lanes:int):
-    if lanes not in (12,32):raise ValueError("Expect 12 XYZ or 32 attribute byte lanes")
+    if lanes not in (1,4,8,12,32):raise ValueError("Expect 1/4/8/12/32 byte lanes")
     bitmap1_len=(lanes+7)//8
     if len(src)<bitmap1_len:raise ValueError("Truncated J active-lane bitmap")
-    mask=int.from_bytes(src[:bitmap1_len],"little")&((1<<lanes)-1)
+    mask=int.from_bytes(src[:bitmap1_len],"little")
+    if mask>>lanes:raise ValueError("J active bitmap has out-of-range lane bits")
     active=mask.bit_count()
-    if active<1:raise ValueError("No active lanes")
+    if active==0:
+        if len(src)!=bitmap1_len:raise ValueError("Trailing bytes after zero J bitmap")
+        return {"recordLaneBytes":lanes,"activeLanes":0,
+                "firstBitmapBytes":bitmap1_len,"secondBitmapBytes":0,
+                "descriptorBytes":0,"laneCompressedBytes":0,
+                "descriptors":[{"lane":i,"kind":1,"compressedBytes":0,
+                                "compressedOffset":bitmap1_len} for i in range(lanes)]}
     bitmap2_len=(2*(active-1)+7)//8
     if len(src)<bitmap1_len+bitmap2_len:raise ValueError("Truncated J token bitmap")
     mask2=int.from_bytes(src[bitmap1_len:bitmap1_len+bitmap2_len],"little")

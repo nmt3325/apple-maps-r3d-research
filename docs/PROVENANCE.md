@@ -11,6 +11,8 @@ SOURCE_MANIFEST.jsonは元ソースのsource path・bytes・SHA-256とrepo内コ
 
 Gitにはコード・記録・静的解析の小さな研究資料を収録する。研究資料のGhidra Cはdecompiled pseudocodeで、compilable Cや独立実装とは区別する。ARM64 sliceも同じ研究用途の参照資料。
 
+2026-10-13 UTCの全数値decoderは`nativefree_bytes.py`、`nativefree_huff_aligned.py`、`nativefree_soup.py`、`nativefree_splat_material.py`、`nativefree_mesh_topology.py`、`nativefree_mesh.py`。保存された命令列を静的に読み、CLERSの既存研究も参照して、Pythonで数値処理を実装した。`research/static-codec/codec-arm64.b64`は既存VectorKitファイルから読み取った118,784 byteの不活性参照資料。GhidraはLinuxで静的解析にだけ使用した。Appleコードを実行していない。decoderはこれらの資料にもgoldenにも実行時に依存しない。
+
 Releaseには元R3D、native比較配列、viewer用出力、GLB/PLY、取得labのpayload/export、独立抽出の中間結果を収録する。各snapshotはdata/REFERENCE_INVENTORY.jsonに載る。重複したtarを保存し直す代わりに、その中身のデータを保存する。
 
 収録しないもの: 認証情報を含むmitmproxy/HTTP capture、ingest.token、鍵ディレクトリ、個別signed request URL、インストール済みGhidra/JDK/node_modules/Unicorn、派生データの重複tar。既存legacy OSS checkoutは再配布せず、出典参照とする。

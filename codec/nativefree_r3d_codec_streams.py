@@ -90,7 +90,6 @@ def dissect(b:bytes):
     attr_quant_header,attr_header_end=read_size(soup,frame1start+2,frame1end)
     # Reconstruct 3x signed XYZ origin integers. Most tiles encode direct
     # 12 bytes; a minority use a sparse bitmask BYET packing (10 or 11 bytes).
-    # Known ambiguous mask 0x0577 remains unsupported; do not invent coords.
     xyz_anchor=None
     xyz_origin_codec="unsupported"
     try:
@@ -98,7 +97,7 @@ def dissect(b:bytes):
         coords=read_origin_int32(xyz_bytes)
         q0=soup_scales[0]
         xyz_anchor=[round(x*q0,5) for x in coords]
-        xyz_origin_codec="int32-le" if xyz_quant_header==12 else "sparse-bitmap-sign-extension"
+        xyz_origin_codec="int32-le" if xyz_quant_header==12 else "byte-transition-bitmap"
     except UnsupportedAnchorPacking as error:
         xyz_origin_codec=f"unsupported: {error}"
     # The native _byet_decompress sees mode bit7 and checks the 0x004A nested

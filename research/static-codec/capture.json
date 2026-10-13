@@ -1,0 +1,8 @@
+{
+  "start": "0x1b7095000",
+  "end": "0x1b70b2000",
+  "bytes": 118784,
+  "sha256": "aed176bf9e74f19b5295b0c1da04a6fc12a4ee94d46b4a781bd6204a6d6100de",
+  "source": "Saved VectorKit file, read as inert bytes only; no native instructions executed",
+  "purpose": "Static interoperability research; independent decoder does not load this capture"
+}

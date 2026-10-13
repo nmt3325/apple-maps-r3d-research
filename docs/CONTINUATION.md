@@ -6,18 +6,18 @@
 
 ## 次の順番
 
-1. kind0の3*N byteをnative triangle buffer全3頂点と比較する。先頭N byte以外をすぐmetadataと決めつけない。このtriangle仮説自体は未検証であり、createSplatsが生成した頂点である可能性も確認する。
-2. sparse origin0877065cfeff5afefff5ffの+1を、mode/bitmap/low-byte復元規則から説明する。goldenだけに合わせた補正はしない。
-3. _bytes_decompressのkind0..6とHUFF callsiteを追い、output-count register/stackの由来を確定する。researchのcodec-slice-arm64.b64、callsite/count-constructor/count-tail資料を利用する。
-4. embedded次HUFF stream、bitmap、payload、paired laneを区別し、整数再構成・quantizationを実装する。
-5. 東京223でXYZと8属性の全数値・並び・必要ならfloat bit parityを検証する。
-6. TRICO mesh v3 topology・position・UV・normalをnative arraysと照合する。
-7. Oahu72でnative-free全geometryを生成し、任意地域fetcherとhybrid viewerを統合する。
-8. shader uniform・tile accumulation・color transfer・LODを詰める。
+1. `codec/nativefree_decode_r3d.py`のOahu72出力からハイブリッドviewerを生成する。Splat/ポリゴンは同じ原本の回転とECEF並進でENUへ移す。元HEICをLinuxでPNG等へ変換して表示する。
+2. Oahuの全配列・地理位置・UV/index・有限値・欠損RGB・レイヤー位置合わせを記録し、WASD、上下、マウス、レイヤー切替をブラウザで検証する。
+3. 既存取得labの署名処理を座標/範囲入力の入口へ統合する。認証はローカル設定とし、ログ・表示・Gitには含めない。任意地域でタイルの有無とstyle versionを検証する。
+4. 原本取得→独立復号→viewer生成を一コマンドにし、GLB/PLY出力、失敗ログ、破損入力検出、別Linux環境での再現を揃える。
+5. 実装・仕様・全検証証拠をGitHubへ保存し、READMEを実態に合わせて6条件の完了監査を行う。
+6. 追加目標のshader uniform・tile accumulation・color transfer・LOD・公式pixel一致を別途追跡する。
+
+数値codecと東京223全配列検証は[INDEPENDENT_DECODER.md](INDEPENDENT_DECODER.md)に記録済み。Splatの全3*N頂点と8属性/material20は完全一致、ポリゴンXYZ/UV/全index/primary HEICも一致。法線271個の1 ULP差は個別の数値証拠付きで説明済み。旧`.decoded`の位置は全配列の先頭N頂点だけなので、これを中心点として再利用しない。
 
 ## 完了判定
 
-Linux上でR3D入力だけからtexture＋mesh XYZ/面/UV/normal＋Splat XYZ/materialを復元し、東京native goldenとの全数値比較と新規Oahu表示を通す。saved native outputsのreplayやヘッダーcount一致だけでは完了としない。
+[ACCEPTANCE.md](ACCEPTANCE.md)の6項目をすべて満たす。Linux上でR3D入力だけからtexture＋mesh XYZ/面/UV/normal＋Splat XYZ/8属性/描画用三角形を復元し、東京223の全配列golden比較、新規Oahu72のgeometry/表示検証、座標入力から取得・復号・表示の統合、新しいLinux環境での再現と回帰、GitHub保存・証拠付き報告を完了する。saved native outputsのreplay、ヘッダーcount一致、HUFF中間復号、推定高さmeshだけでは完了としない。公式表示pixel一致・LOD・タイル累積/色変換は追加目標として別途追跡する。
 
 ## メモ間の優先度
 
