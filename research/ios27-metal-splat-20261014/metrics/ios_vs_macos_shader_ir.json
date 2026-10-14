@@ -1,0 +1,58 @@
+{
+  "Flyover_splat_vertex": {
+    "normalized_ir_identical": false,
+    "ios_bytes": 53389,
+    "mac_bytes": 48079,
+    "ios_sha256": "1cea6e3d069619b8aba5f1462f5204fae7f86991b65c217440f31556ac365871",
+    "mac_sha256": "def2e08acb686581347272882be5e006e3c86d3e0b4050f89221bc370cd2240d"
+  },
+  "Flyover_splat_fragment": {
+    "normalized_ir_identical": true,
+    "ios_bytes": 13924,
+    "mac_bytes": 13924,
+    "ios_sha256": "77a19bb08a5baf63f9efa4cd30c7a7eeb782e392c933f7bc2ca7d1578e842a82",
+    "mac_sha256": "77a19bb08a5baf63f9efa4cd30c7a7eeb782e392c933f7bc2ca7d1578e842a82"
+  },
+  "Flyover_clear_tile": {
+    "normalized_ir_identical": true,
+    "ios_bytes": 4090,
+    "mac_bytes": 4090,
+    "ios_sha256": "ccd4075ce40d068e4931d2085d3d7ee3796d3b86de471c3b080010676c898b64",
+    "mac_sha256": "ccd4075ce40d068e4931d2085d3d7ee3796d3b86de471c3b080010676c898b64"
+  },
+  "Flyover_intermediate_resolve_tile": {
+    "normalized_ir_identical": true,
+    "ios_bytes": 10671,
+    "mac_bytes": 10671,
+    "ios_sha256": "7fe584e00af21ce684e564f9ac0008ddba3607f6660b64383eda698e42242fdb",
+    "mac_sha256": "7fe584e00af21ce684e564f9ac0008ddba3607f6660b64383eda698e42242fdb"
+  },
+  "Flyover_final_resolve_color": {
+    "normalized_ir_identical": true,
+    "ios_bytes": 6381,
+    "mac_bytes": 6381,
+    "ios_sha256": "68370e3dd068f92c98f7b70158ec201a9d8608a9d823f94140ab38a173bd15c7",
+    "mac_sha256": "68370e3dd068f92c98f7b70158ec201a9d8608a9d823f94140ab38a173bd15c7"
+  },
+  "Flyover_final_resolve_depth": {
+    "normalized_ir_identical": true,
+    "ios_bytes": 3734,
+    "mac_bytes": 3734,
+    "ios_sha256": "0af6b145922ae594bae81493bc5f36e2cd4ffe3bfef2f490152db721cb9d9560",
+    "mac_sha256": "0af6b145922ae594bae81493bc5f36e2cd4ffe3bfef2f490152db721cb9d9560"
+  },
+  "Flyover_flyover_vertex": {
+    "normalized_ir_identical": true,
+    "ios_bytes": 18375,
+    "mac_bytes": 18375,
+    "ios_sha256": "5103eaba65ff3d434941c53175d862d497cc6d26c83af1756024350feb834f94",
+    "mac_sha256": "5103eaba65ff3d434941c53175d862d497cc6d26c83af1756024350feb834f94"
+  },
+  "Flyover_flyover_fragment": {
+    "normalized_ir_identical": false,
+    "ios_bytes": 27538,
+    "mac_bytes": 22461,
+    "ios_sha256": "aa5a356130d4cc5b1cf84cc52b08b87236d205c2462bf24774351279e735907b",
+    "mac_sha256": "5c446dfb27c9b8ec08f13c5abf57c58429511905b8c50e602538823cdf18e790"
+  }
+}

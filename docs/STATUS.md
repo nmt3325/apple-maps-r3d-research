@@ -35,6 +35,10 @@ C3MM v2は6つのサンプルで36圧縮区画が宣言長どおり復号でき�
 
 ユーザー指定でOahuサーバーをsystemdに起動し、Tailscale HTTPS8972で公開。別LinuxからTLS検証付きscene GETも成功。URL：https://ct104.taila8c9c.ts.net:8972/。
 
+## Apple独自Triangle SplatのGPUパリティ研究（2026-10-14）
+
+AppleのmacOS Metal環境でiOS由来のtriangle Splatの描画式を検証し、単一東京Splatの64×64画素alpha比較でRMSE 1.3384e-5（境界1画素差）を得ました。別の実RGBA色サンプルでもM4 GPUの色合成を測定しました。iOS/macOS Metal IRは対象8個中6個が同一、残り2個は異なります。標準Gaussian近似は1個と3個を比較しましたが、Appleの実行時alpha定数や公式iOS最終フレームの一致は**未検証**です。詳細と再現用コードは [GPU Splat研究](../research/ios27-metal-splat-20261014/README.md) を参照してください。
+
 ## 残る追加目標・制約
 
 Apple公式pixel parity、正確なLOD、独自tile accumulation/color transferは未達です。ブラウザはbarycentric alpha、GLBは標準alpha blendなので同じ表示にはなりません。取得にはローカル設定が必要で、coverage/API/versionに依存します。decoderは既知のR3D v2/TRICO mesh v3等に対応し、未知variantは明示rejectします。全世界のサービスcoverageを保証するという意味での完了ではありません。

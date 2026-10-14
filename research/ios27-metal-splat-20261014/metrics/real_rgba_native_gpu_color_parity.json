@@ -1,0 +1,21 @@
+{
+  "visible_pixels": 1014,
+  "real_native_material_rgba": [
+    239,
+    239,
+    239,
+    61
+  ],
+  "packed_gpu_bytes": [
+    61,
+    239,
+    239,
+    239
+  ],
+  "mean_abs_red_vs_alpha_times_linearized_srgb_red": 0.0004595204397712993,
+  "rmse": 0.0005852945321672167,
+  "max_abs": 0.0017707814306529568,
+  "mean_abs_red_vs_unscaled_alpha": 0.010816399279901027,
+  "srgb_r": 0.9372549019607843,
+  "srgb_to_linear_r": 0.8631572134541023
+}

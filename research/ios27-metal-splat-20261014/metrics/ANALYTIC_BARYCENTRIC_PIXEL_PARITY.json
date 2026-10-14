@@ -1,0 +1,9 @@
+{
+  "predicted_pixels": 1015,
+  "actual_pixels": 1014,
+  "pixel_set_symmetric_difference": 1,
+  "rmse": 1.3384304207422916e-05,
+  "mae": 4.750112748587226e-06,
+  "max_abs": 9.156200601759257e-05,
+  "source": "Metal native Splat vertex vs software triangle kernel c=1,p=20, prequantized geometry, 64x64"
+}

@@ -1,0 +1,67 @@
+{
+  "input": "actual iOS native-decoded Tokyo triangle 30, projected to 64x64, rendered with Apple macOS Metal vertex + custom analytic fragment",
+  "target_pixel_count": 4096,
+  "rendered_pixel_count": 1014,
+  "source_rgba": [
+    239,
+    239,
+    239,
+    61
+  ],
+  "assumed_test_alpha_concentration": 1.0,
+  "assumed_test_alpha_pre_factor": 20,
+  "triangle_viewport_px": [
+    [
+      5.397299153124283,
+      5.867521171892879
+    ],
+    [
+      58.132478828107125,
+      36.943483634699014
+    ],
+    [
+      29.531554131380176,
+      58.60270084687572
+    ]
+  ],
+  "moment_covariance_px": [
+    [
+      66.37260844787363,
+      36.381699939266014
+    ],
+    [
+      36.381699939266014,
+      66.91803664423351
+    ]
+  ],
+  "moment_matched_fixed_peak": {
+    "amp": 0.17719680464778503,
+    "rmse": 0.015839268572097012,
+    "mae": 0.007865240617288436,
+    "rmse_inside": 0.030779758292003495,
+    "max_error": 0.05886148174845926
+  },
+  "best_single_gaussian_optimized_sigma_amp": {
+    "params": [
+      0.0,
+      1.1
+    ],
+    "amp": 0.20151882865979384,
+    "rmse": 0.012175691486518498,
+    "mae": 0.006701692689058739,
+    "rmse_inside": 0.01983925370827787,
+    "max_error": 0.04651455040545776
+  },
+  "best_three_gaussian_mixture_optimized": {
+    "params": [
+      0.25,
+      0.75
+    ],
+    "amp": 0.4101992711531967,
+    "rmse": 0.007745424175246457,
+    "mae": 0.003965872512154177,
+    "rmse_inside": 0.01356367175921773,
+    "max_error": 0.032335245867636156
+  },
+  "limits": "Raster-space 64x64 single triangle approximation, 3-Gaussian mixture equal strength with 3 centers, no native Apple frame or multi-primitive overlap and no PBR."
+}

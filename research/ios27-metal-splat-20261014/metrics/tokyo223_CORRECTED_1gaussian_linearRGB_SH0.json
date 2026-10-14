@@ -1,0 +1,12 @@
+{
+  "input": "/opt/flyover-viewer/standard3dgs-research-20261014/tokyo223_CORRECTED_planar_approx_c1_p20.ply",
+  "output": "/opt/flyover-viewer/standard3dgs-research-20261014/tokyo223_CORRECTED_1gaussian_linearRGB_SH0.ply",
+  "point_count": 417650,
+  "chunks": 26,
+  "output_size": 28400855,
+  "output_linear_range": [
+    0.0,
+    1.0
+  ],
+  "notes": "SH0 color converted based on actual iOS/Mac Metal 4-pass GPU parity test; remaining geometry/opacity approximate and constants assumed, do not double-apply sRGB gamma in viewer."
+}
