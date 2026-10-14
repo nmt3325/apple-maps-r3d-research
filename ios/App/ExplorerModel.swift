@@ -284,10 +284,7 @@ final class ExplorerModel: ObservableObject {
                 let worldPoint = eye+direction*hit.x
                 guard !masks.contains(where:{worldPoint.x >= $0.x && worldPoint.x < $0.y && worldPoint.z >= $0.z && worldPoint.z < $0.w}) else { return }
                 if let alpha {
-                    let fogStart = Float(viewDistance)*0.62
-                    let fogT = min(1,max(0,(hit.x-fogStart)/(Float(viewDistance)-fogStart)))
-                    let fog = fogT*fogT*(3-2*fogT)
-                    guard min(0.99,alpha*81*(1-hit.y-hit.z)*hit.y*hit.z)*(1-fog) >= 0.003 else { return }
+                    guard min(0.99,alpha*81*(1-hit.y-hit.z)*hit.y*hit.z) >= 0.003 else { return }
                 }
                 nearest = hit.x; point = camera.eye+camera.forward*Double(hit.x)
             }

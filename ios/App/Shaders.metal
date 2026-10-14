@@ -31,7 +31,7 @@ float noise(float2 p) {
 }
 float3 skyColor(float3 direction, float time) {
     float height=clamp(direction.y,0.0,1.0);
-    float3 color=mix(float3(0.70,0.82,0.89),float3(0.08,0.31,0.62),pow(height,0.45));
+    float3 color=mix(float3(0.35,0.58,0.78),float3(0.08,0.31,0.62),pow(height,0.45));
     float3 sun=normalize(float3(-0.45,0.65,-0.55));
     float s=max(dot(direction,sun),0.0);
     color+=float3(1.0,0.83,0.55)*(pow(s,700.0)*1.8+pow(s,24.0)*0.15);
@@ -59,9 +59,7 @@ fragment float4 meshFragment(MeshOut in [[stage_in]], texture2d<float> atlas [[t
     if (refined(in.world,coverage)) discard_fragment();
     constexpr sampler s(address::clamp_to_edge, filter::linear, mip_filter::linear, max_anisotropy(4));
     float3 rgb=atlas.sample(s,in.uv).rgb;
-    float3 direction=in.world-f.eye.xyz;
-    float fog=smoothstep(f.parameters.w*0.62,f.parameters.w,length(direction));
-    return float4(mix(rgb,skyColor(normalize(direction),f.parameters.z),fog),1);
+    return float4(rgb,1);
 }
 vertex SplatOut splatVertex(uint id [[vertex_id]], constant SplatVertex *v [[buffer(0)]],
                             constant Frame &f [[buffer(1)]], constant float4x4 &model [[buffer(2)]]) {
@@ -73,8 +71,7 @@ fragment float4 splatFragment(SplatOut in [[stage_in]], constant Frame &f [[buff
                               constant Coverage &coverage [[buffer(3)]]) {
     if (refined(in.world,coverage)) discard_fragment();
     float product=in.bary.x*in.bary.y*in.bary.z;
-    float fog=smoothstep(f.parameters.w*0.62,f.parameters.w,length(in.world-f.eye.xyz));
-    float alpha=min(0.99,in.rgba.a*product*81.0)*(1-fog);
+    float alpha=min(0.99,in.rgba.a*product*81.0);
     if (alpha < 0.003) discard_fragment();
     float3 rgb=select(in.rgba.rgb/12.92,pow((in.rgba.rgb+0.055)/1.055,float3(2.4)),in.rgba.rgb>0.04045);
     return float4(rgb,alpha);
