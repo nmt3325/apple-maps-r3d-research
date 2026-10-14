@@ -49,7 +49,9 @@ final class DiagnosticsLog: @unchecked Sendable {
         if let tile { record["tile"] = tile }
         if let trace { record["trace_id"] = trace }
         // Invalid or oversized payloads cannot corrupt the line stream.
-        guard let data = try? JSONSerialization.data(withJSONObject:record,options:[.sortedKeys]), data.count <= min(65536,segmentBytes-1) else {
+        guard JSONSerialization.isValidJSONObject(record),
+              let data = try? JSONSerialization.data(withJSONObject:record,options:[.sortedKeys]),
+              data.count <= min(65536,segmentBytes-1) else {
             dropped += 1; lock.unlock(); return
         }
         queued += 1
