@@ -16,6 +16,8 @@ Apple Maps iOS 27のR3Dを調査し、**元のテクスチャ付きポリゴン�
 
 稼働中のビューア（Tailscale内）：**https://ct104.taila8c9c.ts.net:8972/**。地図で場所と範囲を選び、タイル数を確認してから取得・表示できます。完成成果物は [全高さ修正版Release](https://github.com/nmt3325/apple-maps-r3d-research/releases/tag/linux-explorer-height-layers-20261014)、[6条件の検証証拠](reports/validation-20261014/README.md)、[再現手順](docs/LINUX_EXPLORER.md)。ローカル取得設定、サービスcoverageと対応codecの制約は手順に明記しています。
 
+**Web版の移動中ストリーミングを追加。** Appleからの取得・復号はサーバー側のまま、カメラの移動・回転に合わせて全高さ層のタイルを追加します。近距離z20／遠距離z18・z19の逐次表示、任意座標への移動、キャッシュとモデルの解放に対応します。[操作・設計・検証手順](docs/WEB_STREAMING.md)。
+
 ## 現在の成果
 
 | 対象 | 検証結果 | 状態 |

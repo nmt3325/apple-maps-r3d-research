@@ -55,7 +55,7 @@ def build_viewer(decoded, output, lat, lon, title='R3D · 3D explorer'):
         shutil.copyfile(leaflet/'dist'/name,leaflet_vendor/name)
     shutil.copytree(leaflet/'dist/images',leaflet_vendor/'images',dirs_exist_ok=True)
     shutil.copyfile(leaflet/'LICENSE',leaflet_vendor/'LICENSE')
-    for name in ('index.html', 'app.js'):
+    for name in ('index.html', 'app.js', 'stream-planner.mjs', 'stream-controller.mjs', 'stream-scene.mjs'):
         shutil.copyfile(REPO/'viewer/independent'/name, output/name)
     bounds_min = np.full(3, np.inf)
     bounds_max = np.full(3, -np.inf)

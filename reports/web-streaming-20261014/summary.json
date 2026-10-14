@@ -1,0 +1,112 @@
+{
+  "validatedAtJST": "2026-10-14T17:04:26.982826+09:00",
+  "referencePR": "https://github.com/nmt3325/apple-maps-r3d-research/pull/1",
+  "desktop": {
+    "checks": 14,
+    "passed": 14,
+    "maxResidentMiB": 139.66800594329834,
+    "maxPending": 2,
+    "maxUpperTiles": 5,
+    "observedResidentLODs": [
+      18,
+      19,
+      20
+    ],
+    "cacheHits": 148
+  },
+  "mobile": {
+    "checks": 9,
+    "passed": 9,
+    "mode": "Chromium 390x844 with touch emulation; not iOS Safari hardware"
+  },
+  "static": {
+    "checks": 16,
+    "passed": 16
+  },
+  "python": {
+    "tests": 20,
+    "passed": 20
+  },
+  "node": {
+    "plannerPassed": true,
+    "controllerPassed": true
+  },
+  "production": {
+    "service": "r3d-oahu-independent-viewer.service",
+    "active": true,
+    "streaming": true,
+    "browserOrigin": "https://ct104.taila8c9c.ts.net:8972",
+    "transport": "Playwright forwards only app-origin requests to production loopback, retaining browser Origin; real server Apple acquisition and decoding; Tailnet TLS ingress not directly verified"
+  },
+  "liveZ19": {
+    "id": "3a79bdbba2a0b681b07b6dbf13588fee",
+    "tile": {
+      "style": 98,
+      "z": 19,
+      "x": 465662,
+      "y": 206493,
+      "h": 0
+    },
+    "status": "ready",
+    "result": {
+      "tile": {
+        "style": 98,
+        "z": 19,
+        "x": 465662,
+        "y": 206493,
+        "h": 0
+      },
+      "source": "s98_z19_x465662_y206493_h0.r3d",
+      "sourceSHA256": "a69cfa475e295ffd4d5ad376a56d696296392205a5daac38409cdc03af008e14",
+      "transform": {
+        "version": 2,
+        "matrixR3x3": [
+          0.4448982031451994,
+          -0.6461896927348681,
+          0.6200842441486396,
+          -0.37669993445441274,
+          -0.7631768346872272,
+          -0.5250316927375202,
+          0.8125039988949064,
+          -3.7433801478106896e-08,
+          -0.5829556173327302
+        ],
+        "ecefTranslation": [
+          -3959488.6598470043,
+          3352540.214232587,
+          3697487.902126421
+        ],
+        "rotationDeterminant": 1.0
+      },
+      "bounds": {
+        "min": [
+          -32.23999786376953,
+          -32.55999755859375,
+          -156.87998962402344
+        ],
+        "max": [
+          32.23999786376953,
+          32.71999740600586,
+          -55.36000061035156
+        ]
+      },
+      "triangles": 14137,
+      "vertices": 9876,
+      "splatRecords": 6912,
+      "visibleSplatRecords": 6912,
+      "textureSize": [
+        1024,
+        995
+      ],
+      "geometryBytes": 485692,
+      "splatBytes": 276496,
+      "georeferenceErrorMeters": 4.816837810347137e-09,
+      "mesh": "/stream-assets/b538300d3c4cde35207385ba/3a79bdbba2a0b681b07b6dbf13588fee/mesh.bin?v=a69cfa475e295ffd4d5ad376a56d696296392205a5daac38409cdc03af008e14",
+      "splats": "/stream-assets/b538300d3c4cde35207385ba/3a79bdbba2a0b681b07b6dbf13588fee/splats.bin?v=a69cfa475e295ffd4d5ad376a56d696296392205a5daac38409cdc03af008e14",
+      "texture": "/stream-assets/b538300d3c4cde35207385ba/3a79bdbba2a0b681b07b6dbf13588fee/texture.png?v=a69cfa475e295ffd4d5ad376a56d696296392205a5daac38409cdc03af008e14"
+    },
+    "finished": 1791964792.5477982,
+    "cached": false,
+    "expires": 1791968392.5477982
+  }
+}
