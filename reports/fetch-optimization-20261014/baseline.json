@@ -1,0 +1,48 @@
+{
+  "scope": "In-process CPU decode and mobile packing; excludes network, Metal and device performance",
+  "python": "3.13.5",
+  "platform": "Linux-7.0.2-6-pve-x86_64-with-glibc2.41",
+  "rounds": 5,
+  "tiles": [
+    {
+      "tile": "s98_z20_x64554_y460820_h0.r3d",
+      "sourceBytes": 179388,
+      "sourceSHA256": "bcdeb9361be467e317df3e10cd2c422eee3e9a4f36013cd5c4f3b48fc16d756b",
+      "seconds": [
+        0.7773661839892156,
+        0.7647353920037858,
+        0.7672336800023913,
+        0.7814085040008649,
+        0.8551544660003856
+      ],
+      "medianSeconds": 0.7773661839892156,
+      "outputs": {
+        "json": "7922ac0d283ed81116dc3a489832ae5f22f0a507837317f1dc264664937f0d64",
+        "vertices": "d4d9e4ecdbd9b317ac33dfefc7a352f0f0f819ea430a69a5981b07246f2737b5",
+        "indices": "1b1ecd515b386f5020633158b88a7193bafc7152c329b93787f7248333785c50",
+        "splats": "70d42965f78ee73ea69dd4b8e532802ceac47820aabbe77751a9409162147eb8",
+        "atlas": "1b72e58b425297542437d4acc10c5e9b8a6f1112b9478bf3a16ddac63691b83a"
+      }
+    },
+    {
+      "tile": "s98_z20_x931325_y412987.r3d",
+      "sourceBytes": 157192,
+      "sourceSHA256": "3974ea9a6ce7962ef7377e88ba2e3f8e0c05adf10f9ab5823b5ac7157e5a0edd",
+      "seconds": [
+        0.5634123430063482,
+        0.573248311993666,
+        0.45067391902557574,
+        0.4666019080032129,
+        0.48705088402493857
+      ],
+      "medianSeconds": 0.48705088402493857,
+      "outputs": {
+        "json": "55033e714157e837d08d390abce65297cc4292225ba453ac14d87c0cd5c9aa75",
+        "vertices": "3cfae722c2c892fe0acdaeccc293582a28df44b2f19393b332d65fae8020cf70",
+        "indices": "f20300c9b5ae387054d5f75350673d8eec1e69ce96584193e00f35ad082fb56c",
+        "splats": "7ad6c566724e0689049fbaf6a2e25af75922bc3e63662742eeabd853a1d3d96b",
+        "atlas": "397d0e8f192f44c4b0d0af8f653d8d6784f1db5bb5064b90e9977486eb611484"
+      }
+    }
+  ]
+}

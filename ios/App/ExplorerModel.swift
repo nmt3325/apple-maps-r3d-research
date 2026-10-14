@@ -38,6 +38,8 @@ final class ExplorerModel: ObservableObject {
     var roots = Set<TileKey>()
     var needed = Set<TileKey>()
     var pending: [TileKey:Task<Void,Never>] = [:]
+    var fetching = Set<TileKey>()
+    let processing = PipelineSlots(limit:2)
     var queue: [TileKey] = []
     var generation = 0
     var lastPlan = 0.0
@@ -76,7 +78,7 @@ final class ExplorerModel: ObservableObject {
     }
     func invalidate() {
         generation += 1
-        pending.values.forEach{$0.cancel()}; pending.removeAll(); queue.removeAll()
+        pending.values.forEach{$0.cancel()}; pending.removeAll(); fetching.removeAll(); queue.removeAll()
         tiles.removeAll(); knownBounds.removeAll(); accessed.removeAll(); empty.removeAll(); failures.removeAll()
         indices.removeAll(); indexAccess.removeAll(); expanded.removeAll()
         desired.removeAll(); roots.removeAll(); needed.removeAll(); lastPlan = 0
@@ -164,58 +166,62 @@ final class ExplorerModel: ObservableObject {
     }
     func pump() {
         guard active && !paused && !authFailed, let client, let factory else { return }
-        while pending.count < 2 && !queue.isEmpty {
+        while pending.count < 4 && fetching.count < 2 && !queue.isEmpty {
             let key = queue.removeFirst(), epoch = generation, frameOrigin = origin, texture = textureLimit
             let decoder = decoder
+            fetching.insert(key)
             pending[key] = Task { [weak self] in
                 do {
                     let raw = try await client.fetch(key)
                     try Task.checkCancellation()
                     guard let self, self.generation == epoch else { return }
+                    self.fetching.remove(key)
+                    self.pump()
                     if let raw {
-                        let decoded: [String:Data]
-                        do { decoded = try await decoder.invoke(key.style == 100 ? "height_index" : "decode_tile",data:raw) }
-                        catch {
-                            if !(error is CancellationError) { await client.rejectCached(key) }
-                            throw error
-                        }
-                        try Task.checkCancellation()
-                        if key.style == 100 {
-                            guard let data = decoded["json"] else { throw StreamError.invalidIndex }
-                            let index = try JSONDecoder().decode(HeightIndex.self,from:data)
-                            guard index.tile.z == key.z && index.tile.x == key.x && index.tile.y == key.y else { throw StreamError.invalidIndex }
-                            if self.generation == epoch && self.needed.contains(key) { self.indices[key] = index }
-                        } else {
-                            guard let json = decoded["json"] else { throw StreamError.invalidGeometry }
-                            let info = try JSONDecoder().decode(TileInfo.self,from:json)
-                            guard info.min.count == 3, info.max.count == 3,
-                                  info.transform.matrixR3x3.count == 9, info.transform.ecefTranslation.count == 3 else { throw StreamError.invalidGeometry }
-                            if self.generation == epoch && self.needed.contains(key) {
-                                self.knownBounds[key] = info.sphere(origin:frameOrigin)
-                            }
-                            // Keep only the cheap bounds for an offscreen model.
-                            // Its original bytes remain in the bounded disk cache.
-                            if !self.inView(key) {
-                                self.pending.removeValue(forKey:key)
-                                self.updatePlan(now:CACurrentMediaTime())
-                                return
-                            }
-                            let preparation = Task.detached(priority:.utility) {
-                                try Task.checkCancellation()
-                                return try factory.prepare(key:key,decoded:decoded,origin:frameOrigin,textureLimit:texture)
-                            }
-                            let tile = try await withTaskCancellationHandler(operation:{try await preparation.value},onCancel:{preparation.cancel()})
+                        try await self.processing.withSlot {
                             try Task.checkCancellation()
-                            if self.generation == epoch && self.needed.contains(key) {
-                                guard tile.cost <= self.budget else { throw StreamError.gpuBudget }
-                                self.enforceBudget(reserving:tile.cost)
-                                // Prefer reducing the range over evicting visible geometry indefinitely.
-                                if self.tiles.values.reduce(0,{$0+$1.cost})+tile.cost > self.budget {
-                                    self.viewDistance = max(120,self.viewDistance*0.8)
-                                    self.message = "メモリに合わせて描画範囲を調整しました"
-                                } else {
-                                    self.tiles[key] = tile; self.accessed[key] = CACurrentMediaTime()
-                                    self.completed += 1
+                            let decoded: [String:Data]
+                            do { decoded = try await decoder.invoke(key.style == 100 ? "height_index" : "decode_tile",data:raw) }
+                            catch {
+                                if !(error is CancellationError) { await client.rejectCached(key) }
+                                throw error
+                            }
+                            try Task.checkCancellation()
+                            if key.style == 100 {
+                                guard let data = decoded["json"] else { throw StreamError.invalidIndex }
+                                let index = try JSONDecoder().decode(HeightIndex.self,from:data)
+                                guard index.tile.z == key.z && index.tile.x == key.x && index.tile.y == key.y else { throw StreamError.invalidIndex }
+                                if self.generation == epoch && self.needed.contains(key) { self.indices[key] = index }
+                            } else {
+                                guard let json = decoded["json"] else { throw StreamError.invalidGeometry }
+                                let info = try JSONDecoder().decode(TileInfo.self,from:json)
+                                guard info.min.count == 3, info.max.count == 3,
+                                      info.transform.matrixR3x3.count == 9, info.transform.ecefTranslation.count == 3 else { throw StreamError.invalidGeometry }
+                                if self.generation == epoch && self.needed.contains(key) {
+                                    self.knownBounds[key] = info.sphere(origin:frameOrigin)
+                                }
+                                // Keep only the cheap bounds for an offscreen model.
+                                // Its original bytes remain in the bounded disk cache.
+                                if !self.inView(key) {
+                                    return
+                                }
+                                let preparation = Task.detached(priority:.utility) {
+                                    try Task.checkCancellation()
+                                    return try factory.prepare(key:key,decoded:decoded,origin:frameOrigin,textureLimit:texture)
+                                }
+                                let tile = try await withTaskCancellationHandler(operation:{try await preparation.value},onCancel:{preparation.cancel()})
+                                try Task.checkCancellation()
+                                if self.generation == epoch && self.needed.contains(key) {
+                                    guard tile.cost <= self.budget else { throw StreamError.gpuBudget }
+                                    self.enforceBudget(reserving:tile.cost)
+                                    // Prefer reducing the range over evicting visible geometry indefinitely.
+                                    if self.tiles.values.reduce(0,{$0+$1.cost})+tile.cost > self.budget {
+                                        self.viewDistance = max(120,self.viewDistance*0.8)
+                                        self.message = "メモリに合わせて描画範囲を調整しました"
+                                    } else {
+                                        self.tiles[key] = tile; self.accessed[key] = CACurrentMediaTime()
+                                        self.completed += 1
+                                    }
                                 }
                             }
                         }
@@ -232,6 +238,7 @@ final class ExplorerModel: ObservableObject {
                     }
                 }
                 guard let self, self.generation == epoch else { return }
+                self.fetching.remove(key)
                 self.pending.removeValue(forKey:key)
                 if self.active && !self.paused && !self.authFailed {
                     self.updatePlan(now:CACurrentMediaTime())
@@ -267,7 +274,9 @@ final class ExplorerModel: ObservableObject {
         for root in roots {
             let children = desired.filter { $0.x>>($0.z-18) == root.x && $0.y>>($0.z-18) == root.y }
             let fineReady = children.filter{ $0 != root && complete($0) }
-            let useCoarse = !children.allSatisfy{complete($0)} && complete(root)
+            // Render each arriving coarse height instead of waiting for every
+            // height (including empty layers) before showing the first model.
+            let useCoarse = !children.allSatisfy{complete($0)}
             if useCoarse {
                 selected.formUnion(expanded[root] ?? [])
                 let rectangles = fineReady.map{origin.tileBounds($0)}

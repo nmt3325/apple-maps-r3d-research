@@ -11,6 +11,11 @@ import Foundation
         let signed = try? signatureConfig.signedURL(TileKey(z:20,x:931326,y:412987),now:1700000000,nonce:"aaaaaaaaaaaaaaaa")
         let expected = "https://example.apple.com/tile?style=98&v=1&region=test&z=20&x=931326&y=412987&h=0&accessKey=1700004200_aaaaaaaaaaaaaaaa_ikSpT0OYd%2Bo%2BgyyFDo7jsTtU45JQ9W4ybbMc0kGgKALDuqtGQnDobuLJUU5k5deF0zJQfe%2F4OKEmXKYW0KQj0qsyiS0SoXFFdoxLArswR31HejMrk3t1qdSyckJZUvGn"
         let signatureMatches = signed?.absoluteString == expected
+        var cacheConfig = signatureConfig
+        cacheConfig.headers = ["Accept":"application/octet-stream","User-Agent":"test"]
+        let firstNamespace = cacheConfig.cacheNamespace
+        cacheConfig.headers = ["User-Agent":"test","Accept":"application/octet-stream"]
+        let cacheNamespaceStable = cacheConfig.cacheNamespace == firstNamespace
         var samples = [[String:Any]]()
         let directory = FileManager.default.urls(for:.documentDirectory,in:.userDomainMask)[0]
         let report = directory.appendingPathComponent("streaming-validation.json")
@@ -23,7 +28,8 @@ import Foundation
             samples.append(["second":second,"residentTiles":model.tiles.count,
                 "drawnTiles":model.drawnTiles,"fps":model.fps,
                 "residentBytes":model.tiles.values.reduce(0){$0+$1.cost},"budget":model.budget,
-                "pending":model.pending.count,"completed":model.completed,
+                "pending":model.pending.count,"fetching":model.fetching.count,
+                "preparing":model.processing.active,"completed":model.completed,
                 "indexCount":model.indices.count,"failures":model.failures.count,
                 "visibleLODs":Array(Set(visible.map{$0.key.z})).sorted(),
                 "viewDistance":model.viewDistance,
@@ -31,7 +37,7 @@ import Foundation
                 "eye":[model.camera.eye.x,model.camera.eye.y,model.camera.eye.z],
                 "latitude":model.origin.latitude,"longitude":model.origin.longitude,
                 "message":model.message])
-            if let data = try? JSONSerialization.data(withJSONObject:["samples":samples,"signatureMatchesPython":signatureMatches],options:[.prettyPrinted,.sortedKeys]) {
+            if let data = try? JSONSerialization.data(withJSONObject:["samples":samples,"signatureMatchesPython":signatureMatches,"cacheNamespaceStable":cacheNamespaceStable],options:[.prettyPrinted,.sortedKeys]) {
                 try? data.write(to:report,options:.atomic)
             }
             try? await Task.sleep(for:.seconds(1))

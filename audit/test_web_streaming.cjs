@@ -48,7 +48,7 @@ async function main(){
     await page.keyboard.press('Escape');await page.screenshot({path:path.join(output,'moved.png')});
     // Let fine LODs finish; keep collecting resource statistics while requests run.
     for(let i=0;i<12;i++){await page.waitForTimeout(1000);samples.push({stage:'settling',...await snapshot()});}
-    check('requests limited to two',samples.every(v=>v.stream.maxPending<=2),samples.map(v=>v.stream.maxPending));
+    check('pipeline limited to four, acquisition and preparation to two',samples.every(v=>v.stream.maxPending<=4&&v.stream.acquiring<=2&&v.stream.preparing<=2),samples.map(v=>v.stream.maxPending));
     check('resident model budget respected',samples.every(v=>v.stream.residentBytes<=v.stream.budgetBytes),samples.map(v=>v.stream.residentBytes));
     await page.mouse.click(1100,500);
     await page.keyboard.down('ShiftLeft');await page.keyboard.down('KeyD');

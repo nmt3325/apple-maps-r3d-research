@@ -19,7 +19,9 @@ struct FetchConfiguration: Codable, Sendable {
               queryParameters.first(where:{$0[0]=="style"})?[1] == "98" else { throw StreamError.configuration }
     }
     var cacheNamespace: String {
-        let data = (try? JSONEncoder().encode(self)) ?? Data()
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .sortedKeys
+        let data = (try? encoder.encode(self)) ?? Data()
         return SHA256.hash(data:data).map{String(format:"%02x",$0)}.joined()
     }
     private static func encode(_ value: String, form: Bool) -> String {

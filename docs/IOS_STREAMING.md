@@ -8,17 +8,17 @@
 
 原本 R3D を端末内の独立 Python decoder で復号する。Python は BeeWare の iOS 用 XCFramework と標準ライブラリとしてアプリに同梱し、C API で呼び出す。プロセス起動や外部 Python 環境は使わない。UI / 移動 / ネットワーク / 描画は Swift / UIKit / Metal、元の数値 codec はこのリポジトリの `codec/` を共有する。HEIC は ImageIO / MetalKit で端末内変換する。
 
-250 ms ごとにカメラ位置・方向・視野角から表示候補を更新する。水平範囲は z18 / z19 / z20 の quadtree leaves で分割し、近くを細かく、遠くを粗くする。対応する範囲の coarse モデルを先に表示し、各 fine leaf の全高さが揃うごとに切り替える。coarse の同じ XY 範囲を fragment shader でマスクして、Splat の重複合成を防ぐ。実際のタイル境界付近の差や LOD 継ぎ目は公式と同一とは保証しない。
+250 ms ごとにカメラ位置・方向・視野角から表示候補を更新する。水平範囲は z18 / z19 / z20 の quadtree leaves で分割し、近くを細かく、遠くを粗くする。対応する範囲の coarse モデルは高さ層が到着するごとに表示し、各 fine leaf の全高さが揃うごとに切り替える。coarse の同じ XY 範囲を fragment shader でマスクして、Splat の重複合成を防ぐ。実際のタイル境界付近の差や LOD 継ぎ目は公式と同一とは保証しない。
 
 この取得テンプレートで C3MM を提供するのは **z13**。z18 に対して z11 を問い合わせる方法では空応答になるため、各 LOD とも z13 index 内の z17 占有セルを参照する。z18 / z19 / z20 でそれぞれ 2 / 4 / 8 の高さ子を列挙し、途中の空層では探索を止めない。インデックスの座標を検証し、未知の形式や認証失敗を空タイルとして扱わない。h0 固定の取得は行わない。
 
 ## 負荷管理
 
-- ネットワーク・復号・GPU 準備を含むタイル処理は同時最大 2 件。Python 復号は actor 内で直列化し、メインスレッドでは行わない。
+- 通信は同時最大 2 件、復号・GPU 準備も同時最大 2 件。待機を含む全体は最大 4 件で、復号中に次の原本を先行取得する。待機中は最大 16 MB の原本だけを保持し、キャンセルで待機枠を解放する。Python 復号は actor 内で直列化し、メインスレッドでは行わない。
 - 不要になったリクエストを取り消し、復号中の結果も世代番号・キャンセル確認で破棄する。Python 数値処理自体は途中で強制停止せず、完了後に結果を破棄する。
 - GPU のモデル・テクスチャ見積もりは標準 192 MiB、軽量 / メモリ警告時は 96 MiB。実際の 3D frustum に入らないモデルは 2 秒の保持期間後に解放し、軽量な境界情報だけを保持する。視点が変わると原本キャッシュから再生成する。上限に届くと描画距離を短縮する。これは**常駐モデルの予算**であり、Python、復号途中の配列、Metal ドライバー、アプリ全体の RSS の上限ではない。
 - テクスチャは最大 1024 / 512 px に縮小し mipmap を生成。描画解像度を最大 1.5 倍、GPU の処理中フレームを最大 3 件に制限する。実際の 3D sphere / frustum 判定で描画を除外する。
-- 原本の LRU ディスクキャッシュは取得設定ごとの namespace で最大 384 MiB、モデルは原本から再生成する。HTTP 空応答は 60 秒、最大 4096 件。対応するインデックスも必要範囲を中心に整理する。
+- 原本の LRU ディスクキャッシュは取得設定ごとの namespace で最大 384 MiB、モデルは原本から再生成する。設定のキー順を正規化し、再起動時も同じ namespace を使う。HTTP 空応答は 60 秒、最大 4096 件。対応するインデックスも必要範囲を中心に整理する。
 - バックグラウンドでは描画・新規取得・移動を停止する。発熱時には軽量化し、低電力モードでは 30 fps に抑える。
 - 429 / 5xx は最大 3 回、待ち時間を設けて再試行。401 / 403 は取得を停止して設定更新を示す。取得失敗は 20 秒の cooldown を設ける。レスポンス / gzip 展開は 16 MB に制限する。
 
@@ -58,6 +58,8 @@ R3D_FETCH_CONFIG = /absolute/private/path/maps.credentials.json
 ```sh
 swiftc ios/App/World.swift ios/Tests/WorldChecks.swift -o /tmp/r3d-world-checks
 /tmp/r3d-world-checks
+swiftc ios/App/PipelineSlots.swift ios/Tests/PipelineChecks.swift -o /tmp/r3d-pipeline-checks
+/tmp/r3d-pipeline-checks
 python3.13 ios/Tests/test_mobile_decoder.py -v
 # 原本の頂点 / UV / 法線 / Splat の配列一致を検証する場合
 R3D_TEST_FIXTURES=/private/path/raw-fixtures python3.13 ios/Tests/test_mobile_decoder.py -v
@@ -70,6 +72,8 @@ python3 ios/Tests/check_validation.py /private/path/streaming-validation.json
 ```
 
 この検査は実行完了、署名一致、同時処理上限、モデルのメモリ予算、複数 LOD、上層、移動先での表示を確認する。fps は測定値として報告し、端末ごとの結果を区別する。
+
+共通の Huffman / BYET 復号の高速化と変更前後の原本比較は [取得・復号の最適化](../reports/fetch-optimization-20261014/README.md)。同じ codec を使う Web / CLI にも適用される。
 
 ## 対応範囲
 

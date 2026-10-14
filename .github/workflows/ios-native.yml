@@ -21,6 +21,8 @@ jobs:
         run: |
           swiftc ios/App/World.swift ios/Tests/WorldChecks.swift -o "$RUNNER_TEMP/world-checks"
           "$RUNNER_TEMP/world-checks"
+          swiftc ios/App/PipelineSlots.swift ios/Tests/PipelineChecks.swift -o "$RUNNER_TEMP/pipeline-checks"
+          "$RUNNER_TEMP/pipeline-checks"
       - name: Check decoder rejection and size bounds
         run: python ios/Tests/test_mobile_decoder.py -v
       - name: Build simulator

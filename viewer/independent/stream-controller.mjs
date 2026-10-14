@@ -6,11 +6,35 @@ const sleep=(ms,signal)=>new Promise((resolve,reject)=>{
   const timer=setTimeout(()=>{signal.removeEventListener('abort',abort);resolve();},ms);
   signal.addEventListener('abort',abort,{once:true});
 });
+
+class PreparationSlots {
+  constructor(limit){this.limit=limit;this.active=0;this.waiters=[];}
+  acquire(signal){
+    return new Promise((resolve,reject)=>{
+      if(signal.aborted){reject(new DOMException('Aborted','AbortError'));return;}
+      const waiter={grant:()=>{signal.removeEventListener('abort',abort);resolve();}};
+      const abort=()=>{const index=this.waiters.indexOf(waiter);if(index>=0)this.waiters.splice(index,1);reject(new DOMException('Aborted','AbortError'));};
+      if(this.active<this.limit){this.active++;resolve();}
+      else {this.waiters.push(waiter);signal.addEventListener('abort',abort,{once:true});}
+    });
+  }
+  async run(signal,operation){
+    await this.acquire(signal);
+    try{
+      if(signal.aborted)throw new DOMException('Aborted','AbortError');
+      return await operation();
+    }finally{
+      if(this.waiters.length)this.waiters.shift().grant();else this.active--;
+    }
+  }
+}
+
 export class TileStream {
   constructor(options){
     this.options=options;this.models=new Map();this.indices=new Map();this.empty=new Map();this.failures=new Map();this.pending=new Map();
     this.epoch=0;this.active=true;this.enabled=true;this.authFailed=false;this.error='';this.queue=[];this.desired=[];this.expanded=new Map();this.needed=new Map();
     this.lastPlan=0;this.completed=0;this.evictions=0;this.cancelled=0;this.maxPending=0;this.bytes=0;this.budget=192*1024*1024;
+    this.preparation=new PreparationSlots(2);
   }
   clear(){
     this.epoch++;for(const p of this.pending.values()){p.controller.abort();this.cancelled++;}this.pending.clear();
@@ -64,10 +88,10 @@ export class TileStream {
     for(const [id,entry] of this.models){const root=keyOf(rootOf(entry.tile));this.options.render(entry.model,selection.selected.has(id),entry.tile.z===18?(selection.masks.get(root)||[]):[]);}
   }
   pump(){
-    while(this.enabled&&this.active&&!this.authFailed&&this.pending.size<2&&this.queue.length){
-      const tile=this.queue.shift(),id=keyOf(tile),epoch=this.epoch,controller=new AbortController(),pending={controller};
+    while(this.enabled&&this.active&&!this.authFailed&&this.pending.size<4&&[...this.pending.values()].filter(p=>p.acquiring).length<2&&this.queue.length){
+      const tile=this.queue.shift(),id=keyOf(tile),epoch=this.epoch,controller=new AbortController(),pending={controller,acquiring:true};
       this.pending.set(id,pending);this.maxPending=Math.max(this.maxPending,this.pending.size);
-      this.run(tile,controller.signal,epoch).catch(error=>{
+      this.run(tile,controller.signal,epoch,()=>{pending.acquiring=false;this.pump();}).catch(error=>{
         if(epoch!==this.epoch||error.name==='AbortError')return;
         if(error.authenticationFailed){this.authFailed=true;for(const p of this.pending.values())p.controller.abort();}
         this.error=error.message;this.failures.set(id,performance.now()+(error.status===429?1000:20000));
@@ -78,7 +102,7 @@ export class TileStream {
       });
     }
   }
-  async run(tile,signal,epoch){
+  async run(tile,signal,epoch,acquired){
     const id=keyOf(tile);
     const read=async response=>{const body=await response.json();if(!response.ok)throw Object.assign(Error(body.error||'タイルを読み込めません'),{status:response.status,authenticationFailed:body.authenticationFailed});return body;};
     let state=await read(await fetch('/api/stream/request',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(tile),signal}));
@@ -91,16 +115,20 @@ export class TileStream {
     if(state.status==='empty'){this.empty.set(id,performance.now()+60000);return;}
     if(state.status!=='ready'||!state.result)throw Error('タイルの応答が不正です');
     if(tile.style===100){this.indices.set(id,{result:state.result,touched:performance.now()});return;}
-    const model=await this.options.load(state.result,signal);
-    if(signal.aborted||epoch!==this.epoch||!this.needed.has(id)){this.options.dispose(model);return;}
-    const cost=model.cost;this.trim(cost);
-    if(this.bytes+cost>this.budget){this.options.dispose(model);this.options.reduceDistance();throw Error('メモリに合わせて表示範囲を縮小しました');}
-    this.models.set(id,{model,cost,tile,touched:performance.now()});this.bytes+=cost;this.completed++;
-    if(!this.failures.size)this.error='';
+    acquired();
+    await this.preparation.run(signal,async()=>{
+      const model=await this.options.load(state.result,signal);
+      if(signal.aborted||epoch!==this.epoch||!this.needed.has(id)){this.options.dispose(model);return;}
+      const cost=model.cost;this.trim(cost);
+      if(this.bytes+cost>this.budget){this.options.dispose(model);this.options.reduceDistance();throw Error('メモリに合わせて表示範囲を縮小しました');}
+      this.models.set(id,{model,cost,tile,touched:performance.now()});this.bytes+=cost;this.completed++;
+      if(!this.failures.size)this.error='';
+    });
   }
   notify(){this.options.status(this.snapshot());}
   snapshot(){return {enabled:this.enabled,active:this.active,loaded:this.models.size,pending:this.pending.size,queued:this.queue.length,
-    completed:this.completed,evictions:this.evictions,cancelled:this.cancelled,maxPending:this.maxPending,residentBytes:this.bytes,budgetBytes:this.budget,
+    completed:this.completed,evictions:this.evictions,cancelled:this.cancelled,maxPending:this.maxPending,
+    acquiring:[...this.pending.values()].filter(p=>p.acquiring).length,preparing:this.preparation.active,residentBytes:this.bytes,budgetBytes:this.budget,
     lods:[...new Set([...this.models.values()].map(e=>e.tile.z))].sort(),upperTiles:[...this.models.values()].filter(e=>e.tile.h>0).length,
     desired:this.desired.map(t=>({...t})),error:this.error,authFailed:this.authFailed};}
 }

@@ -149,8 +149,8 @@ def decode_j(src: bytes, count: int, lanes: int) -> bytes:
                 raise ValueError("Missing paired first lane")
             pending = False
             decoded, width = decode_lane(src[at:at + size], kind, count)
-            for i in range(count):
-                out[i * lanes + lane - 1:i * lanes + lane + 1] = decoded[i * 2:i * 2 + 2]
+            out[lane-1::lanes] = decoded[0::2]
+            out[lane::lanes] = decoded[1::2]
         else:
             if pending:
                 raise ValueError("Incomplete paired lane")

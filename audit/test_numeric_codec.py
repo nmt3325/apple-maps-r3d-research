@@ -14,6 +14,7 @@ from nativefree_soup import decode_quantized, decode_soup
 from nativefree_validate import validate_arrays
 from nativefree_splat_material import pack_material20
 from nativefree_trico_size import encode_size
+from nativefree_huff_aligned import WordBits, decode_symbols, Huff816Error
 
 
 def literal(payload):
@@ -28,7 +29,52 @@ def lane(kind, values, bitmap, output_count):
     return encode_size(len(values)) + encode_size(len(bitstream)) + bitstream + encode_size(len(value_stream)) + value_stream
 
 
+def word_bits(bits):
+    bits += '0' * (-len(bits) % 32)
+    return b''.join(struct.pack('<I', int(bits[i:i+32], 2)) for i in range(0, len(bits), 32))
+
+
+def compressed_huff(entries, values, width):
+    table = f'{len(entries)-1:0{width}b}' + '101'
+    for length, code, symbol in entries:
+        table += f'{length-1:05b}{code:0{length}b}11{symbol:0{width}b}'
+    codes = {symbol: f'{code:0{length}b}' for length, code, symbol in entries}
+    return struct.pack('<I', 0x61000002) + word_bits(table) + word_bits(''.join(codes[v] for v in values))
+
+
 class NumericCodecTests(unittest.TestCase):
+    def test_word_reader_across_boundaries(self):
+        text = ''.join(f'{v:032b}' for v in (0x12345678, 0xdeadbeef, 0x98765432))
+        data = word_bits(text)
+        for start in range(64):
+            for width in range(33):
+                reader = WordBits(data, start)
+                self.assertEqual(reader.read(width), int(text[start:start+width] or '0', 2))
+                self.assertEqual(reader.pos, start+width)
+        with self.assertRaises(Huff816Error): WordBits(data[:-1], 64).read(1)
+
+    def test_huff_prefix_lookup_long_codes_and_tail(self):
+        for width in (8, 16):
+            entries = [(1, 0, 3), (12, 1<<11, 10), (32, (1<<31)|(1<<30), (1<<width)-1)]
+            for values in ([3], [10], [entries[-1][2]], [3, 10, entries[-1][2], 3]*37):
+                data = compressed_huff(entries, values, width)
+                decoded, stats = decode_symbols(data, width, len(values))
+                expected = b''.join(v.to_bytes(width//8, 'little') for v in values)
+                self.assertEqual(decoded, expected)
+                self.assertEqual(stats['entropyBitsConsumed'], sum(next(n for n, _, s in entries if s==v) for v in values))
+            data = compressed_huff(entries, [3], width)
+            for bad in (data[:-1], data+b'\0'*4, data[:-4]+struct.pack('<I', 1),
+                        data[:-4]+struct.pack('<I', 0xe0000000)):
+                with self.assertRaises(Huff816Error): decode_symbols(bad, width, 1)
+            conflict = compressed_huff([(1,0,1),(2,0,2)], [1], width)
+            with self.assertRaises(Huff816Error): decode_symbols(conflict, width, 1)
+
+    def test_huff_constant_and_literal(self):
+        for width in (8, 16):
+            constant = struct.pack('<I', 0x61000002) + word_bits('0'*width+'00011'+f'{7:0{width}b}')
+            self.assertEqual(decode_symbols(constant, width, 5)[0], (7).to_bytes(width//8,'little')*5)
+            self.assertEqual(decode_symbols(literal(b'\0'*(width//8)), width, 1)[0], b'\0'*(width//8))
+
     def test_byte_predictors(self):
         self.assertEqual(decode_lane(lane(1, [10, 20, 10], 0b1010, 5), 1, 5)[0], bytes([10, 10, 20, 20, 10]))
         self.assertEqual(decode_lane(lane(2, [10, 20, 10], 0b0011, 5), 2, 5)[0], bytes([10, 20, 10, 20, 10]))

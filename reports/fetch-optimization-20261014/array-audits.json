@@ -1,0 +1,158 @@
+{
+  "soup": {
+    "scope": "All TRICO soup triangle XYZ, eight attributes and packed RGBA/material20; polygon mesh tested separately",
+    "nativeRuntimeInvoked": false,
+    "goldensUsedOnlyForComparison": true,
+    "tiles": 223,
+    "exactTiles": 223,
+    "mismatchTiles": 0,
+    "errors": 0,
+    "elapsedSeconds": 28.327,
+    "implementationSHA256": {
+      "nativefree_r3d_field_tree.py": "f04e52581d223fc6f8229deb1c59b6ce8db949dadabfc1fd408c4239f9b6b215",
+      "nativefree_mesh.py": "46d7cc15e4b7f54f2661a0e68322a84bbb7d0279de3761a0ef8e38a90a4dac93",
+      "nativefree_huff816_raw_strict.py": "fcae8e691d34c1e21b860cabe608b7cd7505dd770e0e77171b472f26e5b82830",
+      "nativefree_huffman_header.py": "1f64c52c9c7aeecc4914cf96ed1f52fce227548124bdbdf968783fedf080ee6f",
+      "huff816_nativefree.py": "8fea74a59728ef563522e4c493cd202e9631ea29516ef049d9f15de8a0cb81be",
+      "c3mm_v2_parser.py": "b2883bdc11b3072c204bba677f4280ffbaef40b82dfa4426d2c6f561d9d99afc",
+      "nativefree_decode_r3d.py": "6fa5405c8bccfe739337d9d609acb2f32dde4c59ccfb4fc81210fe8830c35b98",
+      "nativefree_bytes.py": "0fb4148a5fd101b50167bdcc4e695b5e1d0aad03f667fe732eb761977c0b9ad1",
+      "nativefree_prepare_region.py": "bc6c8c41f7ca3612db35dcd458a65f7eff6552a7ddfa2cf77216a64798c73c84",
+      "nativefree_validate.py": "e443f357ca7f30b489beeb8cd73ef0da0598666c02f7c84679540116a541e8ed",
+      "nativefree_soup.py": "872a97d37b1447f62dc35c461937d6e326deb1507bcc4f5bd156278785759635",
+      "nativefree_mesh_topology.py": "4488e3855dc61d9c98e42c9201b03e4cf0a769f398687eaf23ced53349d07764",
+      "nativefree_extract_heic.py": "1784fb0d2bb1f38affcdd39dcbf3d98ebae147ce80c827a9c56f704d8501f09e",
+      "nativefree_r3d_codec_streams.py": "c0c686619748b599290a291ae72d6f9834fbdce5415c0f1aa112e91ecf44264c",
+      "nativefree_byet_jbitmap.py": "2c5735f7154725719ae069c4958e0a69d49c0900be8caba76eb58ee89bdd0f6e",
+      "nativefree_trico_size.py": "b6bd84191b98820b094f3b543e48dbfa50b2e0d0c9109e43915e37f2043102c5",
+      "nativefree_byet_origin.py": "698607a21110b60f40e8afa9e15a679f5459c2adcf4c04a9b419973be39389ef",
+      "nativefree_huff_aligned.py": "d0a1d0162c88e5bdc7e92fc30f93968c34678eaf82e46829308d71e3b9e76d57",
+      "nativefree_splat_material.py": "c305c310b531eb1d752e9055d52b39901fdce0fc8538f511e394ae5cf4e5f538",
+      "nativefree_georef_anchors.py": "d25a0cd19f14fe64be2661686214b04c11352fa63b66731389e86bf52f16d7bd",
+      "nativefree_huff_raw.py": "6c727a5d4ed27df253810efa8c79bc3b9c1a30d873fa02aa8f3bf78cdf68316c",
+      "nativefree_byet_jdescriptor.py": "ce0d7492a5cfb8426bea28c035c4ec4bae95c3b5109c5da3f253b49f57fbce4c"
+    },
+    "arrays": {
+      "triangles": {
+        "floatCount": 6632235,
+        "bitMismatches": 0,
+        "nonFinite": 0,
+        "matchingNaNSentinels": 0,
+        "unexpectedNonFinite": 0
+      },
+      "attributes": {
+        "floatCount": 5895320,
+        "bitMismatches": 0,
+        "nonFinite": 32958,
+        "matchingNaNSentinels": 32958,
+        "unexpectedNonFinite": 0
+      },
+      "material": {
+        "bytes": 14738300,
+        "byteMismatches": 0
+      }
+    }
+  },
+  "mesh": {
+    "scope": "All six polygon arrays and original primary HEIC per tile",
+    "floatPolicy": "Bit exact except normal Y differences individually explained by Decimal sine and adjacent native float32 rounding; maximum 1 ULP and 5.960464477539063e-8 absolute",
+    "nativeRuntimeInvoked": false,
+    "goldensUsedOnlyForComparison": true,
+    "tiles": 223,
+    "statuses": {
+      "explained-normal-rounding": 100,
+      "exact": 123
+    },
+    "elapsedSeconds": 41.396,
+    "arrays": {
+      "positions_f32": {
+        "floatCount": 3172779,
+        "indexCount": 0,
+        "bitMismatches": 0,
+        "nonFinite": 0,
+        "bytes": 0,
+        "maxULP": 0,
+        "maxAbsoluteError": 0.0
+      },
+      "uv_f32": {
+        "floatCount": 2405452,
+        "indexCount": 0,
+        "bitMismatches": 0,
+        "nonFinite": 0,
+        "bytes": 0,
+        "maxULP": 0,
+        "maxAbsoluteError": 0.0
+      },
+      "normals_f32": {
+        "floatCount": 3175104,
+        "indexCount": 0,
+        "bitMismatches": 271,
+        "nonFinite": 0,
+        "bytes": 0,
+        "maxULP": 1,
+        "maxAbsoluteError": 5.960464477539063e-08
+      },
+      "faces": {
+        "floatCount": 0,
+        "indexCount": 5768079,
+        "bitMismatches": 0,
+        "nonFinite": 0,
+        "bytes": 0,
+        "maxULP": 0,
+        "maxAbsoluteError": 0
+      },
+      "uv_indices": {
+        "floatCount": 0,
+        "indexCount": 5768079,
+        "bitMismatches": 0,
+        "nonFinite": 0,
+        "bytes": 0,
+        "maxULP": 0,
+        "maxAbsoluteError": 0
+      },
+      "normal_indices": {
+        "floatCount": 0,
+        "indexCount": 5768079,
+        "bitMismatches": 0,
+        "nonFinite": 0,
+        "bytes": 0,
+        "maxULP": 0,
+        "maxAbsoluteError": 0
+      },
+      "texture": {
+        "floatCount": 0,
+        "indexCount": 0,
+        "bitMismatches": 0,
+        "nonFinite": 0,
+        "bytes": 12402125,
+        "maxULP": 0,
+        "maxAbsoluteError": 0,
+        "exactImages": 223
+      }
+    },
+    "implementationSHA256": {
+      "nativefree_r3d_field_tree.py": "f04e52581d223fc6f8229deb1c59b6ce8db949dadabfc1fd408c4239f9b6b215",
+      "nativefree_mesh.py": "46d7cc15e4b7f54f2661a0e68322a84bbb7d0279de3761a0ef8e38a90a4dac93",
+      "nativefree_huff816_raw_strict.py": "fcae8e691d34c1e21b860cabe608b7cd7505dd770e0e77171b472f26e5b82830",
+      "nativefree_huffman_header.py": "1f64c52c9c7aeecc4914cf96ed1f52fce227548124bdbdf968783fedf080ee6f",
+      "huff816_nativefree.py": "8fea74a59728ef563522e4c493cd202e9631ea29516ef049d9f15de8a0cb81be",
+      "c3mm_v2_parser.py": "b2883bdc11b3072c204bba677f4280ffbaef40b82dfa4426d2c6f561d9d99afc",
+      "nativefree_decode_r3d.py": "6fa5405c8bccfe739337d9d609acb2f32dde4c59ccfb4fc81210fe8830c35b98",
+      "nativefree_bytes.py": "0fb4148a5fd101b50167bdcc4e695b5e1d0aad03f667fe732eb761977c0b9ad1",
+      "nativefree_prepare_region.py": "bc6c8c41f7ca3612db35dcd458a65f7eff6552a7ddfa2cf77216a64798c73c84",
+      "nativefree_validate.py": "e443f357ca7f30b489beeb8cd73ef0da0598666c02f7c84679540116a541e8ed",
+      "nativefree_soup.py": "872a97d37b1447f62dc35c461937d6e326deb1507bcc4f5bd156278785759635",
+      "nativefree_mesh_topology.py": "4488e3855dc61d9c98e42c9201b03e4cf0a769f398687eaf23ced53349d07764",
+      "nativefree_extract_heic.py": "1784fb0d2bb1f38affcdd39dcbf3d98ebae147ce80c827a9c56f704d8501f09e",
+      "nativefree_r3d_codec_streams.py": "c0c686619748b599290a291ae72d6f9834fbdce5415c0f1aa112e91ecf44264c",
+      "nativefree_byet_jbitmap.py": "2c5735f7154725719ae069c4958e0a69d49c0900be8caba76eb58ee89bdd0f6e",
+      "nativefree_trico_size.py": "b6bd84191b98820b094f3b543e48dbfa50b2e0d0c9109e43915e37f2043102c5",
+      "nativefree_byet_origin.py": "698607a21110b60f40e8afa9e15a679f5459c2adcf4c04a9b419973be39389ef",
+      "nativefree_huff_aligned.py": "d0a1d0162c88e5bdc7e92fc30f93968c34678eaf82e46829308d71e3b9e76d57",
+      "nativefree_splat_material.py": "c305c310b531eb1d752e9055d52b39901fdce0fc8538f511e394ae5cf4e5f538",
+      "nativefree_georef_anchors.py": "d25a0cd19f14fe64be2661686214b04c11352fa63b66731389e86bf52f16d7bd",
+      "nativefree_huff_raw.py": "6c727a5d4ed27df253810efa8c79bc3b9c1a30d873fa02aa8f3bf78cdf68316c",
+      "nativefree_byet_jdescriptor.py": "ce0d7492a5cfb8426bea28c035c4ec4bae95c3b5109c5da3f253b49f57fbce4c"
+    }
+  }
+}

@@ -22,14 +22,17 @@ class WordBits:
         if not 0<=n<=32: raise Huff816Error('invalid bit width')
         if self.pos+n>len(self.data)*8: raise Huff816Error('truncated word-bit stream')
         out=0
-        for _ in range(n):
+        remaining=n
+        while remaining:
             word=self.pos//32
             offset=self.pos%32
             start=word*4
             if start+4>len(self.data):raise Huff816Error('partial uint32 word')
             value=struct.unpack_from('<I',self.data,start)[0]
-            out=(out<<1)|((value>>(31-offset))&1)
-            self.pos+=1
+            take=min(remaining,32-offset)
+            out=(out<<take)|((value>>(32-offset-take))&((1<<take)-1))
+            self.pos+=take
+            remaining-=take
         return out
     def align_word(self):
         self.pos=(self.pos+31)&~31
@@ -103,9 +106,27 @@ def decode_symbols(data:bytes,width:int,count:int):
         consumed=0
     else:
         bits=WordBits(data[4+at:])
+        # A bounded prefix table handles common codes with one word read.
+        # Longer codes continue through the validated tree; the final word
+        # uses the tree directly when there are fewer lookahead bits left.
+        lookahead=min(10,max(entry.bits for entry in entries))
+        lookup=[]
+        for prefix in range(1<<lookahead):
+            node=tree
+            used=0
+            while used<lookahead and 'symbol' not in node:
+                node=node.get((prefix>>(lookahead-used-1))&1)
+                used+=1
+                if node is None:break
+            lookup.append((node,used))
         vals=[]
         for _ in range(count):
             node=tree
+            if len(bits.data)*8-bits.pos>=lookahead:
+                prefix=bits.read(lookahead)
+                node,used=lookup[prefix]
+                bits.pos-=lookahead-used
+                if node is None:raise Huff816Error('unmatched entropy code')
             while 'symbol' not in node:
                 bit=bits.read(1)
                 if bit not in node:raise Huff816Error('unmatched entropy code')
