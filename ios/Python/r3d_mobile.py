@@ -1,0 +1,81 @@
+"""Bounded in-process adapter for the audited independent R3D decoder.
+
+No network, subprocess, numpy, or server is used by this module.
+"""
+import gzip
+import io
+import json
+import math
+import struct
+from nativefree_soup import decode_soup
+from nativefree_mesh import decode_mesh
+from nativefree_extract_heic import find_heic_payloads, metadata
+from nativefree_splat_material import pack_material20
+from nativefree_validate import validate_arrays
+from c3mm_v2_parser import parse
+
+MAX_RAW = 16_000_000
+
+
+def unpack_response(raw):
+    if len(raw) > MAX_RAW:
+        raise ValueError('Response size limit')
+    if raw.startswith(b'\x1f\x8b'):
+        with gzip.GzipFile(fileobj=io.BytesIO(raw)) as stream:
+            raw = stream.read(MAX_RAW + 1)
+    if len(raw) > MAX_RAW:
+        raise ValueError('Expanded response size limit')
+    return raw
+
+
+def height_index(raw):
+    sections, cells = parse(unpack_response(raw), True)
+    header = next(s for s in sections if s['tag'] == 0)
+    return {'json': json.dumps({'tile': header['decodedTile'],
+                                'cells': sorted(cells)}).encode()}
+
+
+def decode_tile(raw):
+    raw = unpack_response(raw)
+    if not raw.startswith(bytes.fromhex('3d96592e02000000')):
+        raise ValueError('Unsupported R3D version')
+    soup, mesh = decode_soup(raw), decode_mesh(raw)
+    validate_arrays(soup, mesh)
+    if mesh['faceCount'] > 500_000 or soup.count > 500_000:
+        raise ValueError('Tile geometry budget exceeded')
+    positions = list(struct.iter_unpack('<3f', mesh['positions_f32']))
+    normals = list(struct.iter_unpack('<3f', mesh['normals_f32']))
+    uv = list(struct.iter_unpack('<2f', mesh['uv_f32']))
+    vertices, indices, unique = bytearray(), bytearray(), {}
+    for p, t, n in zip(mesh['faces'], mesh['uv_indices'], mesh['normal_indices']):
+        key = p, t, n
+        index = unique.get(key)
+        if index is None:
+            index = len(unique)
+            unique[key] = index
+            # Metal uses packed float3/float3/float2, exactly 32 bytes.
+            vertices.extend(struct.pack('<8f', *positions[p], *normals[n], *uv[t]))
+        indices.extend(struct.pack('<I', index))
+    colors = pack_material20(soup.attributes_f32)
+    splats = bytearray()
+    xyz = list(struct.iter_unpack('<3f', soup.xyz_f32))
+    for i in range(soup.count):
+        rgba = colors[i*20:i*20+4]
+        if not rgba[3]:
+            continue
+        color = tuple(c/255 for c in rgba)
+        for v in range(3):
+            splats.extend(struct.pack('<10f', *xyz[3*i+v], *color,
+                                      *(1.0 if k == v else 0.0 for k in range(3))))
+    all_points = positions + xyz
+    if not all_points or not all(math.isfinite(v) for p in all_points for v in p):
+        raise ValueError('Nonfinite or missing tile geometry')
+    lower = [min(p[k] for p in all_points) for k in range(3)]
+    upper = [max(p[k] for p in all_points) for k in range(3)]
+    images = find_heic_payloads(raw)
+    info = {'transform': metadata(raw), 'min': lower, 'max': upper,
+            'meshTriangles': mesh['faceCount'], 'splatVertices': len(splats)//40,
+            'vertexCount': len(unique), 'atlasDimensions': mesh['atlasDimensions']}
+    return {'json': json.dumps(info).encode(), 'vertices': bytes(vertices),
+            'indices': bytes(indices), 'splats': bytes(splats),
+            'atlas': images[0][1] if mesh['faceCount'] else b''}

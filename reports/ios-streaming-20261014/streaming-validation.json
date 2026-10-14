@@ -1,0 +1,3506 @@
+{
+  "samples" : [
+    {
+      "budget" : 201326592,
+      "completed" : 0,
+      "drawnTiles" : 0,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 0,
+      "indexCount" : 0,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 0,
+      "residentBytes" : 0,
+      "residentTiles" : 0,
+      "second" : 0,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 0,
+      "drawnTiles" : 0,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 56.654262652028486,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 0,
+      "residentTiles" : 0,
+      "second" : 1,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 1,
+      "drawnTiles" : 1,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.00033933525355,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 5585268,
+      "residentTiles" : 1,
+      "second" : 2,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 2,
+      "drawnTiles" : 1,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999950001989248,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 13380211,
+      "residentTiles" : 2,
+      "second" : 3,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 2,
+      "drawnTiles" : 2,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000300008593712,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 13380211,
+      "residentTiles" : 2,
+      "second" : 4,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 3,
+      "drawnTiles" : 3,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999854993425579,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 19764360,
+      "residentTiles" : 3,
+      "second" : 5,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 5,
+      "drawnTiles" : 4,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999742509039599,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 30452474,
+      "residentTiles" : 5,
+      "second" : 6,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 5,
+      "drawnTiles" : 5,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000024586009992,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 30452474,
+      "residentTiles" : 5,
+      "second" : 7,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 5,
+      "drawnTiles" : 5,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000344268265877,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 30452474,
+      "residentTiles" : 5,
+      "second" : 8,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 7,
+      "drawnTiles" : 6,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999759999132536,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 43951381,
+      "residentTiles" : 7,
+      "second" : 9,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 8,
+      "drawnTiles" : 7,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999657503421652,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 50158651,
+      "residentTiles" : 8,
+      "second" : 10,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 8,
+      "drawnTiles" : 8,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000206556454778,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 50158651,
+      "residentTiles" : 8,
+      "second" : 11,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 8,
+      "drawnTiles" : 8,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999964991604848,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 50158651,
+      "residentTiles" : 8,
+      "second" : 12,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 8,
+      "drawnTiles" : 8,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000329510454243,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 50158651,
+      "residentTiles" : 8,
+      "second" : 13,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 10,
+      "drawnTiles" : 8,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999560009189402,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 56192341,
+      "residentTiles" : 10,
+      "second" : 14,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 14,
+      "drawnTiles" : 11,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.00049672485472,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 66836489,
+      "residentTiles" : 14,
+      "second" : 15,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 16,
+      "drawnTiles" : 15,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.99997540759778,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 72684393,
+      "residentTiles" : 16,
+      "second" : 16,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 18,
+      "drawnTiles" : 16,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999274606807639,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 76645147,
+      "residentTiles" : 18,
+      "second" : 17,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 24,
+      "drawnTiles" : 21,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000506549708788,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 85413845,
+      "residentTiles" : 24,
+      "second" : 18,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 27,
+      "drawnTiles" : 25,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999720003831193,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 92692146,
+      "residentTiles" : 27,
+      "second" : 19,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 27,
+      "drawnTiles" : 26,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999717218821125,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 92692146,
+      "residentTiles" : 27,
+      "second" : 20,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 27,
+      "drawnTiles" : 26,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000046722505168,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 92692146,
+      "residentTiles" : 27,
+      "second" : 21,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 27,
+      "drawnTiles" : 26,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000555742732772,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 92692146,
+      "residentTiles" : 27,
+      "second" : 22,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 28,
+      "drawnTiles" : 26,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999694998063873,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 99462970,
+      "residentTiles" : 28,
+      "second" : 23,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 29,
+      "drawnTiles" : 27,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999282517668298,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 106602485,
+      "residentTiles" : 29,
+      "second" : 24,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 29,
+      "drawnTiles" : 28,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000941814584252,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 106602485,
+      "residentTiles" : 29,
+      "second" : 25,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 31,
+      "drawnTiles" : 29,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999724991017445,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 116584601,
+      "residentTiles" : 31,
+      "second" : 26,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 33,
+      "drawnTiles" : 30,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.942402853435297,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 124658433,
+      "residentTiles" : 33,
+      "second" : 27,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 33,
+      "drawnTiles" : 31,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.056613203075251,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 124658433,
+      "residentTiles" : 33,
+      "second" : 28,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 33,
+      "drawnTiles" : 31,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999948351947985,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 124658433,
+      "residentTiles" : 33,
+      "second" : 29,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 34,
+      "drawnTiles" : 31,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.99998250976715,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 128566190,
+      "residentTiles" : 34,
+      "second" : 30,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 35,
+      "drawnTiles" : 31,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.996077749250752,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 132598688,
+      "residentTiles" : 35,
+      "second" : 31,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 35,
+      "drawnTiles" : 33,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.004367540451796,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 132598688,
+      "residentTiles" : 35,
+      "second" : 32,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 35,
+      "drawnTiles" : 33,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.995650303185613,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 132598688,
+      "residentTiles" : 35,
+      "second" : 33,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 35,
+      "drawnTiles" : 33,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.004104380242396,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 132598688,
+      "residentTiles" : 35,
+      "second" : 34,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 35,
+      "drawnTiles" : 33,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.998812531339837,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 132598688,
+      "residentTiles" : 35,
+      "second" : 35,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 35,
+      "drawnTiles" : 32,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.001841852886962,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 132598688,
+      "residentTiles" : 35,
+      "second" : 36,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 35,
+      "drawnTiles" : 31,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999977508568257,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 132598688,
+      "residentTiles" : 35,
+      "second" : 37,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 35,
+      "drawnTiles" : 31,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999967492203147,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 1,
+      "residentBytes" : 132598688,
+      "residentTiles" : 35,
+      "second" : 38,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 35,
+      "drawnTiles" : 30,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.994615487657519,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 0,
+      "residentBytes" : 132598688,
+      "residentTiles" : 35,
+      "second" : 39,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 35,
+      "drawnTiles" : 30,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.016311204125955,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 0,
+      "residentBytes" : 132598688,
+      "residentTiles" : 35,
+      "second" : 40,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 36,
+      "drawnTiles" : 3,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.00500205340996,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1,
+        2,
+        3
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 137580656,
+      "residentTiles" : 36,
+      "second" : 41,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 37,
+      "drawnTiles" : 4,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999732506722665,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 25527690,
+      "residentTiles" : 5,
+      "second" : 42,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 38,
+      "drawnTiles" : 5,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999476235473971,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 32944449,
+      "residentTiles" : 6,
+      "second" : 43,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 40,
+      "drawnTiles" : 7,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000575406223859,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 46273256,
+      "residentTiles" : 8,
+      "second" : 44,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 41,
+      "drawnTiles" : 8,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.99996558291766,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 50301851,
+      "residentTiles" : 9,
+      "second" : 45,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 41,
+      "drawnTiles" : 8,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000118023841203,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 50301851,
+      "residentTiles" : 9,
+      "second" : 46,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 41,
+      "drawnTiles" : 8,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999832502102549,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 50301851,
+      "residentTiles" : 9,
+      "second" : 47,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 42,
+      "drawnTiles" : 8,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000049182116747,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 57400030,
+      "residentTiles" : 10,
+      "second" : 48,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 43,
+      "drawnTiles" : 10,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999933608071906,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 63726190,
+      "residentTiles" : 11,
+      "second" : 49,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 47,
+      "drawnTiles" : 12,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999780003788068,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 76471660,
+      "residentTiles" : 15,
+      "second" : 50,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 50,
+      "drawnTiles" : 15,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.00022131420593,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 85189255,
+      "residentTiles" : 18,
+      "second" : 51,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 55,
+      "drawnTiles" : 19,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000066385662628,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 97737378,
+      "residentTiles" : 23,
+      "second" : 52,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 57,
+      "drawnTiles" : 23,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999766396810095,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 105620376,
+      "residentTiles" : 25,
+      "second" : 53,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 57,
+      "drawnTiles" : 23,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000469682475817,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 105620376,
+      "residentTiles" : 25,
+      "second" : 54,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 57,
+      "drawnTiles" : 23,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999559995219769,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 105620376,
+      "residentTiles" : 25,
+      "second" : 55,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 58,
+      "drawnTiles" : 23,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000801654097891,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 111976035,
+      "residentTiles" : 26,
+      "second" : 56,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 59,
+      "drawnTiles" : 24,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.998615034229189,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 115720459,
+      "residentTiles" : 27,
+      "second" : 57,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 61,
+      "drawnTiles" : 24,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.998600849317846,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 127258596,
+      "residentTiles" : 29,
+      "second" : 58,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 61,
+      "drawnTiles" : 26,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.001718906430781,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 127258596,
+      "residentTiles" : 29,
+      "second" : 59,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 61,
+      "drawnTiles" : 26,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.886868716319981,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 127258596,
+      "residentTiles" : 29,
+      "second" : 60,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 61,
+      "drawnTiles" : 26,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.113051953268297,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "Apple Maps から 3D データを直接取得中",
+      "pending" : 2,
+      "residentBytes" : 127258596,
+      "residentTiles" : 29,
+      "second" : 61,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 61,
+      "drawnTiles" : 24,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.995840280014605,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 0,
+      "residentBytes" : 127258596,
+      "residentTiles" : 29,
+      "second" : 62,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 61,
+      "drawnTiles" : 24,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999670006287076,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 0,
+      "residentBytes" : 127258596,
+      "residentTiles" : 29,
+      "second" : 63,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 61,
+      "drawnTiles" : 24,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999348365862716,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 0,
+      "residentBytes" : 127258596,
+      "residentTiles" : 29,
+      "second" : 64,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 61,
+      "drawnTiles" : 24,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.003125572056042,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 0,
+      "residentBytes" : 127258596,
+      "residentTiles" : 29,
+      "second" : 65,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 62,
+      "drawnTiles" : 0,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.002006629686498,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 133659726,
+      "residentTiles" : 30,
+      "second" : 66,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 63,
+      "drawnTiles" : 2,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999669992317394,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 11120443,
+      "residentTiles" : 2,
+      "second" : 67,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 65,
+      "drawnTiles" : 4,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000159837364926,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 20056430,
+      "residentTiles" : 4,
+      "second" : 68,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 65,
+      "drawnTiles" : 4,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999767500876793,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 20056430,
+      "residentTiles" : 4,
+      "second" : 69,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 67,
+      "drawnTiles" : 5,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000135254908329,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 32527169,
+      "residentTiles" : 6,
+      "second" : 70,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 67,
+      "drawnTiles" : 6,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999774988653201,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 32527169,
+      "residentTiles" : 6,
+      "second" : 71,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 67,
+      "drawnTiles" : 6,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.00024345084627,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 32527169,
+      "residentTiles" : 6,
+      "second" : 72,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 68,
+      "drawnTiles" : 7,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999947501392406,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 36905048,
+      "residentTiles" : 7,
+      "second" : 73,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 70,
+      "drawnTiles" : 8,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999674993465021,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 48625590,
+      "residentTiles" : 9,
+      "second" : 74,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 70,
+      "drawnTiles" : 9,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000319685658155,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 48625590,
+      "residentTiles" : 9,
+      "second" : 75,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 70,
+      "drawnTiles" : 9,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999845076263817,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 48625590,
+      "residentTiles" : 9,
+      "second" : 76,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 72,
+      "drawnTiles" : 9,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000240991218753,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 52042604,
+      "residentTiles" : 11,
+      "second" : 77,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 74,
+      "drawnTiles" : 12,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000226219717,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 57717691,
+      "residentTiles" : 13,
+      "second" : 78,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 77,
+      "drawnTiles" : 14,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999657503421652,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 64304368,
+      "residentTiles" : 16,
+      "second" : 79,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 79,
+      "drawnTiles" : 17,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.99992501000002,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 69371728,
+      "residentTiles" : 18,
+      "second" : 80,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 80,
+      "drawnTiles" : 18,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000432787806098,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 70986360,
+      "residentTiles" : 19,
+      "second" : 81,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 82,
+      "drawnTiles" : 20,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999699999215665,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 75153932,
+      "residentTiles" : 21,
+      "second" : 82,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 83,
+      "drawnTiles" : 21,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000359012343786,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 77770140,
+      "residentTiles" : 22,
+      "second" : 83,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 201326592,
+      "completed" : 85,
+      "drawnTiles" : 22,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999687510307432,
+      "indexCount" : 2,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "視界内の 3D モデルを表示中",
+      "pending" : 2,
+      "residentBytes" : 86910115,
+      "residentTiles" : 24,
+      "second" : 84,
+      "viewDistance" : 350,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 86,
+      "drawnTiles" : 24,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999892502284425,
+      "indexCount" : 1,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 86910115,
+      "residentTiles" : 24,
+      "second" : 85,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 88,
+      "drawnTiles" : 22,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999877037274445,
+      "indexCount" : 1,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 91320076,
+      "residentTiles" : 26,
+      "second" : 86,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 88,
+      "drawnTiles" : 24,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000073778243674,
+      "indexCount" : 1,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 79599534,
+      "residentTiles" : 24,
+      "second" : 87,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 88,
+      "drawnTiles" : 23,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000051641728533,
+      "indexCount" : 1,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 79599534,
+      "residentTiles" : 24,
+      "second" : 88,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 89,
+      "drawnTiles" : 22,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999982495797319,
+      "indexCount" : 1,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 82185625,
+      "residentTiles" : 25,
+      "second" : 89,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 89,
+      "drawnTiles" : 23,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.998517529415608,
+      "indexCount" : 1,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 82185625,
+      "residentTiles" : 25,
+      "second" : 90,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 91,
+      "drawnTiles" : 24,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999732492752955,
+      "indexCount" : 1,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 86228196,
+      "residentTiles" : 27,
+      "second" : 91,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 91,
+      "drawnTiles" : 25,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999490007436435,
+      "indexCount" : 1,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 86228196,
+      "residentTiles" : 27,
+      "second" : 92,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 91,
+      "drawnTiles" : 25,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000304914117649,
+      "indexCount" : 1,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 86228196,
+      "residentTiles" : 27,
+      "second" : 93,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 92,
+      "drawnTiles" : 25,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999887501100531,
+      "indexCount" : 1,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 88413399,
+      "residentTiles" : 28,
+      "second" : 94,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 93,
+      "drawnTiles" : 25,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000403285844008,
+      "indexCount" : 1,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 90363482,
+      "residentTiles" : 29,
+      "second" : 95,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 93,
+      "drawnTiles" : 25,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999862495193597,
+      "indexCount" : 1,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 90363482,
+      "residentTiles" : 29,
+      "second" : 96,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 93,
+      "drawnTiles" : 25,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.998387546772285,
+      "indexCount" : 1,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 90363482,
+      "residentTiles" : 29,
+      "second" : 97,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 93,
+      "drawnTiles" : 25,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.001689389462321,
+      "indexCount" : 1,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 90363482,
+      "residentTiles" : 29,
+      "second" : 98,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 93,
+      "drawnTiles" : 25,
+      "eye" : [
+        450,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.994582999662335,
+      "indexCount" : 1,
+      "latitude" : 35.6586,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : 139.74539999999999,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 90363482,
+      "residentTiles" : 29,
+      "second" : 99,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 0,
+      "drawnTiles" : 25,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.005272587869015,
+      "indexCount" : 0,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 0,
+      "residentBytes" : 0,
+      "residentTiles" : 0,
+      "second" : 100,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 0,
+      "drawnTiles" : 0,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999815574879676,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 0,
+      "residentTiles" : 0,
+      "second" : 101,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 1,
+      "drawnTiles" : 1,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000088522188641,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 4342023,
+      "residentTiles" : 1,
+      "second" : 102,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 2,
+      "drawnTiles" : 1,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999500009672516,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 8830002,
+      "residentTiles" : 2,
+      "second" : 103,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 3,
+      "drawnTiles" : 2,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000892634668439,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 12763781,
+      "residentTiles" : 3,
+      "second" : 104,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 3,
+      "drawnTiles" : 3,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999420005846815,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 12763781,
+      "residentTiles" : 3,
+      "second" : 105,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 4,
+      "drawnTiles" : 4,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000509023099127,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 15770788,
+      "residentTiles" : 4,
+      "second" : 106,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 4,
+      "drawnTiles" : 4,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000307373750402,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 15770788,
+      "residentTiles" : 4,
+      "second" : 107,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 5,
+      "drawnTiles" : 4,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999020017857369,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 19877043,
+      "residentTiles" : 5,
+      "second" : 108,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 5,
+      "drawnTiles" : 5,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000636897657579,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 19877043,
+      "residentTiles" : 5,
+      "second" : 109,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 6,
+      "drawnTiles" : 6,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999992611101348,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 24241998,
+      "residentTiles" : 6,
+      "second" : 110,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 9,
+      "drawnTiles" : 6,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999332514566632,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 30293219,
+      "residentTiles" : 9,
+      "second" : 111,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 12,
+      "drawnTiles" : 10,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000836075803733,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 36193292,
+      "residentTiles" : 12,
+      "second" : 112,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 15,
+      "drawnTiles" : 13,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999247510110408,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 41884299,
+      "residentTiles" : 15,
+      "second" : 113,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 19,
+      "drawnTiles" : 15,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000484426615358,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 49582833,
+      "residentTiles" : 19,
+      "second" : 114,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 21,
+      "drawnTiles" : 20,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000553283079654,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 52309585,
+      "residentTiles" : 21,
+      "second" : 115,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 21,
+      "drawnTiles" : 21,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999007515262832,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 52309585,
+      "residentTiles" : 21,
+      "second" : 116,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 23,
+      "drawnTiles" : 21,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999550008765404,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 58007787,
+      "residentTiles" : 23,
+      "second" : 117,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 23,
+      "drawnTiles" : 23,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 60.000966411443024,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 58007787,
+      "residentTiles" : 23,
+      "second" : 118,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 24,
+      "drawnTiles" : 23,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999557373737964,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 60909311,
+      "residentTiles" : 24,
+      "second" : 119,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "budget" : 100663296,
+      "completed" : 24,
+      "drawnTiles" : 23,
+      "eye" : [
+        0,
+        100,
+        160
+      ],
+      "failures" : 0,
+      "fps" : 59.999965005574666,
+      "indexCount" : 1,
+      "latitude" : 21.282800000000002,
+      "loadedHeightLayers" : [
+        0,
+        1
+      ],
+      "longitude" : -157.83690000000001,
+      "message" : "メモリに合わせて表示範囲と画質を調整しました",
+      "pending" : 2,
+      "residentBytes" : 60909311,
+      "residentTiles" : 24,
+      "second" : 120,
+      "viewDistance" : 244.99999999999997,
+      "visibleLODs" : [
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "signatureMatchesPython" : true
+}

@@ -1,0 +1,183 @@
+import Foundation
+import simd
+
+struct TileKey: Hashable, Codable, Sendable, Comparable {
+    var z: Int
+    var x: Int
+    var y: Int
+    var h: Int = 0
+    var style: Int = 98
+    var name: String { "s\(style)_z\(z)_x\(x)_y\(y)_h\(h)" }
+    // This researched service template exposes the occupancy index at z13.
+    // Its cells are z17; requesting z11/z12 indexes returns an empty response.
+    var index: TileKey { TileKey(z:13,x:x >> (z-13),y:y >> (z-13),style:100) }
+    var horizontal: TileKey { TileKey(z: z, x: x, y: y) }
+    static func < (a: Self, b: Self) -> Bool { a.name < b.name }
+}
+
+struct GeoOrigin: Codable, Sendable {
+    var latitude: Double
+    var longitude: Double
+    var basis: simd_double3x3 {
+        let p = latitude * .pi / 180, l = longitude * .pi / 180
+        return simd_double3x3(rows: [SIMD3(-sin(l), cos(l), 0),
+            SIMD3(cos(p)*cos(l), cos(p)*sin(l), sin(p)),
+            SIMD3(sin(p)*cos(l), sin(p)*sin(l), -cos(p))])
+    }
+    var ecef: SIMD3<Double> {
+        let p = latitude * .pi / 180, l = longitude * .pi / 180
+        let n = 6378137 / sqrt(1 - 0.0066943799901413165 * pow(sin(p), 2))
+        return SIMD3(n*cos(p)*cos(l), n*cos(p)*sin(l), n*(1-0.0066943799901413165)*sin(p))
+    }
+    func coordinate(east: Double, south: Double) -> GeoOrigin {
+        let lat = min(85.05112878, max(-85.05112878, latitude-south/6378137*180 / .pi))
+        let lon = longitude+east/(6378137*cos(latitude * .pi/180))*180 / .pi
+        return GeoOrigin(latitude: lat, longitude: (lon+540).truncatingRemainder(dividingBy:360)-180)
+    }
+    func tileCenter(_ key: TileKey) -> SIMD2<Double> {
+        let scale = Double(1 << key.z)
+        let lon = (Double(key.x)+0.5)/scale*360-180
+        let lat = atan(sinh(.pi*(1-2*(Double(key.y)+0.5)/scale)))*180 / .pi
+        var delta = lon-longitude
+        if delta > 180 { delta -= 360 }; if delta < -180 { delta += 360 }
+        return SIMD2(delta * .pi/180*6378137*cos(latitude * .pi/180),
+                     (latitude-lat) * .pi/180*6378137)
+    }
+    func tileWidth(_ zoom: Int) -> Double {
+        2 * .pi * 6378137*cos(latitude * .pi/180)/Double(1 << zoom)
+    }
+    func tileBounds(_ key: TileKey) -> SIMD4<Float> {
+        let scale = Double(1 << key.z)
+        var points = [SIMD3<Double>]()
+        for dy in 0...1 { for dx in 0...1 {
+            let lon = Double(key.x+dx)/scale*360-180
+            let lat = atan(sinh(.pi*(1-2*Double(key.y+dy)/scale)))*180 / .pi
+            let corner = GeoOrigin(latitude:lat,longitude:lon)
+            points.append(basis*(corner.ecef-ecef))
+        }}
+        return SIMD4(Float(points.map(\.x).min()!),Float(points.map(\.x).max()!),
+                     Float(points.map(\.z).min()!),Float(points.map(\.z).max()!))
+    }
+}
+
+struct CameraState: Sendable {
+    var eye = SIMD3<Double>(0, 100, 160)
+    var yaw: Double = 0
+    var pitch: Double = -0.45
+    var aspect: Double = 0.6
+    var fov: Double = 60 * .pi/180
+    var forward: SIMD3<Double> { SIMD3(sin(yaw)*cos(pitch), sin(pitch), -cos(yaw)*cos(pitch)) }
+    var right: SIMD3<Double> { SIMD3(cos(yaw), 0, sin(yaw)) }
+    func projection(far: Double) -> simd_float4x4 {
+        let y = Float(1/tan(fov/2)), x = y/Float(max(0.1,aspect)), near: Float = 0.5, f = Float(far)
+        return simd_float4x4(columns: (SIMD4(x,0,0,0), SIMD4(0,y,0,0),
+            SIMD4(0,0,f/(near-f),-1), SIMD4(0,0,near*f/(near-f),0)))
+    }
+    var view: simd_float4x4 {
+        let f = SIMD3<Float>(forward), r = SIMD3<Float>(right), u = simd_cross(r,f)
+        let e = SIMD3<Float>(eye)
+        return simd_float4x4(rows: [SIMD4(r.x,r.y,r.z,-simd_dot(r,e)),
+            SIMD4(u.x,u.y,u.z,-simd_dot(u,e)), SIMD4(-f.x,-f.y,-f.z,simd_dot(f,e)), SIMD4(0,0,0,1)])
+    }
+}
+
+struct TilePlanner {
+    // Quadtree leaves partition the view: close tiles z20, middle z19, distant z18.
+    // C3MM expands *every* occupied vertical cell, including discontinuous towers.
+    static func plan(origin: GeoOrigin, camera: CameraState, distance: Double) -> [TileKey] {
+        let location = origin.coordinate(east: camera.eye.x, south: camera.eye.z)
+        let n = 1 << 18
+        let xx = Int(floor((location.longitude+180)/360*Double(n)))
+        let yy = Int(floor((1-asinh(tan(location.latitude * .pi/180)) / .pi)/2*Double(n)))
+        let width = origin.tileWidth(18)
+        let radius = Int(ceil(distance/width))+1
+        let horizontalHalfFOV = atan(tan(camera.fov/2)*max(1,camera.aspect))
+        var leaves = [TileKey]()
+        func visit(_ key: TileKey) {
+            let center = origin.tileCenter(key)
+            let delta = center-SIMD2(camera.eye.x,camera.eye.z)
+            let halfDiagonal = origin.tileWidth(key.z)*0.71
+            let length = simd_length(delta)
+            guard length-halfDiagonal <= distance else { return }
+            if length > halfDiagonal+90 && camera.pitch > -0.9 {
+                let ahead = SIMD2(sin(camera.yaw),-cos(camera.yaw))
+                let angle = acos(min(1,max(-1,simd_dot(delta/length,ahead))))
+                // Generous guard band prevents missing edges while rotating.
+                if angle > horizontalHalfFOV+0.35+asin(min(1,halfDiagonal/length)) { return }
+            }
+            let minimumDistance = max(0,length-halfDiagonal)
+            if key.z < 20 && minimumDistance < (key.z == 18 ? 200 : 85) {
+                for dy in 0..<2 { for dx in 0..<2 {
+                    visit(TileKey(z:key.z+1,x:key.x*2+dx,y:key.y*2+dy))
+                }}
+            } else { leaves.append(key) }
+        }
+        for dy in -radius...radius { for dx in -radius...radius {
+            let y = yy+dy
+            if (0..<n).contains(y) { visit(TileKey(z:18,x:(xx+dx+n)%n,y:y)) }
+        }}
+        return leaves.sorted { a,b in
+            let eye = SIMD2(camera.eye.x,camera.eye.z)
+            return simd_length(origin.tileCenter(a)-eye) < simd_length(origin.tileCenter(b)-eye)
+        }
+    }
+}
+
+struct TileInfo: Decodable, Sendable {
+    struct Transform: Decodable, Sendable { var matrixR3x3: [Double]; var ecefTranslation: [Double] }
+    var transform: Transform
+    var min: [Double]
+    var max: [Double]
+    var meshTriangles: Int
+    var splatVertices: Int
+    var vertexCount: Int
+    var atlasDimensions: [Int]?
+    func sphere(origin: GeoOrigin) -> TileSphere {
+        let lower = SIMD3<Float>(Float(min[0]),Float(min[1]),Float(min[2]))
+        let upper = SIMD3<Float>(Float(max[0]),Float(max[1]),Float(max[2]))
+        let center = model(origin:origin)*SIMD4((lower+upper)/2,1)
+        return TileSphere(center:SIMD3(center.x,center.y,center.z),radius:simd_length(upper-lower)/2)
+    }
+    func model(origin: GeoOrigin) -> simd_float4x4 {
+        let r = transform.matrixR3x3
+        let rotation = simd_double3x3(rows: [SIMD3(r[0],r[1],r[2]),SIMD3(r[3],r[4],r[5]),SIMD3(r[6],r[7],r[8])])
+        let m = origin.basis*rotation
+        let t = transform.ecefTranslation
+        let shift = origin.basis*(SIMD3(t[0],t[1],t[2])-origin.ecef)
+        return simd_float4x4(columns: (SIMD4(SIMD3<Float>(m.columns.0),0),
+            SIMD4(SIMD3<Float>(m.columns.1),0),SIMD4(SIMD3<Float>(m.columns.2),0),SIMD4(SIMD3<Float>(shift),1)))
+    }
+}
+
+struct TileSphere: Sendable { var center: SIMD3<Float>; var radius: Float }
+
+struct HeightIndex: Decodable, Sendable {
+    struct Position: Decodable, Sendable { var z: Int; var x: Int; var y: Int }
+    var tile: Position
+    var cells: [[Int]]
+    func expand(_ key: TileKey) throws -> [TileKey] {
+        guard (17...20).contains(key.z), tile.z == key.index.z,
+              tile.x == key.index.x && tile.y == key.index.y,
+              cells.allSatisfy({ $0.count == 3 }) else { throw StreamError.invalidIndex }
+        let multiplier = 1 << (key.z-17)
+        let localX = key.x/multiplier%16, localY = 15-key.y/multiplier%16
+        return cells.filter { $0[0] == localX && $0[1] == localY }.flatMap { cell in
+            (0..<multiplier).map { child in TileKey(z:key.z,x:key.x,y:key.y,h:cell[2]*multiplier+child) }
+        }.sorted()
+    }
+}
+
+enum StreamError: LocalizedError {
+    case configuration, invalidIndex, authentication, http(Int), responseTooLarge, invalidGeometry, gpuBudget
+    var errorDescription: String? {
+        switch self {
+        case .configuration: return "Apple Maps の取得設定がありません。設定を読み込んでください。"
+        case .invalidIndex: return "高さインデックスの形式または座標が未対応です。"
+        case .authentication: return "Apple Maps の取得認証が失効しました。取得設定を更新してください。"
+        case .http(let code): return "Apple Maps に接続できませんでした（HTTP \(code)）。"
+        case .responseTooLarge: return "取得データがタイル容量の上限を超えました。"
+        case .invalidGeometry: return "3D モデルの配列が不正です。"
+        case .gpuBudget: return "モデルがメモリ上限を超えました。描画範囲を狭めてください。"
+        }
+    }
+}
