@@ -108,6 +108,20 @@ tar -xzf independent-oahu-viewer-and-exports.tar.gz
 python3 -m http.server 8972 --bind 127.0.0.1 --directory oahu-viewer
 ```
 
+## Web地図から任意地点を取得
+
+現在のWeb入口で「地図から場所を選ぶ」を押し、OpenStreetMap上をクリックするか緯度/経度を入力。範囲を決めてタイル数を確認し、「取得して3D表示」を押す。完了後に取得したポリゴン/Splatシーンへ切り替わる。表示された中心/範囲に交差する全タイルを処理する。z20、範囲5〜300m、1回最大24タイル。設定・coverage・R3D形式が未対応ならエラーを表示する。
+
+Leaflet 1.9.4のJS/CSSはローカル配信する。通常の地図閲覧に限り、背景地図タイルは `https://tile.openstreetmap.org/{z}/{x}/{y}.png` からブラウザが読み込む。帰属表示を常時表示し、標準ブラウザのReferer/キャッシュに従う。[OpenStreetMap標準タイル利用条件](https://operations.osmfoundation.org/policies/tiles/)に沿っており、地図の先読み/保存/一括取得はしない。
+
+Web取得APIは同一サイトOriginだけ受け付け、同時処理1件、24時間後に生成物を整理する。サーバーはloopbackだけで待ち受け、Tailnet HTTPS経由で使う。既存の設定パスを `R3D_FETCH_CONFIG`、許可Originを`R3D_ALLOWED_ORIGIN`に設定する。起動例：
+
+```bash
+R3D_FETCH_CONFIG=/private/path/maps.credentials.json \
+R3D_ALLOWED_ORIGIN=https://viewer.example.ts.net:8972 \
+.venv/bin/python pipeline/map_web_server.py
+```
+
 `fresh-coordinate-regressions.tar.gz` は東京タワー4とニューヨーク2の新原本と独立出力を含む。例えば展開後の `live-new-york/raw` を `--source-dir` に指定すれば、同じ座標/半径で入口を再現できる。取得設定は含まれない。
 
 ユーザー指定によりCT104ではsystemdのtransient unit `r3d-oahu-independent-viewer.service` でOahuサーバーを稼働させ、`tailscale serve --bg --yes --https=8972 http://127.0.0.1:8972`でtailnetに公開した。アクセス先は `https://ct104.taila8c9c.ts.net:8972/`。別Tailscale LinuxからTLS検証付きGETで72タイルsceneを確認済み。serviceはshell終了後も動くがマシン再起動時には自動起動しない。状態は `systemctl status r3d-oahu-independent-viewer.service` と `tailscale serve status`、停止は `systemctl stop r3d-oahu-independent-viewer.service` と `tailscale serve --https=8972 off`。

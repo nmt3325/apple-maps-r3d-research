@@ -48,6 +48,13 @@ def build_viewer(decoded, output, lat, lon, title='R3D · 3D explorer'):
         if not source.is_file():
             raise ValueError('Run npm ci in viewer/ before building a viewer')
         shutil.copyfile(source, output/'vendor'/name)
+    leaflet = REPO/'viewer/node_modules/leaflet'
+    leaflet_vendor = output/'vendor/leaflet'
+    leaflet_vendor.mkdir(exist_ok=True)
+    for name in ('leaflet.js','leaflet.css'):
+        shutil.copyfile(leaflet/'dist'/name,leaflet_vendor/name)
+    shutil.copytree(leaflet/'dist/images',leaflet_vendor/'images',dirs_exist_ok=True)
+    shutil.copyfile(leaflet/'LICENSE',leaflet_vendor/'LICENSE')
     for name in ('index.html', 'app.js'):
         shutil.copyfile(REPO/'viewer/independent'/name, output/name)
     bounds_min = np.full(3, np.inf)

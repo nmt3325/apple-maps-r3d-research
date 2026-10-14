@@ -12,6 +12,8 @@ Oahuサーバーはユーザー指定で https://ct104.taila8c9c.ts.net:8972/ �
 
 次に追跡するのは追加目標の公式pixel一致、正確なLOD、Apple独自の累積・色変換。現状のbarycentric alpha/GLB standard blendの差を維持して明記する。未知codec/primary atlas variantやAPI template更新が必要な地域は明示rejectし、代用meshやnative再表示へfallbackしない。
 
+WebビューアにはOpenStreetMapのクリック選択、半径設定、タイル数確認、Linux取得API、scene切替を追加。サーバーは引き続きTailscale HTTPS 8972のURL。取得はz20・最大24タイル・300m、single active job。詳細は[LINUX_EXPLORER.md](LINUX_EXPLORER.md)。
+
 完全経路のコマンドと取得設定/coverage/対応形式の制約は[LINUX_EXPLORER.md](LINUX_EXPLORER.md)。
 
 数値codecと東京223全配列検証は[INDEPENDENT_DECODER.md](INDEPENDENT_DECODER.md)に記録済み。Splatの全3*N頂点と8属性/material20は完全一致、ポリゴンXYZ/UV/全index/primary HEICも一致。法線271個の1 ULP差は個別の数値証拠付きで説明済み。旧`.decoded`の位置は全配列の先頭N頂点だけなので、これを中心点として再利用しない。

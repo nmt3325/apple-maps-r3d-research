@@ -6,7 +6,7 @@ Apple Maps iOS 27のR3Dを調査し、**元のテクスチャ付きポリゴン�
 
 主要目標は任意の緯度・経度・範囲からLinuxだけで取得・完全復号・自由移動表示まで実行することです。[6項目の完了条件](docs/ACCEPTANCE.md)をすべて満たした場合に達成と判定します。公式表示とのpixel一致、正確なLOD、タイル累積・色変換の完全再現は別の追加目標として追跡します。
 
-稼働中のOahuビューア（Tailscale内）：**https://ct104.taila8c9c.ts.net:8972/**。完成成果物は [Linux explorer Release](https://github.com/nmt3325/apple-maps-r3d-research/releases/tag/linux-explorer-20261014)、[6条件の検証証拠](reports/validation-20261014/README.md)、[再現手順](docs/LINUX_EXPLORER.md)。ローカル取得設定、サービスcoverageと対応codecの制約は手順に明記しています。
+稼働中のビューア（Tailscale内）：**https://ct104.taila8c9c.ts.net:8972/**。地図で場所と範囲を選び、タイル数を確認してから取得・表示できます。完成成果物は [Linux explorer Release](https://github.com/nmt3325/apple-maps-r3d-research/releases/tag/linux-explorer-20261014)、[6条件の検証証拠](reports/validation-20261014/README.md)、[再現手順](docs/LINUX_EXPLORER.md)。ローカル取得設定、サービスcoverageと対応codecの制約は手順に明記しています。
 
 ## 現在の成果
 
@@ -27,6 +27,7 @@ Apple Maps iOS 27のR3Dを調査し、**元のテクスチャ付きポリゴン�
 | C3MM v2 | 6サンプル・36 LZMA区画、タイルz/x/y復元 | 構造解析済み、階層意味は一部未解決 |
 | 新規地域のLinuxのみでの完全3D復元 | Oahu72、304,527 Splat、581,186元ポリゴン面 | 地理・全viewer配列・画像照合、ブラウザ15操作チェック通過 |
 | 座標から取得・復号・表示・出力 | 東京タワー4、新規ニューヨーク2をLinux HTTPS取得 | 一コマンド経路成功。ローカル取得設定が必要 |
+| Web地図から地点選択 | Leaflet/OSM地図、中心座標/範囲、タイル数preview、取得ジョブとシーン切替 | Tailnet Webビューアへ提供中。1回24タイル/300m上限 |
 | 独立GLB/PLY export | Oahuの全geometry/UV/法線/画像/RGBA、PLYの8属性 | 全出力の読み戻し一致、Khronos GLB検証でerror/warning 0 |
 
 過去のHUFF研究では2,424個の0x24 envelope内で1,462圧縮table＋962 literalを検証しました。上記2,659件とは走査対象・候補検出方法が違い、件数を単純に比較できません。現在の独立decoderは原本から実際のsymbol数を取得し、全配列照合とentropy消費・padding検証を通しています。

@@ -1,0 +1,161 @@
+"""Tailnet-scoped map picker API and static host for the independent R3D viewer."""
+from __future__ import annotations
+from concurrent.futures import ThreadPoolExecutor
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+import json
+import os
+from pathlib import Path
+import re
+import secrets
+import shutil
+import subprocess
+import sys
+import threading
+import time
+from urllib.parse import unquote, urlsplit
+
+from acquisition import load_config, plan_area
+
+REPO = Path(__file__).resolve().parents[1]
+WEB_ROOT = Path(os.environ.get('R3D_WEB_ROOT',REPO/'reports/generated/web-root')).resolve()
+RUN_ROOT = Path(os.environ.get('R3D_WEB_RUNS',REPO/'reports/generated/web-runs')).resolve()
+CONFIG = Path(os.environ.get('R3D_FETCH_CONFIG','/nonexistent')).resolve()
+PYTHON = Path(os.environ.get('R3D_PYTHON',REPO/'.venv/bin/python')).resolve()
+PUBLIC_ORIGIN = os.environ.get('R3D_ALLOWED_ORIGIN','https://ct104.taila8c9c.ts.net:8972').rstrip('/')
+MAX_TILES = 24
+MAX_RADIUS = 300
+JOB_TTL = 24*60*60
+LOCK = threading.Lock()
+JOBS: dict[str,dict] = {}
+ACTIVE: str|None = None
+POOL = ThreadPoolExecutor(max_workers=1,thread_name_prefix='r3d-fetch')
+
+
+class Handler(SimpleHTTPRequestHandler):
+    protocol_version = 'HTTP/1.1'
+
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,directory=str(WEB_ROOT),**kwargs)
+
+    def log_message(self,fmt,*args):
+        # HTTP bodies and user coordinates are intentionally never logged.
+        sys.stderr.write('viewer-http '+fmt%args+'\n')
+
+    def send_json(self,status,payload):
+        body=json.dumps(payload,separators=(',',':')).encode()
+        self.send_response(status);self.send_header('Content-Type','application/json; charset=utf-8')
+        self.send_header('Content-Length',str(len(body)));self.send_header('Cache-Control','no-store')
+        self.send_header('X-Content-Type-Options','nosniff');self.end_headers();self.wfile.write(body)
+
+    def read_json(self):
+        length=int(self.headers.get('Content-Length','0'))
+        if not 1<=length<=2048:raise ValueError('入力サイズが不正です')
+        value=json.loads(self.rfile.read(length))
+        if not isinstance(value,dict):raise ValueError('入力形式が不正です')
+        return value
+
+    def origin_allowed(self):
+        return self.headers.get('Origin','').rstrip('/')==PUBLIC_ORIGIN
+
+    def do_GET(self):
+        route=urlsplit(self.path).path
+        if route=='/api/status':
+            self.send_json(200,{'ready':CONFIG.is_file() and WEB_ROOT.is_dir(),'limitTiles':MAX_TILES,'limitRadiusMeters':MAX_RADIUS})
+            return
+        match=re.fullmatch(r'/api/jobs/([0-9a-f]{20})',route)
+        if match:
+            with LOCK:job=JOBS.get(match.group(1))
+            if not job:self.send_json(404,{'error':'処理IDが見つかりません'});return
+            self.send_json(200,{k:v for k,v in job.items() if k not in ('runDir','future')});return
+        super().do_GET()
+
+    def do_POST(self):
+        if not self.origin_allowed():self.send_json(403,{'error':'同じサイトからの操作だけ受け付けます'});return
+        route=urlsplit(self.path).path
+        try:
+            request=self.read_json()
+            lat=float(request['lat']);lon=float(request['lon']);radius=float(request['radiusMeters'])
+            zoom=int(request.get('zoom',20))
+            if radius>MAX_RADIUS:raise ValueError(f'1回の取得範囲は{MAX_RADIUS}m以下にしてください')
+            if zoom!=20:raise ValueError('地図からの取得はz20です')
+            if not CONFIG.is_file():self.send_json(503,{'error':'サーバーに取得設定がありません'});return
+            load_config(CONFIG)
+            plan=plan_area(lat,lon,radius,zoom,max_tiles=MAX_TILES)
+        except (KeyError,TypeError,ValueError,OverflowError,FileNotFoundError,json.JSONDecodeError):
+            self.send_json(400,{'error':'緯度・経度・範囲を確認してください。指定上限は範囲300m、1回24タイルです。'});return
+        if route=='/api/plan':
+            self.send_json(200,{'center':plan['center'],'radiusMeters':radius,'zoom':zoom,
+                                'tileCount':len(plan['tiles']),'bounds':plan['boundsUnwrappedSWNE']});return
+        if route!='/api/jobs':self.send_json(404,{'error':'APIが見つかりません'});return
+        global ACTIVE
+        with LOCK:
+            if ACTIVE is not None:
+                self.send_json(429,{'error':'別の取得処理が進行中です。完了してから再度お試しください。'});return
+            job_id=secrets.token_hex(10)
+            run_dir=RUN_ROOT/job_id
+            state={'id':job_id,'status':'queued','stage':'取得準備','tileCount':len(plan['tiles']),
+                   'started':time.time(),'runDir':str(run_dir)}
+            JOBS[job_id]=state;ACTIVE=job_id
+            future=POOL.submit(run_job,job_id,plan,run_dir)
+            state['future']=future
+        self.send_json(202,{'id':job_id,'tileCount':len(plan['tiles']),'status':'queued'})
+
+
+def remove_old_jobs():
+    cutoff=time.time()-JOB_TTL
+    if not RUN_ROOT.exists():return
+    for path in RUN_ROOT.iterdir():
+        if re.fullmatch(r'[0-9a-f]{20}',path.name) and path.stat().st_mtime<cutoff:
+            link=WEB_ROOT/'scenes'/path.name
+            if link.is_symlink():link.unlink()
+            shutil.rmtree(path,ignore_errors=True)
+
+
+def run_job(job_id,plan,run_dir):
+    global ACTIVE
+    try:
+        RUN_ROOT.mkdir(parents=True,exist_ok=True)
+        run_dir.mkdir(parents=True,exist_ok=False)
+        with LOCK:JOBS[job_id]['status']='running';JOBS[job_id]['stage']='R3D取得・独立復号・3D生成'
+        command=[str(PYTHON),str(REPO/'pipeline/r3d_explorer.py'),
+                 '--lat',str(plan['center'][0]),'--lon',str(plan['center'][1]),
+                 '--radius-m',str(plan['radiusMeters']),'--zoom','20','--max-tiles',str(MAX_TILES),
+                 '--out-dir',str(run_dir),'--config',str(CONFIG)]
+        with (run_dir/'web-run.log').open('w') as log:
+            result=subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,timeout=900,check=False)
+        manifest=run_dir/'run.json'
+        if result.returncode or not manifest.is_file():raise RuntimeError('取得または復号に失敗しました。場所や範囲を変えて再試行してください。')
+        run=json.loads(manifest.read_text())
+        if not run.get('pass'):raise RuntimeError('R3Dを検証できませんでした。別の場所を選んでください。')
+        scene=run_dir/'viewer'
+        if not (scene/'scene.json').is_file():raise RuntimeError('3Dデータを生成できませんでした。')
+        scenes=WEB_ROOT/'scenes';scenes.mkdir(parents=True,exist_ok=True)
+        link=scenes/job_id;temporary=scenes/(job_id+'.tmp')
+        temporary.symlink_to(scene,target_is_directory=True);temporary.replace(link)
+        with LOCK:
+            JOBS[job_id].update(status='ready',stage='表示できます',viewer=f'/scenes/{job_id}/',
+                                 totals=run['steps'][-1].get('counts',{}),finished=time.time())
+    except subprocess.TimeoutExpired:
+        set_failed(job_id,'取得が15分を超えました。範囲を小さくして再試行してください。')
+    except Exception as error:
+        set_failed(job_id,str(error) if isinstance(error,RuntimeError) else '取得処理に失敗しました。もう一度お試しください。')
+    finally:
+        with LOCK:
+            if ACTIVE==job_id:ACTIVE=None
+
+
+def set_failed(job_id,message):
+    with LOCK:
+        if job_id in JOBS:JOBS[job_id].update(status='failed',stage='失敗',message=message,finished=time.time())
+
+
+def main():
+    WEB_ROOT.mkdir(parents=True,exist_ok=True);RUN_ROOT.mkdir(parents=True,exist_ok=True)
+    if not WEB_ROOT.joinpath('index.html').is_file():raise SystemExit('R3D web root is missing index.html')
+    remove_old_jobs()
+    server=ThreadingHTTPServer(('127.0.0.1',8972),Handler);server.daemon_threads=True
+    print('R3D map viewer listening on 127.0.0.1:8972',flush=True)
+    server.serve_forever()
+
+
+if __name__=='__main__':main()

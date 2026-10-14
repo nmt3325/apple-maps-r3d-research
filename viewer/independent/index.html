@@ -2,18 +2,33 @@
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>R3D explorer</title>
 <link rel="icon" href="data:,">
+<link rel="stylesheet" href="./vendor/leaflet/leaflet.css">
 <style>
-*{box-sizing:border-box}body{margin:0;background:#101820;color:#eef4f4;font:14px system-ui,sans-serif}canvas{display:block;width:100%;height:100%;outline:none}#viewport{position:absolute;inset:0}.panel{position:absolute;left:22px;top:22px;width:300px;padding:20px;background:#101c28ec;border:1px solid #ffffff24;border-radius:16px;box-shadow:0 10px 45px #0005;backdrop-filter:blur(12px)}h1{font-size:20px;margin:0 0 6px;line-height:1.35}.small{font-size:12px;color:#acbcc9;line-height:1.7}hr{border:0;border-top:1px solid #ffffff20;margin:16px 0}.row{display:flex;align-items:center;justify-content:space-between;margin:12px 0;gap:12px}input{accent-color:#5cdcc4}input[type=checkbox]{width:18px;height:18px}input[type=range]{width:100%}button{font:inherit;color:#eef4f4;border:1px solid #ffffff35;border-radius:9px;background:#243849;padding:10px 13px;cursor:pointer}button.active{background:#197561;border-color:#5cdcc4}.buttons{display:flex;gap:8px}#status{position:absolute;bottom:20px;left:22px;padding:10px 14px;background:#101c28e6;border-radius:9px;max-width:calc(100vw - 44px)}#lockHint{margin-top:10px;color:#7de6d0}#error{color:#ffc5a8;white-space:pre-wrap}a{color:#8aebd6}details{margin-top:16px}summary{cursor:pointer;font-size:12px;color:#acbcc9}@media(max-width:650px){.panel{left:12px;top:12px;width:245px;padding:15px;font-size:12px}h1{font-size:17px}#status{left:12px;bottom:12px}}
+*{box-sizing:border-box}body{margin:0;background:#101820;color:#eef4f4;font:14px system-ui,sans-serif}canvas{display:block;width:100%;height:100%;outline:none}#viewport{position:absolute;inset:0}.panel{position:absolute;left:22px;top:22px;width:300px;padding:20px;background:#101c28ec;border:1px solid #ffffff24;border-radius:16px;box-shadow:0 10px 45px #0005;backdrop-filter:blur(12px)}h1{font-size:20px;margin:0 0 6px;line-height:1.35}.small{font-size:12px;color:#acbcc9;line-height:1.7}hr{border:0;border-top:1px solid #ffffff20;margin:16px 0}.row{display:flex;align-items:center;justify-content:space-between;margin:12px 0;gap:12px}input{accent-color:#5cdcc4}input[type=checkbox]{width:18px;height:18px}input[type=range]{width:100%}input[type=number]{width:100%;padding:8px;color:#eef4f4;background:#142534;border:1px solid #ffffff35;border-radius:7px}button{font:inherit;color:#eef4f4;border:1px solid #ffffff35;border-radius:9px;background:#243849;padding:10px 13px;cursor:pointer}button.active{background:#197561;border-color:#5cdcc4}button:disabled{opacity:.5;cursor:wait}.buttons{display:flex;gap:8px;flex-wrap:wrap}#status{position:absolute;bottom:20px;left:22px;padding:10px 14px;background:#101c28e6;border-radius:9px;max-width:calc(100vw - 44px)}#lockHint{margin-top:10px;color:#7de6d0}#error{color:#ffc5a8;white-space:pre-wrap}a{color:#8aebd6}details{margin-top:16px}summary{cursor:pointer;font-size:12px;color:#acbcc9}.picker{position:fixed;z-index:20;inset:0;display:grid;grid-template-columns:minmax(0,1fr) 330px;grid-template-rows:58px minmax(0,1fr);background:#101820}.picker[hidden]{display:none}.picker-head{grid-column:1/3;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#101c28;border-bottom:1px solid #ffffff25}.picker-head strong{font-size:16px}.picker-map{grid-column:1;grid-row:2;min-height:0;background:#263746}.picker-side{grid-column:2;grid-row:2;display:flex;flex-direction:column;gap:12px;padding:18px;overflow:auto;background:#14212d}.coords{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:grid;gap:5px;font-size:12px;color:#acbcc9}.field input{font-size:14px}#picker-message{min-height:44px;color:#acbcc9}.close-map{padding:8px 12px}@media(max-width:700px){.picker{grid-template-columns:1fr;grid-template-rows:50px minmax(38vh,1fr) auto}.picker-head{grid-column:1}.picker-map{grid-column:1;grid-row:2}.picker-side{grid-column:1;grid-row:3;max-height:42vh;padding:12px;gap:8px}.coords{grid-template-columns:1fr 1fr}.field input{padding:6px}}
 </style>
 <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
 </head><body><div id="viewport"></div>
 <aside class="panel"><h1 id="title">R3D explorer</h1><div class="small" id="location"></div><div class="small" id="counts">読み込み中…</div><hr>
 <label class="row"><span>元のテクスチャ付きポリゴン</span><input id="polygons" type="checkbox" checked></label>
 <label class="row"><span>Splat</span><input id="splats" type="checkbox" checked></label>
-<div class="buttons"><button id="fly" type="button">自由移動 OFF</button><button id="reset" type="button">全体表示</button></div>
+<div class="buttons"><button id="pick-location" type="button" disabled>地図から場所を選ぶ</button><button id="fly" type="button">自由移動 OFF</button><button id="reset" type="button">全体表示</button></div>
 <div class="small" id="lockHint">ドラッグで回転 · ホイールでズーム</div>
 <label class="row" for="speed"><span>移動速度</span><span id="speedValue">15 m/s</span></label><input id="speed" type="range" min="2" max="150" step="1" value="15">
 <div class="small">WASD 移動 · E / Q 上下 · Shift 高速<br>自由移動中は画面クリックでマウス視点操作<br>Esc マウス解除 · F 自由移動切替</div>
 <details><summary>Splatの表示調整</summary><label class="row" for="opacity"><span>濃さ</span><span id="opacityValue">81</span></label><input id="opacity" type="range" min="0" max="120" step="1" value="81"><div class="small">Splatの合成は近似です。公式表示とのpixel一致、LOD、タイル累積・色変換は未検証。</div></details>
 <div id="error" class="small"></div></aside><div id="status">データ読み込み中…</div>
+<section id="location-picker" class="picker" hidden aria-label="地図で取得地点を選択">
+<header class="picker-head"><strong>地図で取得地点を選択</strong><button id="close-picker" class="close-map" type="button">閉じる</button></header>
+<div id="pick-map" class="picker-map" aria-label="OpenStreetMap"></div>
+<div class="picker-side">
+<div class="small">地図をクリックするか、数値を入力して中心を選んでください。丸い範囲が取得対象の目安です。</div>
+<div class="coords"><label class="field">緯度<input id="pick-lat" type="number" min="-85.05112878" max="85.05112878" step="any"></label><label class="field">経度<input id="pick-lon" type="number" min="-180" max="180" step="any"></label></div>
+<label class="field">取得範囲（半径 m）<input id="pick-radius" type="number" min="5" max="300" step="5" value="40"></label>
+<button id="preview-area" type="button">対象タイル数を確認</button>
+<div id="tile-preview" class="small">z20の範囲内タイルを先に計算します。最大24タイルまで取得できます。</div>
+<button id="fetch-location" type="button" disabled>取得して3D表示</button>
+<div id="picker-message" class="small" role="status" aria-live="polite">地図をクリックして場所を選択してください。</div>
+<div class="small">処理中はこのページを開いたままにしてください。Apple Mapsの取得設定はサーバー側に保存されています。</div>
+</div></section>
+<script src="./vendor/leaflet/leaflet.js"></script>
 <script type="module" src="./app.js"></script></body></html>

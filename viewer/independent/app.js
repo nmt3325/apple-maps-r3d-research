@@ -75,6 +75,48 @@ function setFlying(value){
 }
 el('polygons').addEventListener('change',e=>polygons.visible=e.target.checked);
 el('splats').addEventListener('change',e=>splats.visible=e.target.checked);
+const picker=el('location-picker'),latInput=el('pick-lat'),lonInput=el('pick-lon'),radiusInput=el('pick-radius');
+let map=null,marker=null,area=null,lastPlan=null,activeJob=null;
+function updateMapPoint(lat,lon){
+  lat=+lat;lon=+lon;if(!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>85.05112878||Math.abs(lon)>180)return;
+  latInput.value=lat.toFixed(7);lonInput.value=lon.toFixed(7);
+  if(map){const point=[lat,lon],radius=Number.isFinite(+radiusInput.value)&&+radiusInput.value>0?+radiusInput.value:40;
+    if(marker)marker.setLatLng(point);else marker=L.marker(point,{draggable:true}).addTo(map).on('dragend',e=>updateMapPoint(e.target.getLatLng().lat,e.target.getLatLng().lng));
+    if(area)area.setLatLng(point);else area=L.circle(point,{radius,color:'#55ddc4',weight:2,fillOpacity:.09}).addTo(map);area.setRadius(radius);}
+  lastPlan=null;el('fetch-location').disabled=true;el('tile-preview').textContent='対象タイル数を再計算してください。';
+}
+el('pick-location').addEventListener('click',()=>{
+  picker.hidden=false;el('error').textContent='';
+  if(!map){map=L.map('pick-map').setView([metadata.origin[0],metadata.origin[1]],16);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+    map.on('click',e=>updateMapPoint(e.latlng.lat,e.latlng.lng));
+  }
+  updateMapPoint(+el('location').textContent.split(',')[0],+el('location').textContent.split(',')[1]);
+  requestAnimationFrame(()=>map.invalidateSize());
+});
+el('close-picker').addEventListener('click',()=>picker.hidden=true);
+for(const input of [latInput,lonInput,radiusInput])input.addEventListener('input',()=>{lastPlan=null;el('fetch-location').disabled=true;el('tile-preview').textContent='対象タイル数を再計算してください。';
+  if(input===latInput||input===lonInput){const lat=+latInput.value,lon=+lonInput.value;if(Number.isFinite(lat)&&Number.isFinite(lon)&&Math.abs(lat)<=85.05112878&&Math.abs(lon)<=180&&map){marker?.setLatLng([lat,lon]);area?.setLatLng([lat,lon]);}}
+  else if(area&&Number.isFinite(+radiusInput.value)&&+radiusInput.value>0)area.setRadius(+radiusInput.value);});
+for(const input of [latInput,lonInput])input.addEventListener('change',()=>{const lat=+latInput.value,lon=+lonInput.value;if(map&&Number.isFinite(lat)&&Number.isFinite(lon)&&Math.abs(lat)<=85.05112878&&Math.abs(lon)<=180)map.panTo([lat,lon]);});
+async function postJSON(path,body){const response=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const data=await response.json();if(!response.ok)throw Error(data.error||'サーバーで処理できませんでした');return data;}
+function selection(){const lat=+latInput.value,lon=+lonInput.value,radius=+radiusInput.value;
+ if(!Number.isFinite(lat)||!Number.isFinite(lon)||!Number.isFinite(radius))throw Error('緯度・経度・範囲を入力してください');
+ if(Math.abs(lat)>85.05112878||Math.abs(lon)>180||radius<5||radius>300)throw Error('緯度±85.05、経度±180、範囲5〜300mで指定してください');
+ return {lat,lon,radiusMeters:radius,zoom:20};}
+el('preview-area').addEventListener('click',async()=>{const button=el('preview-area');button.disabled=true;lastPlan=null;el('fetch-location').disabled=true;
+ try{const selected=selection(),plan=await postJSON('/api/plan',selected);if(selection().lat!==selected.lat||selection().lon!==selected.lon||selection().radiusMeters!==selected.radiusMeters)throw Error('位置が変わったため、タイル数を再計算してください');lastPlan=plan;el('tile-preview').textContent=`z${plan.zoom} · ${plan.tileCount}タイル · 取得範囲 ±${plan.radiusMeters}m`;
+   el('fetch-location').textContent=`${plan.tileCount}タイルを取得して3D表示`;el('fetch-location').disabled=false;el('picker-message').textContent='この範囲のR3D取得と復号を開始できます。';}
+ catch(error){el('tile-preview').textContent=String(error.message||error);el('picker-message').textContent='範囲を調整して再計算してください。';}
+ finally{button.disabled=false;}});
+el('fetch-location').addEventListener('click',async()=>{if(!lastPlan)return;const button=el('fetch-location');button.disabled=true;el('preview-area').disabled=true;
+ try{const job=await postJSON('/api/jobs',selection());activeJob=job.id;el('picker-message').textContent=`${job.tileCount}タイルを取得中…`;
+   while(true){await new Promise(resolve=>setTimeout(resolve,1200));const response=await fetch(`/api/jobs/${encodeURIComponent(activeJob)}`);const state=await response.json();
+     if(state.status==='failed')throw Error(state.message||'取得または復号に失敗しました');
+     el('picker-message').textContent=state.status==='ready'?'3Dシーンを開いています…':`${state.stage||'取得中'} · ${state.tileCount}タイル`;
+     if(state.status==='ready'){window.location.assign(state.viewer);return;}}
+ }catch(error){el('picker-message').textContent=String(error.message||error);button.disabled=false;el('preview-area').disabled=false;}
+});
 el('fly').addEventListener('click',()=>setFlying(!flying));el('reset').addEventListener('click',reset);
 el('speed').addEventListener('input',e=>el('speedValue').textContent=`${e.target.value} m/s`);
 el('opacity').addEventListener('input',e=>{splatMaterial.uniforms.alphaFactor.value=+e.target.value;el('opacityValue').textContent=e.target.value;});
@@ -105,5 +147,5 @@ try{
   document.title=metadata.title;el('title').textContent=metadata.title;el('location').textContent=`${metadata.origin[0].toFixed(6)}, ${metadata.origin[1].toFixed(6)}`;
   const total=metadata.totals;el('counts').textContent=`${total.tiles} タイル · ポリゴン ${total.meshTriangles.toLocaleString()} 面 · Splat ${total.splatRecords.toLocaleString()}`;
   reset();const queue=metadata.tiles.slice();await Promise.all(Array.from({length:4},async()=>{while(queue.length)await loadTile(queue.shift());}));
-  renderer.compile(scene,camera);ready=true;el('status').textContent='元のテクスチャ付きポリゴン + Splat · 読み込み完了';
+  renderer.compile(scene,camera);ready=true;el('pick-location').disabled=false;el('status').textContent='元のテクスチャ付きポリゴン + Splat · 読み込み完了';
 }catch(error){el('error').textContent=String(error.message||error);el('status').textContent='読み込みに失敗しました';console.error(error);}
