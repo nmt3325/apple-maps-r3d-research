@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "plan": {
+    "center": [
+      35.6586,
+      139.7454
+    ],
+    "radiusMeters": 15.0,
+    "rangeMeaning": "Bounding square enclosing requested spherical radius; complete intersecting tiles",
+    "zoom": 20,
+    "style": 98,
+    "tiles": [
+      {
+        "z": 20,
+        "x": 931325,
+        "y": 412986,
+        "h": 0
+      },
+      {
+        "z": 20,
+        "x": 931325,
+        "y": 412987,
+        "h": 0
+      },
+      {
+        "z": 20,
+        "x": 931326,
+        "y": 412986,
+        "h": 0
+      },
+      {
+        "z": 20,
+        "x": 931326,
+        "y": 412987,
+        "h": 0
+      }
+    ],
+    "boundsUnwrappedSWNE": [
+      35.65846525270738,
+      139.74523415819112,
+      35.65873474729262,
+      139.74556584180885
+    ],
+    "lodSelection": "Explicit zoom; Apple exact LOD selection is an additional goal"
+  },
+  "nativeRuntimeInvoked": false,
+  "nativeGoldenInput": false,
+  "steps": [
+    {
+      "step": "fetch",
+      "tiles": 4,
+      "freshResponses": 4,
+      "pass": true
+    },
+    {
+      "step": "independent-decode",
+      "exitCode": 0,
+      "log": "decode.log",
+      "pass": true
+    },
+    {
+      "step": "hybrid-viewer",
+      "counts": {
+        "tiles": 4,
+        "meshTriangles": 28745,
+        "splatRecords": 8983,
+        "visibleSplatRecords": 3910
+      },
+      "pass": true
+    },
+    {
+      "step": "GLB/PLY",
+      "outputs": {
+        "scene.glb": {
+          "bytes": 3583596,
+          "sha256": "4a95595a9da5ced66b2a88c9c1b28cfbb0f5ab2e97e41f24083bd982c612feb0"
+        },
+        "splats.ply": {
+          "bytes": 1410921,
+          "sha256": "a4121315d62ae1e9fb2bde267c6eb8d110d7d89222617d8d7427690e047f170c"
+        }
+      },
+      "pass": true
+    }
+  ],
+  "mode": "live-Linux-HTTPS",
+  "startedUTC": "2026-10-14T01:59:12Z",
+  "pass": true,
+  "elapsedSeconds": 3.536
+}

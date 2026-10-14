@@ -1,5 +1,7 @@
 # 再現と検証
 
+独立復号からハイブリッド表示・GLB/PLY出力までの完全経路は [LINUX_EXPLORER.md](LINUX_EXPLORER.md)。以下のsaved native viewerの復元とは区別する。
+
 現在の全数値decoderは[INDEPENDENT_DECODER.md](INDEPENDENT_DECODER.md)のコマンドで実行する。以下のフレーム/HUFF中間検証と区別する。東京全配列golden比較は`audit_soup_arrays.py`と`audit_mesh_arrays.py`。Oahu72は`nativefree_decode_r3d.py`で原本から出力できる。
 
 ## データ不要のcheck

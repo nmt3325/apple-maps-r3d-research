@@ -1,0 +1,30 @@
+{
+  "tiles": 72,
+  "origin": [
+    21.2828,
+    -157.8369,
+    0
+  ],
+  "geographicBoundsSWNE": [
+    21.27,
+    -157.85,
+    21.3,
+    -157.82
+  ],
+  "polygonFaces": 581186,
+  "splatRecords": 304527,
+  "allGeometryFinite": true,
+  "allIndicesAndUVExact": true,
+  "allTexturesDecodedRGBExact": true,
+  "sharedFramePlacementVerified": true,
+  "nativeGoldenInput": false,
+  "surfaceDistanceSampleCount": 36158,
+  "surfaceDistanceMetersPercentiles": {
+    "p50": 2.8460663557052612,
+    "p90": 11.79014377593994,
+    "p95": 13.996932840347293,
+    "p99": 18.56091148376465,
+    "max": 26.02534294128418
+  },
+  "surfaceDistanceScope": "Deterministic samples of visible Splat centroids to original mesh triangles among 24 nearest centroids; diagnostic, not equality of the two distinct geometry layers"
+}

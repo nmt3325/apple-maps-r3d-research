@@ -6,12 +6,12 @@
 
 ## 次の順番
 
-1. `codec/nativefree_decode_r3d.py`のOahu72出力からハイブリッドviewerを生成する。Splat/ポリゴンは同じ原本の回転とECEF並進でENUへ移す。元HEICをLinuxでPNG等へ変換して表示する。
-2. Oahuの全配列・地理位置・UV/index・有限値・欠損RGB・レイヤー位置合わせを記録し、WASD、上下、マウス、レイヤー切替をブラウザで検証する。
-3. 既存取得labの署名処理を座標/範囲入力の入口へ統合する。認証はローカル設定とし、ログ・表示・Gitには含めない。任意地域でタイルの有無とstyle versionを検証する。
-4. 原本取得→独立復号→viewer生成を一コマンドにし、GLB/PLY出力、失敗ログ、破損入力検出、別Linux環境での再現を揃える。
-5. 実装・仕様・全検証証拠をGitHubへ保存し、READMEを実態に合わせて6条件の完了監査を行う。
-6. 追加目標のshader uniform・tile accumulation・color transfer・LOD・公式pixel一致を別途追跡する。
+1. Oahu72の表示・地理/全viewer配列・GLB/PLY・ブラウザ15操作検証は完了。座標入力による東京4/ニューヨーク2のLinux HTTPS取得→独立復号→表示生成も完了。
+2. 別Linux（Ubuntu 24.04 aarch64）の隔離venvで、固定依存から全経路を再現する。
+3. 最終の実装・検証証拠・viewer/export成果物をGitHubへ保存し、README/ACCEPTANCEと6条件の監査を揃える。
+4. 追加目標の公式pixel一致、正確なLOD、Apple独自の累積・色変換は未達として追跡する。
+
+完全経路のコマンドと制約は[LINUX_EXPLORER.md](LINUX_EXPLORER.md)。新しい証拠はreports/validation-20261014/。
 
 数値codecと東京223全配列検証は[INDEPENDENT_DECODER.md](INDEPENDENT_DECODER.md)に記録済み。Splatの全3*N頂点と8属性/material20は完全一致、ポリゴンXYZ/UV/全index/primary HEICも一致。法線271個の1 ULP差は個別の数値証拠付きで説明済み。旧`.decoded`の位置は全配列の先頭N頂点だけなので、これを中心点として再利用しない。
 

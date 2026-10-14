@@ -1,0 +1,97 @@
+{
+  "requested": 4,
+  "files": [
+    {
+      "tile": {
+        "z": 20,
+        "x": 931325,
+        "y": 412986,
+        "h": 0
+      },
+      "file": "s98_z20_x931325_y412986_h0.r3d",
+      "bytes": 106267,
+      "sha256": "1409d03c4aeaec369b3a686c7ca675a90bb1eda289b627417191ddee2fc44df8"
+    },
+    {
+      "tile": {
+        "z": 20,
+        "x": 931325,
+        "y": 412987,
+        "h": 0
+      },
+      "file": "s98_z20_x931325_y412987_h0.r3d",
+      "bytes": 157192,
+      "sha256": "3974ea9a6ce7962ef7377e88ba2e3f8e0c05adf10f9ab5823b5ac7157e5a0edd"
+    },
+    {
+      "tile": {
+        "z": 20,
+        "x": 931326,
+        "y": 412986,
+        "h": 0
+      },
+      "file": "s98_z20_x931326_y412986_h0.r3d",
+      "bytes": 58014,
+      "sha256": "27b65b43dcbdc9e9bb6196c1cbbc5ac6a57ad4e04d7aec09155031f75d28a15f"
+    },
+    {
+      "tile": {
+        "z": 20,
+        "x": 931326,
+        "y": 412987,
+        "h": 0
+      },
+      "file": "s98_z20_x931326_y412987_h0.r3d",
+      "bytes": 160685,
+      "sha256": "a2a45143b71eee4ce6c7d0132ad670a0349763fcf0c55aa3a1296637c81d9899"
+    }
+  ],
+  "errors": [],
+  "freshResponses": 4,
+  "cached": 0,
+  "authentication": "Fresh per-request signatures; no saved signed URLs or access keys",
+  "source": "Linux HTTPS; configured style/region/version template",
+  "plan": {
+    "center": [
+      35.6586,
+      139.7454
+    ],
+    "radiusMeters": 15.0,
+    "rangeMeaning": "Bounding square enclosing requested spherical radius; complete intersecting tiles",
+    "zoom": 20,
+    "style": 98,
+    "tiles": [
+      {
+        "z": 20,
+        "x": 931325,
+        "y": 412986,
+        "h": 0
+      },
+      {
+        "z": 20,
+        "x": 931325,
+        "y": 412987,
+        "h": 0
+      },
+      {
+        "z": 20,
+        "x": 931326,
+        "y": 412986,
+        "h": 0
+      },
+      {
+        "z": 20,
+        "x": 931326,
+        "y": 412987,
+        "h": 0
+      }
+    ],
+    "boundsUnwrappedSWNE": [
+      35.65846525270738,
+      139.74523415819112,
+      35.65873474729262,
+      139.74556584180885
+    ],
+    "lodSelection": "Explicit zoom; Apple exact LOD selection is an additional goal"
+  }
+}

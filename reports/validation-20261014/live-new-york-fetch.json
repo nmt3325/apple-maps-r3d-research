@@ -1,0 +1,63 @@
+{
+  "requested": 2,
+  "files": [
+    {
+      "tile": {
+        "z": 20,
+        "x": 308789,
+        "y": 394105,
+        "h": 0
+      },
+      "file": "s98_z20_x308789_y394105_h0.r3d",
+      "bytes": 53779,
+      "sha256": "241982b5a4f9a240ada2ac41d0dd071967db43f5badeab4eedecb0eeddaad8df"
+    },
+    {
+      "tile": {
+        "z": 20,
+        "x": 308789,
+        "y": 394106,
+        "h": 0
+      },
+      "file": "s98_z20_x308789_y394106_h0.r3d",
+      "bytes": 33751,
+      "sha256": "72b0af773234af6e928fb616433c8bc8270630b3b4cb59c6e4f0723b5cdf0deb"
+    }
+  ],
+  "errors": [],
+  "freshResponses": 2,
+  "cached": 0,
+  "authentication": "Fresh per-request signatures; no saved signed URLs or access keys",
+  "source": "Linux HTTPS; configured style/region/version template",
+  "plan": {
+    "center": [
+      40.748817,
+      -73.985428
+    ],
+    "radiusMeters": 5.0,
+    "rangeMeaning": "Bounding square enclosing requested spherical radius; complete intersecting tiles",
+    "zoom": 20,
+    "style": 98,
+    "tiles": [
+      {
+        "z": 20,
+        "x": 308789,
+        "y": 394105,
+        "h": 0
+      },
+      {
+        "z": 20,
+        "x": 308789,
+        "y": 394106,
+        "h": 0
+      }
+    ],
+    "boundsUnwrappedSWNE": [
+      40.748772084235796,
+      -73.98548728859711,
+      40.74886191576421,
+      -73.98536871140288
+    ],
+    "lodSelection": "Explicit zoom; Apple exact LOD selection is an additional goal"
+  }
+}

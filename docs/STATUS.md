@@ -21,7 +21,7 @@ R3D原本からSplatの3頂点XYZ・8属性・material20と、元ポリゴンの
 
 kind0の3*N byteはSplatの3頂点分です。旧`.decoded` goldenは位置配列の先頭N頂点だけを保存しており、全3*N頂点は`.native-triangle-f32`にあります。原点の+1差はint32境界をまたぐbyteの繰り返しで説明でき、タイル固有の例外を除去しました。
 
-Oahu72も原本だけから304,527 Splatと581,186元ポリゴン面を復号しました。元テクスチャ付きポリゴンとSplatのハイブリッド表示・位置合わせ検証はまだ完了していません。
+Oahu72も原本だけから304,527 Splatと581,186元ポリゴン面を復号しました。元テクスチャ付きポリゴンとSplatを表示し、全viewer配列・画像・地理範囲・同じR/ECEF→ENUの適用を検証しました。ブラウザの15チェック（WASD/EQ/mouse/Esc/layer toggleを含む）も通過。独立GLB/PLYの全配列読み戻しは一致、Khronos検証器はerror/warning 0です。
 
 過去のHUFF監査は探索履歴として保存します。現在の全配列比較はレーン内compact整数から実際の出力symbol数を取り、word境界・entropy消費・paddingも検証するdecoderで実行しています。
 
@@ -29,10 +29,10 @@ C3MM v2は6つのサンプルで36圧縮区画が宣言長どおり復号でき�
 
 ## まだできていないこと
 
-1. Oahuを独立decoderから元テクスチャ付きポリゴン＋Splatとして描画し、地理位置・レイヤー位置合わせまで検証する。
-2. 任意の緯度・経度・範囲から取得、完全独立復号、自由移動表示を一体化する。
-3. 独立復号出力のGLB/PLY等のexport、新しいLinux環境での完全経路の再現を揃える。
-4. 最終の実装・検証・制約をGitHubに保存し、主要目標達成時に再現コマンドと証拠を提示する。
+1. 別のLinuxマシンの隔離venvで、固定依存・取得済みR3D原本から完全経路を再現する。
+2. 最終の実装・検証・制約・表示/出力成果物をGitHubに保存し、再現コマンドと証拠を添えて6条件を監査する。
+
+座標入口は`pipeline/r3d_explorer.py`。東京タワー4タイルとニューヨーク2タイルで、新しいHTTPS署名取得→独立復号→ハイブリッドviewer→GLB/PLYの成功を記録しました。[LINUX_EXPLORER.md](LINUX_EXPLORER.md)にセットアップ、ローカル取得設定、再現コマンド、範囲と制約を記録しています。
 5. 追加目標：Apple公式表示のpixel parity、uniform、tile accumulation、color transfer、正確なLOD選択。
 
 過去メモの「polygon未取得」「222/223 origin」「native-free geometry未完成」は、その時点の履歴です。独立した数値復号は今回実装・照合済みですが、取得から表示までの主要目標は引き続き未達です。

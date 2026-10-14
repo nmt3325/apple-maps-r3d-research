@@ -2,7 +2,7 @@
 
 Apple Maps iOS 27のR3Dを調査し、**元のテクスチャ付きポリゴンとsoft triangle Splatを復元・表示する研究**の成果をまとめたスナップショットです。2026-10-14 JST時点。
 
-**Linuxの独立decoderで元ポリゴンとSplatの全数値復号を実装し、東京223タイルの全配列照合を通しました。取得から自由移動表示までの統合とOahuの表示検証は未完成で、主要目標は未達です。** soft triangle Splatを通常の楕円3D Gaussian Splattingと同一とは断定していません。
+**Linuxの独立decoder、東京223の全配列照合、Oahu72の元テクスチャ付きポリゴン＋Splat表示、座標入力からの取得・復号・表示・GLB/PLY出力を実装・検証しました。別Linuxでの再現と最終保存を確認中で、主要目標はまだ未達です。** soft triangle Splatを通常の楕円3D Gaussian Splattingと同一とは断定していません。
 
 主要目標は任意の緯度・経度・範囲からLinuxだけで取得・完全復号・自由移動表示まで実行することです。[6項目の完了条件](docs/ACCEPTANCE.md)をすべて満たした場合に達成と判定します。公式表示とのpixel一致、正確なLOD、タイル累積・色変換の完全再現は別の追加目標として追跡します。
 
@@ -23,7 +23,9 @@ Apple Maps iOS 27のR3Dを調査し、**元のテクスチャ付きポリゴン�
 | 過去HUFF中間監査 | 2,659圧縮候補、739,702出力byte、復号reject 0 | 探索履歴。現在の数値decoderは実際のsymbol数を原本から復元 |
 | BYET/J kind0..6 | 数値復号とtriangle/属性/mesh全配列照合 | 原点差と3*N byteの意味も解決 |
 | C3MM v2 | 6サンプル・36 LZMA区画、タイルz/x/y復元 | 構造解析済み、階層意味は一部未解決 |
-| 新規地域のLinuxのみでの完全3D復元 | Oahu72を原本だけから数値復号。304,527 Splat、581,186元ポリゴン面 | 数値復号済み、ハイブリッド表示検証は未完了 |
+| 新規地域のLinuxのみでの完全3D復元 | Oahu72、304,527 Splat、581,186元ポリゴン面 | 地理・全viewer配列・画像照合、ブラウザ15操作チェック通過 |
+| 座標から取得・復号・表示・出力 | 東京タワー4、新規ニューヨーク2をLinux HTTPS取得 | 一コマンド経路成功。ローカル取得設定が必要 |
+| 独立GLB/PLY export | Oahuの全geometry/UV/法線/画像/RGBA、PLYの8属性 | 全出力の読み戻し一致、Khronos GLB検証でerror/warning 0 |
 
 HUFFの別研究では2,424個の0x24 envelope内で1,462圧縮table＋962 literalを検証しています。上記2,659件とは走査対象・候補検出方法が違い、件数を単純に比較できません。出力長の意味・呼び出し元からの値は引き続き要検証です。
 
@@ -34,6 +36,7 @@ HUFFの別研究では2,424個の0x24 envelope内で1,462圧縮table＋962 liter
 | [codec/](codec/) | 独立Python実装：R3D/TLV、compact size、HEIC、BYET origin/J directory、HUFF、C3MM |
 | [audit/](audit/) | レーン照合・コーパス検証。主要HUFF/ BYET監査はrepo内codecを参照 |
 | [viewer/](viewer/) | 現行HTML、依存package情報、vendorライセンス |
+| [pipeline/](pipeline/) | Linuxの座標計画・署名取得・独立復号・ハイブリッド表示・GLB/PLY出力 |
 | [snapshots/viewer/](snapshots/viewer/) | CT104の元ビューワ・変換・GLB/PLY出力・ブラウザ検証スクリプト |
 | [snapshots/apple-maps-region-fetch-lab-20261013/](snapshots/apple-maps-region-fetch-lab-20261013/) | 別作業の取得/計画ツールを読み取り専用で複製 |
 | [native-harness/](native-harness/) | Mac iOS Simulatorによる参照復号用Objective-C++と静的解析ツール |
@@ -46,6 +49,17 @@ HUFFの別研究では2,424個の0x24 envelope内で1,462圧縮table＋962 liter
 元R3D、native golden、ビュー用バイナリ、GLB/PLY、抽出済み中間データは、**private Release `snapshot-20261014`** の添付に保存します。Git cloneだけでは実データは揃いません。5つのデータアーカイブには計6,338ファイル、圧縮後676,456,931 byte（約645 MiB）を収録しました。認証情報、署名付きURL、通信キャプチャ、インストール済みツール一式は収録しません。
 
 ## 最小の実行
+
+**完全経路のセットアップと再現コマンドは [LINUX_EXPLORER.md](docs/LINUX_EXPLORER.md)。** Python 3.12以上、Node/npm、固定requirementsとpackage-lockを使う。
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-audit.txt
+npm ci --prefix viewer --ignore-scripts --no-audit --no-fund
+.venv/bin/python pipeline/r3d_explorer.py --lat 35.6586 --lon 139.7454 \
+  --radius-m 15 --config /private/path/maps.credentials.json \
+  --out-dir reports/generated/tokyo-tower --export --serve
+```
 
 Python 3.10以上。主要codecは標準ライブラリのみです。
 
