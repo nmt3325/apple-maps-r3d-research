@@ -14,8 +14,11 @@ final class ExplorerModel: ObservableObject {
     @Published var completed = 0
     @Published var quality = 1
     @Published var configured = false
-    @Published var paused = false { didSet { if paused { stopNavigation() } } }
-    @Published var viewDistance = 600.0
+    @Published var paused = false { didSet {
+        if paused { stopNavigation() }
+        DiagnosticsLog.shared.event("control.pause",fields:["paused":paused])
+    } }
+    @Published var viewDistance = 600.0 { didSet { DiagnosticsLog.shared.event("control.view_distance",fields:["meters":viewDistance]) } }
     @Published var cpuCacheMB = 0
     @Published var processMemoryMB = 0
     @Published var metalMemoryMB = 0
@@ -26,8 +29,8 @@ final class ExplorerModel: ObservableObject {
     var camera = CameraState()
     var origin = GeoOrigin(latitude:35.6586,longitude:139.7454)
     var navigation = CameraNavigation()
-    var elevation = 0.0
-    @Published var elevationSpeed = 35.0
+    var elevation = 0.0 { didSet { if oldValue != elevation { DiagnosticsLog.shared.event("control.elevation",fields:["direction":elevation,"speed_mps":elevationSpeed]) } } }
+    @Published var elevationSpeed = 35.0 { didSet { DiagnosticsLog.shared.event("control.elevation_speed",fields:["meters_per_second":elevationSpeed]) } }
     @Published var active = true
     var device: MTLDevice?
     var factory: GPUFactory?
@@ -65,6 +68,13 @@ final class ExplorerModel: ObservableObject {
     var velocity = SIMD2<Double>.zero
     var previousEye: SIMD2<Double>?
     var previousMotionTime = 0.0
+    var queuedAt: [TileKey:Double] = [:]
+    var neededAt: [TileKey:Double] = [:]
+    var tileReadyAt: [TileKey:Double] = [:]
+    var tileTraces: [TileKey:String] = [:]
+    var awaitingFirstDraw = Set<TileKey>()
+    var lastPlanLog = 0.0
+    var lastResidencyLog = 0.0
     var residentBytes: Int { tiles.values.reduce(0){$0+$1.cost} }
 
 
@@ -72,6 +82,7 @@ final class ExplorerModel: ObservableObject {
         device = MTLCreateSystemDefaultDevice()
         if let device { factory = GPUFactory(device:device) }
         else { rendererError = "この端末では Metal を使用できません。" }
+        DiagnosticsLog.shared.event("app.model_init",fields:["metal_available":device != nil,"device":device?.name ?? "none"])
         if let config = CredentialStore.load() { configure(config) }
         else { message = StreamError.configuration.localizedDescription }
         #if DEBUG
@@ -83,6 +94,7 @@ final class ExplorerModel: ObservableObject {
     func configure(_ config: FetchConfiguration) {
         invalidate()
         client = AppleMapsClient(config); configured = true; authFailed = false
+        DiagnosticsLog.shared.event("connection.configured",fields:["generation":generation])
         message = "Apple Maps から 3D データを直接取得中"
     }
     func importConfiguration(_ url: URL) {
@@ -96,6 +108,8 @@ final class ExplorerModel: ObservableObject {
         } catch { message = "取得設定を読み込めませんでした。形式を確認してください。" }
     }
     func invalidate() {
+        DiagnosticsLog.shared.event("stream.invalidate",fields:["generation":generation,"pending":pending.count,"resident":tiles.count])
+        queuedAt.removeAll(); neededAt.removeAll(); tileReadyAt.removeAll(); tileTraces.removeAll(); awaitingFirstDraw.removeAll()
         generation += 1
         textureTask?.cancel(); textureTask = nil; textureKey = nil; textureReservation = 0
         textureRetry.removeAll(); decodedCache.removeAll()
@@ -112,6 +126,7 @@ final class ExplorerModel: ObservableObject {
         stopNavigation(); invalidate(); origin = GeoOrigin(latitude:latitude,longitude:longitude)
         camera.eye = SIMD3(0,100,160); camera.yaw = 0; camera.pitch = -0.45
         locationLabel = label; completed = 0
+        DiagnosticsLog.shared.event("control.relocate",fields:cameraLogFields())
     }
     func step(dt: Double, now: Double) {
         if !paused {
@@ -146,7 +161,31 @@ final class ExplorerModel: ObservableObject {
             metalMemoryMB = Int(device?.currentAllocatedSize ?? 0)/1024/1024
             processMemoryMB = Self.processFootprint()/1024/1024
             if os_proc_available_memory() < 128*1024*1024 && !constrained { memoryWarning() }
+            let beforeTrim = decodedCache.bytes
             decodedCache.trim(now:now,budget:cpuBudget)
+            var state = cameraLogFields()
+            state.merge(["resident_bytes":residentBytes,"resident_tiles":tiles.count,"cpu_cache_bytes":decodedCache.bytes,
+                "cpu_cache_trimmed_bytes":beforeTrim-decodedCache.bytes,"gpu_budget_bytes":budget,
+                "cpu_budget_bytes":cpuBudget,"metal_allocated_bytes":device?.currentAllocatedSize ?? 0,
+                "process_footprint_bytes":Self.processFootprint(),"available_memory_bytes":os_proc_available_memory(),
+                "queue":queue.count,"oldest_queue_wait_ms":queuedAt.values.min().map{(DiagnosticsLog.now-$0)*1000} ?? 0,
+                "pending":pending.count,"fetching":fetching.count,"preparing":processing.active,
+                "failures":failures.count,"fps":fps,"drawn_tiles":drawnTiles,"texture_reservation_bytes":textureReservation,
+                "paused":paused,"authentication_failed":authFailed,"thermal_state":ProcessInfo.processInfo.thermalState.rawValue,
+                "low_power":ProcessInfo.processInfo.isLowPowerModeEnabled],uniquingKeysWith:{$1})
+            DiagnosticsLog.shared.event("stream.state",fields:state)
+            if now-lastResidencyLog >= 5 {
+                lastResidencyLog = now
+                let resident = tiles.values.sorted{$0.key<$1.key}
+                for offset in stride(from:0,to:resident.count,by:64) {
+                    let batch = resident[offset..<min(offset+64,resident.count)].map { tile -> [String:Any] in
+                        ["tile":tile.key.name,"bytes":tile.cost,"texture_limit":tile.textureLimit,
+                         "source_pixels":tile.sourcePixels,"triangles":tile.triangles,"splat_vertices":tile.splatVertices,
+                         "distance_m":tileDistance(tile.key),"in_frustum":inView(tile.key),"needed":needed.contains(tile.key)]
+                    }
+                    DiagnosticsLog.shared.event("stream.residency",fields:["generation":generation,"offset":offset,"total":resident.count,"tiles":batch])
+                }
+            }
         }
     }
     func updatePlan(now: Double) {
@@ -176,14 +215,28 @@ final class ExplorerModel: ObservableObject {
                 } catch { message = error.localizedDescription }
             }
         }
+        let added = newNeeded.subtracting(needed), removed = needed.subtracting(newNeeded)
+        let timingNow = DiagnosticsLog.now
+        neededAt = neededAt.filter { newNeeded.contains($0.key) }
+        for key in added { neededAt[key] = timingNow }
+        if !added.isEmpty || !removed.isEmpty || now-lastPlanLog >= 1 {
+            lastPlanLog = now
+            DiagnosticsLog.shared.event("plan.update",fields:["generation":generation,"desired_leaves":desired.count,
+                "lod_counts":Dictionary(grouping:desired,by:{String($0.z)}).mapValues{$0.count},
+                "added_count":added.count,"removed_count":removed.count,"needed_count":newNeeded.count,
+                "index_count":activeIndices.count,"range_m":renderDistance,
+                "velocity_east_mps":velocity.x,"velocity_south_mps":velocity.y])
+        }
         needed = newNeeded
         knownBounds = knownBounds.filter{needed.contains($0.key)}
-        for (key,task) in pending where !needed.contains(key) { task.cancel() }
+        for (key,task) in pending where !needed.contains(key) && !task.isCancelled {
+            DiagnosticsLog.shared.event("pipeline.cancel_requested",tile:key.name,fields:["reason":"outside_plan"]); task.cancel()
+        }
         empty = empty.filter{$0.value > Date() && needed.contains($0.key)}
         failures = failures.filter{$0.value > Date() && needed.contains($0.key)}
         for key in tiles.keys where needed.contains(key) { accessed[key] = now }
         for key in Array(tiles.keys) where !needed.contains(key) && key != textureKey &&
-            now-(accessed[key] ?? 0) > StreamingPolicy.retention(distance:tileDistance(key)) { evict(key) }
+            now-(accessed[key] ?? 0) > StreamingPolicy.retention(distance:tileDistance(key)) { evict(key,reason:"retention_expired") }
         if residentBytes > budget*4/5 { texturePressureUntil = max(texturePressureUntil,now+20) }
         updateTextures(now:now)
         enforceBudget(reserving:0)
@@ -212,28 +265,48 @@ final class ExplorerModel: ObservableObject {
             }
             return rank(a)<rank(b)
         }
+        let eligible = Set(queue)
+        queuedAt = queuedAt.filter { eligible.contains($0.key) }
+        for (position,key) in queue.enumerated() where queuedAt[key] == nil {
+            queuedAt[key] = DiagnosticsLog.now
+            DiagnosticsLog.shared.event("pipeline.queued",tile:key.name,fields:["generation":generation,"position":position,
+                "queue_size":queue.count,"lod":key.z,"height_layer":key.h,"distance_m":tileDistance(key),"in_frustum":inView(key)])
+        }
     }
     func pump() {
         guard active && !paused && !authFailed, let client, let factory else { return }
         while pending.count < 4 && fetching.count < 2 && !queue.isEmpty {
             let key = queue.removeFirst(), epoch = generation, frameOrigin = origin, texture = constrained ? 512 : 1024
             let decoder = decoder
+            let trace = UUID().uuidString, pipelineStart = DiagnosticsLog.now
+            let wait = (pipelineStart-(queuedAt.removeValue(forKey:key) ?? pipelineStart))*1000
             let cached = decodedCache.value(for:key,now:CACurrentMediaTime())
             if cached == nil { fetching.insert(key) }
+            DiagnosticsLog.shared.event("pipeline.begin",tile:key.name,trace:trace,fields:["generation":epoch,
+                "queue_wait_ms":wait,"needed_wait_ms":(pipelineStart-(neededAt[key] ?? pipelineStart))*1000,
+                "cpu_cache_hit":cached != nil,"queue_remaining":queue.count,"pending":pending.count,"fetching":fetching.count])
             pending[key] = Task { [weak self] in
+                var outcome = "stale", stage = "fetch"
+                defer { DiagnosticsLog.shared.event("pipeline.end",tile:key.name,trace:trace,fields:["generation":epoch,
+                    "outcome":outcome,"last_stage":stage,"duration_ms":DiagnosticsLog.milliseconds(since:pipelineStart)]) }
                 do {
-                    let raw = cached == nil ? try await client.fetch(key) : Data()
+                    let raw = cached == nil ? try await client.fetch(key,trace:trace) : Data()
                     try Task.checkCancellation()
                     guard let self, self.generation == epoch else { return }
                     self.fetching.remove(key)
                     self.pump()
                     if let raw {
+                        stage = "processing_wait"
+                        let slotStart = DiagnosticsLog.now
+                        DiagnosticsLog.shared.event("processing.queued",tile:key.name,trace:trace,fields:["active":self.processing.active])
                         try await self.processing.withSlot {
+                            DiagnosticsLog.shared.event("processing.begin",tile:key.name,trace:trace,fields:["wait_ms":DiagnosticsLog.milliseconds(since:slotStart)])
+                            stage = "decode"
                             try Task.checkCancellation()
                             let decoded: [String:Data]
                             do {
                                 if let cached { decoded = cached }
-                                else { decoded = try await decoder.invoke(key.style == 100 ? "height_index" : "decode_tile",data:raw) }
+                                else { decoded = try await decoder.invoke(key.style == 100 ? "height_index" : "decode_tile",data:raw,tile:key.name,trace:trace,queuedAt:DiagnosticsLog.now) }
                             }
                             catch {
                                 if !(error is CancellationError) { await client.rejectCached(key) }
@@ -244,7 +317,10 @@ final class ExplorerModel: ObservableObject {
                                 guard let data = decoded["json"] else { throw StreamError.invalidIndex }
                                 let index = try JSONDecoder().decode(HeightIndex.self,from:data)
                                 guard index.tile.z == key.z && index.tile.x == key.x && index.tile.y == key.y else { throw StreamError.invalidIndex }
-                                if self.generation == epoch && self.needed.contains(key) { self.indices[key] = index }
+                                if self.generation == epoch && self.needed.contains(key) {
+                                    self.indices[key] = index; outcome = "index_ready"
+                                    DiagnosticsLog.shared.event("index.ready",tile:key.name,trace:trace,fields:["occupied_cells":index.cells.count])
+                                }
                             } else {
                                 guard let json = decoded["json"] else { throw StreamError.invalidGeometry }
                                 let info = try JSONDecoder().decode(TileInfo.self,from:json)
@@ -253,17 +329,29 @@ final class ExplorerModel: ObservableObject {
                                 if self.generation == epoch && self.needed.contains(key) {
                                     self.knownBounds[key] = info.sphere(origin:frameOrigin)
                                 }
+                                let cacheBefore = self.decodedCache.bytes
                                 self.decodedCache.insert(decoded,for:key,now:CACurrentMediaTime(),budget:self.cpuBudget)
+                                DiagnosticsLog.shared.event("cache.cpu_insert",tile:key.name,trace:trace,fields:["bytes_before":cacheBefore,
+                                    "bytes_after":self.decodedCache.bytes,"retained":self.decodedCache.entries[key] != nil,"budget":self.cpuBudget])
                                 if self.tiles[key] != nil {
+                                    outcome = "atlas_source_ready"
                                     if self.decodedCache.entries[key] == nil { self.textureRetry[key] = CACurrentMediaTime()+60 }
                                     self.updateTextures(now:CACurrentMediaTime())
                                     return
                                 }
+                                stage = "gpu_prepare"
+                                let gpuStart = DiagnosticsLog.now
+                                DiagnosticsLog.shared.event("gpu.prepare_begin",tile:key.name,trace:trace,fields:["texture_limit":texture])
                                 let preparation = Task.detached(priority:.utility) {
+                                    DiagnosticsLog.shared.event("gpu.worker_begin",tile:key.name,trace:trace,fields:["dispatch_wait_ms":DiagnosticsLog.milliseconds(since:gpuStart)])
                                     try Task.checkCancellation()
                                     return try factory.prepare(key:key,decoded:decoded,origin:frameOrigin,textureLimit:texture)
                                 }
                                 let tile = try await withTaskCancellationHandler(operation:{try await preparation.value},onCancel:{preparation.cancel()})
+                                DiagnosticsLog.shared.event("gpu.prepare_end",tile:key.name,trace:trace,fields:["duration_ms":DiagnosticsLog.milliseconds(since:gpuStart),
+                                    "bytes":tile.cost,"triangles":tile.triangles,"splat_vertices":tile.splatVertices,
+                                    "atlas_width":tile.atlas?.width ?? 0,"atlas_height":tile.atlas?.height ?? 0,"mip_levels":tile.atlas?.mipmapLevelCount ?? 0])
+                                stage = "admission"
                                 try Task.checkCancellation()
                                 if self.generation == epoch && self.needed.contains(key) {
                                     guard tile.cost <= self.budget else { throw StreamError.gpuBudget }
@@ -277,17 +365,26 @@ final class ExplorerModel: ObservableObject {
                                         self.texturePressureUntil = CACurrentMediaTime()+30
                                         self.failures[key] = Date().addingTimeInterval(5)
                                         if self.textureTask == nil { self.adaptiveDistance = max(120,self.renderDistance*0.85) }
+                                        outcome = "budget_deferred"
+                                        DiagnosticsLog.shared.event("gpu.admission_deferred",tile:key.name,trace:trace,fields:["tile_bytes":tile.cost,
+                                            "resident_bytes":self.residentBytes,"reservation_bytes":self.textureReservation,"budget_bytes":self.budget,"range_m":self.renderDistance])
                                         self.message = "メモリに合わせて描画範囲を調整しました"
                                     } else {
                                         self.tiles[key] = tile; self.accessed[key] = CACurrentMediaTime()
-                                        self.completed += 1
+                                        self.completed += 1; outcome = "resident"
+                                        self.tileReadyAt[key] = DiagnosticsLog.now; self.tileTraces[key] = trace; self.awaitingFirstDraw.insert(key)
+                                        DiagnosticsLog.shared.event("gpu.resident",tile:key.name,trace:trace,fields:["resident_bytes":self.residentBytes,
+                                            "needed_to_resident_ms":(DiagnosticsLog.now-(self.neededAt[key] ?? pipelineStart))*1000])
                                     }
                                 }
                             }
                         }
-                    } else if self.generation == epoch { self.empty[key] = Date().addingTimeInterval(60) }
-                } catch is CancellationError { }
+                    } else if self.generation == epoch { self.empty[key] = Date().addingTimeInterval(60); outcome = "empty" }
+                } catch is CancellationError { outcome = "cancelled" }
                 catch {
+                    outcome = (error as? URLError)?.code == .cancelled ? "cancelled" : "error"
+                    var fields = DiagnosticsLog.errorFields(error); fields["stage"] = stage
+                    DiagnosticsLog.shared.event("pipeline.error",tile:key.name,trace:trace,fields:fields)
                     guard let self, self.generation == epoch else { return }
                     if let failure = error as? StreamError, case .authentication = failure {
                         self.authFailed = true; self.pending.values.forEach{$0.cancel()}
@@ -309,7 +406,13 @@ final class ExplorerModel: ObservableObject {
             }
         }
     }
-    func evict(_ key: TileKey) { tiles.removeValue(forKey:key); accessed.removeValue(forKey:key) }
+    func evict(_ key: TileKey, reason: String = "memory_budget") {
+        DiagnosticsLog.shared.event("gpu.evict",tile:key.name,trace:tileTraces[key],fields:["reason":reason,
+            "bytes":tiles[key]?.cost ?? 0,"distance_m":tileDistance(key),"lod":key.z,"needed":needed.contains(key),
+            "in_frustum":inView(key),"unused_s":CACurrentMediaTime()-(accessed[key] ?? CACurrentMediaTime())])
+        tiles.removeValue(forKey:key); accessed.removeValue(forKey:key)
+        tileReadyAt.removeValue(forKey:key); tileTraces.removeValue(forKey:key); awaitingFirstDraw.remove(key)
+    }
     func tileDistance(_ key: TileKey) -> Double {
         max(0,simd_length(origin.tileCenter(key)-SIMD2(camera.eye.x,camera.eye.z))-origin.tileWidth(key.z)*0.71)
     }
@@ -351,7 +454,9 @@ final class ExplorerModel: ObservableObject {
             // One replacement in flight, with memory reserved against other uploads.
             let reservation = Int(Double(limit)*Double(limit)*4*1.34)+65536
             guard reducing || residentBytes+reservation <= budget else { continue }
-            let epoch = generation
+            let epoch = generation, textureStart = DiagnosticsLog.now, trace = UUID().uuidString
+            DiagnosticsLog.shared.event("texture.begin",tile:key.name,trace:trace,fields:["reducing":reducing,
+                "previous_limit":tile.textureLimit,"target_limit":limit,"reservation_bytes":reservation,"source_trace":tileTraces[key] ?? ""])
             textureKey = key; textureReservation = reservation
             textureTask = Task { [weak self] in
                 defer {
@@ -373,8 +478,14 @@ final class ExplorerModel: ObservableObject {
                     let replacement = current.replacing(atlas:atlas,limit:limit)
                     if self.residentBytes-current.cost+replacement.cost <= self.budget {
                         self.tiles[key] = replacement
-                    } else { self.textureRetry[key] = CACurrentMediaTime()+10 }
+                        DiagnosticsLog.shared.event("texture.replaced",tile:key.name,trace:trace,fields:["duration_ms":DiagnosticsLog.milliseconds(since:textureStart),
+                            "old_bytes":current.cost,"new_bytes":replacement.cost,"width":atlas.width,"height":atlas.height,"mip_levels":atlas.mipmapLevelCount])
+                    } else {
+                        self.textureRetry[key] = CACurrentMediaTime()+10
+                        DiagnosticsLog.shared.event("texture.deferred",tile:key.name,trace:trace,fields:["reason":"memory_budget"])
+                    }
                 } catch {
+                    DiagnosticsLog.shared.event("texture.error",tile:key.name,trace:trace,fields:DiagnosticsLog.errorFields(error))
                     if let self, self.generation == epoch { self.textureRetry[key] = CACurrentMediaTime()+10 }
                 }
             }
@@ -399,7 +510,10 @@ final class ExplorerModel: ObservableObject {
             evictedNeeded = evictedNeeded || needed.contains(key)
             failures[key] = Date().addingTimeInterval(10)
         }
-        if evictedNeeded && textureTask == nil { adaptiveDistance = max(120,renderDistance*0.9) }
+        if evictedNeeded && textureTask == nil {
+            adaptiveDistance = max(120,renderDistance*0.9)
+            DiagnosticsLog.shared.event("memory.range_reduced",fields:["range_m":renderDistance,"resident_bytes":residentBytes,"budget_bytes":budget])
+        }
     }
     func complete(_ horizontal: TileKey) -> Bool {
         guard let candidates = expanded[horizontal] else { return false }
@@ -411,6 +525,22 @@ final class ExplorerModel: ObservableObject {
     }
     func renderTiles() -> [GPUTile] {
         selection().tiles
+    }
+    func cameraLogFields() -> [String:Any] {
+        ["generation":generation,"origin_latitude":origin.latitude,"origin_longitude":origin.longitude,
+         "eye_m":[camera.eye.x,camera.eye.y,camera.eye.z],"yaw_radians":camera.yaw,"pitch_radians":camera.pitch,
+         "fov_radians":camera.fov,"aspect":camera.aspect,"range_m":renderDistance,
+         "focus_m":[navigation.focus.x,navigation.focus.y,navigation.focus.z],
+         "inertia_mps":[navigation.velocity.x,navigation.velocity.y,navigation.velocity.z]]
+    }
+    func didSubmitTiles(_ submitted: [GPUTile], frame: Int) {
+        for tile in submitted where awaitingFirstDraw.remove(tile.key) != nil {
+            let now = DiagnosticsLog.now
+            DiagnosticsLog.shared.event("render.tile_first_submitted",tile:tile.key.name,trace:tileTraces[tile.key],fields:[
+                "frame":frame,"ready_to_draw_ms":(now-(tileReadyAt[tile.key] ?? now))*1000,
+                "needed_to_draw_ms":(now-(neededAt[tile.key] ?? now))*1000,
+                "triangles":tile.triangles,"splat_vertices":tile.splatVertices,"texture_limit":tile.textureLimit])
+        }
     }
     func centerFocus() -> SIMD3<Double> {
         let displayed = selection(), eye = SIMD3<Float>(camera.eye), direction = SIMD3<Float>(camera.forward)
@@ -458,32 +588,45 @@ final class ExplorerModel: ObservableObject {
     }
     func beginNavigation(viewportHeight: Double) {
         guard active, !paused else { return }
+        let start = DiagnosticsLog.now
         navigation.begin(camera:camera,focus:centerFocus(),viewportHeight:viewportHeight)
+        var fields = cameraLogFields(); fields["picking_ms"] = DiagnosticsLog.milliseconds(since:start)
+        DiagnosticsLog.shared.event("navigation.begin",fields:fields)
     }
     func pan(_ delta: SIMD2<Double>) {
         guard active, !paused, navigation.interacting else { return }
         navigation.pan(delta,camera:&camera)
+        DiagnosticsLog.shared.event("navigation.pan",fields:["delta_points":[delta.x,delta.y],"camera":cameraLogFields()])
     }
     func applyNavigation(_ update: NavigationTouchUpdate, viewportHeight: Double) {
         guard active, !paused, navigation.interacting else { return }
         navigation.apply(update,viewportHeight:viewportHeight,camera:&camera)
+        DiagnosticsLog.shared.event("navigation.update",fields:["touches":update.count,"operation":update.operation.map{String(describing:$0)} ?? "pan_or_pending",
+            "delta_points":[update.delta.x,update.delta.y],"twist_radians":update.twist,"zoom_scale":update.zoom,"camera":cameraLogFields()])
     }
     func endPan(velocity: SIMD2<Double>) {
         guard active, !paused, navigation.interacting else { return }
         navigation.endPan(pointsPerSecond:velocity,camera:camera)
+        DiagnosticsLog.shared.event("navigation.release",fields:["velocity_points_s":[velocity.x,velocity.y],"camera":cameraLogFields()])
     }
     func orbit(azimuth: Double = 0, elevation: Double = 0) {
         guard active, !paused, navigation.interacting else { return }
         navigation.orbit(azimuth:azimuth,elevation:elevation,camera:&camera)
+        DiagnosticsLog.shared.event("navigation.orbit",fields:["azimuth_delta":azimuth,"elevation_delta":elevation,"camera":cameraLogFields()])
     }
     func zoom(_ scale: Double) {
         guard active, !paused, navigation.interacting else { return }
         navigation.zoom(scale:scale,camera:&camera)
+        DiagnosticsLog.shared.event("navigation.zoom",fields:["scale":scale,"camera":cameraLogFields()])
     }
-    func stopNavigation() { navigation.stop(); elevation = 0 }
+    func stopNavigation() {
+        DiagnosticsLog.shared.event("navigation.stop",fields:cameraLogFields())
+        navigation.stop(); elevation = 0
+    }
     func resetCamera() {
         let aspect = camera.aspect
         stopNavigation(); camera = CameraState(); camera.aspect = aspect
+        DiagnosticsLog.shared.event("control.reset_camera",fields:cameraLogFields())
     }
     func selection() -> (tiles:[GPUTile], masks:[TileKey:[SIMD4<Float>]]) {
         var selected = Set<TileKey>()
@@ -508,11 +651,13 @@ final class ExplorerModel: ObservableObject {
         return (selected.compactMap{tiles[$0]},masks)
     }
     func setActive(_ value: Bool) {
+        DiagnosticsLog.shared.event("app.active",fields:["active":value])
         active = value; stopNavigation()
         if !value { pending.values.forEach{$0.cancel()} }
         else { lastPlan = 0 }
     }
     func memoryWarning() {
+        DiagnosticsLog.shared.event("memory.warning",fields:["resident_bytes":residentBytes,"process_bytes":Self.processFootprint(),"available_bytes":os_proc_available_memory()])
         let now = CACurrentMediaTime()
         memoryConstrainedUntil = now+60; texturePressureUntil = now+60
         decodedCache.trim(now:now,budget:cpuBudget)
@@ -524,11 +669,13 @@ final class ExplorerModel: ObservableObject {
         lastPlan = 0
     }
     func qualityChanged() {
+        DiagnosticsLog.shared.event("control.quality",fields:["quality":quality])
         texturePressureUntil = CACurrentMediaTime()+20
         updateTextures(now:CACurrentMediaTime()); lastPlan = 0
         message = "画質に合わせてテクスチャを更新中"
     }
     func retry() {
+        DiagnosticsLog.shared.event("control.retry")
         authFailed = false; failures.removeAll(); lastPlan = 0
         message = "Apple Maps に再接続中"
     }
@@ -537,6 +684,7 @@ final class ExplorerModel: ObservableObject {
         configure(.standard)
     }
     func clearCache() {
+        DiagnosticsLog.shared.event("control.clear_cache")
         invalidate()
         if let client { Task { await client.clearCache(); self.lastPlan = 0 } }
     }

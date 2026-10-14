@@ -38,7 +38,11 @@ struct MetalViewport: UIViewRepresentable {
         var input = NavigationTouchInput()
         init(model: ExplorerModel) { self.model = model }
         func handleTouches(_ phase: NavigationTouchPhase, points: [SIMD2<Double>], time: Double, height: Double) {
-            if phase == .cancel { input = NavigationTouchInput(); model.navigation.stop(); return }
+            if phase != .move {
+                DiagnosticsLog.shared.event("input.touch_phase",fields:["phase":String(describing:phase),"touches":points.count,
+                    "points":points.map{[$0.x,$0.y]},"event_uptime_s":time])
+            }
+            if phase == .cancel { input = NavigationTouchInput(); model.stopNavigation(); return }
             let update = input.update(points:points,time:time)
             if update.count == 0 { model.endPan(velocity:update.releaseVelocity); return }
             if update.modeChanged {
@@ -64,7 +68,10 @@ struct MetalViewport: UIViewRepresentable {
             do {
                 let renderer = try MetalRenderer(device:device)
                 renderer.world = model; context.coordinator.renderer = renderer; view.delegate = renderer
-            } catch { model.rendererError = error.localizedDescription }
+            } catch {
+                DiagnosticsLog.shared.event("render.init_error",fields:DiagnosticsLog.errorFields(error))
+                model.rendererError = error.localizedDescription
+            }
         }
         return view
     }
@@ -139,7 +146,10 @@ struct ExplorerView: View {
                     .font(.caption2).padding(.top,10)
             }.padding(.horizontal,16).padding(.top,8).padding(.bottom,14).foregroundStyle(.white)
         }.preferredColorScheme(.dark)
-            .onChange(of:settings) { _,open in if open { model.stopNavigation() } }
+            .onChange(of:settings) { _,open in
+                DiagnosticsLog.shared.event("control.settings",fields:["open":open])
+                if open { model.stopNavigation() }
+            }
             .onChange(of:model.quality) { _,_ in model.qualityChanged() }
             .sheet(isPresented:$settings) { SettingsView(model:model,importing:$importing) }
             .fileImporter(isPresented:$importing,allowedContentTypes:[.json]) { result in
@@ -162,6 +172,9 @@ struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     @State var latitude = "35.6586"
     @State var longitude = "139.7454"
+    @State private var exportingLog = false
+    @State private var exportedLog: DiagnosticExport?
+    @State private var logError: String?
     var body: some View {
         NavigationStack {
             Form {
@@ -185,6 +198,24 @@ struct SettingsView: View {
                     Toggle("移動・新規取得を一時停止",isOn:$model.paused)
                     Button("視点をリセット") { model.resetCamera(); dismiss() }
                 }
+                Section {
+                    Button {
+                        exportingLog = true
+                        DiagnosticsLog.shared.event("control.export_log",fields:model.cameraLogFields())
+                        Task { @MainActor in
+                            defer { exportingLog = false }
+                            do { exportedLog = DiagnosticExport(url:try await DiagnosticsLog.shared.export()) }
+                            catch { logError = "ログを書き出せませんでした。\(error.localizedDescription)" }
+                        }
+                    } label: {
+                        HStack {
+                            Label("詳細ログを書き出す",systemImage:"square.and.arrow.up")
+                            if exportingLog { Spacer(); ProgressView() }
+                        }
+                    }.disabled(exportingLog)
+                } header: { Text("診断ログ") } footer: {
+                    Text("取得・描画・操作と位置情報をJSONLファイルで共有できます。直近約24 MBを保存します。")
+                }
                 Section("接続") {
                     LabeledContent("データ取得",value:"Apple Maps へ直接接続")
                     LabeledContent("状態",value:model.configured ? "設定済み" : "未設定")
@@ -194,7 +225,24 @@ struct SettingsView: View {
                     Button("キャッシュを消去",role:.destructive) { model.clearCache() }
                 }
             }.navigationTitle("3D Explorer")
+                .sheet(item:$exportedLog) { DiagnosticShareSheet(url:$0.url) }
+                .alert("ログの書き出し",isPresented:Binding(get:{logError != nil},set:{if !$0 { logError = nil }})) {
+                    Button("OK",role:.cancel) { logError = nil }
+                } message: { Text(logError ?? "") }
                 .toolbar { ToolbarItem(placement:.confirmationAction) { Button("完了") { dismiss() } } }
         }
     }
+}
+
+private struct DiagnosticExport: Identifiable {
+    let id = UUID()
+    let url: URL
+}
+
+private struct DiagnosticShareSheet: UIViewControllerRepresentable {
+    let url: URL
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        UIActivityViewController(activityItems:[url],applicationActivities:nil)
+    }
+    func updateUIViewController(_ controller: UIActivityViewController, context: Context) {}
 }

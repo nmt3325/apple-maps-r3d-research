@@ -25,6 +25,10 @@ jobs:
           "$RUNNER_TEMP/navigation-checks"
           swiftc ios/App/PipelineSlots.swift ios/Tests/PipelineChecks.swift -o "$RUNNER_TEMP/pipeline-checks"
           "$RUNNER_TEMP/pipeline-checks"
+      - name: Check diagnostic log persistence and export
+        run: |
+          swiftc ios/App/DiagnosticsLog.swift ios/Tests/DiagnosticsChecks.swift -o "$RUNNER_TEMP/diagnostics-checks"
+          "$RUNNER_TEMP/diagnostics-checks"
       - name: Check atlas refinement and resident mip reduction
         run: |
           swiftc ios/App/World.swift ios/App/GPUFactory.swift ios/Tests/GPUChecks.swift -o "$RUNNER_TEMP/gpu-checks"
