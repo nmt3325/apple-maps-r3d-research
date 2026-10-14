@@ -1,5 +1,11 @@
 # Apple Maps R3D / Flyover research
 
+## iOS ネイティブ・視界に応じた直接取得
+
+`ios/R3DExplorer.xcodeproj` に SwiftUI + Metal の iPhone / iPad アプリを追加。Apple Maps の R3D / C3MM を端末から直接取得し、独立 decoder を端末内で実行する。カメラ移動に応じた取得、全高さ、距離別 LOD、視界外モデルの解放、容量制限付きキャッシュ、青空・太陽・雲を実装している。既存の研究用 Web ビューアも保持する。
+
+セットアップ・操作・検証・制約は [IOS_STREAMING.md](docs/IOS_STREAMING.md)。`bash ios/Scripts/bootstrap.sh` 後に Xcode project を開く。取得設定は既存の調査方式を使い、公開コードには含めない。
+
 Apple Maps iOS 27のR3Dを調査し、**元のテクスチャ付きポリゴンとsoft triangle Splatを復元・表示する研究**の成果をまとめたスナップショットです。2026-10-14 JST時点。
 
 **Linuxの独立decoder、東京223の全配列照合、Oahu72の元配列検証と、全高さ135タイルの元テクスチャ付きポリゴン＋Splat表示、座標入力からの取得・復号・表示・GLB/PLY出力を実装・検証しました。別Ubuntu24.04 ARM Linuxでも再現し、936配列/画像とGLB/PLYのhashが一致しました。GitHub Releaseへ成果物を保存済みで、対応するR3Dについて主要6条件を達成しました。** soft triangle Splatを通常の楕円3D Gaussian Splattingと同一とは断定していません。
@@ -93,3 +99,4 @@ python3 -m unittest audit.test_numeric_codec -v
 - AppleのSplat shaderに由来するalpha式は調査済みですが、公式uniform値・タイル累積・LOD・最終合成のpixel parityは未達です。
 
 リポジトリは研究スナップショットです。コード・第三者由来資料・Apple由来データの出所は[PROVENANCE](docs/PROVENANCE.md)で区別しています。一括でMIT等のライセンスを適用していません。
+

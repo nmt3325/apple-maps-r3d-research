@@ -1,0 +1,16 @@
+{
+  "samples": 121,
+  "signatureMatchesPython": true,
+  "concurrentMaximum": 2,
+  "residentMaximumMiB": 131.20713806152344,
+  "fpsMedian": 59.999948351947985,
+  "fpsMinimum": 59.016311204125955,
+  "failureMaximum": 0,
+  "memoryBudgetViolations": 0,
+  "visibleLODs": [
+    18,
+    19,
+    20
+  ],
+  "deviceRuntime": "iOS 27 Simulator on Apple Silicon; physical iPhone not tested"
+}

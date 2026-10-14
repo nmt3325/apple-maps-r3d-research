@@ -1,0 +1,44 @@
+// !$*UTF8*$!
+{ archiveVersion = 1; classes = {}; objectVersion = 56; objects = {
+1705560FB5D4D050069FAEAA = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App/AppleMapsClient.swift"; sourceTree = "<group>"; };
+9CE6A91E8C1F1313F6A838A3 = { isa = PBXBuildFile; fileRef = 1705560FB5D4D050069FAEAA; };
+F75EE40FA432A8836B9B9273 = { isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "App/BridgingHeader.h"; sourceTree = "<group>"; };
+045E9A9C3692A2B7E97E87C9 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App/ExplorerModel.swift"; sourceTree = "<group>"; };
+E3DB8903674CDA4E492FBF55 = { isa = PBXBuildFile; fileRef = 045E9A9C3692A2B7E97E87C9; };
+C9F0F8CE4349AF3581787607 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App/ExplorerView.swift"; sourceTree = "<group>"; };
+EC80AB12E09CBF0D625F63A2 = { isa = PBXBuildFile; fileRef = C9F0F8CE4349AF3581787607; };
+A2CDD2B51B9CC7AF9D7B2D55 = { isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "App/Info.plist"; sourceTree = "<group>"; };
+22CAB8C4C448C06F3D3C06A9 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App/MetalRenderer.swift"; sourceTree = "<group>"; };
+32C255095340B8CEFD31CA4E = { isa = PBXBuildFile; fileRef = 22CAB8C4C448C06F3D3C06A9; };
+3B40FD28EAF6057A70ED90A5 = { isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "App/PythonBridge.h"; sourceTree = "<group>"; };
+64A51675702FBD4C96E188BD = { isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "App/PythonBridge.m"; sourceTree = "<group>"; };
+0FB9F90D3744B23F60827FFC = { isa = PBXBuildFile; fileRef = 64A51675702FBD4C96E188BD; };
+E7616D8BA28C6EFB28581D8C = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App/R3DExplorerApp.swift"; sourceTree = "<group>"; };
+10E3C4B734FEA46940E6DFD1 = { isa = PBXBuildFile; fileRef = E7616D8BA28C6EFB28581D8C; };
+5C121B954E5FE72F2A039871 = { isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "App/Shaders.metal"; sourceTree = "<group>"; };
+A0C4D0F7D715C65A36C5495F = { isa = PBXBuildFile; fileRef = 5C121B954E5FE72F2A039871; };
+6F9604A6A9BCDEC5AE4F8644 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App/ValidationScenario.swift"; sourceTree = "<group>"; };
+C2E8145E4BF84BBE3C4340C9 = { isa = PBXBuildFile; fileRef = 6F9604A6A9BCDEC5AE4F8644; };
+41E28E5A6702720317067A11 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App/World.swift"; sourceTree = "<group>"; };
+30D090CDC1890363FA8B88AE = { isa = PBXBuildFile; fileRef = 41E28E5A6702720317067A11; };
+4235227B51436AD86D07C7CF = { isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Vendor/Python.xcframework; sourceTree = "<group>"; };
+DFBA7AADE0868074C2861C98 = { isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Build.xcconfig; sourceTree = "<group>"; };
+E3F59C31EA9AD904D69CF6F8 = { isa = PBXBuildFile; fileRef = 4235227B51436AD86D07C7CF; };
+7EA8F5B98A9969BFD80F8804 = { isa = PBXBuildFile; fileRef = 4235227B51436AD86D07C7CF; settings = { ATTRIBUTES = (CodeSignOnCopy,RemoveHeadersOnCopy,); }; };
+38A007151ABE87CC01A5B6E9 = { isa = PBXFileReference; explicitFileType = wrapper.application; path = R3DExplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+FBDC4F23F93125BBEEAE800C = { isa = PBXGroup; name = Products; children = (38A007151ABE87CC01A5B6E9,); sourceTree = "<group>"; };
+B28B7AF69320201D1CF206EB = { isa = PBXGroup; children = (1705560FB5D4D050069FAEAA,F75EE40FA432A8836B9B9273,045E9A9C3692A2B7E97E87C9,C9F0F8CE4349AF3581787607,A2CDD2B51B9CC7AF9D7B2D55,22CAB8C4C448C06F3D3C06A9,3B40FD28EAF6057A70ED90A5,64A51675702FBD4C96E188BD,E7616D8BA28C6EFB28581D8C,5C121B954E5FE72F2A039871,6F9604A6A9BCDEC5AE4F8644,41E28E5A6702720317067A11,4235227B51436AD86D07C7CF,DFBA7AADE0868074C2861C98,FBDC4F23F93125BBEEAE800C,); sourceTree = "<group>"; };
+BCE16DD0260827ECF338C787 = { isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (9CE6A91E8C1F1313F6A838A3,E3DB8903674CDA4E492FBF55,EC80AB12E09CBF0D625F63A2,32C255095340B8CEFD31CA4E,0FB9F90D3744B23F60827FFC,10E3C4B734FEA46940E6DFD1,A0C4D0F7D715C65A36C5495F,C2E8145E4BF84BBE3C4340C9,30D090CDC1890363FA8B88AE,); runOnlyForDeploymentPostprocessing = 0; };
+7561BFB015D8F536760CB671 = { isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (E3F59C31EA9AD904D69CF6F8,); runOnlyForDeploymentPostprocessing = 0; };
+0189424A5A60FED329FA868E = { isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+F2E18FFC17E2595362B5468A = { isa = PBXShellScriptBuildPhase; alwaysOutOfDate = 1; buildActionMask = 2147483647; files = (); inputPaths = (); outputPaths = (); name = "Install embedded decoder"; shellPath = /bin/bash; shellScript = "bash \"$PROJECT_DIR/Scripts/install_runtime.sh\""; runOnlyForDeploymentPostprocessing = 0; };
+CFFF27C96089B93150F3553B = { isa = PBXCopyFilesBuildPhase; buildActionMask = 2147483647; dstPath = ""; dstSubfolderSpec = 10; files = (7EA8F5B98A9969BFD80F8804,); name = "Embed Frameworks"; runOnlyForDeploymentPostprocessing = 0; };
+7082CC0B6FC1282FCEABD07A = { isa = XCBuildConfiguration; baseConfigurationReference = DFBA7AADE0868074C2861C98; buildSettings = { CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; ENABLE_TESTABILITY = YES; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; GCC_PREPROCESSOR_DEFINITIONS = ("$(inherited)","DEBUG=1",); }; name = Debug; };
+639A7CA24D39909E713B47F7 = { isa = XCBuildConfiguration; baseConfigurationReference = DFBA7AADE0868074C2861C98; buildSettings = { CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; ENABLE_TESTABILITY = YES; }; name = Release; };
+C57128001CE614BF8549D6BB = { isa = XCConfigurationList; buildConfigurations = (7082CC0B6FC1282FCEABD07A,639A7CA24D39909E713B47F7,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+89E1FD6268CC0F221A2BE178 = { isa = XCBuildConfiguration; baseConfigurationReference = DFBA7AADE0868074C2861C98; buildSettings = { CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; ENABLE_TESTABILITY = YES; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; GCC_PREPROCESSOR_DEFINITIONS = ("$(inherited)","DEBUG=1",); }; name = Debug; };
+E6DE6C99132752C914FEF632 = { isa = XCBuildConfiguration; baseConfigurationReference = DFBA7AADE0868074C2861C98; buildSettings = { CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; ENABLE_TESTABILITY = YES; }; name = Release; };
+862894B703A6DEDF96A9DD6C = { isa = XCConfigurationList; buildConfigurations = (89E1FD6268CC0F221A2BE178,E6DE6C99132752C914FEF632,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+0E8A3AD980EC179856012B7E = { isa = PBXNativeTarget; buildConfigurationList = C57128001CE614BF8549D6BB; buildPhases = (BCE16DD0260827ECF338C787,7561BFB015D8F536760CB671,0189424A5A60FED329FA868E,F2E18FFC17E2595362B5468A,CFFF27C96089B93150F3553B,); buildRules = (); dependencies = (); name = R3DExplorer; productName = R3DExplorer; productReference = 38A007151ABE87CC01A5B6E9; productType = "com.apple.product-type.application"; };
+98F54143AB4E86B28C3AFEE0 = { isa = PBXProject; attributes = { LastUpgradeCheck = 2700; }; buildConfigurationList = 862894B703A6DEDF96A9DD6C; compatibilityVersion = "Xcode 14.0"; developmentRegion = ja; hasScannedForEncodings = 0; knownRegions = (ja,en,Base,); mainGroup = B28B7AF69320201D1CF206EB; productRefGroup = FBDC4F23F93125BBEEAE800C; projectDirPath = ""; projectRoot = ""; targets = (0E8A3AD980EC179856012B7E,); };
+}; rootObject = 98F54143AB4E86B28C3AFEE0; }

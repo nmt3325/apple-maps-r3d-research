@@ -1,0 +1,38 @@
+name: iOS native build
+on:
+  pull_request:
+    paths: ['ios/**', 'codec/**', '.github/workflows/ios-native.yml']
+  push:
+    paths: ['ios/**', 'codec/**', '.github/workflows/ios-native.yml']
+jobs:
+  native:
+    runs-on: macos-15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Prepare pinned embedded runtime
+        run: bash ios/Scripts/bootstrap.sh
+      - name: Check camera, LOD partition, and height discovery
+        run: |
+          swiftc ios/App/World.swift ios/Tests/WorldChecks.swift -o "$RUNNER_TEMP/world-checks"
+          "$RUNNER_TEMP/world-checks"
+      - name: Check decoder rejection and size bounds
+        run: python ios/Tests/test_mobile_decoder.py -v
+      - name: Build simulator
+        run: >-
+          xcodebuild -project ios/R3DExplorer.xcodeproj -scheme R3DExplorer
+          -configuration Debug -sdk iphonesimulator
+          -destination 'generic/platform=iOS Simulator'
+          -derivedDataPath "$RUNNER_TEMP/SimulatorBuild"
+          ARCHS=arm64 CODE_SIGNING_ALLOWED=NO build
+      - name: Build iPhone arm64
+        run: >-
+          xcodebuild -project ios/R3DExplorer.xcodeproj -scheme R3DExplorer
+          -configuration Release -sdk iphoneos
+          -destination 'generic/platform=iOS'
+          -derivedDataPath "$RUNNER_TEMP/DeviceBuild"
+          ARCHS=arm64 CODE_SIGNING_ALLOWED=NO build

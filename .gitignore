@@ -12,3 +12,11 @@ reports/generated/
 *.credentials.json
 reports/generated/web-runs/
 reports/generated/web-root/
+
+ios/Vendor/
+ios/Local.xcconfig
+ios/Private/
+**/xcuserdata/
+**/*.xcuserstate
+**/__pycache__/
+*.credentials.json
