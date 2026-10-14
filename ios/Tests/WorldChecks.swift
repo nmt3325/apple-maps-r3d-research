@@ -15,7 +15,43 @@ import simd
         let moved = TilePlanner.plan(origin:origin,camera:camera,distance:350)
         precondition(Set(moved) != Set(plan), "Movement must request a different region")
         camera.yaw = .pi
-        precondition(Set(TilePlanner.plan(origin:origin,camera:camera,distance:350)) != Set(moved))
+        precondition(Set(TilePlanner.plan(origin:origin,camera:camera,distance:350)) == Set(moved), "Rotation must preserve the entire preload region")
+        let surrounding = TilePlanner.plan(origin:origin,camera:camera,distance:600)
+        for quadrant in 0..<4 {
+            precondition(surrounding.contains { key in
+                let delta = origin.tileCenter(key)-SIMD2(camera.eye.x,camera.eye.z)
+                return simd_length(delta) > 250 && (delta.x >= 0 ? 1 : 0)+(delta.y >= 0 ? 2 : 0) == quadrant
+            }, "All four directions must be loaded")
+        }
+        var shifted = CameraState(); shifted.eye.x += 40
+        let cold = TilePlanner.plan(origin:origin,camera:shifted,distance:350)
+        let warm = TilePlanner.plan(origin:origin,camera:shifted,distance:350,previous:Set(plan))
+        precondition(warm.filter{$0.z == 20}.count > cold.filter{$0.z == 20}.count, "Keep high LOD through the hysteresis band")
+        for a in warm { for b in warm where a.z < b.z {
+            precondition(!(b.x>>(b.z-a.z) == a.x && b.y>>(b.z-a.z) == a.y), "Hysteresis must preserve partition")
+        }}
+        precondition(TilePlanner.plan(origin:origin,camera:shifted,distance:350,previous:Set(warm),maximumZoom:19).allSatisfy{$0.z <= 19})
+        precondition(StreamingPolicy.textureLimit(zoom:20,source:4096,constrained:false,headroom:192*1048576) == 4096)
+        precondition(StreamingPolicy.textureLimit(zoom:19,source:4096,constrained:false,headroom:192*1048576) == 2048)
+        precondition(StreamingPolicy.textureLimit(zoom:18,source:4096,constrained:false,headroom:192*1048576) == 1024)
+        precondition(StreamingPolicy.textureLimit(zoom:20,source:4096,constrained:true,headroom:96*1048576) == 1024)
+        precondition(StreamingPolicy.textureLimit(zoom:19,source:4096,constrained:true,headroom:96*1048576) == 512)
+        precondition(StreamingPolicy.textureLimit(zoom:20,source:4096,constrained:false,headroom:2*1048576) == 512)
+        let farHigh = StreamingPolicy.evictionScore(distance:500,zoom:20,age:20,bytes:8*1048576,needed:true,visible:false)
+        let nearCoarse = StreamingPolicy.evictionScore(distance:60,zoom:18,age:0,bytes:1048576,needed:true,visible:true)
+        precondition(farHigh > nearCoarse)
+        precondition(StreamingPolicy.retention(distance:80) == 60 && StreamingPolicy.retention(distance:300) == 40)
+        var cache = DecodedTileCache()
+        let a = TileKey(z:20,x:1,y:1), b = TileKey(z:20,x:2,y:1), c = TileKey(z:20,x:3,y:1)
+        cache.insert(["vertices":Data(count:8)],for:a,now:0,budget:16)
+        cache.insert(["vertices":Data(count:8)],for:b,now:1,budget:16)
+        precondition(cache.value(for:a,now:2) != nil)
+        cache.insert(["vertices":Data(count:8)],for:c,now:3,budget:16)
+        precondition(cache.entries[b] == nil && cache.entries[a] != nil && cache.bytes == 16)
+        cache.insert(["vertices":Data(count:4)],for:a,now:4,budget:16)
+        precondition(cache.bytes == 12)
+        cache.trim(now:5,budget:4); precondition(cache.bytes == 4 && cache.entries[a] != nil)
+        cache.trim(now:65,budget:4); precondition(cache.bytes == 0)
         let dateline = GeoOrigin(latitude:0,longitude:179.99999)
         let wrapped = TilePlanner.plan(origin:dateline,camera:CameraState(),distance:600)
         precondition(wrapped.contains{$0.x < 8} && wrapped.contains{$0.x > (1 << $0.z)-8})

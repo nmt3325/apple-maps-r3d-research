@@ -112,7 +112,9 @@ struct ExplorerView: View {
                         .accessibilityLabel("設定")
                 }.padding(14).background(.ultraThinMaterial,in:RoundedRectangle(cornerRadius:20))
                 HStack {
-                    Text("\(Int(model.fps)) fps · 表示 \(model.drawnTiles) · \(model.memoryMB) MB")
+                    Text("\(Int(model.fps)) fps · 表示 \(model.drawnTiles) · モデル \(model.memoryMB) MB")
+                    Text("CPUキャッシュ \(model.cpuCacheMB) MB · Metal \(model.metalMemoryMB) MB · アプリ \(model.processMemoryMB) MB")
+                        .font(.caption2)
                     Spacer()
                     if model.requests > 0 { ProgressView().tint(.white); Text("取得中") }
                 }.font(.caption.monospacedDigit()).padding(.horizontal,8).padding(.top,4)

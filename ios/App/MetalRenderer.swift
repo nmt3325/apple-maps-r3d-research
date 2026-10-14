@@ -10,59 +10,6 @@ struct FrameUniforms {
     var parameters: SIMD4<Float>
 }
 
-struct GPUTile: @unchecked Sendable {
-    let key: TileKey
-    let vertices: MTLBuffer?
-    let indices: MTLBuffer?
-    let splats: MTLBuffer?
-    let atlas: MTLTexture?
-    let model: simd_float4x4
-    let center: SIMD3<Float>
-    let radius: Float
-    let triangles: Int
-    let splatVertices: Int
-    let cost: Int
-}
-
-final class GPUFactory: @unchecked Sendable {
-    let device: MTLDevice
-    init(device: MTLDevice) { self.device = device }
-    func prepare(key: TileKey, decoded: [String:Data], origin: GeoOrigin, textureLimit: Int) throws -> GPUTile {
-        guard let json = decoded["json"], let vb = decoded["vertices"], let ib = decoded["indices"],
-              let sb = decoded["splats"], let image = decoded["atlas"] else { throw StreamError.invalidGeometry }
-        let info = try JSONDecoder().decode(TileInfo.self,from:json)
-        guard vb.count == info.vertexCount*32, ib.count == info.meshTriangles*12,
-              sb.count == info.splatVertices*40, info.transform.matrixR3x3.count == 9,
-              info.transform.ecefTranslation.count == 3, info.min.count == 3, info.max.count == 3,
-              vb.count+ib.count+sb.count <= 64*1024*1024 else { throw StreamError.invalidGeometry }
-        func buffer(_ data: Data) throws -> MTLBuffer? {
-            guard !data.isEmpty else { return nil }
-            let result = data.withUnsafeBytes { bytes in device.makeBuffer(bytes:bytes.baseAddress!,length:data.count,options:.storageModeShared) }
-            guard let result else { throw StreamError.gpuBudget }
-            return result
-        }
-        let vertices = try buffer(vb), indices = try buffer(ib), splats = try buffer(sb)
-        var texture: MTLTexture?
-        if info.meshTriangles > 0 {
-            guard let source = CGImageSourceCreateWithData(image as CFData,nil),
-                  let bitmap = CGImageSourceCreateThumbnailAtIndex(source,0,[
-                    kCGImageSourceCreateThumbnailFromImageAlways:true,
-                    kCGImageSourceThumbnailMaxPixelSize:textureLimit,
-                    kCGImageSourceShouldCacheImmediately:true] as CFDictionary) else { throw StreamError.invalidGeometry }
-            texture = try MTKTextureLoader(device:device).newTexture(cgImage:bitmap,options:[
-                .SRGB:true,.generateMipmaps:true,.textureStorageMode:MTLStorageMode.private.rawValue])
-        }
-        let model = info.model(origin:origin)
-        let lower = SIMD3<Float>(Float(info.min[0]),Float(info.min[1]),Float(info.min[2]))
-        let upper = SIMD3<Float>(Float(info.max[0]),Float(info.max[1]),Float(info.max[2]))
-        let center = model*SIMD4((lower+upper)/2,1)
-        let textureBytes = texture.map { Int(Double($0.width*$0.height*4)*1.34) } ?? 0
-        return GPUTile(key:key,vertices:vertices,indices:indices,splats:splats,atlas:texture,
-            model:model,center:SIMD3(center.x,center.y,center.z),radius:simd_length(upper-lower)/2,
-            triangles:info.meshTriangles,splatVertices:info.splatVertices,cost:vb.count+ib.count+sb.count+textureBytes)
-    }
-}
-
 @MainActor
 final class MetalRenderer: NSObject, MTKViewDelegate {
     let device: MTLDevice
@@ -129,11 +76,11 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
         let semaphore = inFlight
         command.addCompletedHandler { _ in semaphore.signal() }
         let camera = world.camera
-        let vp = camera.projection(far:world.viewDistance)*camera.view
+        let vp = camera.projection(far:world.renderDistance)*camera.view
         var frame = FrameUniforms(viewProjection:vp,eye:SIMD4(SIMD3<Float>(camera.eye),1),
             forward:SIMD4(SIMD3<Float>(camera.forward),0),right:SIMD4(SIMD3<Float>(camera.right),0),
             up:SIMD4(SIMD3<Float>(simd_cross(camera.right,camera.forward)),0),
-            parameters:SIMD4(Float(camera.aspect),Float(tan(camera.fov/2)),Float(now-started),Float(world.viewDistance)))
+            parameters:SIMD4(Float(camera.aspect),Float(tan(camera.fov/2)),Float(now-started),Float(world.renderDistance)))
         encoder.setVertexBytes(&frame,length:MemoryLayout<FrameUniforms>.stride,index:1)
         encoder.setFragmentBytes(&frame,length:MemoryLayout<FrameUniforms>.stride,index:1)
         encoder.setCullMode(.none)
