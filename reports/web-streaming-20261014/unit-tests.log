@@ -1,0 +1,34 @@
+test_coordinates_and_multilod_all_heights (audit.test_web_streaming.StreamTests.test_coordinates_and_multilod_all_heights) ... ok
+test_disk_budget_evicts_old_entries (audit.test_web_streaming.StreamTests.test_disk_budget_evicts_old_entries) ... ok
+test_empty_and_authentication_are_distinct (audit.test_web_streaming.StreamTests.test_empty_and_authentication_are_distinct) ... ok
+test_http_origin_assets_and_existing_scene (audit.test_web_streaming.StreamTests.test_http_origin_assets_and_existing_scene) ... viewer-http "POST /api/stream/request HTTP/1.1" 403 -
+viewer-http "POST /api/stream/request HTTP/1.1" 200 -
+viewer-http "GET /api/stream/jobs/4401f70e4dd9d9277671878df88325b9 HTTP/1.1" 200 -
+viewer-http "GET /stream-assets/cdbbbf3be802f287511e65ec/4401f70e4dd9d9277671878df88325b9/mesh.bin?v=ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff HTTP/1.1" 200 -
+viewer-http "GET /stream-assets/cdbbbf3be802f287511e65ec/4401f70e4dd9d9277671878df88325b9/raw.r3d HTTP/1.1" 404 -
+viewer-http "GET /scene.json HTTP/1.1" 200 -
+viewer-http "GET / HTTP/1.1" 200 -
+ok
+test_original_upper_tile_packing_and_wrong_location_rejection (audit.test_web_streaming.StreamTests.test_original_upper_tile_packing_and_wrong_location_rejection) ... ok
+test_singleflight_queue_limit_and_restart_cache (audit.test_web_streaming.StreamTests.test_singleflight_queue_limit_and_restart_cache) ... ok
+test_byte_predictors (audit.test_numeric_codec.NumericCodecTests.test_byte_predictors) ... ok
+test_closed_triangle_predictor (audit.test_numeric_codec.NumericCodecTests.test_closed_triangle_predictor) ... ok
+test_long_transition_block (audit.test_numeric_codec.NumericCodecTests.test_long_transition_block) ... ok
+test_origin_crosses_channel_boundary (audit.test_numeric_codec.NumericCodecTests.test_origin_crosses_channel_boundary) ... ok
+test_original_numeric_fixture_and_corruption (audit.test_numeric_codec.NumericCodecTests.test_original_numeric_fixture_and_corruption) ... ok
+test_paired_predictors (audit.test_numeric_codec.NumericCodecTests.test_paired_predictors) ... ok
+test_special_floats_precede_origin (audit.test_numeric_codec.NumericCodecTests.test_special_floats_precede_origin) ... ok
+test_truncated_and_inconsistent_lanes (audit.test_numeric_codec.NumericCodecTests.test_truncated_and_inconsistent_lanes) ... ok
+test_dateline_and_invalid_requests (audit.test_pipeline.PipelineTests.test_dateline_and_invalid_requests) ... ok
+test_original_r3d_corruption_and_wrong_location (audit.test_pipeline.PipelineTests.test_original_r3d_corruption_and_wrong_location) ... ok
+test_empty_lower_layer_does_not_hide_upper_geometry (audit.test_height_layers.HeightLayerTests.test_empty_lower_layer_does_not_hide_upper_geometry) ... fetch 2/8 s98_z20_x64556_y460816_h1.r3d bytes=243226
+fetch 2/8 s98_z20_x64556_y460816_h1.r3d bytes=243226
+ok
+test_offline_entry_preserves_original_upper_mesh_and_splats (audit.test_height_layers.HeightLayerTests.test_offline_entry_preserves_original_upper_mesh_and_splats) ... ok
+test_original_splat_only_upper_tile_and_corrupted_empty_mesh (audit.test_height_layers.HeightLayerTests.test_original_splat_only_upper_tile_and_corrupted_empty_mesh) ... ok
+test_real_index_discovers_upper_layers_and_enforces_limit (audit.test_height_layers.HeightLayerTests.test_real_index_discovers_upper_layers_and_enforces_limit) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 6.166s
+
+OK

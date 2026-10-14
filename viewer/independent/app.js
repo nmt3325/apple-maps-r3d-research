@@ -1,8 +1,15 @@
 import * as THREE from 'three';
 import { OrbitControls } from './vendor/OrbitControls.js';
+import {frameAt,coordinateAt,planTiles,validCoordinate} from './stream-planner.mjs';
+import {TileStream} from './stream-controller.mjs';
+import {loadStreamModel,renderStreamModel,disposeStreamModel} from './stream-scene.mjs';
 
 const el = id => document.getElementById(id);
 const viewport = el('viewport');
+const panel=document.querySelector('.panel');
+function collapsePanel(value){panel.classList.toggle('collapsed',value);el('panel-toggle').setAttribute('aria-expanded',String(!value));el('panel-toggle').textContent=value?'操作':'閉じる';}
+collapsePanel(matchMedia('(pointer:coarse)').matches);
+el('panel-toggle').addEventListener('click',()=>collapsePanel(!panel.classList.contains('collapsed')));
 const renderer = new THREE.WebGLRenderer({antialias:true, powerPreference:'high-performance'});
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 renderer.setSize(innerWidth, innerHeight);
@@ -25,6 +32,7 @@ const splatMaterial = new THREE.ShaderMaterial({
   gl_FragColor=vec4(vRGBA.rgb,min(.99,vRGBA.a*product*alphaFactor));}`
 });
 let ready=false, flying=false, loaded=0, metadata=null;
+let stream=null,streamFrame=null,streamSupported=false,viewDistance=250,rebases=0;
 const keys=new Set(), clock=new THREE.Clock(), yawPitch=new THREE.Euler(0,0,0,'YXZ');
 const forward=new THREE.Vector3(), right=new THREE.Vector3(), direction=new THREE.Vector3();
 const loader=new THREE.TextureLoader();
@@ -63,6 +71,7 @@ async function loadTile(tile){
 }
 function reset(){
   if(!metadata)return;
+  if(stream){camera.position.set(0,100,160);orbit.target.set(0,25,0);camera.lookAt(orbit.target);orbit.update();yawPitch.setFromQuaternion(camera.quaternion,'YXZ');stream.lastPlan=0;return;}
   const lo=new THREE.Vector3(...metadata.bounds.min), hi=new THREE.Vector3(...metadata.bounds.max);
   const center=lo.clone().add(hi).multiplyScalar(.5), span=hi.clone().sub(lo);
   const r=Math.max(span.x,span.z,span.y,20);
@@ -94,7 +103,8 @@ el('pick-location').addEventListener('click',()=>{
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
     map.on('click',e=>updateMapPoint(e.latlng.lat,e.latlng.lng));
   }
-  updateMapPoint(+el('location').textContent.split(',')[0],+el('location').textContent.split(',')[1]);
+  const current=stream?coordinateAt(streamFrame,camera.position.toArray()):{lat:metadata.origin[0],lon:metadata.origin[1]};
+  if(stream)radiusInput.value=viewDistance;updateMapPoint(current.lat,current.lon);if(stream)map.setView([current.lat,current.lon],16);
   requestAnimationFrame(()=>map.invalidateSize());
 });
 el('close-picker').addEventListener('click',()=>picker.hidden=true);
@@ -105,15 +115,20 @@ for(const input of [latInput,lonInput])input.addEventListener('change',()=>{cons
 async function postJSON(path,body){const response=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const data=await response.json();if(!response.ok)throw Error(data.error||'サーバーで処理できませんでした');return data;}
 function selection(){const lat=+latInput.value,lon=+lonInput.value,radius=+radiusInput.value;
  if(!Number.isFinite(lat)||!Number.isFinite(lon)||!Number.isFinite(radius))throw Error('緯度・経度・範囲を入力してください');
- if(Math.abs(lat)>85.05112878||Math.abs(lon)>180||radius<5||radius>300)throw Error('緯度±85.05、経度±180、範囲5〜300mで指定してください');
+ if(Math.abs(lat)>85.05112878||Math.abs(lon)>180||radius<(streamSupported?80:5)||radius>(streamSupported?600:300))throw Error(streamSupported?'緯度±85.05、経度±180、描画距離80〜600mで指定してください':'緯度±85.05、経度±180、範囲5〜300mで指定してください');
  return {lat,lon,radiusMeters:radius,zoom:20};}
 el('preview-area').addEventListener('click',async()=>{const button=el('preview-area');button.disabled=true;lastPlan=null;el('fetch-location').disabled=true;
- try{const selected=selection(),plan=await postJSON('/api/plan',selected);if(selection().lat!==selected.lat||selection().lon!==selected.lon||selection().radiusMeters!==selected.radiusMeters)throw Error('位置が変わったため、タイル数を再計算してください');lastPlan=plan;el('tile-preview').textContent=`z${plan.zoom} · 平面${plan.tileCount}タイル + 全高さ層 · 取得範囲 ±${plan.radiusMeters}m`;
+ try{const selected=selection();
+   if(streamSupported){const leaves=planTiles(frameAt(selected.lat,selected.lon),{position:[0,100,160],yaw:0,pitch:-.45,fov:camera.fov*Math.PI/180,aspect:camera.aspect},selected.radiusMeters);
+     lastPlan=selected;el('tile-preview').textContent=`近くから順に ${leaves.length} の表示範囲を読み込みます。移動先も自動で追加します。`;
+     el('fetch-location').textContent='この場所から探索';el('fetch-location').disabled=false;el('picker-message').textContent='全高さ層を読み込みながら移動できます。';return;}
+   const plan=await postJSON('/api/plan',selected);if(selection().lat!==selected.lat||selection().lon!==selected.lon||selection().radiusMeters!==selected.radiusMeters)throw Error('位置が変わったため、タイル数を再計算してください');lastPlan=plan;el('tile-preview').textContent=`z${plan.zoom} · 平面${plan.tileCount}タイル + 全高さ層 · 取得範囲 ±${plan.radiusMeters}m`;
    el('fetch-location').textContent=`全高さ層を取得して3D表示`;el('fetch-location').disabled=false;el('picker-message').textContent='この範囲のR3D取得と復号を開始できます。';}
  catch(error){el('tile-preview').textContent=String(error.message||error);el('picker-message').textContent='範囲を調整して再計算してください。';}
  finally{button.disabled=false;}});
 el('fetch-location').addEventListener('click',async()=>{if(!lastPlan)return;const button=el('fetch-location');button.disabled=true;el('preview-area').disabled=true;
- try{const job=await postJSON('/api/jobs',selection());activeJob=job.id;el('picker-message').textContent=`平面${job.tileCount}タイルの全高さ層を取得中…`;
+ try{if(streamSupported){const selected=selection();relocate(selected.lat,selected.lon,selected.radiusMeters);picker.hidden=true;el('preview-area').disabled=false;button.disabled=false;return;}
+   const job=await postJSON('/api/jobs',selection());activeJob=job.id;el('picker-message').textContent=`平面${job.tileCount}タイルの全高さ層を取得中…`;
    while(true){await new Promise(resolve=>setTimeout(resolve,1200));const response=await fetch(`/api/jobs/${encodeURIComponent(activeJob)}`);const state=await response.json();
      if(state.status==='failed')throw Error(state.message||'取得または復号に失敗しました');
      el('picker-message').textContent=state.status==='ready'?'3Dシーンを開いています…':`${state.stage||'取得中'} · ${state.tileCount}タイル`;
@@ -123,7 +138,7 @@ el('fetch-location').addEventListener('click',async()=>{if(!lastPlan)return;cons
 el('fly').addEventListener('click',()=>setFlying(!flying));el('reset').addEventListener('click',reset);
 el('speed').addEventListener('input',e=>el('speedValue').textContent=`${e.target.value} m/s`);
 el('opacity').addEventListener('input',e=>{splatMaterial.uniforms.alphaFactor.value=+e.target.value;el('opacityValue').textContent=e.target.value;});
-renderer.domElement.addEventListener('click',()=>{if(flying)renderer.domElement.requestPointerLock();});
+renderer.domElement.addEventListener('click',()=>{if(flying&&matchMedia('(pointer:fine)').matches)renderer.domElement.requestPointerLock();});
 document.addEventListener('mousemove',e=>{if(!flying||document.pointerLockElement!==renderer.domElement)return;
   yawPitch.y-=e.movementX*.002;yawPitch.x=THREE.MathUtils.clamp(yawPitch.x-e.movementY*.002,-Math.PI*.495,Math.PI*.495);
   camera.quaternion.setFromEuler(yawPitch);});
@@ -133,6 +148,49 @@ document.addEventListener('keydown',e=>{if(e.target instanceof HTMLInputElement)
   if(flying&&['KeyW','KeyA','KeyS','KeyD','KeyE','KeyQ','Space','ControlLeft','ShiftLeft','ShiftRight'].includes(e.code)){e.preventDefault();keys.add(e.code);}});
 document.addEventListener('keyup',e=>keys.delete(e.code));window.addEventListener('blur',()=>keys.clear());
 window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+document.addEventListener('visibilitychange',()=>{keys.clear();stream?.setActive(!document.hidden);});
+el('stream-enabled').addEventListener('change',e=>{if(!stream)return;stream.enabled=e.target.checked;stream.setActive(e.target.checked&&!document.hidden);el('status').textContent=e.target.checked?'移動先を読み込み中…':'自動読み込みを停止しました';});
+el('retry-stream').addEventListener('click',()=>stream?.retry());
+el('distance').addEventListener('input',e=>{viewDistance=+e.target.value;el('distanceValue').textContent=`${viewDistance} m`;if(stream)stream.lastPlan=0;});
+let touchLook=null;
+renderer.domElement.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'&&flying){touchLook={id:e.pointerId,x:e.clientX,y:e.clientY};renderer.domElement.setPointerCapture(e.pointerId);}});
+renderer.domElement.addEventListener('pointermove',e=>{if(touchLook?.id!==e.pointerId)return;yawPitch.y-=(e.clientX-touchLook.x)*.005;yawPitch.x=THREE.MathUtils.clamp(yawPitch.x-(e.clientY-touchLook.y)*.005,-Math.PI*.495,Math.PI*.495);camera.quaternion.setFromEuler(yawPitch);touchLook.x=e.clientX;touchLook.y=e.clientY;});
+for(const event of ['pointerup','pointercancel'])renderer.domElement.addEventListener(event,()=>touchLook=null);
+for(const button of document.querySelectorAll('[data-move]')){
+  button.addEventListener('pointerdown',e=>{e.preventDefault();if(!flying)setFlying(true);keys.add(button.dataset.move);button.setPointerCapture(e.pointerId);});
+  for(const event of ['pointerup','pointercancel','lostpointercapture'])button.addEventListener(event,()=>keys.delete(button.dataset.move));
+}
+function cameraState(){camera.getWorldDirection(forward);return {position:camera.position.toArray(),yaw:Math.atan2(forward.x,-forward.z),pitch:Math.asin(THREE.MathUtils.clamp(forward.y,-1,1)),fov:camera.fov*Math.PI/180,aspect:camera.aspect};}
+function streamStatus(state){
+  el('counts').textContent=`${state.loaded} タイル · ${Math.round(state.residentBytes/1024/1024)} MiB · 読み込み ${state.pending} 件`;
+  el('error').textContent=state.error;el('retry-stream').hidden=!state.error;
+  if(!state.enabled)return;
+  if(state.authFailed){el('status').textContent='取得設定の更新が必要です';return;}
+  el('status').textContent=state.pending||state.queued?'移動先を読み込み中…':state.loaded?'視界内のモデルを表示中':'この範囲には対応する3Dデータがありません';
+}
+function startStreaming(){
+  document.title='Apple Maps · 3D explorer';el('title').textContent=document.title;
+  streamFrame=frameAt(metadata.origin[0],metadata.origin[1]);
+  stream=new TileStream({frame:()=>streamFrame,camera:cameraState,distance:()=>viewDistance,
+    load:(tile,signal)=>loadStreamModel(tile,signal,{frame:()=>streamFrame,renderer,polygons,splats,splatMaterial,meshGeometry,splatGeometry}),
+    render:(model,visible,fine)=>renderStreamModel(model,visible,fine,streamFrame,splatMaterial.uniforms.alphaFactor.value),
+    dispose:disposeStreamModel,status:streamStatus,reduceDistance:()=>{viewDistance=Math.max(80,viewDistance*.8);el('distance').value=viewDistance;el('distanceValue').textContent=`${Math.round(viewDistance)} m`;}});
+  if(innerWidth<700)stream.budget=96*1024*1024;
+  el('stream-controls').hidden=false;el('stream-enabled').checked=true;el('stream-enabled').disabled=false;
+  el('distance').value=viewDistance;el('distanceValue').textContent=`${viewDistance} m`;
+  radiusInput.min=80;radiusInput.max=600;radiusInput.value=viewDistance;
+  el('radius-label').textContent='描画距離（m）';el('tile-preview').textContent='移動先を自動で読み込みます。';
+  el('fetch-location').textContent='この場所から探索';el('picker-help').textContent='場所を選ぶと、その位置から移動しながら探索できます。';
+  reset();ready=true;stream.update();
+}
+function relocate(lat,lon,distance=viewDistance){
+  if(!validCoordinate(lat,lon))throw Error('緯度・経度が範囲外です');
+  stream.clear();streamFrame=frameAt(lat,lon);metadata.origin=[lat,lon,0];viewDistance=distance;
+  el('stream-enabled').checked=true;stream.enabled=true;stream.setActive(!document.hidden);
+  el('distance').value=viewDistance;el('distanceValue').textContent=`${viewDistance} m`;
+  el('location').textContent=`${lat.toFixed(6)}, ${lon.toFixed(6)}`;reset();stream.update();
+  const url=new URL(location.href);url.searchParams.set('lat',lat.toFixed(7));url.searchParams.set('lon',lon.toFixed(7));history.replaceState(null,'',url);
+}
 renderer.setAnimationLoop(()=>{
   const dt=Math.min(clock.getDelta(),.1);
   if(flying){camera.getWorldDirection(forward);forward.y=0;forward.normalize();right.crossVectors(forward,camera.up).normalize();direction.set(0,0,0);
@@ -140,15 +198,27 @@ renderer.setAnimationLoop(()=>{
     if(keys.has('KeyE')||keys.has('Space'))direction.y+=1;if(keys.has('KeyQ')||keys.has('ControlLeft'))direction.y-=1;
     const speed=+el('speed').value*((keys.has('ShiftLeft')||keys.has('ShiftRight'))?4:1);if(direction.lengthSq())camera.position.addScaledVector(direction.normalize(),dt*speed);
   }else orbit.update();
+  if(stream){
+    if(Math.hypot(camera.position.x,camera.position.z)>3000){const current=coordinateAt(streamFrame,camera.position.toArray()),old=camera.position.clone();
+      stream.clear();streamFrame=frameAt(current.lat,current.lon);metadata.origin=[current.lat,current.lon,0];camera.position.set(0,old.y,0);orbit.target.sub(new THREE.Vector3(old.x,0,old.z));rebases++;}
+    stream.tick(performance.now());
+    const current=coordinateAt(streamFrame,camera.position.toArray());el('location').textContent=`${current.lat.toFixed(6)}, ${current.lon.toFixed(6)}`;
+  }
   renderer.render(scene,camera);
 });
-window.r3dViewer={snapshot:()=>({ready,loaded,flying,pointerLocked:document.pointerLockElement===renderer.domElement,
+window.r3dViewer={snapshot:()=>({ready,loaded:stream?stream.models.size:loaded,flying,pointerLocked:document.pointerLockElement===renderer.domElement,
   position:camera.position.toArray(),quaternion:camera.quaternion.toArray(),polygonsVisible:polygons.visible,splatsVisible:splats.visible,
-  expectedPolygonTiles:metadata?.tiles.filter(t=>t.triangles>0).length,polygonTiles:polygons.children.length,splatTiles:splats.children.length,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles})};
+  origin:metadata?.origin,coordinate:stream?coordinateAt(streamFrame,camera.position.toArray()):null,rebases,stream:stream?.snapshot(),
+  expectedPolygonTiles:stream?[...stream.models.values()].filter(e=>e.model.polygon).length:metadata?.tiles.filter(t=>t.triangles>0).length,polygonTiles:polygons.children.length,splatTiles:splats.children.length,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles})};
 try{
   const r=await fetch('./scene.json');if(!r.ok)throw Error('scene.jsonを読み込めません');metadata=await r.json();
+  if(metadata.webStreaming){const status=await (await fetch('/api/status')).json();streamSupported=!!status.streaming;if(!status.ready)el('error').textContent='サーバーに取得設定がありません';}
+  const params=new URLSearchParams(location.search);if(streamSupported&&params.has('lat')&&params.has('lon')){const lat=Number(params.get('lat')),lon=Number(params.get('lon'));if(!validCoordinate(lat,lon))throw Error('URLの緯度・経度が範囲外です');metadata.origin=[lat,lon,0];}
   document.title=metadata.title;el('title').textContent=metadata.title;el('location').textContent=`${metadata.origin[0].toFixed(6)}, ${metadata.origin[1].toFixed(6)}`;
   const total=metadata.totals;el('counts').textContent=`${total.tiles} タイル · ポリゴン ${total.meshTriangles.toLocaleString()} 面 · Splat ${total.splatRecords.toLocaleString()}`;
+  if(streamSupported){startStreaming();el('pick-location').disabled=false;}
+  else{
   reset();const queue=metadata.tiles.slice();await Promise.all(Array.from({length:4},async()=>{while(queue.length)await loadTile(queue.shift());}));
   renderer.compile(scene,camera);ready=true;el('pick-location').disabled=false;el('status').textContent='元のテクスチャ付きポリゴン + Splat · 読み込み完了';
+  }
 }catch(error){el('error').textContent=String(error.message||error);el('status').textContent='読み込みに失敗しました';console.error(error);}

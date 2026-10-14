@@ -1,5 +1,5 @@
 name: Offline codec checks
-on: [push, workflow_dispatch]
+on: [push, pull_request, workflow_dispatch]
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -12,3 +12,17 @@ jobs:
       - run: python codec/huff816_nativefree.py
       - run: PYTHONPATH=codec python -c "from audit.test_nativefree_r3d import test_compact_size; test_compact_size(); print('PASS compact-size roundtrip')"
       - run: python -m unittest audit.test_numeric_codec -v
+  web-streaming:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -r requirements.txt
+      - run: python -m unittest audit.test_web_streaming -v
+      - run: node audit/test_stream_planner.mjs
+      - run: node audit/test_stream_controller.mjs
