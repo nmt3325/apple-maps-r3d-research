@@ -105,7 +105,9 @@ def decode_symbols(data:bytes,width:int,count:int):
         vals=[tree['constant']]*count
         consumed=0
     else:
-        bits=WordBits(data[4+at:])
+        entropy=data[4+at:]
+        if len(entropy)%4:raise Huff816Error('partial uint32 word')
+        words=struct.unpack('<'+'I'*(len(entropy)//4),entropy)
         # A bounded prefix table handles common codes with one word read.
         # Longer codes continue through the validated tree; the final word
         # uses the tree directly when there are fewer lookahead bits left.
@@ -120,20 +122,35 @@ def decode_symbols(data:bytes,width:int,count:int):
                 if node is None:break
             lookup.append((node,used))
         vals=[]
+        reservoir=available=cursor=0
         for _ in range(count):
             node=tree
-            if len(bits.data)*8-bits.pos>=lookahead:
-                prefix=bits.read(lookahead)
+            # Keep unread bits in a bounded integer reservoir. Each input
+            # word is loaded once, including codes crossing word boundaries.
+            if available<lookahead and cursor<len(words):
+                reservoir=(reservoir<<32)|words[cursor]
+                available+=32
+                cursor+=1
+            if available>=lookahead:
+                prefix=reservoir>>(available-lookahead)
                 node,used=lookup[prefix]
-                bits.pos-=lookahead-used
+                available-=used
+                reservoir&=(1<<available)-1
                 if node is None:raise Huff816Error('unmatched entropy code')
             while 'symbol' not in node:
-                bit=bits.read(1)
+                if not available:
+                    if cursor==len(words):raise Huff816Error('truncated word-bit stream')
+                    reservoir=words[cursor]
+                    available=32
+                    cursor+=1
+                available-=1
+                bit=reservoir>>available
+                reservoir&=(1<<available)-1
                 if bit not in node:raise Huff816Error('unmatched entropy code')
                 node=node[bit]
             vals.append(node['symbol'])
-        stats['entropyBitsConsumed']=bits.pos
-        consumed=bits.pos
+        consumed=cursor*32-available
+        stats['entropyBitsConsumed']=consumed
     entropy=data[4+at:]
     if len(entropy)!=(consumed+31)//32*4:
         raise Huff816Error('entropy length differs from exact symbol consumption')

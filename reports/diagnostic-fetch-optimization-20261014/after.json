@@ -1,0 +1,77 @@
+{
+  "scope": "In-process CPU decode and mobile packing; excludes network, Metal and device performance",
+  "python": "3.13.5",
+  "platform": "Linux-7.0.2-6-pve-x86_64-with-glibc2.41",
+  "rounds": 5,
+  "tiles": [
+    {
+      "tile": "s98_z18_x232829_y103246_h0.r3d",
+      "sourceBytes": 457636,
+      "sourceSHA256": "2369033ef44fc57718c83631213ae31c0c699c3493d93e9ca3e27b3b98fd63ee",
+      "seconds": [
+        0.5109580770076718,
+        0.5191436229797546,
+        0.49284820901812054,
+        0.5218890240066685,
+        0.5157848499948159
+      ],
+      "medianSeconds": 0.5157848499948159,
+      "outputs": {
+        "json": "1335a4d3fec06374183c6b3076fea28ebc8265a3eb6957cd5bd0e9ff420f6238",
+        "vertices": "e81cd9ae20314c05271d2bad8fe5fed8011d6e25541c7598fc2146a9b073cf06",
+        "indices": "14a841b68d9ce2668a027c5ce978249570e65b71b78d51407fef535947427d75",
+        "splats": "5b1c129fb362cd48e057bbd3531d01ec979843f980b6a4130b2c05db8a8ee862",
+        "atlas": "38158c5bfcda2bd06288ca9907facb623eec80d4e70bd8ba6170f0c6a2c85c06"
+      },
+      "outputsMatchBaseline": true,
+      "baselineMedianSeconds": 0.6317756859934889,
+      "reductionPercent": 18.35949666474952
+    },
+    {
+      "tile": "s98_z20_x931325_y412987_h2.r3d",
+      "sourceBytes": 82870,
+      "sourceSHA256": "e98ee980997f827ca59db30d7ea491ea5ed2d2e164b61617be5198df37bbc27d",
+      "seconds": [
+        0.08941331700771116,
+        0.09381156801828183,
+        0.09087555500445887,
+        0.0914400189940352,
+        0.0933733610145282
+      ],
+      "medianSeconds": 0.0914400189940352,
+      "outputs": {
+        "json": "a4352ff8171a54aa9e08ea50842aff548f0be76f63746222df1187557641650f",
+        "vertices": "6eaf6ed898983521c4f2c84511948272aee9e907b6c7a3673d1d73ec96e52e7e",
+        "indices": "abbf3d57f37e6298eb21f49d9c5c205ab08ea2a3f5ce5d97cd6c8a1d8b8e16fe",
+        "splats": "eed7f5d73676d8598273e8fd9e8b1407fdeae66ca0236f37294722da7061dc20",
+        "atlas": "da2c25262e9832a6b36bd9d51cb294b08b72ec5a38db4f73ec8ec7f89c701bcb"
+      },
+      "outputsMatchBaseline": true,
+      "baselineMedianSeconds": 0.10863600199809298,
+      "reductionPercent": 15.82899102303088
+    },
+    {
+      "tile": "s98_z20_x64554_y460820_h0.r3d",
+      "sourceBytes": 179388,
+      "sourceSHA256": "bcdeb9361be467e317df3e10cd2c422eee3e9a4f36013cd5c4f3b48fc16d756b",
+      "seconds": [
+        0.34016433398937806,
+        0.3596763979876414,
+        0.35670094200759195,
+        0.38004752798588015,
+        0.35874154799967073
+      ],
+      "medianSeconds": 0.35874154799967073,
+      "outputs": {
+        "json": "7922ac0d283ed81116dc3a489832ae5f22f0a507837317f1dc264664937f0d64",
+        "vertices": "d4d9e4ecdbd9b317ac33dfefc7a352f0f0f819ea430a69a5981b07246f2737b5",
+        "indices": "1b1ecd515b386f5020633158b88a7193bafc7152c329b93787f7248333785c50",
+        "splats": "70d42965f78ee73ea69dd4b8e532802ceac47820aabbe77751a9409162147eb8",
+        "atlas": "1b72e58b425297542437d4acc10c5e9b8a6f1112b9478bf3a16ddac63691b83a"
+      },
+      "outputsMatchBaseline": true,
+      "baselineMedianSeconds": 0.4249463530140929,
+      "reductionPercent": 15.579567760692504
+    }
+  ]
+}

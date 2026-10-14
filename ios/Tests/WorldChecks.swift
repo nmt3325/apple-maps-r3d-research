@@ -8,6 +8,20 @@ import simd
         let plan = TilePlanner.plan(origin:origin,camera:camera,distance:350)
         precondition(!plan.isEmpty && Set(plan).count == plan.count)
         precondition(Set(plan.map(\.z)) == Set([18,19,20]))
+        var portrait = camera, landscape = camera
+        portrait.aspect = 0.46; landscape.aspect = 1.5
+        let portraitPlan = Set(TilePlanner.plan(origin:origin,camera:portrait,distance:600))
+        let landscapePlan = Set(TilePlanner.plan(origin:origin,camera:landscape,distance:600))
+        precondition(portraitPlan.isSubset(of:landscapePlan) && portraitPlan.count < landscapePlan.count,
+            "Portrait must avoid requesting the landscape guard band")
+        let nearFine = TileKey(z:20,x:931326,y:412987)
+        let fallback = TileKey(z:18,x:232831,y:103246)
+        func rank(_ key: TileKey, _ distance: Double, _ coarse: Bool) -> Double {
+            TilePlanner.requestRank(key,distance:distance,alignment:1,coarse:coarse)
+        }
+        precondition(rank(fallback,100,true) < rank(nearFine,100,false), "Nearby fallback arrives first")
+        precondition(rank(nearFine,100,false) < rank(fallback,600,true), "Far roots must not starve near detail")
+        precondition(rank(nearFine.index,0,false) < rank(fallback,0,true), "Occupancy index arrives first")
         for a in plan { for b in plan where a.z < b.z {
             precondition(!(b.x>>(b.z-a.z) == a.x && b.y>>(b.z-a.z) == a.y), "Overlapping LOD leaves")
         }}

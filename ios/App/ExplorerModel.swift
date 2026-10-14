@@ -155,17 +155,19 @@ final class ExplorerModel: ObservableObject {
         let eye = SIMD2(camera.eye.x,camera.eye.z)
         let frameOrigin = origin, coarseRoots = roots
         let direction = SIMD2(sin(camera.yaw),-cos(camera.yaw))
-        queue = needed.filter { key in
+        let candidates = needed.filter { key in
             pending[key] == nil && tiles[key] == nil && empty[key] == nil && failures[key] == nil && indices[key] == nil && inView(key)
-        }.sorted { a,b in
-            func rank(_ key: TileKey) -> Double {
-                if key.style == 100 { return -10000+Double(key.z) }
-                let delta = frameOrigin.tileCenter(key)-eye, d = simd_length(delta)
-                let alignment = d > 0 ? simd_dot(delta/d,direction) : 1
-                return (coarseRoots.contains(key.horizontal) ? -5000 : 0)+d+(1-alignment)*120+Double(key.h)*0.01
-            }
-            return rank(a)<rank(b)
         }
+        // Compute geographic distances once per candidate, not on every
+        // comparison while sorting a queue with hundreds of height layers.
+        queue = candidates.map { key -> (key:TileKey,rank:Double) in
+            let delta = frameOrigin.tileCenter(key)-eye, d = simd_length(delta)
+            let alignment = d > 0 ? simd_dot(delta/d,direction) : 1
+            return (key,TilePlanner.requestRank(key,distance:d,alignment:alignment,
+                coarse:coarseRoots.contains(key.horizontal)))
+        }.sorted { a,b in
+            a.rank == b.rank ? a.key < b.key : a.rank < b.rank
+        }.map(\.key)
     }
     func pump() {
         guard active && !paused && !authFailed, let client, let factory else { return }

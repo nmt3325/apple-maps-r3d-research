@@ -82,6 +82,12 @@ struct CameraState: Sendable {
 }
 
 struct TilePlanner {
+    static func requestRank(_ key: TileKey, distance: Double, alignment: Double, coarse: Bool) -> Double {
+        if key.style == 100 { return -10000+Double(key.z) }
+        // Give fallback geometry a local head start. An unbounded coarse
+        // preference makes every distant root delay nearby fine geometry.
+        return distance+(1-alignment)*120-(coarse ? 150 : 0)+Double(key.h)*0.01
+    }
     // Quadtree leaves partition the view: close tiles z20, middle z19, distant z18.
     // C3MM expands *every* occupied vertical cell, including discontinuous towers.
     static func plan(origin: GeoOrigin, camera: CameraState, distance: Double) -> [TileKey] {
@@ -91,7 +97,7 @@ struct TilePlanner {
         let yy = Int(floor((1-asinh(tan(location.latitude * .pi/180)) / .pi)/2*Double(n)))
         let width = origin.tileWidth(18)
         let radius = Int(ceil(distance/width))+1
-        let horizontalHalfFOV = atan(tan(camera.fov/2)*max(1,camera.aspect))
+        let horizontalHalfFOV = atan(tan(camera.fov/2)*max(0.1,camera.aspect))
         var leaves = [TileKey]()
         func visit(_ key: TileKey) {
             let center = origin.tileCenter(key)
