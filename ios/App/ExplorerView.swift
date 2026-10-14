@@ -46,11 +46,7 @@ struct MetalViewport: UIViewRepresentable {
                 else { model.navigation.stop() }
                 return
             }
-            if update.count == 1 { model.pan(update.delta) }
-            else if update.count == 2 {
-                model.orbit(azimuth:update.twist,elevation:update.delta.y * .pi / height)
-                if abs(update.zoom-1) > 0.00001 { model.zoom(update.zoom) }
-            }
+            model.applyNavigation(update,viewportHeight:height)
         }
     }
     func makeUIView(context: Context) -> MTKView {

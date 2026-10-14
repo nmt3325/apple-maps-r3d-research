@@ -326,6 +326,10 @@ final class ExplorerModel: ObservableObject {
         guard active, !paused, navigation.interacting else { return }
         navigation.pan(delta,camera:&camera)
     }
+    func applyNavigation(_ update: NavigationTouchUpdate, viewportHeight: Double) {
+        guard active, !paused, navigation.interacting else { return }
+        navigation.apply(update,viewportHeight:viewportHeight,camera:&camera)
+    }
     func endPan(velocity: SIMD2<Double>) {
         guard active, !paused, navigation.interacting else { return }
         navigation.endPan(pointsPerSecond:velocity,camera:camera)

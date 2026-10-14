@@ -2,10 +2,12 @@ import Foundation
 import simd
 
 enum NavigationTouchPhase { case begin, move, end, cancel }
+enum NavigationTwoFingerOperation { case tilt, twist, zoom }
 
 struct NavigationTouchUpdate {
     var count: Int
     var modeChanged = false
+    var operation: NavigationTwoFingerOperation? = nil
     var delta = SIMD2<Double>.zero
     var twist = 0.0
     var zoom = 1.0
@@ -20,6 +22,11 @@ struct NavigationTouchInput {
     private var lastTime = 0.0
     private var lastMotionTime = 0.0
     private var velocity = SIMD2<Double>.zero
+    private var operation: NavigationTwoFingerOperation?
+    private var startCenter = SIMD2<Double>.zero
+    private var startAngle = 0.0
+    private var startSpan = 0.0
+    private static func wrapped(_ angle: Double) -> Double { atan2(sin(angle),cos(angle)) }
     mutating func update(points: [SIMD2<Double>], time: Double) -> NavigationTouchUpdate {
         let nextCenter: SIMD2<Double> = points.isEmpty ? .zero : points.reduce(.zero,+)/Double(points.count)
         let pair = points.count == 2 ? points[1]-points[0] : .zero
@@ -30,14 +37,36 @@ struct NavigationTouchInput {
             if points.isEmpty, count == 1, time-lastMotionTime <= 0.15 { result.releaseVelocity = velocity }
             // A change in finger count resets the baseline, never becoming a swipe or twist.
             count = points.count; velocity = .zero; lastMotionTime = time
-        } else if count == 1 || count == 2 {
+            operation = nil; startCenter = nextCenter; startAngle = nextAngle; startSpan = nextSpan
+        } else if count == 1 {
             result.delta = nextCenter-center
-            if count == 1, simd_length_squared(result.delta) > 0 {
+            if simd_length_squared(result.delta) > 0 {
                 velocity = result.delta/max(0.008,time-lastTime); lastMotionTime = time
             }
-            if count == 2 {
-                result.twist = atan2(sin(nextAngle-angle),cos(nextAngle-angle))
-                if span > 8, nextSpan > 8 { result.zoom = nextSpan/span }
+        } else if count == 2 {
+            let totalTilt = nextCenter.y-startCenter.y
+            let totalTwist = Self.wrapped(nextAngle-startAngle)
+            let totalZoom = startSpan > 8 && nextSpan > 8 ? nextSpan/startSpan : 1
+            var justLocked = false
+            if operation == nil {
+                // Ignore small finger wobble, then lock the dominant intent for this touch pair.
+                let scores: [(NavigationTwoFingerOperation,Double)] = [
+                    (.tilt,abs(totalTilt)/6), (.twist,abs(totalTwist)/0.06),
+                    (.zoom,abs(log(totalZoom))/log(1.06))]
+                if let winner = scores.max(by:{$0.1 < $1.1}), winner.1 >= 1 {
+                    operation = winner.0; justLocked = true
+                }
+            }
+            result.operation = operation
+            switch operation {
+            case .tilt:
+                result.delta.y = justLocked ? totalTilt : nextCenter.y-center.y
+            case .twist:
+                result.twist = justLocked ? totalTwist : Self.wrapped(nextAngle-angle)
+            case .zoom:
+                if justLocked { result.zoom = totalZoom }
+                else if span > 8, nextSpan > 8 { result.zoom = nextSpan/span }
+            case nil: break
             }
         }
         center = nextCenter; angle = nextAngle; span = nextSpan; lastTime = time
@@ -64,6 +93,17 @@ struct CameraNavigation: Sendable {
         let delta = horizontalDelta(points,camera:camera)
         camera.eye += delta; focus += delta
     }
+    mutating func apply(_ update: NavigationTouchUpdate, viewportHeight: Double, camera: inout CameraState) {
+        if update.count == 1 { pan(update.delta,camera:&camera) }
+        else if update.count == 2 {
+            switch update.operation {
+            case .tilt: orbit(azimuth:0,elevation:-update.delta.y * .pi / max(1,viewportHeight),camera:&camera)
+            case .twist: orbit(azimuth:-update.twist,elevation:0,camera:&camera)
+            case .zoom: zoom(scale:update.zoom,camera:&camera)
+            case nil: break
+            }
+        }
+    }
     mutating func endPan(pointsPerSecond: SIMD2<Double>, camera: CameraState) {
         interacting = false
         velocity = horizontalDelta(pointsPerSecond,camera:camera)
@@ -81,9 +121,11 @@ struct CameraNavigation: Sendable {
     }
     mutating func zoom(scale: Double, camera: inout CameraState) {
         guard scale.isFinite, scale > 0 else { return }
-        let radius = min(5000,max(2,simd_distance(camera.eye,focus)/scale))
+        var radius = min(5000,max(2,simd_distance(camera.eye,focus)/scale))
+        // Limit the zoom distance at the ground instead of changing the camera's pitch.
+        if camera.forward.y < -0.0001 { radius = max(radius,(2-focus.y)/(-camera.forward.y)) }
+        else if camera.forward.y > 0.0001 { radius = min(radius,max(0.5,(focus.y-2)/camera.forward.y)) }
         camera.eye = focus-camera.forward*radius
-        if camera.eye.y < 2 { orbit(azimuth:0,elevation:0,camera:&camera) }
     }
     mutating func step(dt: Double, camera: inout CameraState) {
         guard !interacting, dt.isFinite, dt > 0, simd_length_squared(velocity) > 0 else { return }
