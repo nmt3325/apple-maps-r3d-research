@@ -124,7 +124,11 @@ def run_job(job_id,plan,run_dir):
         with (run_dir/'web-run.log').open('w') as log:
             result=subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,timeout=900,check=False)
         manifest=run_dir/'run.json'
-        if result.returncode or not manifest.is_file():raise RuntimeError('取得または復号に失敗しました。場所や範囲を変えて再試行してください。')
+        if result.returncode or not manifest.is_file():
+            output=(run_dir/'web-run.log').read_text(errors='replace')
+            if 'ModuleNotFoundError:' in output:
+                raise RuntimeError('サーバーのPython依存関係が不足しています。管理者が依存関係を復旧する必要があります。')
+            raise RuntimeError(f'取得・復号の実行に失敗しました（処理ID: {job_id}）。場所を変えても解決しない場合はこのIDを添えてください。')
         run=json.loads(manifest.read_text())
         if not run.get('pass'):raise RuntimeError('R3Dを検証できませんでした。別の場所を選んでください。')
         scene=run_dir/'viewer'
