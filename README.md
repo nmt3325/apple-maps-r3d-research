@@ -16,7 +16,7 @@ Apple Maps iOS 27のR3Dを調査し、**元のテクスチャ付きポリゴン�
 | Splat描画 | 417,650個のalpha可視三角形、元の頂点/RGBA | ブラウザ表示・GLB出力済み |
 | 元のC3Mポリゴン | 223タイル、1,922,693面、223枚の元HEICアトラス | XYZ・面・UV・法線・テクスチャ取得済み |
 | ハイブリッド表示 | 元のポリゴン＋Splat、UV上下方向修正、WASD・Q/E飛行 | 動作検証済み |
-| Oahu Hilton取得 | 72 R3D、304,527 Splatレコード、216 HEIC | 新規取得・ヘッダー/画像抽出済み |
+| Oahu Hilton取得・独立復号 | 72 R3D、304,527 Splatレコード、581,186元ポリゴン面、216 HEIC | 全数値復号・元テクスチャ付き表示・地理/配列/画像検証済み |
 | Linux独立Splat復号 | 東京223、XYZ 6,632,235 float・8属性5,895,320 float・material20 14,738,300 byte | 全配列bit/byte完全一致 |
 | Linux独立ポリゴン復号 | 東京223、XYZ・UV・位置/UV/法線index・223 primary HEIC | bit/byte完全一致 |
 | Linux独立ポリゴン法線 | 3,175,104 float中271個に1 ULP差 | 全差異をDecimal三角関数で説明、最大絶対誤差5.96e-8 |
@@ -29,7 +29,7 @@ Apple Maps iOS 27のR3Dを調査し、**元のテクスチャ付きポリゴン�
 | 座標から取得・復号・表示・出力 | 東京タワー4、新規ニューヨーク2をLinux HTTPS取得 | 一コマンド経路成功。ローカル取得設定が必要 |
 | 独立GLB/PLY export | Oahuの全geometry/UV/法線/画像/RGBA、PLYの8属性 | 全出力の読み戻し一致、Khronos GLB検証でerror/warning 0 |
 
-HUFFの別研究では2,424個の0x24 envelope内で1,462圧縮table＋962 literalを検証しています。上記2,659件とは走査対象・候補検出方法が違い、件数を単純に比較できません。出力長の意味・呼び出し元からの値は引き続き要検証です。
+過去のHUFF研究では2,424個の0x24 envelope内で1,462圧縮table＋962 literalを検証しました。上記2,659件とは走査対象・候補検出方法が違い、件数を単純に比較できません。現在の独立decoderは原本から実際のsymbol数を取得し、全配列照合とentropy消費・padding検証を通しています。
 
 ## ファイル構成
 
@@ -48,7 +48,9 @@ HUFFの別研究では2,424個の0x24 envelope内で1,462圧縮table＋962 liter
 | [data/](data/) | Releaseデータのファイル一覧・原本所在・SHA-256 |
 | [SOURCE_MANIFEST.json](SOURCE_MANIFEST.json) | 元ソースの所在とハッシュ。移植調整は別記 |
 
-元R3D、native golden、ビュー用バイナリ、GLB/PLY、抽出済み中間データは、**private Release `snapshot-20261014`** の添付に保存します。Git cloneだけでは実データは揃いません。5つのデータアーカイブには計6,338ファイル、圧縮後676,456,931 byte（約645 MiB）を収録しました。認証情報、署名付きURL、通信キャプチャ、インストール済みツール一式は収録しません。
+元R3D、native golden、以前のビュー用バイナリとGLB/PLY、抽出済み中間データは、**private Release `snapshot-20261014`** に保存済みです。5つのデータアーカイブには計6,338ファイル、圧縮後676,456,931 byte（約645 MiB）を収録しました。
+
+**private Release `linux-explorer-20261014`** には独立復号したOahuの全配列・完成viewer・GLB/PLY（143,194,860 byteのarchive）と、東京タワー4/ニューヨーク2の新原本・独立出力・ログ（10,078,991 byteのarchive）を保存済みです。別Linuxからダウンロードし、両archiveのSHA-256一致を確認しました。最終確認と数値/表示検証の記録も添付しました。Git cloneだけでは実データは揃いません。認証情報、署名付きURL、通信キャプチャ、インストール済みツール一式は収録しません。
 
 ## 最小の実行
 

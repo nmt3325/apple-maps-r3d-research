@@ -4,6 +4,8 @@
 
 **以下6項目をすべて満たし、再現コマンドと検証証拠を提示した時点で主要目標の達成とする。2026-10-14 UTCに対応するR3Dについて主要6条件を達成。証拠は[validation-20261014](../reports/validation-20261014/README.md)。** 部分的な解析結果を完全復号と呼ばない。
 
+最終確認は[FINAL_REVIEW.json](../reports/validation-20261014/FINAL_REVIEW.json)。Releaseの公開状態・添付名/サイズ・ダウンロード検証、6条件に対応する保存証拠、README/現状文書との整合を確認した。対応形式・取得設定・サービスcoverageの制約と、下記の未達追加目標は[LINUX_EXPLORER.md](LINUX_EXPLORER.md)に明記する。
+
 | 条件 | 必須の成果・証拠 | 現状 |
 |---|---|---|
 | 1. 独立した完全復号 | R3D原本からSplatのXYZ・8属性・描画用三角形、ポリゴンのXYZ・面・UV・法線・テクスチャを復元。実行時にAppleライブラリ、iOS Simulator、保存済みnative復号結果を必要としない | 対応するR3D v2/TRICO v3で実装済み。標準Pythonの独立decoderで東京223/Oahu72を数値復号 |

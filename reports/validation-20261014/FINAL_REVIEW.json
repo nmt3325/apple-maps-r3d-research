@@ -1,0 +1,67 @@
+{
+  "checkedUTC": "2026-10-14T02:18:58.807228+00:00",
+  "reviewedBaseCommit": "677cce8c3545966f7d1ac8047699154ed421a6ce",
+  "testedImplementationCommit": "fb259cf3577958f8010df5297772e07915f9ffd4",
+  "pass": true,
+  "criteria": [
+    {
+      "criterion": 1,
+      "status": "verified",
+      "evidence": "Tokyo/Oahu independent decoder, unchanged codec hashes in full numerical audits"
+    },
+    {
+      "criterion": 2,
+      "status": "verified",
+      "evidence": "Tokyo223 full-array reports, 271 individually explained normal components at 1 ULP"
+    },
+    {
+      "criterion": 3,
+      "status": "verified",
+      "evidence": "Oahu72 original textured polygons/Splat, full geometry/UV/indices/images/geolocation checks"
+    },
+    {
+      "criterion": 4,
+      "status": "verified",
+      "evidence": "Fresh Tokyo4/NewYork2 HTTPS end-to-end runs; 15/15 actual browser controls checks"
+    },
+    {
+      "criterion": 5,
+      "status": "verified",
+      "evidence": "Isolated Ubuntu24.04 ARM reproduction, 936 array/image hashes and complete GLB/PLY identical; corrupt input regressions"
+    },
+    {
+      "criterion": 6,
+      "status": "verified",
+      "evidence": "Published Release assets/sizes verified; independent download SHA verification; README/acceptance links checked"
+    }
+  ],
+  "release": {
+    "url": "https://github.com/nmt3325/apple-maps-r3d-research/releases/tag/linux-explorer-20261014",
+    "tag": "linux-explorer-20261014",
+    "publishedAt": "2026-10-14T02:10:09Z",
+    "assetsVerified": [
+      "ASSET_MANIFEST.json",
+      "fresh-coordinate-regressions.tar.gz",
+      "independent-oahu-viewer-and-exports.tar.gz",
+      "SHA256SUMS"
+    ],
+    "previousIndependentDownloadSHA256Verification": "release-download-verification.json"
+  },
+  "documentationFilesChecked": [
+    "README.md",
+    "docs/ACCEPTANCE.md",
+    "docs/STATUS.md",
+    "docs/CONTINUATION.md",
+    "docs/INDEPENDENT_DECODER.md",
+    "docs/LINUX_EXPLORER.md",
+    "reports/validation-20261014/README.md"
+  ],
+  "validRelativeLinks": 43,
+  "codecHashesUnchangedFromTokyoAudits": true,
+  "remainingAdditionalGoals": [
+    "Official pixel parity",
+    "Exact LOD",
+    "Apple tile accumulation/color transfer"
+  ],
+  "limits": "Supported R3D v2/TRICO variants; local acquisition configuration and service coverage/version required. Unknown formats and failed acquisition are explicitly rejected."
+}

@@ -1,0 +1,37 @@
+{
+  "verifiedUTC": "2026-10-14T02:20:11.378845+00:00",
+  "releaseURL": "https://github.com/nmt3325/apple-maps-r3d-research/releases/tag/linux-explorer-20261014",
+  "tag": "linux-explorer-20261014",
+  "published": true,
+  "targetCommitish": "fb259cf3577958f8010df5297772e07915f9ffd4",
+  "allAssetNames": [
+    "ASSET_MANIFEST.json",
+    "FINAL_REVIEW.json",
+    "SHA256SUMS",
+    "VALIDATION_SHA256SUMS",
+    "fresh-coordinate-regressions.tar.gz",
+    "independent-oahu-viewer-and-exports.tar.gz",
+    "validation-evidence.tar.gz"
+  ],
+  "newEvidenceAssets": [
+    {
+      "name": "FINAL_REVIEW.json",
+      "bytes": 2397,
+      "sha256": "181ee0333a147d9a5285f212fcfebaac73e53de833217de1efcf54bde9d56e91",
+      "downloadVerified": true
+    },
+    {
+      "name": "validation-evidence.tar.gz",
+      "bytes": 2693562,
+      "sha256": "d62a7fefed1972662a1d2090b9874dc719dd96450c4582c7c326b860a058e846",
+      "downloadVerified": true
+    },
+    {
+      "name": "VALIDATION_SHA256SUMS",
+      "bytes": 177,
+      "sha256": "e0d6e7c637c211dfd1d0d98c5cc2ee294f3d1141b9950b242698100a965f72bf",
+      "downloadVerified": true
+    }
+  ],
+  "originalDataArchiveDownloadVerification": "release-download-verification.json"
+}
