@@ -1,0 +1,761 @@
+{
+  "Flyover::splat_vertex": {
+    "reflection_index": 51,
+    "function": "Flyover::splat_vertex",
+    "inputs": [
+      {
+        "kind": "IndirectBufferArg",
+        "name": "sharedArgBuffer",
+        "type": "Flyover::SharedSplatsArgumentBuffer"
+      },
+      {
+        "kind": "BufferArg",
+        "name": "constants",
+        "type": "FlyoverCommon::SharedSplatsConstants"
+      },
+      {
+        "kind": "BufferArg",
+        "name": "splatConstants",
+        "type": "FlyoverCommon::SplatConstants"
+      },
+      {
+        "kind": "IndirectBufferArg",
+        "name": "argBuffer",
+        "type": "Flyover::SplatsArgumentBuffer"
+      },
+      {
+        "kind": "BufferArg",
+        "name": "__elems",
+        "type": "CommonMesh::BufferPos4w"
+      },
+      {
+        "kind": "BufferArg",
+        "name": "__elems",
+        "type": "FlyoverCommon::SplatProperties"
+      },
+      {
+        "kind": "BufferArg",
+        "name": "__elems",
+        "type": "FlyoverCommon::SplatOrders"
+      },
+      {
+        "kind": "VertexIDArg",
+        "name": "vid",
+        "type": "uint"
+      },
+      {
+        "kind": "InstanceIDArg",
+        "name": "iid",
+        "type": "uint"
+      }
+    ],
+    "outputs": [
+      {
+        "kind": "PositionRet",
+        "name": "position",
+        "type": "float4"
+      },
+      {
+        "kind": "VertexOutputRet",
+        "name": "barycentric",
+        "type": "float3"
+      },
+      {
+        "kind": "VertexOutputRet",
+        "name": "color",
+        "type": "half4"
+      },
+      {
+        "kind": "VertexOutputRet",
+        "name": "alphaPreFactor",
+        "type": "half"
+      },
+      {
+        "kind": "VertexOutputRet",
+        "name": "alphaConcentration",
+        "type": "half"
+      }
+    ],
+    "structures": {
+      "Flyover::SharedSplatsArgumentBuffer": [
+        {
+          "field_name": "constants",
+          "type_name": "FlyoverCommon::SharedSplatsConstants",
+          "offset": 0,
+          "size": 8,
+          "array_entries": 0
+        },
+        {
+          "field_name": "splatConstants",
+          "type_name": "FlyoverCommon::SplatConstants",
+          "offset": 8,
+          "size": 8,
+          "array_entries": 0
+        }
+      ],
+      "FlyoverCommon::SharedSplatsConstants": [
+        {
+          "field_name": "projection",
+          "type_name": "float4x4",
+          "offset": 0,
+          "size": 64,
+          "array_entries": 0
+        },
+        {
+          "field_name": "hue",
+          "type_name": "float",
+          "offset": 64,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "field_name": "saturation",
+          "type_name": "float",
+          "offset": 68,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "field_name": "brightness",
+          "type_name": "float",
+          "offset": 72,
+          "size": 4,
+          "array_entries": 0
+        }
+      ],
+      "FlyoverCommon::SplatConstants": [
+        {
+          "field_name": "modelView",
+          "type_name": "float4x4",
+          "offset": 0,
+          "size": 64,
+          "array_entries": 0
+        },
+        {
+          "field_name": "clipPlanes",
+          "type_name": "float4",
+          "offset": 64,
+          "size": 16,
+          "array_entries": 6
+        },
+        {
+          "field_name": "specularLight",
+          "type_name": "float3",
+          "offset": 160,
+          "size": 16,
+          "array_entries": 0
+        },
+        {
+          "field_name": "lightDir",
+          "type_name": "float3",
+          "offset": 176,
+          "size": 16,
+          "array_entries": 0
+        },
+        {
+          "field_name": "splatID",
+          "type_name": "int",
+          "offset": 192,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "field_name": "alphaConcentration",
+          "type_name": "float",
+          "offset": 196,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "field_name": "alphaPreFactor",
+          "type_name": "float",
+          "offset": 200,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "field_name": "specularWeightScale",
+          "type_name": "float",
+          "offset": 204,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "field_name": "specularWeightOffset",
+          "type_name": "float",
+          "offset": 208,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "field_name": "posBoundsMin",
+          "type_name": "float3",
+          "offset": 224,
+          "size": 16,
+          "array_entries": 0
+        },
+        {
+          "field_name": "posBoundsScale",
+          "type_name": "float3",
+          "offset": 240,
+          "size": 16,
+          "array_entries": 0
+        }
+      ],
+      "Flyover::SplatsArgumentBuffer": [
+        {
+          "field_name": "vertexBuffers",
+          "type_name": "metal::array",
+          "offset": 0,
+          "size": 131072,
+          "array_entries": 0
+        },
+        {
+          "field_name": "propertiesBuffers",
+          "type_name": "metal::array",
+          "offset": 131072,
+          "size": 131072,
+          "array_entries": 0
+        },
+        {
+          "field_name": "splatOrderBuffers",
+          "type_name": "metal::array",
+          "offset": 262144,
+          "size": 131072,
+          "array_entries": 0
+        }
+      ],
+      "CommonMesh::BufferPos4w": [
+        {
+          "field_name": "position",
+          "type_name": "ushort4",
+          "offset": 0,
+          "size": 8,
+          "array_entries": 0
+        }
+      ],
+      "FlyoverCommon::SplatProperties": [
+        {
+          "field_name": "albedoSrgbHex",
+          "type_name": "int",
+          "offset": 0,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "field_name": "normal",
+          "type_name": "ushort2",
+          "offset": 4,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "field_name": "roughnessSpecularWeight",
+          "type_name": "ushort",
+          "offset": 8,
+          "size": 2,
+          "array_entries": 0
+        }
+      ],
+      "FlyoverCommon::SplatOrders": [
+        {
+          "field_name": "splatIndex",
+          "type_name": "int",
+          "offset": 0,
+          "size": 4,
+          "array_entries": 0
+        }
+      ]
+    }
+  },
+  "Flyover::clear_tile": {
+    "reflection_index": 54,
+    "function": "Flyover::clear_tile",
+    "inputs": [
+      {
+        "kind": "RenderTargetArg",
+        "name": "color",
+        "type": "half4"
+      },
+      {
+        "kind": "ImageblockDataArg",
+        "name": "tileData",
+        "type": "FlyoverTileMemory::SplatAccumView"
+      }
+    ],
+    "outputs": [
+      {
+        "kind": "RenderTargetRet",
+        "name": "fragColor",
+        "type": "half4"
+      },
+      {
+        "kind": "ImageblockDataRet",
+        "name": "accumData",
+        "type": "FlyoverTileMemory::SplatAccumView"
+      }
+    ],
+    "structures": {
+      "FlyoverTileMemory::SplatAccumView": [
+        {
+          "attribute_name": "field0",
+          "type_name": "float",
+          "offset": 0,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field1",
+          "type_name": "float",
+          "offset": 4,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field2",
+          "type_name": "float",
+          "offset": 8,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field3",
+          "type_name": "float",
+          "offset": 12,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field4",
+          "type_name": "float",
+          "offset": 16,
+          "size": 4,
+          "array_entries": 0
+        }
+      ]
+    }
+  },
+  "Flyover::splat_fragment": {
+    "reflection_index": 55,
+    "function": "Flyover::splat_fragment",
+    "inputs": [
+      {
+        "kind": "PositionArg",
+        "name": "position",
+        "type": "float4"
+      },
+      {
+        "kind": "FragmentInputArg",
+        "name": "barycentric",
+        "type": "float3"
+      },
+      {
+        "kind": "FragmentInputArg",
+        "name": "color",
+        "type": "half4"
+      },
+      {
+        "kind": "FragmentInputArg",
+        "name": "alphaPreFactor",
+        "type": "half"
+      },
+      {
+        "kind": "FragmentInputArg",
+        "name": "alphaConcentration",
+        "type": "half"
+      },
+      {
+        "kind": "IndirectBufferArg",
+        "name": "sharedArgBuffer",
+        "type": "Flyover::SharedSplatsArgumentBuffer"
+      },
+      {
+        "kind": "BufferArg",
+        "name": "constants",
+        "type": "FlyoverCommon::SharedSplatsConstants"
+      },
+      {
+        "kind": "BufferArg",
+        "name": "splatConstants",
+        "type": "FlyoverCommon::SplatConstants"
+      },
+      {
+        "kind": "BarycentricCoordArg",
+        "name": "barycentric",
+        "type": "float3"
+      },
+      {
+        "kind": "RenderTargetArg",
+        "name": "color",
+        "type": "half4"
+      },
+      {
+        "kind": "ImageblockDataArg",
+        "name": "tileData",
+        "type": "FlyoverTileMemory::SplatAccumView"
+      }
+    ],
+    "outputs": [
+      {
+        "kind": "RenderTargetRet",
+        "name": "fragColor",
+        "type": "half4"
+      },
+      {
+        "kind": "ImageblockDataRet",
+        "name": "accumData",
+        "type": "FlyoverTileMemory::SplatAccumView"
+      }
+    ],
+    "structures": {
+      "FlyoverTileMemory::SplatAccumView": [
+        {
+          "attribute_name": "field0",
+          "type_name": "float",
+          "offset": 0,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field1",
+          "type_name": "float",
+          "offset": 4,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field2",
+          "type_name": "float",
+          "offset": 8,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field3",
+          "type_name": "float",
+          "offset": 12,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field4",
+          "type_name": "float",
+          "offset": 16,
+          "size": 4,
+          "array_entries": 0
+        }
+      ],
+      "Flyover::SharedSplatsArgumentBuffer": [
+        {
+          "field_name": "constants",
+          "type_name": "FlyoverCommon::SharedSplatsConstants",
+          "offset": 0,
+          "size": 8,
+          "array_entries": 0
+        },
+        {
+          "field_name": "splatConstants",
+          "type_name": "FlyoverCommon::SplatConstants",
+          "offset": 8,
+          "size": 8,
+          "array_entries": 0
+        }
+      ],
+      "FlyoverCommon::SharedSplatsConstants": [
+        {
+          "field_name": "projection",
+          "type_name": "float4x4",
+          "offset": 0,
+          "size": 64,
+          "array_entries": 0
+        },
+        {
+          "field_name": "hue",
+          "type_name": "float",
+          "offset": 64,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "field_name": "saturation",
+          "type_name": "float",
+          "offset": 68,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "field_name": "brightness",
+          "type_name": "float",
+          "offset": 72,
+          "size": 4,
+          "array_entries": 0
+        }
+      ],
+      "FlyoverCommon::SplatConstants": [
+        {
+          "field_name": "modelView",
+          "type_name": "float4x4",
+          "offset": 0,
+          "size": 64,
+          "array_entries": 0
+        },
+        {
+          "field_name": "clipPlanes",
+          "type_name": "float4",
+          "offset": 64,
+          "size": 16,
+          "array_entries": 6
+        },
+        {
+          "field_name": "specularLight",
+          "type_name": "float3",
+          "offset": 160,
+          "size": 16,
+          "array_entries": 0
+        },
+        {
+          "field_name": "lightDir",
+          "type_name": "float3",
+          "offset": 176,
+          "size": 16,
+          "array_entries": 0
+        },
+        {
+          "field_name": "splatID",
+          "type_name": "int",
+          "offset": 192,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "field_name": "alphaConcentration",
+          "type_name": "float",
+          "offset": 196,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "field_name": "alphaPreFactor",
+          "type_name": "float",
+          "offset": 200,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "field_name": "specularWeightScale",
+          "type_name": "float",
+          "offset": 204,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "field_name": "specularWeightOffset",
+          "type_name": "float",
+          "offset": 208,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "field_name": "posBoundsMin",
+          "type_name": "float3",
+          "offset": 224,
+          "size": 16,
+          "array_entries": 0
+        },
+        {
+          "field_name": "posBoundsScale",
+          "type_name": "float3",
+          "offset": 240,
+          "size": 16,
+          "array_entries": 0
+        }
+      ]
+    }
+  },
+  "Flyover::intermediate_resolve_tile": {
+    "reflection_index": 56,
+    "function": "Flyover::intermediate_resolve_tile",
+    "inputs": [
+      {
+        "kind": "RenderTargetArg",
+        "name": "backgroundColor",
+        "type": "half4"
+      },
+      {
+        "kind": "ImageblockDataArg",
+        "name": "accumData",
+        "type": "FlyoverTileMemory::SplatAccumView"
+      }
+    ],
+    "outputs": [
+      {
+        "kind": "RenderTargetRet",
+        "name": "color",
+        "type": "half4"
+      },
+      {
+        "kind": "ImageblockDataRet",
+        "name": "compositeData",
+        "type": "FlyoverTileMemory::CompositeView"
+      }
+    ],
+    "structures": {
+      "FlyoverTileMemory::CompositeView": [
+        {
+          "attribute_name": "field0",
+          "type_name": "float",
+          "offset": 0,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field1",
+          "type_name": "float",
+          "offset": 4,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field2",
+          "type_name": "float",
+          "offset": 8,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field3",
+          "type_name": "float",
+          "offset": 12,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field4",
+          "type_name": "float",
+          "offset": 16,
+          "size": 4,
+          "array_entries": 0
+        }
+      ]
+    }
+  },
+  "Flyover::final_resolve_color": {
+    "reflection_index": 57,
+    "function": "Flyover::final_resolve_color",
+    "inputs": [
+      {
+        "kind": "RenderTargetArg",
+        "name": "background",
+        "type": "half4"
+      },
+      {
+        "kind": "ImageblockDataArg",
+        "name": "compositeData",
+        "type": "FlyoverTileMemory::CompositeView"
+      }
+    ],
+    "outputs": [
+      {
+        "kind": "RenderTargetRet",
+        "name": "color",
+        "type": "half4"
+      }
+    ],
+    "structures": {
+      "FlyoverTileMemory::CompositeView": [
+        {
+          "attribute_name": "field0",
+          "type_name": "float",
+          "offset": 0,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field1",
+          "type_name": "float",
+          "offset": 4,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field2",
+          "type_name": "float",
+          "offset": 8,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field3",
+          "type_name": "float",
+          "offset": 12,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field4",
+          "type_name": "float",
+          "offset": 16,
+          "size": 4,
+          "array_entries": 0
+        }
+      ]
+    }
+  },
+  "Flyover::final_resolve_depth": {
+    "reflection_index": 58,
+    "function": "Flyover::final_resolve_depth",
+    "inputs": [
+      {
+        "kind": "ImageblockDataArg",
+        "name": "compositeData",
+        "type": "FlyoverTileMemory::CompositeView"
+      }
+    ],
+    "outputs": [
+      {
+        "kind": "DepthRet",
+        "name": "depth",
+        "type": "float"
+      }
+    ],
+    "structures": {
+      "FlyoverTileMemory::CompositeView": [
+        {
+          "attribute_name": "field0",
+          "type_name": "float",
+          "offset": 0,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field1",
+          "type_name": "float",
+          "offset": 4,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field2",
+          "type_name": "float",
+          "offset": 8,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field3",
+          "type_name": "float",
+          "offset": 12,
+          "size": 4,
+          "array_entries": 0
+        },
+        {
+          "attribute_name": "field4",
+          "type_name": "float",
+          "offset": 16,
+          "size": 4,
+          "array_entries": 0
+        }
+      ]
+    }
+  }
+}

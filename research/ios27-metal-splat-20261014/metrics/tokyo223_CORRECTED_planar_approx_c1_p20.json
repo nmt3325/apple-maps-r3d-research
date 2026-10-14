@@ -1,0 +1,26 @@
+{
+  "source": "Apple native-decoded saved golden buffers (not independently decoded)",
+  "input_count": 417650,
+  "output_count": 417650,
+  "input_positions": "/opt/flyover-viewer/standard3dgs-research-20261014/corrected-triangles/corrected-native-223-triangles-positions.bin",
+  "input_rgba": "/opt/flyover-viewer/standard3dgs-research-20261014/corrected-triangles/corrected-native-223-triangles-rgba.bin",
+  "output_ply": "/opt/flyover-viewer/standard3dgs-research-20261014/tokyo223_CORRECTED_planar_approx_c1_p20.ply",
+  "output_size_bytes": 28400737,
+  "alpha_concentration_hypothetical": 1.0,
+  "alpha_pre_factor_hypothetical": 20.0,
+  "thickness_ratio_hypothetical": 0.08,
+  "mean_chunk_major_sigma": [
+    9.921583335152706,
+    8.238897720277528,
+    8.061583809607086,
+    4.134392640436714,
+    3.9067042665256624,
+    3.854505958820759,
+    3.88423892008853,
+    4.158752593915596,
+    3.8867725296059246,
+    3.9623434699491047,
+    3.9748584385035364
+  ],
+  "limitations": "Triangle-supported kernel approximated by unbounded Gaussian, color PBR/transfer and SH, clipping and georeference not reproduced; alpha globals assumed, no iOS runtime comparison."
+}

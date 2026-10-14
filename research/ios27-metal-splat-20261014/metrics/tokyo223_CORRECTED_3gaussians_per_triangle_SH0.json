@@ -1,0 +1,14 @@
+{
+  "gaussians": 1252950,
+  "input_native_splats": 417650,
+  "source": "/opt/flyover-viewer/standard3dgs-research-20261014/tokyo223_CORRECTED_planar_approx_c1_p20.ply",
+  "out": "/opt/flyover-viewer/standard3dgs-research-20261014/tokyo223_CORRECTED_3gaussians_per_triangle_SH0.ply",
+  "size": 85201126,
+  "mean_abs_center_match_error_theory": 0,
+  "mix_center_offset": 0.25,
+  "sigma_scale": 0.75,
+  "center_attenuation": 0.45942582403592663,
+  "clipped_sub_opacity_count": 0,
+  "method": "approximate three isotropic-weight Gaussians with original native triangular local geometry and SH0 color; transformed Gaussian center+covariance and alpha center matched with front-to-back transmittance; theoretical view/overlap not verified",
+  "provenance": "Native-decoded goldens, not native-free"
+}
