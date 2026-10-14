@@ -194,6 +194,7 @@ final class ExplorerModel: ObservableObject {
         let eye = SIMD2(camera.eye.x,camera.eye.z)
         let frameOrigin = origin, coarseRoots = roots
         let direction = SIMD2(sin(camera.yaw),-cos(camera.yaw))
+        let predicted = eye+velocity*2
         queue = needed.filter { key in
             let refreshAtlas = tiles[key].map { tile in
                 inView(key) && targetTextureLimit(tile,now:CACurrentMediaTime()) > tile.textureLimit &&
@@ -205,9 +206,8 @@ final class ExplorerModel: ObservableObject {
                 if key.style == 100 { return -10000+Double(key.z) }
                 let delta = frameOrigin.tileCenter(key)-eye, d = simd_length(delta)
                 let alignment = d > 0 ? simd_dot(delta/d,direction) : 1
-                let predicted = eye+velocity*2
                 let futureDistance = simd_length(frameOrigin.tileCenter(key)-predicted)
-                return (coarseRoots.contains(key.horizontal) ? -1500 : 0)+d+(1-alignment)*180
+                return (coarseRoots.contains(key.horizontal) ? -300 : 0)+d+(1-alignment)*180
                     + futureDistance*0.8 + Double(key.h)*0.01
             }
             return rank(a)<rank(b)
@@ -387,14 +387,12 @@ final class ExplorerModel: ObservableObject {
         // Give scheduled texture reductions a chance before evicting geometry.
         if textureTask != nil && cost <= budget { return }
         let now = CACurrentMediaTime()
-        let victims = tiles.keys.filter{$0 != textureKey}.sorted { a,b in
-            func score(_ key: TileKey) -> Double {
-                StreamingPolicy.evictionScore(distance:tileDistance(key),zoom:key.z,
-                    age:now-(accessed[key] ?? 0),bytes:tiles[key]?.cost ?? 0,
-                    needed:needed.contains(key),visible:inView(key))
-            }
-            return score(a)>score(b)
-        }
+        let scores = Dictionary(uniqueKeysWithValues:tiles.keys.map { key in
+            (key,StreamingPolicy.evictionScore(distance:tileDistance(key),zoom:key.z,
+                age:now-(accessed[key] ?? 0),bytes:tiles[key]?.cost ?? 0,
+                needed:needed.contains(key),visible:inView(key)))
+        })
+        let victims = tiles.keys.filter{$0 != textureKey}.sorted { (scores[$0] ?? 0)>(scores[$1] ?? 0) }
         var evictedNeeded = false
         for key in victims where cost+reserving > budget {
             cost -= tiles[key]?.cost ?? 0; evict(key)
