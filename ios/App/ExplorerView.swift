@@ -4,6 +4,24 @@ import UniformTypeIdentifiers
 
 final class BoundedMetalView: MTKView {
     var renderScale: CGFloat = 1.5
+    var touchHandler: ((NavigationTouchPhase,[SIMD2<Double>],Double,Double) -> Void)?
+    private var trackedTouches = [UITouch]()
+    private func sendTouches(_ phase: NavigationTouchPhase, event: UIEvent?) {
+        let points = trackedTouches.map { touch -> SIMD2<Double> in
+            let point = touch.location(in:self); return SIMD2(Double(point.x),Double(point.y))
+        }
+        touchHandler?(phase,points,event?.timestamp ?? CACurrentMediaTime(),Double(max(1,bounds.height)))
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        trackedTouches.append(contentsOf:touches); sendTouches(.begin,event:event)
+    }
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) { sendTouches(.move,event:event) }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        trackedTouches.removeAll { touches.contains($0) }; sendTouches(.end,event:event)
+    }
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        trackedTouches.removeAll(); sendTouches(.cancel,event:event)
+    }
     override func layoutSubviews() {
         super.layoutSubviews()
         let size = CGSize(width:max(1,bounds.width*renderScale),height:max(1,bounds.height*renderScale))
@@ -13,8 +31,28 @@ final class BoundedMetalView: MTKView {
 
 struct MetalViewport: UIViewRepresentable {
     @ObservedObject var model: ExplorerModel
-    func makeCoordinator() -> Coordinator { Coordinator() }
-    final class Coordinator { var renderer: MetalRenderer? }
+    func makeCoordinator() -> Coordinator { Coordinator(model:model) }
+    @MainActor final class Coordinator {
+        let model: ExplorerModel
+        var renderer: MetalRenderer?
+        var input = NavigationTouchInput()
+        init(model: ExplorerModel) { self.model = model }
+        func handleTouches(_ phase: NavigationTouchPhase, points: [SIMD2<Double>], time: Double, height: Double) {
+            if phase == .cancel { input = NavigationTouchInput(); model.navigation.stop(); return }
+            let update = input.update(points:points,time:time)
+            if update.count == 0 { model.endPan(velocity:update.releaseVelocity); return }
+            if update.modeChanged {
+                if update.count <= 2 { model.beginNavigation(viewportHeight:height) }
+                else { model.navigation.stop() }
+                return
+            }
+            if update.count == 1 { model.pan(update.delta) }
+            else if update.count == 2 {
+                model.orbit(azimuth:update.twist,elevation:update.delta.y * .pi / height)
+                if abs(update.zoom-1) > 0.00001 { model.zoom(update.zoom) }
+            }
+        }
+    }
     func makeUIView(context: Context) -> MTKView {
         let view = BoundedMetalView(frame:.zero,device:model.device)
         view.colorPixelFormat = .bgra8Unorm_srgb
@@ -22,6 +60,10 @@ struct MetalViewport: UIViewRepresentable {
         view.preferredFramesPerSecond = 60
         view.framebufferOnly = true
         view.autoResizeDrawable = false
+        view.isMultipleTouchEnabled = true
+        view.touchHandler = { [weak coordinator = context.coordinator] phase,points,time,height in
+            coordinator?.handleTouches(phase,points:points,time:time,height:height)
+        }
         if let device = model.device {
             do {
                 let renderer = try MetalRenderer(device:device)
@@ -38,24 +80,8 @@ struct MetalViewport: UIViewRepresentable {
         let size = CGSize(width:max(1,view.bounds.width*scale),height:max(1,view.bounds.height*scale))
         if view.drawableSize != size { view.drawableSize = size }
     }
-}
-
-struct Joystick: View {
-    var changed: (SIMD2<Double>) -> Void
-    @State var offset = CGSize.zero
-    var body: some View {
-        ZStack {
-            Circle().fill(.ultraThinMaterial).frame(width:116,height:116)
-            Image(systemName:"arrow.up.and.down.and.arrow.left.and.right").font(.title2).foregroundStyle(.white.opacity(0.5))
-            Circle().fill(.white.opacity(0.65)).frame(width:45,height:45).offset(offset)
-        }.contentShape(Circle())
-            .gesture(DragGesture(minimumDistance:0).onChanged { value in
-                let x = value.location.x-58, y = value.location.y-58
-                let length = max(1,hypot(x,y)/38)
-                offset = CGSize(width:x/length,height:y/length)
-                changed(SIMD2(Double(offset.width/38),Double(-offset.height/38)))
-            }.onEnded { _ in offset = .zero; changed(.zero) })
-            .accessibilityLabel("移動スティック")
+    static func dismantleUIView(_ view: MTKView, coordinator: Coordinator) {
+        coordinator.model.stopNavigation(); (view as? BoundedMetalView)?.touchHandler = nil; view.delegate = nil
     }
 }
 
@@ -76,22 +102,9 @@ struct ExplorerView: View {
     @Environment(\.scenePhase) var phase
     @State var settings = false
     @State var importing = false
-    @State var lastDrag = CGSize.zero
-    @State var magnification = 1.0
     var body: some View {
         ZStack {
             MetalViewport(model:model).ignoresSafeArea()
-                .overlay(Color.clear.contentShape(Rectangle()).gesture(DragGesture(minimumDistance:2).onChanged { value in
-                    let delta = CGSize(width:value.translation.width-lastDrag.width,height:value.translation.height-lastDrag.height)
-                    model.camera.yaw -= delta.width*0.005
-                    model.camera.pitch = min(1.4,max(-1.5,model.camera.pitch+delta.height*0.005))
-                    lastDrag = value.translation
-                }.onEnded{_ in lastDrag = .zero})
-                .simultaneousGesture(MagnificationGesture().onChanged { scale in
-                    let step = scale/magnification
-                    model.camera.eye += model.camera.forward*Double(step-1)*60
-                    model.camera.eye.y = max(2,model.camera.eye.y); magnification = scale
-                }.onEnded{_ in magnification = 1})).ignoresSafeArea()
             VStack {
                 HStack(spacing:12) {
                     VStack(alignment:.leading,spacing:3) {
@@ -110,17 +123,25 @@ struct ExplorerView: View {
                 if let error = model.rendererError { Text(error).padding().background(.ultraThinMaterial,in:RoundedRectangle(cornerRadius:12)) }
                 Spacer()
                 HStack(alignment:.bottom) {
-                    Joystick { model.movement = $0 }
                     Spacer()
-                    VStack(spacing:12) {
-                        HoldControl(symbol:"arrow.up",label:"上昇") { model.elevation = $0 ? 1 : 0 }
-                        HoldControl(symbol:"arrow.down",label:"下降") { model.elevation = $0 ? -1 : 0 }
-                    }
+                    VStack(spacing:8) {
+                        HStack(spacing:12) {
+                            HoldControl(symbol:"arrow.up",label:"上昇") { pressed in
+                                if pressed { model.navigation.stop() }; model.elevation = pressed ? 1 : 0
+                            }
+                            HoldControl(symbol:"arrow.down",label:"下降") { pressed in
+                                if pressed { model.navigation.stop() }; model.elevation = pressed ? -1 : 0
+                            }
+                        }
+                        HStack { Text("上下速度"); Spacer(); Text("\(Int(model.elevationSpeed)) m/s").monospacedDigit() }.font(.caption2)
+                        Slider(value:$model.elevationSpeed,in:1...150,step:1).accessibilityLabel("上下移動の速度")
+                    }.frame(width:156).padding(12).background(.ultraThinMaterial,in:RoundedRectangle(cornerRadius:18))
                 }
-                Text("ドラッグで見回す · 左スティックで移動 · 右ボタンで上下移動")
+                Text("1本指で移動 · 2本指の上下で仰角 · ひねって回転")
                     .font(.caption2).padding(.top,10)
             }.padding(.horizontal,16).padding(.top,8).padding(.bottom,14).foregroundStyle(.white)
         }.preferredColorScheme(.dark)
+            .onChange(of:settings) { _,open in if open { model.stopNavigation() } }
             .onChange(of:model.quality) { _,_ in model.qualityChanged() }
             .sheet(isPresented:$settings) { SettingsView(model:model,importing:$importing) }
             .fileImporter(isPresented:$importing,allowedContentTypes:[.json]) { result in
@@ -161,8 +182,10 @@ struct SettingsView: View {
                     Picker("画質",selection:$model.quality) { Text("軽量").tag(0); Text("標準").tag(1) }.pickerStyle(.segmented)
                     Text("描画範囲 \(Int(model.viewDistance)) m")
                     Slider(value:$model.viewDistance,in:120...600,step:10)
+                    Text("上下移動の速度 \(Int(model.elevationSpeed)) m/s")
+                    Slider(value:$model.elevationSpeed,in:1...150,step:1)
                     Toggle("移動・新規取得を一時停止",isOn:$model.paused)
-                    Button("視点をリセット") { model.camera = CameraState(); dismiss() }
+                    Button("視点をリセット") { model.resetCamera(); dismiss() }
                 }
                 Section("接続") {
                     LabeledContent("データ取得",value:"Apple Maps へ直接接続")

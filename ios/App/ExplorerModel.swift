@@ -12,15 +12,15 @@ final class ExplorerModel: ObservableObject {
     @Published var completed = 0
     @Published var quality = 1
     @Published var configured = false
-    @Published var paused = false
+    @Published var paused = false { didSet { if paused { stopNavigation() } } }
     @Published var viewDistance = 350.0
     @Published var locationLabel = "東京タワー"
     @Published var rendererError: String?
     var camera = CameraState()
     var origin = GeoOrigin(latitude:35.6586,longitude:139.7454)
-    var movement = SIMD2<Double>.zero
+    var navigation = CameraNavigation()
     var elevation = 0.0
-    var speed = 35.0
+    @Published var elevationSpeed = 35.0
     @Published var active = true
     var device: MTLDevice?
     var factory: GPUFactory?
@@ -87,20 +87,23 @@ final class ExplorerModel: ObservableObject {
         guard latitude.isFinite, longitude.isFinite, abs(latitude) <= 85.05112878, abs(longitude) <= 180 else {
             message = "緯度・経度の範囲を確認してください。"; return
         }
-        invalidate(); origin = GeoOrigin(latitude:latitude,longitude:longitude)
+        stopNavigation(); invalidate(); origin = GeoOrigin(latitude:latitude,longitude:longitude)
         camera.eye = SIMD3(0,100,160); camera.yaw = 0; camera.pitch = -0.45
         locationLabel = label; completed = 0
     }
     func step(dt: Double, now: Double) {
         if !paused {
-            camera.eye += (camera.right*movement.x+camera.forward*movement.y)*speed*dt
-            camera.eye.y = max(2,camera.eye.y+elevation*speed*dt)
+            navigation.step(dt:dt,camera:&camera)
+            camera.eye.y = max(2,camera.eye.y+elevation*elevationSpeed*dt)
         }
         if simd_length(SIMD2(camera.eye.x,camera.eye.z)) > 3000 {
             let coordinate = origin.coordinate(east:camera.eye.x,south:camera.eye.z)
-            let altitude = camera.eye.y, yaw = camera.yaw, pitch = camera.pitch
+            let oldEye = camera.eye, yaw = camera.yaw, pitch = camera.pitch
+            let oldNavigation = navigation, oldElevation = elevation
             relocate(latitude:coordinate.latitude,longitude:coordinate.longitude,label:locationLabel)
-            camera.eye = SIMD3(0,altitude,0); camera.yaw = yaw; camera.pitch = pitch
+            camera.eye = SIMD3(0,oldEye.y,0); camera.yaw = yaw; camera.pitch = pitch
+            navigation = oldNavigation; navigation.rebase(by:SIMD3(oldEye.x,0,oldEye.z))
+            elevation = oldElevation
         }
         if now-lastPlan > 0.25 && configured && !paused && !authFailed {
             lastPlan = now; updatePlan(now:now)
@@ -268,6 +271,78 @@ final class ExplorerModel: ObservableObject {
     func renderTiles() -> [GPUTile] {
         selection().tiles
     }
+    func centerFocus() -> SIMD3<Double> {
+        let displayed = selection(), eye = SIMD3<Float>(camera.eye), direction = SIMD3<Float>(camera.forward)
+        var nearest = Float(viewDistance), point: SIMD3<Double>?
+        for tile in displayed.tiles where NavigationPicking.sphere(origin:eye,direction:direction,center:tile.center,radius:tile.radius) {
+            let inverse = simd_inverse(tile.model)
+            let localEye4 = inverse*SIMD4(eye,1), localDirection4 = inverse*SIMD4(direction,0)
+            let localEye = SIMD3(localEye4.x,localEye4.y,localEye4.z), localDirection = SIMD3(localDirection4.x,localDirection4.y,localDirection4.z)
+            let masks = displayed.masks[tile.key.horizontal]?.dropFirst() ?? ArraySlice<SIMD4<Float>>()
+            func accept(_ hit: SIMD3<Float>, alpha: Float? = nil) {
+                guard hit.x < nearest else { return }
+                let worldPoint = eye+direction*hit.x
+                guard !masks.contains(where:{worldPoint.x >= $0.x && worldPoint.x < $0.y && worldPoint.z >= $0.z && worldPoint.z < $0.w}) else { return }
+                if let alpha {
+                    let fogStart = Float(viewDistance)*0.62
+                    let fogT = min(1,max(0,(hit.x-fogStart)/(Float(viewDistance)-fogStart)))
+                    let fog = fogT*fogT*(3-2*fogT)
+                    guard min(0.99,alpha*81*(1-hit.y-hit.z)*hit.y*hit.z)*(1-fog) >= 0.003 else { return }
+                }
+                nearest = hit.x; point = camera.eye+camera.forward*Double(hit.x)
+            }
+            if let vertices = tile.vertices, let indices = tile.indices {
+                let floats = vertices.contents().assumingMemoryBound(to:Float.self)
+                let indexes = indices.contents().assumingMemoryBound(to:UInt32.self)
+                func position(_ index: UInt32) -> SIMD3<Float>? {
+                    let i = Int(index)*8
+                    guard i+2 < vertices.length/4 else { return nil }
+                    return SIMD3(floats[i],floats[i+1],floats[i+2])
+                }
+                for i in stride(from:0,to:tile.triangles*3,by:3) {
+                    guard let a = position(indexes[i]), let b = position(indexes[i+1]), let c = position(indexes[i+2]) else { continue }
+                    if let hit = NavigationPicking.triangle(origin:localEye,direction:localDirection,
+                        a:a,b:b,c:c) { accept(hit) }
+                }
+            }
+            if let splats = tile.splats {
+                let floats = splats.contents().assumingMemoryBound(to:Float.self)
+                for i in stride(from:0,to:(tile.splatVertices/3)*3,by:3) {
+                    let offset = i*10, alpha = floats[offset+6]
+                    guard alpha > 0 else { continue }
+                    func position(_ offset: Int) -> SIMD3<Float> { SIMD3(floats[offset],floats[offset+1],floats[offset+2]) }
+                    if let hit = NavigationPicking.triangle(origin:localEye,direction:localDirection,
+                        a:position(offset),b:position(offset+10),c:position(offset+20)) { accept(hit,alpha:alpha) }
+                }
+            }
+        }
+        return point ?? CameraNavigation.fallbackFocus(camera:camera,distance:viewDistance)
+    }
+    func beginNavigation(viewportHeight: Double) {
+        guard active, !paused else { return }
+        navigation.begin(camera:camera,focus:centerFocus(),viewportHeight:viewportHeight)
+    }
+    func pan(_ delta: SIMD2<Double>) {
+        guard active, !paused, navigation.interacting else { return }
+        navigation.pan(delta,camera:&camera)
+    }
+    func endPan(velocity: SIMD2<Double>) {
+        guard active, !paused, navigation.interacting else { return }
+        navigation.endPan(pointsPerSecond:velocity,camera:camera)
+    }
+    func orbit(azimuth: Double = 0, elevation: Double = 0) {
+        guard active, !paused, navigation.interacting else { return }
+        navigation.orbit(azimuth:azimuth,elevation:elevation,camera:&camera)
+    }
+    func zoom(_ scale: Double) {
+        guard active, !paused, navigation.interacting else { return }
+        navigation.zoom(scale:scale,camera:&camera)
+    }
+    func stopNavigation() { navigation.stop(); elevation = 0 }
+    func resetCamera() {
+        let aspect = camera.aspect
+        stopNavigation(); camera = CameraState(); camera.aspect = aspect
+    }
     func selection() -> (tiles:[GPUTile], masks:[TileKey:[SIMD4<Float>]]) {
         var selected = Set<TileKey>()
         var masks = [TileKey:[SIMD4<Float>]]()
@@ -291,7 +366,7 @@ final class ExplorerModel: ObservableObject {
         return (selected.compactMap{tiles[$0]},masks)
     }
     func setActive(_ value: Bool) {
-        active = value; movement = .zero; elevation = 0
+        active = value; stopNavigation()
         if !value { pending.values.forEach{$0.cancel()} }
         else { lastPlan = 0 }
     }

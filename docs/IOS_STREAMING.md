@@ -51,13 +51,15 @@ R3D_FETCH_CONFIG = /absolute/private/path/maps.credentials.json
 
 個別に読み込んだ設定は Keychain に保存する。設定を読み込まず、Keychain が利用できない環境でも標準設定で起動できる。個別の設定ファイル・保存済み署名 URL・取得済み実データは git に含めない。
 
-画面ドラッグで視点を回転、左のスティックで前後左右移動、右のボタンで上昇 / 下降、ピンチで前後移動。設定画面から東京タワー・ワイキキ・任意の緯度経度へ移動できる。端末 GPS の現在地への追従ではなく、アプリ内のカメラ位置を追従する。
+1本指のスワイプで水平移動し、指を離すと慣性で減速する。2本指の上下スライドで仰角、2本指をひねると水平方向の視点を変更する。操作開始時に画面中央に見えるモデルとの交点を回転中心にし、同じ操作の間はその点を保持する。未読込や空の場合は中央の地面、または視線上の点を使う。ピンチは対象への接近 / 後退。左下のスティックは廃止し、右下の上昇 / 下降ボタンは押している間だけ移動する。「上下速度」スライダーで1〜150 m/sに調整でき、設定画面でも変更できる。停止・バックグラウンド化・視点リセット・地点変更時に慣性を解除する。設定画面から東京タワー・ワイキキ・任意の緯度経度へ移動できる。端末 GPS の現在地への追従ではなく、アプリ内のカメラ位置を追従する。
 
 ## 検証
 
 ```sh
 swiftc ios/App/World.swift ios/Tests/WorldChecks.swift -o /tmp/r3d-world-checks
 /tmp/r3d-world-checks
+swiftc ios/App/World.swift ios/App/CameraNavigation.swift ios/Tests/NavigationChecks.swift -o /tmp/r3d-navigation-checks
+/tmp/r3d-navigation-checks
 swiftc ios/App/PipelineSlots.swift ios/Tests/PipelineChecks.swift -o /tmp/r3d-pipeline-checks
 /tmp/r3d-pipeline-checks
 python3.13 ios/Tests/test_mobile_decoder.py -v
