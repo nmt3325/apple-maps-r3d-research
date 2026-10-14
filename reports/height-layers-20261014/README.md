@@ -15,3 +15,5 @@
 修正版成果物はprivate Release [linux-explorer-height-layers-20261014](https://github.com/nmt3325/apple-maps-r3d-research/releases/tag/linux-explorer-height-layers-20261014)。Oahu原本・C3MM・全配列・viewer・GLB/PLY・ログを収録する。旧ReleaseのOahu72とARM間の936配列照合はh0コーパスの履歴として保持する。今回の全135タイル出力について新たなARM間照合は行っていない。
 
 [REVIEW.json](REVIEW.json)に要点。公式pixel一致・正確なLOD・独自累積/色変換は未達の追加目標のまま。元Splatだけの上層にポリゴンを捏造しない。
+
+Releaseの6添付すべてのsizeとGitHub保存SHA-256がローカル成果物に一致し、tagのcommitも実装158fbdeに一致。[保存確認](GITHUB_RECEIPT.json)。

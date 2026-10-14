@@ -1,0 +1,47 @@
+{
+  "pass": true,
+  "releaseTag": "linux-explorer-height-layers-20261014",
+  "url": "https://github.com/nmt3325/apple-maps-r3d-research/releases/tag/linux-explorer-height-layers-20261014",
+  "draft": false,
+  "assets": [
+    {
+      "name": "ASSET_MANIFEST.json",
+      "bytes": 761,
+      "sha256": "e688a5df297d099b0138f441fc4e74facc9e60790ed458285be22f6c36cd5cb2",
+      "remoteDigestExact": true
+    },
+    {
+      "name": "oahu-full-height.tar.gz",
+      "bytes": 236946996,
+      "sha256": "07c9827283199d5649add592852eadcf176ca7ade48e47151f4e5f61433c403a",
+      "remoteDigestExact": true
+    },
+    {
+      "name": "REPRODUCE.md",
+      "bytes": 1839,
+      "sha256": "400ff8d0febbec9f5d4aaaab59fb8c29b9889ca66f4d2aca2548c3b5b33bc283",
+      "remoteDigestExact": true
+    },
+    {
+      "name": "SHA256SUMS",
+      "bytes": 445,
+      "sha256": "2b31d035aac8512bdc9692040d76f3bf428c1e5ee0ea058e7ee975e3690e8bff",
+      "remoteDigestExact": true
+    },
+    {
+      "name": "tokyo-tower-full-height.tar.gz",
+      "bytes": 14302575,
+      "sha256": "bff24c09c0351dd6be0f97af754e05edae5e5d12dce930eede608fec26acb861",
+      "remoteDigestExact": true
+    },
+    {
+      "name": "validation-evidence.tar.gz",
+      "bytes": 5072041,
+      "sha256": "1807bbb4f82dec5d1d7546167d649e501936a3edc285e65ff8f911ae0652b8cf",
+      "remoteDigestExact": true
+    }
+  ],
+  "verification": "GitHub stored asset sizes and server SHA256 digests match local artifacts",
+  "sourceCommit": "158fbde1d65f01a35a6c3cd87c1ad33d0562e48f",
+  "releaseTagCommitExact": true
+}
