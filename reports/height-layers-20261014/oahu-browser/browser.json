@@ -1,0 +1,374 @@
+{
+  "url": "http://127.0.0.1:8972/",
+  "initial": {
+    "ready": true,
+    "loaded": 135,
+    "flying": false,
+    "pointerLocked": false,
+    "position": [
+      187.8072143554688,
+      297.821284460419,
+      256.22738037109383
+    ],
+    "quaternion": [
+      -0.2776491339546597,
+      0.28380021917802856,
+      0.0862349899682207,
+      0.9137460919281195
+    ],
+    "polygonsVisible": true,
+    "splatsVisible": true,
+    "expectedPolygonTiles": 134,
+    "polygonTiles": 134,
+    "splatTiles": 135,
+    "drawCalls": 267,
+    "triangles": 1441864
+  },
+  "checks": [
+    {
+      "name": "all tiles loaded",
+      "pass": true,
+      "evidence": {
+        "ready": true,
+        "loaded": 135,
+        "flying": false,
+        "pointerLocked": false,
+        "position": [
+          187.8072143554688,
+          297.821284460419,
+          256.22738037109383
+        ],
+        "quaternion": [
+          -0.2776491339546597,
+          0.28380021917802856,
+          0.0862349899682207,
+          0.9137460919281195
+        ],
+        "polygonsVisible": true,
+        "splatsVisible": true,
+        "expectedPolygonTiles": 134,
+        "polygonTiles": 134,
+        "splatTiles": 135,
+        "drawCalls": 267,
+        "triangles": 1441864
+      }
+    },
+    {
+      "name": "WebGL draws original geometry",
+      "pass": true,
+      "evidence": {
+        "ready": true,
+        "loaded": 135,
+        "flying": false,
+        "pointerLocked": false,
+        "position": [
+          187.8072143554688,
+          297.821284460419,
+          256.22738037109383
+        ],
+        "quaternion": [
+          -0.2776491339546597,
+          0.28380021917802856,
+          0.0862349899682207,
+          0.9137460919281195
+        ],
+        "polygonsVisible": true,
+        "splatsVisible": true,
+        "expectedPolygonTiles": 134,
+        "polygonTiles": 134,
+        "splatTiles": 135,
+        "drawCalls": 267,
+        "triangles": 1441864
+      }
+    },
+    {
+      "name": "Splat display toggle",
+      "pass": true,
+      "evidence": {
+        "ready": true,
+        "loaded": 135,
+        "flying": false,
+        "pointerLocked": false,
+        "position": [
+          187.8072143554688,
+          297.821284460419,
+          256.22738037109383
+        ],
+        "quaternion": [
+          -0.2776491339546597,
+          0.28380021917802856,
+          0.0862349899682207,
+          0.9137460919281195
+        ],
+        "polygonsVisible": true,
+        "splatsVisible": false,
+        "expectedPolygonTiles": 134,
+        "polygonTiles": 134,
+        "splatTiles": 135,
+        "drawCalls": 267,
+        "triangles": 1441864
+      }
+    },
+    {
+      "name": "polygon display toggle",
+      "pass": true,
+      "evidence": {
+        "ready": true,
+        "loaded": 135,
+        "flying": false,
+        "pointerLocked": false,
+        "position": [
+          187.8072143554688,
+          297.821284460419,
+          256.22738037109383
+        ],
+        "quaternion": [
+          -0.2776491339546597,
+          0.28380021917802856,
+          0.0862349899682207,
+          0.9137460919281195
+        ],
+        "polygonsVisible": false,
+        "splatsVisible": true,
+        "expectedPolygonTiles": 134,
+        "polygonTiles": 134,
+        "splatTiles": 135,
+        "drawCalls": 267,
+        "triangles": 1441864
+      }
+    },
+    {
+      "name": "free movement mode",
+      "pass": true,
+      "evidence": {
+        "ready": true,
+        "loaded": 135,
+        "flying": true,
+        "pointerLocked": false,
+        "position": [
+          187.8072143554688,
+          297.821284460419,
+          256.22738037109383
+        ],
+        "quaternion": [
+          -0.2776491339546597,
+          0.28380021917802856,
+          0.0862349899682207,
+          0.9137460919281195
+        ],
+        "polygonsVisible": true,
+        "splatsVisible": true,
+        "expectedPolygonTiles": 134,
+        "polygonTiles": 134,
+        "splatTiles": 135,
+        "drawCalls": 267,
+        "triangles": 1441864
+      }
+    },
+    {
+      "name": "WASD w changes position",
+      "pass": true,
+      "evidence": {
+        "before": [
+          187.8072143554688,
+          297.821284460419,
+          256.22738037109383
+        ],
+        "after": [
+          186.9574211211382,
+          297.821284460419,
+          254.9913174847948
+        ]
+      }
+    },
+    {
+      "name": "WASD a changes position",
+      "pass": true,
+      "evidence": {
+        "before": [
+          186.9574211211382,
+          297.821284460419,
+          254.9913174847948
+        ],
+        "after": [
+          185.72135823483916,
+          297.821284460419,
+          255.8411107191254
+        ]
+      }
+    },
+    {
+      "name": "WASD s changes position",
+      "pass": true,
+      "evidence": {
+        "before": [
+          185.72135823483916,
+          297.821284460419,
+          255.8411107191254
+        ],
+        "after": [
+          186.57115146916976,
+          297.821284460419,
+          257.07717360542443
+        ]
+      }
+    },
+    {
+      "name": "WASD d changes position",
+      "pass": true,
+      "evidence": {
+        "before": [
+          186.57115146916976,
+          297.821284460419,
+          257.07717360542443
+        ],
+        "after": [
+          187.8072143554688,
+          297.821284460419,
+          256.22738037109383
+        ]
+      }
+    },
+    {
+      "name": "vertical e",
+      "pass": true,
+      "evidence": {
+        "before": [
+          187.8072143554688,
+          297.821284460419,
+          256.22738037109383
+        ],
+        "after": [
+          187.8072143554688,
+          299.321284460419,
+          256.22738037109383
+        ]
+      }
+    },
+    {
+      "name": "vertical q",
+      "pass": true,
+      "evidence": {
+        "before": [
+          187.8072143554688,
+          299.321284460419,
+          256.22738037109383
+        ],
+        "after": [
+          187.8072143554688,
+          297.821284460419,
+          256.22738037109383
+        ]
+      }
+    },
+    {
+      "name": "mouse pointer lock acquired",
+      "pass": true,
+      "evidence": {
+        "ready": true,
+        "loaded": 135,
+        "flying": true,
+        "pointerLocked": true,
+        "position": [
+          187.8072143554688,
+          297.821284460419,
+          256.22738037109383
+        ],
+        "quaternion": [
+          -0.2776491339546597,
+          0.28380021917802856,
+          0.0862349899682207,
+          0.9137460919281195
+        ],
+        "polygonsVisible": true,
+        "splatsVisible": true,
+        "expectedPolygonTiles": 134,
+        "polygonTiles": 134,
+        "splatTiles": 135,
+        "drawCalls": 267,
+        "triangles": 1441864
+      }
+    },
+    {
+      "name": "mouse view changes camera orientation",
+      "pass": true,
+      "evidence": {
+        "before": [
+          -0.2776491339546597,
+          0.28380021917802856,
+          0.0862349899682207,
+          0.9137460919281195
+        ],
+        "after": [
+          -0.331371330211185,
+          0.18801803999045347,
+          0.06756693906572721,
+          0.922104639885033
+        ]
+      }
+    },
+    {
+      "name": "Escape releases mouse lock",
+      "pass": true,
+      "evidence": {
+        "ready": true,
+        "loaded": 135,
+        "flying": true,
+        "pointerLocked": false,
+        "position": [
+          187.8072143554688,
+          297.821284460419,
+          256.22738037109383
+        ],
+        "quaternion": [
+          -0.331371330211185,
+          0.18801803999045347,
+          0.06756693906572721,
+          0.922104639885033
+        ],
+        "polygonsVisible": true,
+        "splatsVisible": true,
+        "expectedPolygonTiles": 134,
+        "polygonTiles": 134,
+        "splatTiles": 135,
+        "drawCalls": 269,
+        "triangles": 1442055
+      }
+    },
+    {
+      "name": "reset restores initial camera",
+      "pass": true,
+      "evidence": {
+        "ready": true,
+        "loaded": 135,
+        "flying": true,
+        "pointerLocked": false,
+        "position": [
+          187.8072143554688,
+          297.821284460419,
+          256.22738037109383
+        ],
+        "quaternion": [
+          -0.2776491339546597,
+          0.28380021917802856,
+          0.0862349899682207,
+          0.9137460919281195
+        ],
+        "polygonsVisible": true,
+        "splatsVisible": true,
+        "expectedPolygonTiles": 134,
+        "polygonTiles": 134,
+        "splatTiles": 135,
+        "drawCalls": 267,
+        "triangles": 1441864
+      }
+    },
+    {
+      "name": "no browser/shader errors",
+      "pass": true,
+      "evidence": []
+    }
+  ],
+  "errors": [],
+  "source": "Independently decoded R3D; actual browser UI events"
+}

@@ -2,11 +2,13 @@
 
 Apple Maps iOS 27のR3Dを調査し、**元のテクスチャ付きポリゴンとsoft triangle Splatを復元・表示する研究**の成果をまとめたスナップショットです。2026-10-14 JST時点。
 
-**Linuxの独立decoder、東京223の全配列照合、Oahu72の元テクスチャ付きポリゴン＋Splat表示、座標入力からの取得・復号・表示・GLB/PLY出力を実装・検証しました。別Ubuntu24.04 ARM Linuxでも再現し、936配列/画像とGLB/PLYのhashが一致しました。GitHub Releaseへ成果物を保存済みで、対応するR3Dについて主要6条件を達成しました。** soft triangle Splatを通常の楕円3D Gaussian Splattingと同一とは断定していません。
+**Linuxの独立decoder、東京223の全配列照合、Oahu72の元配列検証と、全高さ135タイルの元テクスチャ付きポリゴン＋Splat表示、座標入力からの取得・復号・表示・GLB/PLY出力を実装・検証しました。別Ubuntu24.04 ARM Linuxでも再現し、936配列/画像とGLB/PLYのhashが一致しました。GitHub Releaseへ成果物を保存済みで、対応するR3Dについて主要6条件を達成しました。** soft triangle Splatを通常の楕円3D Gaussian Splattingと同一とは断定していません。
 
 主要目標は任意の緯度・経度・範囲からLinuxだけで取得・完全復号・自由移動表示まで実行することです。[6項目の完了条件](docs/ACCEPTANCE.md)をすべて満たした場合に達成と判定します。公式表示とのpixel一致、正確なLOD、タイル累積・色変換の完全再現は別の追加目標として追跡します。
 
-稼働中のビューア（Tailscale内）：**https://ct104.taila8c9c.ts.net:8972/**。地図で場所と範囲を選び、タイル数を確認してから取得・表示できます。完成成果物は [Linux explorer Release](https://github.com/nmt3325/apple-maps-r3d-research/releases/tag/linux-explorer-20261014)、[6条件の検証証拠](reports/validation-20261014/README.md)、[再現手順](docs/LINUX_EXPLORER.md)。ローカル取得設定、サービスcoverageと対応codecの制約は手順に明記しています。
+**高層部分の取得漏れを修正済み。** 従来は高さ層h0だけを取得していたため、Oahu72の上部が欠けていました。C3MM占有インデックスから全高さ候補を取得し、Oahuは135タイルへ補完。元72の936配列/画像は完全一致を保持し、上部ポリゴン・SplatとGLB/PLYを再検証しました。[修正仕様・再現手順](docs/HEIGHT_LAYERS.md) / [検証証拠](reports/height-layers-20261014/README.md)。
+
+稼働中のビューア（Tailscale内）：**https://ct104.taila8c9c.ts.net:8972/**。地図で場所と範囲を選び、タイル数を確認してから取得・表示できます。完成成果物は [全高さ修正版Release](https://github.com/nmt3325/apple-maps-r3d-research/releases/tag/linux-explorer-height-layers-20261014)、[6条件の検証証拠](reports/validation-20261014/README.md)、[再現手順](docs/LINUX_EXPLORER.md)。ローカル取得設定、サービスcoverageと対応codecの制約は手順に明記しています。
 
 ## 現在の成果
 
@@ -16,7 +18,8 @@ Apple Maps iOS 27のR3Dを調査し、**元のテクスチャ付きポリゴン�
 | Splat描画 | 417,650個のalpha可視三角形、元の頂点/RGBA | ブラウザ表示・GLB出力済み |
 | 元のC3Mポリゴン | 223タイル、1,922,693面、223枚の元HEICアトラス | XYZ・面・UV・法線・テクスチャ取得済み |
 | ハイブリッド表示 | 元のポリゴン＋Splat、UV上下方向修正、WASD・Q/E飛行 | 動作検証済み |
-| Oahu Hilton取得・独立復号 | 72 R3D、304,527 Splatレコード、581,186元ポリゴン面、216 HEIC | 全数値復号・元テクスチャ付き表示・地理/配列/画像検証済み |
+| Oahu Hilton h0原本の独立復号（従来検証） | 72 R3D、304,527 Splatレコード、581,186元ポリゴン面、216 HEIC | 全数値復号・元テクスチャ付き表示・地理/配列/画像検証済み |
+| Oahu全高さ取得・独立復号 | 135 R3D、382,128 Splat、1,064,079元ポリゴン面 | 63上層追加、全配列/画像/位置合わせ/GLB/PLY検証、既存URLへ反映 |
 | Linux独立Splat復号 | 東京223、XYZ 6,632,235 float・8属性5,895,320 float・material20 14,738,300 byte | 全配列bit/byte完全一致 |
 | Linux独立ポリゴン復号 | 東京223、XYZ・UV・位置/UV/法線index・223 primary HEIC | bit/byte完全一致 |
 | Linux独立ポリゴン法線 | 3,175,104 float中271個に1 ULP差 | 全差異をDecimal三角関数で説明、最大絶対誤差5.96e-8 |
@@ -27,7 +30,7 @@ Apple Maps iOS 27のR3Dを調査し、**元のテクスチャ付きポリゴン�
 | C3MM v2 | 6サンプル・36 LZMA区画、タイルz/x/y復元 | 構造解析済み、階層意味は一部未解決 |
 | 新規地域のLinuxのみでの完全3D復元 | Oahu72、304,527 Splat、581,186元ポリゴン面 | 地理・全viewer配列・画像照合、ブラウザ15操作チェック通過 |
 | 座標から取得・復号・表示・出力 | 東京タワー4、新規ニューヨーク2をLinux HTTPS取得 | 一コマンド経路成功。ローカル取得設定が必要 |
-| Web地図から地点選択 | Leaflet/OSM地図、中心座標/範囲、タイル数preview、取得ジョブとシーン切替 | Tailnet Webビューアへ提供中。1回24タイル/300m上限 |
+| Web地図から地点選択 | Leaflet/OSM地図、中心座標/範囲、タイル数preview、取得ジョブとシーン切替 | Tailnet Webビューアへ提供中。1回24平面タイル/300m上限、全高さを自動取得 |
 | 独立GLB/PLY export | Oahuの全geometry/UV/法線/画像/RGBA、PLYの8属性 | 全出力の読み戻し一致、Khronos GLB検証でerror/warning 0 |
 
 過去のHUFF研究では2,424個の0x24 envelope内で1,462圧縮table＋962 literalを検証しました。上記2,659件とは走査対象・候補検出方法が違い、件数を単純に比較できません。現在の独立decoderは原本から実際のsymbol数を取得し、全配列照合とentropy消費・padding検証を通しています。
@@ -51,7 +54,9 @@ Apple Maps iOS 27のR3Dを調査し、**元のテクスチャ付きポリゴン�
 
 元R3D、native golden、以前のビュー用バイナリとGLB/PLY、抽出済み中間データは、**private Release `snapshot-20261014`** に保存済みです。5つのデータアーカイブには計6,338ファイル、圧縮後676,456,931 byte（約645 MiB）を収録しました。
 
-**private Release `linux-explorer-20261014`** には独立復号したOahuの全配列・完成viewer・GLB/PLY（143,194,860 byteのarchive）と、東京タワー4/ニューヨーク2の新原本・独立出力・ログ（10,078,991 byteのarchive）を保存済みです。別Linuxからダウンロードし、両archiveのSHA-256一致を確認しました。最終確認と数値/表示検証の記録も添付しました。Git cloneだけでは実データは揃いません。認証情報、署名付きURL、通信キャプチャ、インストール済みツール一式は収録しません。
+**private Release `linux-explorer-20261014`（旧h0版）** には独立復号したOahuの全配列・完成viewer・GLB/PLY（143,194,860 byteのarchive）と、東京タワー4/ニューヨーク2の新原本・独立出力・ログ（10,078,991 byteのarchive）を保存済みです。別Linuxからダウンロードし、両archiveのSHA-256一致を確認しました。最終確認と数値/表示検証の記録も添付しました。Git cloneだけでは実データは揃いません。認証情報、署名付きURL、通信キャプチャ、インストール済みツール一式は収録しません。
+
+修正版の原本・C3MM・全135タイルの独立出力・viewer・GLB/PLY・ログは **private Release `linux-explorer-height-layers-20261014`**。旧h0版の地域上部の不足を補完しています。
 
 ## 最小の実行
 

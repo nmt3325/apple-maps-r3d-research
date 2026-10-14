@@ -153,6 +153,11 @@ def decode_mesh_uv(raw: bytes) -> dict:
     else:
         flags_raw = b''
     has_uv, at = read_signed(src, at)
+    if mesh['faceCount']==0:
+        if flags_bits or has_uv:raise ValueError('Unexpected stream in empty polygon mesh')
+        return {**mesh,'uv_f32':b'','uv_pixels_f32':b'','atlasDimensions':None,
+                'uv_indices':[],'face_materials':[],'uvCount':0,'vertexFlagsBits':0,
+                'vertexFlagsPacked':b'','nextOffset':at}
     if not has_uv:
         raise ValueError("TRICO mesh has no UV stream")
     declared_uv, at = read_signed(src, at)
@@ -186,6 +191,9 @@ def decode_mesh(raw: bytes) -> dict:
     mesh = decode_mesh_uv(raw)
     src, at = mesh['src'], mesh['nextOffset']
     has_normals, at = read_signed(src, at)
+    if mesh['faceCount']==0:
+        if has_normals or at!=len(src):raise ValueError('Invalid empty mesh normal stream/trailing bytes')
+        return {**mesh,'normals_f32':b'','normal_indices':[],'normalCount':0,'normalWords':b'','nextOffset':at}
     if not has_normals:
         raise ValueError("Mesh normal stream is absent")
     variant, at = read_signed(src, at)

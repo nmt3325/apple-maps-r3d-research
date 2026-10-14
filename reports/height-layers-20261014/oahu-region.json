@@ -1,0 +1,3542 @@
+{
+  "tiles": 135,
+  "origin": [
+    21.2828,
+    -157.8369,
+    0
+  ],
+  "geographicBoundsSWNE": [
+    21.27,
+    -157.85,
+    21.3,
+    -157.82
+  ],
+  "polygonFaces": 1064079,
+  "splatRecords": 382128,
+  "allGeometryFinite": true,
+  "allIndicesAndUVExact": true,
+  "allTexturesDecodedRGBExact": true,
+  "sharedFramePlacementVerified": true,
+  "nativeGoldenInput": false,
+  "surfaceDistanceSampleCount": 63298,
+  "surfaceDistanceMetersPercentiles": {
+    "p50": 0.3900328725576401,
+    "p90": 10.231938648223878,
+    "p95": 12.80065760612486,
+    "p99": 18.05406049728393,
+    "max": 28.719039916992188
+  },
+  "surfaceDistanceScope": "Deterministic samples of visible Splat centroids to original mesh triangles among 24 nearest centroids; diagnostic, not equality of the two distinct geometry layers",
+  "results": [
+    {
+      "tile": "s98_z20_x64551_y460816_h0.r3d",
+      "sourceSHA256": "d06bab6ecfa1adb68094d243a2051dea56c62dafd19367f47a0e7cbbce3b4e24",
+      "vertices": 5564,
+      "polygonFaces": 9284,
+      "splatRecords": 3938,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.626222185308507e-06,
+      "maxSplatFrameRoundingMeters": 7.628751774291231e-06,
+      "geodeticMin": [
+        -157.8381847287956,
+        21.283920074152036,
+        16.600036343559623
+      ],
+      "geodeticMax": [
+        -157.83781738808847,
+        21.28426761335879,
+        56.680000958032906
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 3.5381808280944824
+    },
+    {
+      "tile": "s98_z20_x64551_y460816_h1.r3d",
+      "sourceSHA256": "5e044430428f2323a991f70a9748eb7fd2c49cfbb67f1e9fd4c67e40b9d50752",
+      "vertices": 4123,
+      "polygonFaces": 6990,
+      "splatRecords": 1129,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.628183425367752e-06,
+      "maxSplatFrameRoundingMeters": 7.627468278315064e-06,
+      "geodeticMin": [
+        -157.838188581579,
+        21.28412671898994,
+        55.520016870461404
+      ],
+      "geodeticMax": [
+        -157.83791606552825,
+        21.28426977993024,
+        95.28002579323947
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.10263504087924957
+    },
+    {
+      "tile": "s98_z20_x64551_y460817_h0.r3d",
+      "sourceSHA256": "c310e034886851ee989085d133662dab65a8606d692b165e876d0adb32d52dc1",
+      "vertices": 5885,
+      "polygonFaces": 9581,
+      "splatRecords": 2489,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.579414443625865e-06,
+      "maxSplatFrameRoundingMeters": 7.606939107063226e-06,
+      "geodeticMin": [
+        -157.8381835721166,
+        21.2836041425501,
+        16.680048320442438
+      ],
+      "geodeticMax": [
+        -157.83781546111007,
+        21.28395059781855,
+        39.00003808364272
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.5427259802818298
+    },
+    {
+      "tile": "s98_z20_x64551_y460818_h0.r3d",
+      "sourceSHA256": "0cd02e667ef241ee7fd694c2b4b3cf2b6b43ed73661d761e8b1b985761bd0bba",
+      "vertices": 9462,
+      "polygonFaces": 15480,
+      "splatRecords": 1978,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.605856325199056e-06,
+      "maxSplatFrameRoundingMeters": 7.57583600830003e-06,
+      "geodeticMin": [
+        -157.83818241544455,
+        21.283283513212112,
+        16.560034566558897
+      ],
+      "geodeticMax": [
+        -157.83782162915358,
+        21.28362707863429,
+        56.400005106814206
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.22155848145484924
+    },
+    {
+      "tile": "s98_z20_x64551_y460818_h1.r3d",
+      "sourceSHA256": "282feb1d645fb4760002b8fa0c4abf5728b2744286219145c16c1b1add8066ba",
+      "vertices": 6622,
+      "polygonFaces": 10659,
+      "splatRecords": 2279,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.6095388408248255e-06,
+      "maxSplatFrameRoundingMeters": 7.623777150911337e-06,
+      "geodeticMin": [
+        -157.83818896648256,
+        21.283289295110546,
+        52.72002404462546
+      ],
+      "geodeticMax": [
+        -157.8379773531264,
+        21.28354723791604,
+        91.60003386996686
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.16358047723770142
+    },
+    {
+      "tile": "s98_z20_x64551_y460819_h0.r3d",
+      "sourceSHA256": "7f5271101432c9ce828c9759cbd3c26abd6fc50cb9df6b438a8096ea2fb525b1",
+      "vertices": 3038,
+      "polygonFaces": 4802,
+      "splatRecords": 6574,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.625931459642743e-06,
+      "maxSplatFrameRoundingMeters": 7.6081879001321795e-06,
+      "geodeticMin": [
+        -157.8381881963799,
+        21.28296505125377,
+        16.48002309910953
+      ],
+      "geodeticMax": [
+        -157.83781738954286,
+        21.283308978211327,
+        51.64004768617451
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 11.768348693847656
+    },
+    {
+      "tile": "s98_z20_x64551_y460819_h1.r3d",
+      "sourceSHA256": "d6e755ccba12667baec32ddd4cbdde4dfe8db6a7754bb4768b541b86b7f79638",
+      "vertices": 1565,
+      "polygonFaces": 2180,
+      "splatRecords": 232,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.61181448183379e-06,
+      "maxSplatFrameRoundingMeters": 7.591265045903128e-06,
+      "geodeticMin": [
+        -157.83819050865574,
+        21.283260928668764,
+        51.64004007168114
+      ],
+      "geodeticMax": [
+        -157.83810108314512,
+        21.283302473715654,
+        87.92004504892975
+      ],
+      "surfaceDistanceSampleCount": 229,
+      "surfaceDistanceMedianMeters": 0.0856332778930664
+    },
+    {
+      "tile": "s98_z20_x64551_y460820_h0.r3d",
+      "sourceSHA256": "29de5e5dac2a3cf526d73df28b76b355926062da4454ee5d745964cd3a8ef302",
+      "vertices": 2452,
+      "polygonFaces": 4170,
+      "splatRecords": 7716,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.62596303616192e-06,
+      "maxSplatFrameRoundingMeters": 7.609297966837403e-06,
+      "geodeticMin": [
+        -157.83818318545127,
+        21.282644420691355,
+        16.56002566218376
+      ],
+      "geodeticMax": [
+        -157.83781738959934,
+        21.282988708863247,
+        35.920008352957666
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 4.760221481323242
+    },
+    {
+      "tile": "s98_z20_x64551_y460821_h0.r3d",
+      "sourceSHA256": "0de55d22f7fcfffb84eb39e0264e4bfab987cce73387d17f78431a5b311e2335",
+      "vertices": 7427,
+      "polygonFaces": 12525,
+      "splatRecords": 3502,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.597664961167538e-06,
+      "maxSplatFrameRoundingMeters": 7.6201275476250885e-06,
+      "geodeticMin": [
+        -157.8381881961133,
+        21.282322345589225,
+        16.64002591278404
+      ],
+      "geodeticMax": [
+        -157.83781584795662,
+        21.28266771673322,
+        64.1599999256432
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 2.068826198577881
+    },
+    {
+      "tile": "s98_z20_x64551_y460821_h2.r3d",
+      "sourceSHA256": "24a68736ff396674170ba9293c275c3eb476d53ebf0b473f00eae94e10aeeba9",
+      "vertices": 3697,
+      "polygonFaces": 6238,
+      "splatRecords": 596,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.616279987132657e-06,
+      "maxSplatFrameRoundingMeters": 7.607128111430939e-06,
+      "geodeticMin": [
+        -157.83818858007766,
+        21.282319817227695,
+        60.91999891772866
+      ],
+      "geodeticMax": [
+        -157.8379280157674,
+        21.282468297089697,
+        88.88000084925443
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.11541642248630524
+    },
+    {
+      "tile": "s98_z20_x64551_y460821_h3.r3d",
+      "sourceSHA256": "e2dbe041ffc3f037c77713016fad0f187bf5bd0ea5d0cbaacb8fe45074c29c75",
+      "vertices": 2705,
+      "polygonFaces": 4605,
+      "splatRecords": 741,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.623658802913269e-06,
+      "maxSplatFrameRoundingMeters": 7.5968902422118845e-06,
+      "geodeticMin": [
+        -157.83818472453822,
+        21.28232306935292,
+        85.4800016079098
+      ],
+      "geodeticMax": [
+        -157.83792531783274,
+        21.28249177937224,
+        111.96004820428789
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.13529804348945618
+    },
+    {
+      "tile": "s98_z20_x64551_y460822_h0.r3d",
+      "sourceSHA256": "e1535a36b9bbc59b670e82ab53879f13f8b1340a7852baef5206941964797630",
+      "vertices": 6200,
+      "polygonFaces": 10590,
+      "splatRecords": 6851,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.623564187042575e-06,
+      "maxSplatFrameRoundingMeters": 7.617082786737228e-06,
+      "geodeticMin": [
+        -157.83818511185456,
+        21.282003880526997,
+        16.360040966421366
+      ],
+      "geodeticMax": [
+        -157.83781546320404,
+        21.282347806632927,
+        64.40000773966312
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 7.231659889221191
+    },
+    {
+      "tile": "s98_z20_x64551_y460822_h2.r3d",
+      "sourceSHA256": "64e99e4fb703b34730558a171030f184464ced551f3b3d6797757b497b0a6489",
+      "vertices": 3151,
+      "polygonFaces": 5491,
+      "splatRecords": 1058,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.612653547539594e-06,
+      "maxSplatFrameRoundingMeters": 7.618283973442885e-06,
+      "geodeticMin": [
+        -157.83818164147328,
+        21.28216789613317,
+        61.36001929547638
+      ],
+      "geodeticMax": [
+        -157.8379287866508,
+        21.28235033494831,
+        90.680007298477
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.1202772855758667
+    },
+    {
+      "tile": "s98_z20_x64551_y460822_h3.r3d",
+      "sourceSHA256": "f34b3495d791049618f5a47536034f8c8d2112a87a05f06c51f0400d0d91dc19",
+      "vertices": 2620,
+      "polygonFaces": 4422,
+      "splatRecords": 1022,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.620511496497784e-06,
+      "maxSplatFrameRoundingMeters": 7.6215295337078715e-06,
+      "geodeticMin": [
+        -157.83818703675735,
+        21.28216464477776,
+        88.04002112615854
+      ],
+      "geodeticMax": [
+        -157.83790257648366,
+        21.28235069568377,
+        112.24000591784716
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.12740711867809296
+    },
+    {
+      "tile": "s98_z20_x64551_y460823_h0.r3d",
+      "sourceSHA256": "8c66d07a43ff7a895d251a440c7e8bc24230d0f1aa6c3017758cdd77413bc363",
+      "vertices": 3912,
+      "polygonFaces": 6354,
+      "splatRecords": 8062,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.602624691571691e-06,
+      "maxSplatFrameRoundingMeters": 7.6287439867428475e-06,
+      "geodeticMin": [
+        -157.83818434057574,
+        21.28169625328319,
+        16.080023487098515
+      ],
+      "geodeticMax": [
+        -157.83782085966413,
+        21.282031871105694,
+        46.000024107284844
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 6.903141498565674
+    },
+    {
+      "tile": "s98_z20_x64551_y460824_h0.r3d",
+      "sourceSHA256": "b5a3a70e57ee69d2361199ea4c5c85155a97eceaefd4ecedc3554b0a0e72ccb6",
+      "vertices": 1670,
+      "polygonFaces": 2851,
+      "splatRecords": 2605,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.623799149314436e-06,
+      "maxSplatFrameRoundingMeters": 7.629101816064576e-06,
+      "geodeticMin": [
+        -157.83818202774992,
+        21.281365143470445,
+        16.0800519939512
+      ],
+      "geodeticMax": [
+        -157.83782895427413,
+        21.281697871553803,
+        38.440014474093914
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 5.748991966247559
+    },
+    {
+      "tile": "s98_z20_x64552_y460816_h0.r3d",
+      "sourceSHA256": "040adc00dc6351b7871f6c482145cf4a4143b2170ce769712c200e8e54a55991",
+      "vertices": 5725,
+      "polygonFaces": 9350,
+      "splatRecords": 2869,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.629243498286087e-06,
+      "maxSplatFrameRoundingMeters": 7.628962350736401e-06,
+      "geodeticMin": [
+        -157.83784179152693,
+        21.283923325782535,
+        16.68003344722092
+      ],
+      "geodeticMax": [
+        -157.83748254568283,
+        21.28427267125511,
+        46.720003861002624
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 1.179955244064331
+    },
+    {
+      "tile": "s98_z20_x64552_y460816_h1.r3d",
+      "sourceSHA256": "1caa337816c63e7e6417cffe668856af95e48a8f9ae0005a3e79d56abdaa1832",
+      "vertices": 5253,
+      "polygonFaces": 8252,
+      "splatRecords": 1565,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.628893484934451e-06,
+      "maxSplatFrameRoundingMeters": 7.628078861898757e-06,
+      "geodeticMin": [
+        -157.8376999431025,
+        21.283920074610627,
+        44.200009264051914
+      ],
+      "geodeticMax": [
+        -157.83748562948543,
+        21.28413864088965,
+        76.36001157108694
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.1763313114643097
+    },
+    {
+      "tile": "s98_z20_x64552_y460816_h2.r3d",
+      "sourceSHA256": "fd10cb407c383b3ca2ff95bdf93cbc5ed7bbb01c6174f375852f76fdd5f9cfc0",
+      "vertices": 5092,
+      "polygonFaces": 7839,
+      "splatRecords": 1443,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.629360197825008e-06,
+      "maxSplatFrameRoundingMeters": 7.6286514740786515e-06,
+      "geodeticMin": [
+        -157.83769724473086,
+        21.283921159356126,
+        73.2800102615729
+      ],
+      "geodeticMax": [
+        -157.83748563025705,
+        21.284135750437834,
+        103.92000506725162
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.190498948097229
+    },
+    {
+      "tile": "s98_z20_x64552_y460816_h3.r3d",
+      "sourceSHA256": "b0924f398d8e38ae2888fe583babb9bcdc86618c33f7b44739228cd99d02ed9f",
+      "vertices": 5281,
+      "polygonFaces": 8612,
+      "splatRecords": 3037,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.6282917120806815e-06,
+      "maxSplatFrameRoundingMeters": 7.629341183701399e-06,
+      "geodeticMin": [
+        -157.83771651700795,
+        21.28392152143326,
+        101.47999992314726
+      ],
+      "geodeticMax": [
+        -157.83746905730766,
+        21.284183798141825,
+        130.52003755234182
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.40798985958099365
+    },
+    {
+      "tile": "s98_z20_x64552_y460817_h0.r3d",
+      "sourceSHA256": "9f0dcd8fdeef4d515b758ff7e5b222f4ca459dd4c5561ab96ebec9e62b5a6344",
+      "vertices": 7685,
+      "polygonFaces": 12432,
+      "splatRecords": 2415,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8144557379382604e-06,
+      "maxSplatFrameRoundingMeters": 3.8143227953923997e-06,
+      "geodeticMin": [
+        -157.8378437186463,
+        21.2836023361465,
+        19.520046718418598
+      ],
+      "geodeticMax": [
+        -157.83747599346083,
+        21.283950597460855,
+        48.36001600790769
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.27689558267593384
+    },
+    {
+      "tile": "s98_z20_x64552_y460817_h1.r3d",
+      "sourceSHA256": "ba12b7cd94f6a84cfbbc860fd5fbe2afe685b9abc8bd880945065243f78e0b0d",
+      "vertices": 2771,
+      "polygonFaces": 4197,
+      "splatRecords": 651,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.81458674780788e-06,
+      "maxSplatFrameRoundingMeters": 3.814269746271748e-06,
+      "geodeticMin": [
+        -157.83768067032406,
+        21.28389315598021,
+        46.76001841761172
+      ],
+      "geodeticMax": [
+        -157.83748370279488,
+        21.283951319779387,
+        76.32002015411854
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.14473259449005127
+    },
+    {
+      "tile": "s98_z20_x64552_y460817_h2.r3d",
+      "sourceSHA256": "cb528455e9f153861557b7b83503e36060fe1db13969058643830f49b1f6402a",
+      "vertices": 2239,
+      "polygonFaces": 3316,
+      "splatRecords": 521,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.814408316316076e-06,
+      "maxSplatFrameRoundingMeters": 3.814006873881226e-06,
+      "geodeticMin": [
+        -157.8376772010721,
+        21.28389929675185,
+        73.68001869879663
+      ],
+      "geodeticMax": [
+        -157.83748794338888,
+        21.283951319217458,
+        97.68001379445195
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.12645933032035828
+    },
+    {
+      "tile": "s98_z20_x64552_y460817_h3.r3d",
+      "sourceSHA256": "2ba1f258bde91b0317bd488e1c9bf3112f50b1428b1542ab3488dbc74bf419e3",
+      "vertices": 2957,
+      "polygonFaces": 4749,
+      "splatRecords": 1030,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8144356722114026e-06,
+      "maxSplatFrameRoundingMeters": 7.57731797307315e-06,
+      "geodeticMin": [
+        -157.83768645179475,
+        21.283876175410136,
+        95.08000821620226
+      ],
+      "geodeticMax": [
+        -157.83746982825377,
+        21.283950956797963,
+        128.52002928499132
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.16534504294395447
+    },
+    {
+      "tile": "s98_z20_x64552_y460818_h0.r3d",
+      "sourceSHA256": "193833857344169fe8dc6dbc2ad0ebf71bf49ce93813b07386592f01f1194ab0",
+      "vertices": 6505,
+      "polygonFaces": 11124,
+      "splatRecords": 2133,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.814196688267657e-06,
+      "maxSplatFrameRoundingMeters": 3.8145921195109622e-06,
+      "geodeticMin": [
+        -157.83783716511698,
+        21.283282790988387,
+        16.72005106881261
+      ],
+      "geodeticMax": [
+        -157.83747136847563,
+        21.28363358145741,
+        44.52000720053911
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.4316447973251343
+    },
+    {
+      "tile": "s98_z20_x64552_y460819_h0.r3d",
+      "sourceSHA256": "f3f5c4ea6d06ed3afee1c2bee30aeb6daf8f7f7149e9d1d03a7e4be5da3c50aa",
+      "vertices": 5866,
+      "polygonFaces": 9683,
+      "splatRecords": 2922,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.81461019571816e-06,
+      "maxSplatFrameRoundingMeters": 3.814482496977689e-06,
+      "geodeticMin": [
+        -157.83784140470075,
+        21.282961438438672,
+        16.480025853030384
+      ],
+      "geodeticMax": [
+        -157.8374767649226,
+        21.28331042289553,
+        40.48000522330403
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.4908828139305115
+    },
+    {
+      "tile": "s98_z20_x64552_y460820_h0.r3d",
+      "sourceSHA256": "bf2493cc9688b3e9be1a3dc716d84ecae70aaf3d6098f5688a4645c1c7731fce",
+      "vertices": 3002,
+      "polygonFaces": 4990,
+      "splatRecords": 5500,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8119357412824684e-06,
+      "maxSplatFrameRoundingMeters": 3.814440134419783e-06,
+      "geodeticMin": [
+        -157.83784217543595,
+        21.28263936291459,
+        16.52003281749785
+      ],
+      "geodeticMax": [
+        -157.8374686706324,
+        21.282990515404933,
+        36.76001643575728
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 6.344945907592773
+    },
+    {
+      "tile": "s98_z20_x64552_y460821_h0.r3d",
+      "sourceSHA256": "bcf89d605cbb73883a82222bbbf6bc1937f616cc2d58b54beeda181b2d93a33a",
+      "vertices": 4597,
+      "polygonFaces": 7697,
+      "splatRecords": 5328,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.811097769812477e-06,
+      "maxSplatFrameRoundingMeters": 3.814655642031539e-06,
+      "geodeticMin": [
+        -157.83784140365037,
+        21.282319816006968,
+        17.400028757750988
+      ],
+      "geodeticMax": [
+        -157.8374725255783,
+        21.282669523053478,
+        48.56001521740109
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 10.88565444946289
+    },
+    {
+      "tile": "s98_z20_x64552_y460822_h0.r3d",
+      "sourceSHA256": "67d8c4eb379acaeee595965aa1f7a7b8a53e7e38bd2046426af808636b64096c",
+      "vertices": 2797,
+      "polygonFaces": 4712,
+      "splatRecords": 7466,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8137823565875806e-06,
+      "maxSplatFrameRoundingMeters": 3.8144730467593035e-06,
+      "geodeticMin": [
+        -157.8378437165545,
+        21.282012550737395,
+        16.28002498112619
+      ],
+      "geodeticMax": [
+        -157.83747522410656,
+        21.282349974800525,
+        47.640020423568785
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 14.998014450073242
+    },
+    {
+      "tile": "s98_z20_x64552_y460823_h0.r3d",
+      "sourceSHA256": "7259b3f4b4f1c2c3da1d9dbc001934fdc0b4af3b80f369fa70fe9ca9c4acf051",
+      "vertices": 3549,
+      "polygonFaces": 5972,
+      "splatRecords": 6934,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.814173382465924e-06,
+      "maxSplatFrameRoundingMeters": 3.814600617602082e-06,
+      "geodeticMin": [
+        -157.8378433307428,
+        21.281682886593284,
+        16.080025671981275
+      ],
+      "geodeticMax": [
+        -157.83747252598167,
+        21.28201994971983,
+        40.96001082286239
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 5.580715179443359
+    },
+    {
+      "tile": "s98_z20_x64552_y460824_h0.r3d",
+      "sourceSHA256": "b6c38ef39a7f372017d3a3b189e4763281673c690f3dcdf9fdb64f5056804b50",
+      "vertices": 2527,
+      "polygonFaces": 4159,
+      "splatRecords": 8856,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.628123995573333e-06,
+      "maxSplatFrameRoundingMeters": 7.629041817835969e-06,
+      "geodeticMin": [
+        -157.8378302253909,
+        21.28136586636078,
+        16.6000242754817
+      ],
+      "geodeticMax": [
+        -157.83747214114206,
+        21.28170834809098,
+        37.08001744002104
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 9.731715202331543
+    },
+    {
+      "tile": "s98_z20_x64553_y460816_h0.r3d",
+      "sourceSHA256": "b6872a378b05661da7a0e32e9db6880426876ad8543fb0d86f9e8472b728254d",
+      "vertices": 4893,
+      "polygonFaces": 7586,
+      "splatRecords": 668,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.6284192971343145e-06,
+      "maxSplatFrameRoundingMeters": 7.627156719536288e-06,
+      "geodeticMin": [
+        -157.83749615578216,
+        21.28393307992647,
+        17.320049130357802
+      ],
+      "geodeticMax": [
+        -157.83714230595933,
+        21.28427014233501,
+        42.08002498187125
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.27823886275291443
+    },
+    {
+      "tile": "s98_z20_x64553_y460816_h1.r3d",
+      "sourceSHA256": "019bb8189c0d021de9e18e85be22c3f6727b17692d01cf5d183be41dc990a139",
+      "vertices": 12949,
+      "polygonFaces": 19879,
+      "splatRecords": 2513,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.626551223438582e-06,
+      "maxSplatFrameRoundingMeters": 7.626156445894594e-06,
+      "geodeticMin": [
+        -157.83749230113347,
+        21.283929106174515,
+        39.32002964429557
+      ],
+      "geodeticMax": [
+        -157.83712727468924,
+        21.284260026354755,
+        75.76001886930317
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.21543243527412415
+    },
+    {
+      "tile": "s98_z20_x64553_y460816_h2.r3d",
+      "sourceSHA256": "e0aee390a4acba53f4eb0ad2acd56495d05dbb288faec3c17860ce07ab10866b",
+      "vertices": 12199,
+      "polygonFaces": 18506,
+      "splatRecords": 2082,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.6283887153749674e-06,
+      "maxSplatFrameRoundingMeters": 7.627826846601238e-06,
+      "geodeticMin": [
+        -157.83748998670595,
+        21.28392910768698,
+        74.08002578746527
+      ],
+      "geodeticMax": [
+        -157.83712611921382,
+        21.28426074810545,
+        105.28001396078616
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.1806955635547638
+    },
+    {
+      "tile": "s98_z20_x64553_y460816_h3.r3d",
+      "sourceSHA256": "4b988383acd86cf83bac7d68990e022750c5066a0b4ca3f6055fea39832d6e93",
+      "vertices": 11092,
+      "polygonFaces": 18139,
+      "splatRecords": 4494,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.629142089626839e-06,
+      "maxSplatFrameRoundingMeters": 7.629260238672941e-06,
+      "geodeticMin": [
+        -157.83750309118034,
+        21.283925495711564,
+        104.16002340987325
+      ],
+      "geodeticMax": [
+        -157.83712843229785,
+        21.28427266865867,
+        131.16002615261823
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.25819331407546997
+    },
+    {
+      "tile": "s98_z20_x64553_y460817_h0.r3d",
+      "sourceSHA256": "4215fa696d2e343af9e86bad430589375310f2324301e2a35786dee2aac5529c",
+      "vertices": 3106,
+      "polygonFaces": 5016,
+      "splatRecords": 689,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.813687868614579e-06,
+      "maxSplatFrameRoundingMeters": 3.81461893539381e-06,
+      "geodeticMin": [
+        -157.8374973118815,
+        21.28361570308292,
+        29.16003143414855
+      ],
+      "geodeticMax": [
+        -157.8371423067299,
+        21.283941565287655,
+        75.96004219260067
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.3053172826766968
+    },
+    {
+      "tile": "s98_z20_x64553_y460817_h2.r3d",
+      "sourceSHA256": "8b1f9964a70a500bad3668090acbdcdb683775883b159e8e7b15e9e5f764470f",
+      "vertices": 352,
+      "polygonFaces": 347,
+      "splatRecords": 67,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.7736351572448257e-06,
+      "maxSplatFrameRoundingMeters": 3.8134090658559217e-06,
+      "geodeticMin": [
+        -157.83746917251358,
+        21.28392892023548,
+        74.44003747589886
+      ],
+      "geodeticMax": [
+        -157.83742985611875,
+        21.283941926090478,
+        100.00004037376493
+      ],
+      "surfaceDistanceSampleCount": 66,
+      "surfaceDistanceMedianMeters": 0.32353946566581726
+    },
+    {
+      "tile": "s98_z20_x64553_y460817_h3.r3d",
+      "sourceSHA256": "0f589e73152c5c70cca37b02273b4c7e0e1a9ee4b75ac23b43566853f7c4ec20",
+      "vertices": 660,
+      "polygonFaces": 769,
+      "splatRecords": 249,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8143041081184492e-06,
+      "maxSplatFrameRoundingMeters": 3.8125165531255334e-06,
+      "geodeticMin": [
+        -157.83750154935618,
+        21.283915552967077,
+        100.80003512557596
+      ],
+      "geodeticMax": [
+        -157.8373334927416,
+        21.283950234153348,
+        125.12002062238753
+      ],
+      "surfaceDistanceSampleCount": 247,
+      "surfaceDistanceMedianMeters": 0.19859163463115692
+    },
+    {
+      "tile": "s98_z20_x64553_y460818_h0.r3d",
+      "sourceSHA256": "a6f2801ca23215932f85ee0e4897b5b150e2e8c713e048931d8c75b2d2219e22",
+      "vertices": 2828,
+      "polygonFaces": 4572,
+      "splatRecords": 538,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.808146360029241e-06,
+      "maxSplatFrameRoundingMeters": 3.8119285079574183e-06,
+      "geodeticMin": [
+        -157.83750309293583,
+        21.283290016174636,
+        30.560043272562325
+      ],
+      "geodeticMax": [
+        -157.83712573288275,
+        21.283616601817382,
+        42.759998825378716
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.22921594977378845
+    },
+    {
+      "tile": "s98_z20_x64553_y460819_h0.r3d",
+      "sourceSHA256": "dafa96172ea52c6ccaeaaa8e0dee7bef849babd2291d39fb1d241a29568b4129",
+      "vertices": 6496,
+      "polygonFaces": 10718,
+      "splatRecords": 3801,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 1.9067139049866455e-06,
+      "maxSplatFrameRoundingMeters": 1.9072383281582006e-06,
+      "geodeticMin": [
+        -157.83749654013036,
+        21.28296468972959,
+        16.560033480636775
+      ],
+      "geodeticMax": [
+        -157.8371268892801,
+        21.283302113765846,
+        39.16002424620092
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 1.2561876773834229
+    },
+    {
+      "tile": "s98_z20_x64553_y460820_h0.r3d",
+      "sourceSHA256": "1ebcb311200cf1adbed56a32848cdd8e9f1dcc72a8dd387abb2ae45762d6f09f",
+      "vertices": 3882,
+      "polygonFaces": 6330,
+      "splatRecords": 7188,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 1.907278054602557e-06,
+      "maxSplatFrameRoundingMeters": 1.90716712467065e-06,
+      "geodeticMin": [
+        -157.8375046344257,
+        21.282644059532245,
+        16.56003096792847
+      ],
+      "geodeticMax": [
+        -157.83713035885765,
+        21.28298798649074,
+        38.360029897652566
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 8.109825134277344
+    },
+    {
+      "tile": "s98_z20_x64553_y460821_h0.r3d",
+      "sourceSHA256": "f80d1499e5c9a09e05220bda5763d4d4e32e033f935f888c6f12cb84ae21000d",
+      "vertices": 4110,
+      "polygonFaces": 6758,
+      "splatRecords": 3006,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 1.9072892456506452e-06,
+      "maxSplatFrameRoundingMeters": 1.9069604135779628e-06,
+      "geodeticMin": [
+        -157.83750386310427,
+        21.282319815649508,
+        17.72004576213658
+      ],
+      "geodeticMax": [
+        -157.8371288171442,
+        21.282670245647488,
+        32.080016585066915
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 1.917344570159912
+    },
+    {
+      "tile": "s98_z20_x64553_y460822_h0.r3d",
+      "sourceSHA256": "349b70872b998e24d0355f351bd33b8e75fa7d6d1706553f5292fe051c078452",
+      "vertices": 3377,
+      "polygonFaces": 5626,
+      "splatRecords": 4923,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.810673447901536e-06,
+      "maxSplatFrameRoundingMeters": 3.8142540574881423e-06,
+      "geodeticMin": [
+        -157.8374980808842,
+        21.28200388030185,
+        16.440025884658098
+      ],
+      "geodeticMax": [
+        -157.83712997406593,
+        21.2823470849156,
+        38.72003499418497
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 3.521634578704834
+    },
+    {
+      "tile": "s98_z20_x64553_y460823_h0.r3d",
+      "sourceSHA256": "2382d1e747f494bb4700e729d69d635dd760c6ddcbf53d08c500a0410abd8787",
+      "vertices": 7979,
+      "polygonFaces": 13450,
+      "splatRecords": 3464,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8144862202216245e-06,
+      "maxSplatFrameRoundingMeters": 3.814296988480237e-06,
+      "geodeticMin": [
+        -157.83750000772497,
+        21.281683609462874,
+        16.440023697912693
+      ],
+      "geodeticMax": [
+        -157.8371295887329,
+        21.28202970398108,
+        44.24000333342701
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 1.1292787790298462
+    },
+    {
+      "tile": "s98_z20_x64553_y460823_h1.r3d",
+      "sourceSHA256": "5c885adfddee6dbbe07c69acfedee3db898d3e0a1f78bac3d60a75d70a6400de",
+      "vertices": 6736,
+      "polygonFaces": 11386,
+      "splatRecords": 1420,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8146448417819556e-06,
+      "maxSplatFrameRoundingMeters": 3.8139608449228035e-06,
+      "geodeticMin": [
+        -157.83740826985553,
+        21.281683971082266,
+        42.08001453150064
+      ],
+      "geodeticMax": [
+        -157.83712766222365,
+        21.282010916934993,
+        70.72001949325204
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.13572195172309875
+    },
+    {
+      "tile": "s98_z20_x64553_y460824_h0.r3d",
+      "sourceSHA256": "fe6bac1061f0e2303d12e40a00e830fa66f5bf44c2a9c45fe9ff2a89dc9effe7",
+      "vertices": 5501,
+      "polygonFaces": 9029,
+      "splatRecords": 4996,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.628061126752073e-06,
+      "maxSplatFrameRoundingMeters": 7.629031131273223e-06,
+      "geodeticMin": [
+        -157.83750116387006,
+        21.281363337461137,
+        16.08003079239279
+      ],
+      "geodeticMax": [
+        -157.83713228762747,
+        21.281705458086442,
+        36.68003546167165
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 1.4601893424987793
+    },
+    {
+      "tile": "s98_z20_x64553_y460824_h1.r3d",
+      "sourceSHA256": "ca35ae90ec11f486670e30182e38b518bd0ba11716dcdd3be0356ef3ef07a321",
+      "vertices": 1952,
+      "polygonFaces": 3013,
+      "splatRecords": 316,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.6098395709323086e-06,
+      "maxSplatFrameRoundingMeters": 7.593383941184584e-06,
+      "geodeticMin": [
+        -157.83719126191852,
+        21.281619837016326,
+        34.44003195967525
+      ],
+      "geodeticMax": [
+        -157.83713267395225,
+        21.281706541136955,
+        66.0800347533077
+      ],
+      "surfaceDistanceSampleCount": 311,
+      "surfaceDistanceMedianMeters": 0.11077559739351273
+    },
+    {
+      "tile": "s98_z20_x64554_y460816_h0.r3d",
+      "sourceSHA256": "84c144bd0fc45218b25b9e37966f07d5acc35bd3ff619650f5f6715a87ce8ddf",
+      "vertices": 5772,
+      "polygonFaces": 9127,
+      "splatRecords": 564,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.626679916938883e-06,
+      "maxSplatFrameRoundingMeters": 7.617723241537533e-06,
+      "geodeticMin": [
+        -157.83715321821782,
+        21.283935608764683,
+        16.240035742521286
+      ],
+      "geodeticMax": [
+        -157.83678703403282,
+        21.284261110852672,
+        44.760036864317954
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.20669960975646973
+    },
+    {
+      "tile": "s98_z20_x64554_y460816_h1.r3d",
+      "sourceSHA256": "697619fdccfe176f29e5e74dcef70b5de520c08cebf9a56c19ab42a03d97a048",
+      "vertices": 3460,
+      "polygonFaces": 5363,
+      "splatRecords": 791,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.6265985740064934e-06,
+      "maxSplatFrameRoundingMeters": 7.624848734621992e-06,
+      "geodeticMin": [
+        -157.83715861427928,
+        21.284019422947836,
+        44.72003330197185
+      ],
+      "geodeticMax": [
+        -157.83707998154875,
+        21.28422534476217,
+        76.40001627709717
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.10618200898170471
+    },
+    {
+      "tile": "s98_z20_x64554_y460816_h2.r3d",
+      "sourceSHA256": "c9ee8dc166fd8cb0e92ed5f348b5c0dc52323b2423be3485d3b80ad967ff8fca",
+      "vertices": 3530,
+      "polygonFaces": 5419,
+      "splatRecords": 845,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.629066146819241e-06,
+      "maxSplatFrameRoundingMeters": 7.626215847267304e-06,
+      "geodeticMin": [
+        -157.8371609260166,
+        21.284020507447163,
+        73.7600206034258
+      ],
+      "geodeticMax": [
+        -157.8370757407818,
+        21.28423293028186,
+        105.36001822538674
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.12618213891983032
+    },
+    {
+      "tile": "s98_z20_x64554_y460816_h3.r3d",
+      "sourceSHA256": "ba3e39896fd0f8a61c86f9685e8ce6d77d039e095700abe5a1f51fba002bf8cb",
+      "vertices": 2442,
+      "polygonFaces": 4000,
+      "splatRecords": 991,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.629066146819241e-06,
+      "maxSplatFrameRoundingMeters": 7.62925731123687e-06,
+      "geodeticMin": [
+        -157.8371597690411,
+        21.284015811169123,
+        103.88001566659659
+      ],
+      "geodeticMax": [
+        -157.83706379119369,
+        21.284241600138724,
+        128.80003507900983
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.17212718725204468
+    },
+    {
+      "tile": "s98_z20_x64554_y460817_h0.r3d",
+      "sourceSHA256": "b4e3fb448bb245889ab77fff2fd82554b079c066e71492562f152a744e31b103",
+      "vertices": 1328,
+      "polygonFaces": 2250,
+      "splatRecords": 142,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8101658930145277e-06,
+      "maxSplatFrameRoundingMeters": 3.8113069251721754e-06,
+      "geodeticMin": [
+        -157.83714358188712,
+        21.283615703072226,
+        37.64005007687956
+      ],
+      "geodeticMax": [
+        -157.836798984035,
+        21.283939759591696,
+        43.32001861464232
+      ],
+      "surfaceDistanceSampleCount": 142,
+      "surfaceDistanceMedianMeters": 0.10044889897108078
+    },
+    {
+      "tile": "s98_z20_x64554_y460818_h0.r3d",
+      "sourceSHA256": "bcb86f7a99630769f11c463e9ca5e09edcfdc36fe7d22cf02d45a7080b9a2739",
+      "vertices": 4239,
+      "polygonFaces": 7045,
+      "splatRecords": 1311,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.810729168662874e-06,
+      "maxSplatFrameRoundingMeters": 3.8145082896789972e-06,
+      "geodeticMin": [
+        -157.83715630113127,
+        21.28328351312931,
+        18.72003857884556
+      ],
+      "geodeticMax": [
+        -157.83678819183314,
+        21.28361660182281,
+        42.680001427419484
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.30729740858078003
+    },
+    {
+      "tile": "s98_z20_x64554_y460819_h0.r3d",
+      "sourceSHA256": "bb9c615fa0bf3da71c5af6c73c4d70ffc06e45f3f10f1e50bcdd0f894c6645af",
+      "vertices": 4885,
+      "polygonFaces": 8013,
+      "splatRecords": 11305,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 1.9066785696963962e-06,
+      "maxSplatFrameRoundingMeters": 1.9072599570790771e-06,
+      "geodeticMin": [
+        -157.83715668680952,
+        21.282963967382607,
+        17.48002890497446
+      ],
+      "geodeticMax": [
+        -157.83678395173575,
+        21.283306448950526,
+        38.080002238973975
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 7.089073657989502
+    },
+    {
+      "tile": "s98_z20_x64554_y460820_h0.r3d",
+      "sourceSHA256": "bcdeb9361be467e317df3e10cd2c422eee3e9a4f36013cd5c4f3b48fc16d756b",
+      "vertices": 4583,
+      "polygonFaces": 7486,
+      "splatRecords": 7847,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 9.536272145282965e-07,
+      "maxSplatFrameRoundingMeters": 1.9071879435728079e-06,
+      "geodeticMin": [
+        -157.83715552977458,
+        21.282643336841502,
+        16.960022639483213
+      ],
+      "geodeticMax": [
+        -157.83678510841912,
+        21.282993044085497,
+        41.24002209305763
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 7.938405990600586
+    },
+    {
+      "tile": "s98_z20_x64554_y460821_h0.r3d",
+      "sourceSHA256": "e0430f0583e461014d87e21b953ed57efa0f656ffee79f474654d433ed07b1e5",
+      "vertices": 3734,
+      "polygonFaces": 6080,
+      "splatRecords": 8158,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 1.9054120627970406e-06,
+      "maxSplatFrameRoundingMeters": 1.9073071726438684e-06,
+      "geodeticMin": [
+        -157.8371536024144,
+        21.28232270579026,
+        17.0000261310488
+      ],
+      "geodeticMax": [
+        -157.83678163992596,
+        21.28266916145946,
+        41.12000908795744
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 9.226081848144531
+    },
+    {
+      "tile": "s98_z20_x64554_y460822_h0.r3d",
+      "sourceSHA256": "039e25b930e4d41bed7ea23b09f299b6811efb498814571397bbfdeada810ad0",
+      "vertices": 4216,
+      "polygonFaces": 6738,
+      "splatRecords": 4190,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8119907657119256e-06,
+      "maxSplatFrameRoundingMeters": 3.814370728605354e-06,
+      "geodeticMin": [
+        -157.83715206005903,
+        21.28200604796357,
+        16.560048203915358
+      ],
+      "geodeticMax": [
+        -157.83678472400362,
+        21.28235033642753,
+        38.520034397020936
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 3.347931385040283
+    },
+    {
+      "tile": "s98_z20_x64554_y460822_h1.r3d",
+      "sourceSHA256": "8f3aa445f6dc053504c8e2ef9767ad39bb01535edbeb2ce4a3b49b47a5fc1fac",
+      "vertices": 1170,
+      "polygonFaces": 1677,
+      "splatRecords": 416,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8134899682518153e-06,
+      "maxSplatFrameRoundingMeters": 3.813529204421684e-06,
+      "geodeticMin": [
+        -157.83713124450043,
+        21.282002075248634,
+        37.36003477871418
+      ],
+      "geodeticMax": [
+        -157.8370464457867,
+        21.282193184767596,
+        66.12004314921796
+      ],
+      "surfaceDistanceSampleCount": 413,
+      "surfaceDistanceMedianMeters": 0.540077269077301
+    },
+    {
+      "tile": "s98_z20_x64554_y460823_h0.r3d",
+      "sourceSHA256": "e33b14a2730a76b01ddf16332023a8abe52d48111da4cf25777a210fecb61f8e",
+      "vertices": 6065,
+      "polygonFaces": 9791,
+      "splatRecords": 987,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8145614666973415e-06,
+      "maxSplatFrameRoundingMeters": 3.812269184777506e-06,
+      "geodeticMin": [
+        -157.83715552868256,
+        21.281696253311072,
+        16.56004615779966
+      ],
+      "geodeticMax": [
+        -157.83678780832602,
+        21.282027174533688,
+        43.88003799598664
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 1.6195688247680664
+    },
+    {
+      "tile": "s98_z20_x64554_y460823_h1.r3d",
+      "sourceSHA256": "64fca039a2b1ea9e26275b3f7a9ec9033785bbbf412d6645fd4a2424492bd457",
+      "vertices": 6077,
+      "polygonFaces": 9856,
+      "splatRecords": 900,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.81413192940272e-06,
+      "maxSplatFrameRoundingMeters": 3.8123241949961084e-06,
+      "geodeticMin": [
+        -157.8371559134934,
+        21.281689390546276,
+        41.64000532776117
+      ],
+      "geodeticMax": [
+        -157.8367835691036,
+        21.282032592960835,
+        70.00001818686724
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.13140670955181122
+    },
+    {
+      "tile": "s98_z20_x64554_y460824_h0.r3d",
+      "sourceSHA256": "54f6eb34c2836cd5c75ca02169998162d0cc44303d7fbf7958222823aa8559fd",
+      "vertices": 7331,
+      "polygonFaces": 12236,
+      "splatRecords": 4242,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.6278867879864265e-06,
+      "maxSplatFrameRoundingMeters": 7.629241110862495e-06,
+      "geodeticMin": [
+        -157.8371520594871,
+        21.281361530934415,
+        16.080034187063575
+      ],
+      "geodeticMax": [
+        -157.83678511035296,
+        21.281701122442268,
+        41.80000651720911
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 5.187467575073242
+    },
+    {
+      "tile": "s98_z20_x64554_y460824_h1.r3d",
+      "sourceSHA256": "eb7e6a7b635ec89a6a72d9fe0e7bffe803fa7a2903a6c1c4666fc416d597f6b2",
+      "vertices": 6405,
+      "polygonFaces": 10776,
+      "splatRecords": 1584,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.622406343443799e-06,
+      "maxSplatFrameRoundingMeters": 7.629375488704682e-06,
+      "geodeticMin": [
+        -157.8371539858064,
+        21.281371285580914,
+        38.440004302188754
+      ],
+      "geodeticMax": [
+        -157.83678819442085,
+        21.281705095731574,
+        66.60000680759549
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.1465061604976654
+    },
+    {
+      "tile": "s98_z20_x64555_y460816_h0.r3d",
+      "sourceSHA256": "b380eeecadb1d08aaa2ceaabd7b680cd5385848dc7e93007880f866229508c7a",
+      "vertices": 4709,
+      "polygonFaces": 7686,
+      "splatRecords": 2721,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.627078474570226e-06,
+      "maxSplatFrameRoundingMeters": 7.628661677472337e-06,
+      "geodeticMin": [
+        -157.8368106672543,
+        21.283926938573618,
+        16.240038933232427
+      ],
+      "geodeticMax": [
+        -157.83644332631638,
+        21.28426400115699,
+        51.560031338594854
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.846778154373169
+    },
+    {
+      "tile": "s98_z20_x64555_y460817_h0.r3d",
+      "sourceSHA256": "2e8f97831fd3736d18038bbace1b0d5ce6a2e7abc8170e84ef6f77d80fb1dfa1",
+      "vertices": 1479,
+      "polygonFaces": 2239,
+      "splatRecords": 393,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.795758274804939e-06,
+      "maxSplatFrameRoundingMeters": 3.806335300282626e-06,
+      "geodeticMin": [
+        -157.83680025906352,
+        21.28361136789347,
+        36.760022301226854
+      ],
+      "geodeticMax": [
+        -157.83644255606004,
+        21.283948429911938,
+        48.720025905407965
+      ],
+      "surfaceDistanceSampleCount": 390,
+      "surfaceDistanceMedianMeters": 0.9837329387664795
+    },
+    {
+      "tile": "s98_z20_x64555_y460818_h0.r3d",
+      "sourceSHA256": "e38107f750c00af6b7111d112955654b37eb989c7e660eb3ffacdde7de5f6324",
+      "vertices": 4488,
+      "polygonFaces": 7449,
+      "splatRecords": 1340,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8143576404081614e-06,
+      "maxSplatFrameRoundingMeters": 3.8142697746934573e-06,
+      "geodeticMin": [
+        -157.8368137494821,
+        21.283289293522152,
+        16.480038987472653
+      ],
+      "geodeticMax": [
+        -157.836445639623,
+        21.28362093690711,
+        41.200043339282274
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.25709813833236694
+    },
+    {
+      "tile": "s98_z20_x64555_y460819_h0.r3d",
+      "sourceSHA256": "8950750873fdd9872be7905a908db298be489e4ac6968c06d96f4be03860f74d",
+      "vertices": 5123,
+      "polygonFaces": 8358,
+      "splatRecords": 6065,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 1.9064080873931744e-06,
+      "maxSplatFrameRoundingMeters": 1.9072351449267444e-06,
+      "geodeticMin": [
+        -157.83681259305288,
+        21.282963967323518,
+        16.800028699450195
+      ],
+      "geodeticMax": [
+        -157.8364402443776,
+        21.28331114586174,
+        49.64002465736121
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 7.5462541580200195
+    },
+    {
+      "tile": "s98_z20_x64555_y460819_h1.r3d",
+      "sourceSHA256": "da6cdc8903510317e729df3e1253fd37476206c16e14a3142b15afbeda32cc07",
+      "vertices": 1173,
+      "polygonFaces": 1652,
+      "splatRecords": 94,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8049587089972192e-06,
+      "maxSplatFrameRoundingMeters": 3.8136914923825316e-06,
+      "geodeticMin": [
+        -157.83650769906674,
+        21.282974445147683,
+        46.800023624673486
+      ],
+      "geodeticMax": [
+        -157.8364429432817,
+        21.283038027930758,
+        77.40002578124404
+      ],
+      "surfaceDistanceSampleCount": 92,
+      "surfaceDistanceMedianMeters": 0.10346972197294235
+    },
+    {
+      "tile": "s98_z20_x64555_y460819_h2.r3d",
+      "sourceSHA256": "f15cb62ebaa37b1516bdc987d5d320407ecef92bea8bdeab7c692c712069d9c5",
+      "vertices": 1201,
+      "polygonFaces": 1685,
+      "splatRecords": 120,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8111521831751816e-06,
+      "maxSplatFrameRoundingMeters": 3.7551200477992097e-06,
+      "geodeticMin": [
+        -157.83650808477296,
+        21.282974806785457,
+        74.72002638317645
+      ],
+      "geodeticMax": [
+        -157.83644178748608,
+        21.283040195828125,
+        101.720025671646
+      ],
+      "surfaceDistanceSampleCount": 117,
+      "surfaceDistanceMedianMeters": 0.10029014945030212
+    },
+    {
+      "tile": "s98_z20_x64555_y460819_h3.r3d",
+      "sourceSHA256": "1e82990fb42d8ffcf426da81af17633af7ef0a880fd07938a78bc909a8151719",
+      "vertices": 1489,
+      "polygonFaces": 2116,
+      "splatRecords": 269,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.812495165789187e-06,
+      "maxSplatFrameRoundingMeters": 3.814607254071234e-06,
+      "geodeticMin": [
+        -157.83651271101792,
+        21.282973724155838,
+        99.28004301153123
+      ],
+      "geodeticMax": [
+        -157.8364444861366,
+        21.283053201775083,
+        127.36002603266388
+      ],
+      "surfaceDistanceSampleCount": 267,
+      "surfaceDistanceMedianMeters": 0.1127673089504242
+    },
+    {
+      "tile": "s98_z20_x64555_y460820_h0.r3d",
+      "sourceSHA256": "5f23ecaecdb596ea804285311ddce6f1ef3fb04ce6a9bf579a68048bbc9f1a39",
+      "vertices": 10881,
+      "polygonFaces": 18586,
+      "splatRecords": 3447,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 1.9073096737542983e-06,
+      "maxSplatFrameRoundingMeters": 1.9070937469223281e-06,
+      "geodeticMin": [
+        -157.8368145201609,
+        21.28264442087851,
+        16.96002626605332
+      ],
+      "geodeticMax": [
+        -157.83645566201906,
+        21.28299087643331,
+        54.440008853562176
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 2.3290977478027344
+    },
+    {
+      "tile": "s98_z20_x64555_y460820_h1.r3d",
+      "sourceSHA256": "b07c5eb82e622ce473e71c79b44fe62959cd5f9e68676c7caf5d03243be2e821",
+      "vertices": 9720,
+      "polygonFaces": 17197,
+      "splatRecords": 1633,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8143170684179495e-06,
+      "maxSplatFrameRoundingMeters": 3.813404063635062e-06,
+      "geodeticMin": [
+        -157.8367659515272,
+        21.28265453787081,
+        50.960019405931234
+      ],
+      "geodeticMax": [
+        -157.8364506528114,
+        21.282976786460853,
+        90.32001421786845
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.12035823613405228
+    },
+    {
+      "tile": "s98_z20_x64555_y460820_h2.r3d",
+      "sourceSHA256": "b0784439a131a79c3ce27348a79d6cfbb299be16d8ae2eca5b2b12840ea4c509",
+      "vertices": 13643,
+      "polygonFaces": 23370,
+      "splatRecords": 4342,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.622078697977486e-06,
+      "maxSplatFrameRoundingMeters": 7.625710168213118e-06,
+      "geodeticMin": [
+        -157.83678830649427,
+        21.28264875876399,
+        86.8000154318288
+      ],
+      "geodeticMax": [
+        -157.8364452577042,
+        21.282985093721024,
+        132.56000546272844
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.2018079161643982
+    },
+    {
+      "tile": "s98_z20_x64555_y460821_h0.r3d",
+      "sourceSHA256": "eceee95b8e50c5b2640610b0a70043d23d49dd4725e67f791462febebb06451c",
+      "vertices": 6416,
+      "polygonFaces": 10503,
+      "splatRecords": 6467,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 1.9071533614578584e-06,
+      "maxSplatFrameRoundingMeters": 1.9073012182957427e-06,
+      "geodeticMin": [
+        -157.83681336311713,
+        21.282325234623872,
+        16.92002299800515
+      ],
+      "geodeticMax": [
+        -157.83644371359543,
+        21.28266482629298,
+        55.48001836333424
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 5.199800491333008
+    },
+    {
+      "tile": "s98_z20_x64555_y460821_h1.r3d",
+      "sourceSHA256": "74eb21b32b587ba0a3781b1373cd78b130b3e06257724986b2f4cfce56072b88",
+      "vertices": 1416,
+      "polygonFaces": 2197,
+      "splatRecords": 191,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.787593470860884e-06,
+      "maxSplatFrameRoundingMeters": 3.810391660863388e-06,
+      "geodeticMin": [
+        -157.83669888318784,
+        21.28262436342684,
+        52.40001340582967
+      ],
+      "geodeticMax": [
+        -157.8365863314634,
+        21.28265687797961,
+        89.44001318514347
+      ],
+      "surfaceDistanceSampleCount": 190,
+      "surfaceDistanceMedianMeters": 0.10061322897672653
+    },
+    {
+      "tile": "s98_z20_x64555_y460821_h2.r3d",
+      "sourceSHA256": "97aa6a8e0dd132288bf1e26806a4f6e54e5e71f1f0c00e6af250fb8ae3a36c94",
+      "vertices": 1958,
+      "polygonFaces": 3025,
+      "splatRecords": 509,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 6.338220089219249e-06,
+      "maxSplatFrameRoundingMeters": 7.528878825269203e-06,
+      "geodeticMin": [
+        -157.83670119515273,
+        21.282599074270404,
+        87.08002149127424
+      ],
+      "geodeticMax": [
+        -157.83655703771439,
+        21.282667352767824,
+        129.92001367453486
+      ],
+      "surfaceDistanceSampleCount": 504,
+      "surfaceDistanceMedianMeters": 0.1359161138534546
+    },
+    {
+      "tile": "s98_z20_x64555_y460821_h3.r3d",
+      "sourceSHA256": "4aa049f90dc42e535975e4188ce23f814c02bae4a27da4d9407020442653bebb",
+      "vertices": 0,
+      "polygonFaces": 0,
+      "splatRecords": 536,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 0.0,
+      "maxSplatFrameRoundingMeters": 7.6272152114142955e-06,
+      "geodeticMin": [
+        -157.83662449108584,
+        21.282639535477802,
+        127.56002083141357
+      ],
+      "geodeticMax": [
+        -157.83660637507091,
+        21.282659766159853,
+        160.3600150384009
+      ],
+      "surfaceDistanceSampleCount": 0,
+      "surfaceDistanceMedianMeters": null
+    },
+    {
+      "tile": "s98_z20_x64555_y460822_h0.r3d",
+      "sourceSHA256": "3e0586b77e0b63efd981a604aeff09ae52095e001d1b9c439b53e66a00991196",
+      "vertices": 4257,
+      "polygonFaces": 6955,
+      "splatRecords": 3192,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8142090801329687e-06,
+      "maxSplatFrameRoundingMeters": 3.813510090822092e-06,
+      "geodeticMin": [
+        -157.836814904583,
+        21.282004964260203,
+        16.44002935104072
+      ],
+      "geodeticMax": [
+        -157.8364464118353,
+        21.282348530059657,
+        38.12002875749022
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 3.1079554557800293
+    },
+    {
+      "tile": "s98_z20_x64555_y460822_h1.r3d",
+      "sourceSHA256": "411f1b1a3da1148ab33e9fd6c71f5c1827334ddb4a8ad1b245eaa60a0960a6cd",
+      "vertices": 4091,
+      "polygonFaces": 6916,
+      "splatRecords": 1255,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8134914035481415e-06,
+      "maxSplatFrameRoundingMeters": 3.8135095081770487e-06,
+      "geodeticMin": [
+        -157.83674706471936,
+        21.282003881485497,
+        37.600006335414946
+      ],
+      "geodeticMax": [
+        -157.83644371513765,
+        21.28228024986617,
+        70.08002503681928
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.16948150098323822
+    },
+    {
+      "tile": "s98_z20_x64555_y460823_h0.r3d",
+      "sourceSHA256": "d1f41b1314429d6ca497a77b997cbddfe1876032e4f216a5b050a176a89a89f2",
+      "vertices": 9001,
+      "polygonFaces": 15193,
+      "splatRecords": 1684,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.81373199331847e-06,
+      "maxSplatFrameRoundingMeters": 3.812889701748645e-06,
+      "geodeticMin": [
+        -157.8368102784968,
+        21.281682525717283,
+        16.280026237480342
+      ],
+      "geodeticMax": [
+        -157.83644602731243,
+        21.282025729916505,
+        46.88000114634633
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.8322651386260986
+    },
+    {
+      "tile": "s98_z20_x64555_y460823_h1.r3d",
+      "sourceSHA256": "4864a2778ea5bef4d9d11126605b49e121de2a2ba84183c7fde45c1680c6e265",
+      "vertices": 6486,
+      "polygonFaces": 10827,
+      "splatRecords": 2182,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8146780809711345e-06,
+      "maxSplatFrameRoundingMeters": 3.8143758587239063e-06,
+      "geodeticMin": [
+        -157.83681605935016,
+        21.281686861391435,
+        44.879997877404094
+      ],
+      "geodeticMax": [
+        -157.83644834016576,
+        21.282028980640092,
+        66.840008915402
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.1763114631175995
+    },
+    {
+      "tile": "s98_z20_x64555_y460824_h0.r3d",
+      "sourceSHA256": "7ce58c368f7aedf83860c401d53be64727d28704bb55b72f52d495d07c47bfb9",
+      "vertices": 3461,
+      "polygonFaces": 5207,
+      "splatRecords": 11768,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.616951421596241e-06,
+      "maxSplatFrameRoundingMeters": 7.629386004737171e-06,
+      "geodeticMin": [
+        -157.83680835101555,
+        21.2813633374965,
+        16.240029511973262
+      ],
+      "geodeticMax": [
+        -157.83644294386488,
+        21.281713044420666,
+        57.24004593398422
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 12.53199577331543
+    },
+    {
+      "tile": "s98_z20_x64556_y460816_h0.r3d",
+      "sourceSHA256": "cf48a4ee0703780cf9781c1d87c6118010d20f85ce3296481453dcd78f180958",
+      "vertices": 9215,
+      "polygonFaces": 15346,
+      "splatRecords": 2395,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.628771271583901e-06,
+      "maxSplatFrameRoundingMeters": 7.627945421972981e-06,
+      "geodeticMin": [
+        -157.8364719694786,
+        21.283924771418487,
+        16.72004039771855
+      ],
+      "geodeticMax": [
+        -157.83610539955274,
+        21.284271587675114,
+        65.80000863689929
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.7298638224601746
+    },
+    {
+      "tile": "s98_z20_x64556_y460816_h1.r3d",
+      "sourceSHA256": "6ad3d822991ad3af29ebe63c511656c007fcfe4bcd7ca9743de81414edc4e12e",
+      "vertices": 10885,
+      "polygonFaces": 18676,
+      "splatRecords": 3491,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.6275756271115824e-06,
+      "maxSplatFrameRoundingMeters": 7.629033603961943e-06,
+      "geodeticMin": [
+        -157.83637791699246,
+        21.28392332765146,
+        62.88000249210745
+      ],
+      "geodeticMax": [
+        -157.8361019330717,
+        21.284235097860822,
+        111.64001601096243
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.23310935497283936
+    },
+    {
+      "tile": "s98_z20_x64556_y460817_h0.r3d",
+      "sourceSHA256": "2781fbb675219ff36361c55c10d1e86b9e54e829bdb607a38db88d287089ffe7",
+      "vertices": 6843,
+      "polygonFaces": 11705,
+      "splatRecords": 2399,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8146723539966843e-06,
+      "maxSplatFrameRoundingMeters": 3.814465586060578e-06,
+      "geodeticMin": [
+        -157.83646888514943,
+        21.28360125224177,
+        17.16002620011568
+      ],
+      "geodeticMax": [
+        -157.83610578637388,
+        21.283948429812284,
+        65.7200100114569
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.8125633001327515
+    },
+    {
+      "tile": "s98_z20_x64556_y460817_h1.r3d",
+      "sourceSHA256": "f5a5e6e70e5e176e9082964585fee002e2b54d935bd010eeb0dcde7f0b9a5a42",
+      "vertices": 6833,
+      "polygonFaces": 11859,
+      "splatRecords": 2302,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8145438452374947e-06,
+      "maxSplatFrameRoundingMeters": 3.8146753951195933e-06,
+      "geodeticMin": [
+        -157.83630352452272,
+        21.283628348971604,
+        62.64004025515169
+      ],
+      "geodeticMax": [
+        -157.83610039127896,
+        21.28395023468677,
+        111.52002660185099
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.20552343130111694
+    },
+    {
+      "tile": "s98_z20_x64556_y460818_h0.r3d",
+      "sourceSHA256": "6cc36d48222bc8497d604342f0044ab63f908fb4cfb01498d0e16c29c7377783",
+      "vertices": 3423,
+      "polygonFaces": 5503,
+      "splatRecords": 5679,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8146129242022653e-06,
+      "maxSplatFrameRoundingMeters": 3.8144057441513723e-06,
+      "geodeticMin": [
+        -157.83647351054577,
+        21.283284958202696,
+        16.520041972398758
+      ],
+      "geodeticMax": [
+        -157.8360976911022,
+        21.283628885089094,
+        38.56003485061228
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 8.09634780883789
+    },
+    {
+      "tile": "s98_z20_x64556_y460819_h0.r3d",
+      "sourceSHA256": "2fc3f52d2ab476f0bb13f4fb4c9f022b781b7f8a44ce6c0ec8d3b26b8f7da80b",
+      "vertices": 6625,
+      "polygonFaces": 10882,
+      "splatRecords": 2578,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.812758336607658e-06,
+      "maxSplatFrameRoundingMeters": 3.8145122687183175e-06,
+      "geodeticMin": [
+        -157.83647004127454,
+        21.283013822154594,
+        16.72002723067999
+      ],
+      "geodeticMax": [
+        -157.83610231695536,
+        21.283310784393574,
+        46.1600244352594
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 2.9591872692108154
+    },
+    {
+      "tile": "s98_z20_x64556_y460819_h1.r3d",
+      "sourceSHA256": "c2931903bc9422e9d8117a8238ed0e425279f39ebcb22641b149102af32aae71",
+      "vertices": 5186,
+      "polygonFaces": 8869,
+      "splatRecords": 759,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8140337323966378e-06,
+      "maxSplatFrameRoundingMeters": 3.8138696680789508e-06,
+      "geodeticMin": [
+        -157.83646811317922,
+        21.283017796547007,
+        42.800005414523184
+      ],
+      "geodeticMax": [
+        -157.83610810008787,
+        21.283182172922565,
+        75.2000204557553
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.12137129157781601
+    },
+    {
+      "tile": "s98_z20_x64556_y460819_h2.r3d",
+      "sourceSHA256": "b7ec6ab383f6c9070b91bbf12ce94b6b98fe29999c408dc2ab4ff2107731718e",
+      "vertices": 5327,
+      "polygonFaces": 9044,
+      "splatRecords": 844,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8146872185507164e-06,
+      "maxSplatFrameRoundingMeters": 3.8135900553015745e-06,
+      "geodeticMin": [
+        -157.83647196623485,
+        21.283015629506846,
+        72.15999526809901
+      ],
+      "geodeticMax": [
+        -157.836110798913,
+        21.283181811422267,
+        101.88002098817378
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.11586324870586395
+    },
+    {
+      "tile": "s98_z20_x64556_y460819_h3.r3d",
+      "sourceSHA256": "b4cc6aba1387bf1b3ecee009b84d77e061b74cb0adb56e80d587566cbc7fe294",
+      "vertices": 7307,
+      "polygonFaces": 12101,
+      "splatRecords": 2233,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.492689690025145e-06,
+      "maxSplatFrameRoundingMeters": 7.616063157911412e-06,
+      "geodeticMin": [
+        -157.83646965271066,
+        21.282962525029664,
+        98.3200078997761
+      ],
+      "geodeticMax": [
+        -157.83610617468617,
+        21.28318253376956,
+        130.96000784635544
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.1715235859155655
+    },
+    {
+      "tile": "s98_z20_x64556_y460820_h0.r3d",
+      "sourceSHA256": "d490e331d6d17db4228c9bbf7fa481ba43d5b6550bb536d7aaacca046078df67",
+      "vertices": 5383,
+      "polygonFaces": 9192,
+      "splatRecords": 303,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8120157626053697e-06,
+      "maxSplatFrameRoundingMeters": 3.8094981107406056e-06,
+      "geodeticMin": [
+        -157.83646811331766,
+        21.282644059686756,
+        17.200036942958832
+      ],
+      "geodeticMax": [
+        -157.8361123395931,
+        21.282952582146955,
+        53.64000477734953
+      ],
+      "surfaceDistanceSampleCount": 298,
+      "surfaceDistanceMedianMeters": 0.25213003158569336
+    },
+    {
+      "tile": "s98_z20_x64556_y460820_h1.r3d",
+      "sourceSHA256": "0eb131f14625213231c0a0f5db131af2c61cbd3fde70d771aedbb60e25142c39",
+      "vertices": 5964,
+      "polygonFaces": 10475,
+      "splatRecords": 477,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8134771358500075e-06,
+      "maxSplatFrameRoundingMeters": 3.814104530874829e-06,
+      "geodeticMin": [
+        -157.8364569345573,
+        21.282719204157008,
+        52.2000110540539
+      ],
+      "geodeticMax": [
+        -157.83611234010698,
+        21.282869128858906,
+        87.44000239670277
+      ],
+      "surfaceDistanceSampleCount": 474,
+      "surfaceDistanceMedianMeters": 0.1562151163816452
+    },
+    {
+      "tile": "s98_z20_x64556_y460820_h2.r3d",
+      "sourceSHA256": "aecf41bd4191be91d0ae1d5c91696ebf7ddd6b9909f63ac00ed94074caec1ce7",
+      "vertices": 10761,
+      "polygonFaces": 17861,
+      "splatRecords": 2538,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.6212807869069366e-06,
+      "maxSplatFrameRoundingMeters": 7.628980597473856e-06,
+      "geodeticMin": [
+        -157.83647003773783,
+        21.28271017314816,
+        84.40000862441957
+      ],
+      "geodeticMax": [
+        -157.83610232038174,
+        21.282986900048197,
+        131.08001871034503
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.21058690547943115
+    },
+    {
+      "tile": "s98_z20_x64556_y460820_h3.r3d",
+      "sourceSHA256": "a2e883f68314c0f92ae1651080ccb9124a5e9bc21c0809f4c7f9a3f1e6e1388a",
+      "vertices": 346,
+      "polygonFaces": 455,
+      "splatRecords": 492,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.613653252747099e-06,
+      "maxSplatFrameRoundingMeters": 7.628138405380014e-06,
+      "geodeticMin": [
+        -157.83646232885957,
+        21.282816022993565,
+        128.3600148409605
+      ],
+      "geodeticMax": [
+        -157.83624185261624,
+        21.28298292572285,
+        156.04000909347087
+      ],
+      "surfaceDistanceSampleCount": 489,
+      "surfaceDistanceMedianMeters": 16.667203903198242
+    },
+    {
+      "tile": "s98_z20_x64556_y460821_h0.r3d",
+      "sourceSHA256": "dfdfcdc893f4ec5a168cbe7783e54728358f60d8b248b03e55762356ae3886cb",
+      "vertices": 5363,
+      "polygonFaces": 8820,
+      "splatRecords": 3110,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.814558951376057e-06,
+      "maxSplatFrameRoundingMeters": 3.813686788589621e-06,
+      "geodeticMin": [
+        -157.8364723529326,
+        21.282324873439375,
+        16.84003486391157
+      ],
+      "geodeticMax": [
+        -157.83610270363894,
+        21.28266518793189,
+        44.80003148410469
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 2.4612879753112793
+    },
+    {
+      "tile": "s98_z20_x64556_y460821_h1.r3d",
+      "sourceSHA256": "2a0d4dfb6e8bdc71b2d7fe288dd08a07436c62e8f8023a0f73c705f7709a9262",
+      "vertices": 1080,
+      "polygonFaces": 1715,
+      "splatRecords": 215,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8142162139820357e-06,
+      "maxSplatFrameRoundingMeters": 3.8030413094247706e-06,
+      "geodeticMin": [
+        -157.8363763747498,
+        21.28232957116627,
+        44.80001826118678
+      ],
+      "geodeticMax": [
+        -157.8361003921061,
+        21.282425667592292,
+        70.04002283234149
+      ],
+      "surfaceDistanceSampleCount": 212,
+      "surfaceDistanceMedianMeters": 0.12869861721992493
+    },
+    {
+      "tile": "s98_z20_x64556_y460822_h0.r3d",
+      "sourceSHA256": "56537bd55d6ec986c8869d7aeb0b459cde05f23213c41796105dc9efe8a32cb8",
+      "vertices": 5976,
+      "polygonFaces": 10014,
+      "splatRecords": 810,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8146827279206263e-06,
+      "maxSplatFrameRoundingMeters": 3.813523960616294e-06,
+      "geodeticMin": [
+        -157.83646387299615,
+        21.282006409191336,
+        16.280026762746274
+      ],
+      "geodeticMax": [
+        -157.83610039139495,
+        21.282351781339994,
+        40.52000899333507
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.1822364330291748
+    },
+    {
+      "tile": "s98_z20_x64556_y460822_h1.r3d",
+      "sourceSHA256": "85f632e838e7f7bc34c4c91b82ab3e78515bc9041fc4ad90baf83f6b7edf8372",
+      "vertices": 7866,
+      "polygonFaces": 13430,
+      "splatRecords": 2517,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.814540789903731e-06,
+      "maxSplatFrameRoundingMeters": 3.814575222804706e-06,
+      "geodeticMin": [
+        -157.83647080972594,
+        21.28200713257813,
+        38.64000834710896
+      ],
+      "geodeticMax": [
+        -157.83609923559007,
+        21.28234419366321,
+        70.08002542424947
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.2164429873228073
+    },
+    {
+      "tile": "s98_z20_x64556_y460823_h0.r3d",
+      "sourceSHA256": "f08156c8784574c09e2d6419216b496418208b447b709815fa45384207be9294",
+      "vertices": 4105,
+      "polygonFaces": 6576,
+      "splatRecords": 6280,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.814369236465609e-06,
+      "maxSplatFrameRoundingMeters": 3.814650270328457e-06,
+      "geodeticMin": [
+        -157.8364681119323,
+        21.28168180294558,
+        16.280024703592062
+      ],
+      "geodeticMax": [
+        -157.83610193327578,
+        21.282026091259496,
+        54.56003793142736
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 11.02450942993164
+    },
+    {
+      "tile": "s98_z20_x64556_y460824_h0.r3d",
+      "sourceSHA256": "f36c966c467b15c81344aab4e834cc8d5cf76d4d57bac4f6a4760d996d10001e",
+      "vertices": 1627,
+      "polygonFaces": 2570,
+      "splatRecords": 9008,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.623988693694628e-06,
+      "maxSplatFrameRoundingMeters": 7.627611296356918e-06,
+      "geodeticMin": [
+        -157.83647196625031,
+        21.28136839520788,
+        16.16002571862191
+      ],
+      "geodeticMax": [
+        -157.8361000067481,
+        21.28171232204376,
+        40.36001212988049
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 13.914799690246582
+    },
+    {
+      "tile": "s98_z20_x64557_y460816_h0.r3d",
+      "sourceSHA256": "957bb6ac00f420827cfd2ed0f5b9427b238067ddd4a68313eb5bbeda0226d3e3",
+      "vertices": 6199,
+      "polygonFaces": 10270,
+      "splatRecords": 4358,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.628629475675552e-06,
+      "maxSplatFrameRoundingMeters": 7.6290786807931e-06,
+      "geodeticMin": [
+        -157.8361271053453,
+        21.283924409306554,
+        16.680028527975082
+      ],
+      "geodeticMax": [
+        -157.83575436804082,
+        21.284269781401946,
+        55.800029329024255
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 7.134220123291016
+    },
+    {
+      "tile": "s98_z20_x64557_y460816_h1.r3d",
+      "sourceSHA256": "642377fa502f33022c975b9a1a150edfe9b1c750e26f818e4db0932d8f4d6d38",
+      "vertices": 3567,
+      "polygonFaces": 5699,
+      "splatRecords": 711,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.620610233516345e-06,
+      "maxSplatFrameRoundingMeters": 7.615955070150449e-06,
+      "geodeticMin": [
+        -157.83612864433263,
+        21.283928746553855,
+        53.64001336507499
+      ],
+      "geodeticMax": [
+        -157.83599412155982,
+        21.28420186160136,
+        111.32002974953502
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.15828046202659607
+    },
+    {
+      "tile": "s98_z20_x64557_y460817_h0.r3d",
+      "sourceSHA256": "6071936b64b072ad20965628cdf6dc0bc169511183928e4958f5c35ff36d0bb0",
+      "vertices": 6330,
+      "polygonFaces": 10598,
+      "splatRecords": 3171,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8145881262607872e-06,
+      "maxSplatFrameRoundingMeters": 3.8142170666333186e-06,
+      "geodeticMin": [
+        -157.83611900931172,
+        21.283600890694444,
+        16.840031808242202
+      ],
+      "geodeticMax": [
+        -157.83575552494926,
+        21.28395023666064,
+        66.00000033061951
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 5.438151836395264
+    },
+    {
+      "tile": "s98_z20_x64557_y460817_h1.r3d",
+      "sourceSHA256": "db1b6b843b851fc933bb672127b96f7fdf7c596fd564a08c18e6ae4629ef60e5",
+      "vertices": 6268,
+      "polygonFaces": 10581,
+      "splatRecords": 2019,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8143713112503974e-06,
+      "maxSplatFrameRoundingMeters": 3.8146780809711345e-06,
+      "geodeticMin": [
+        -157.836127873149,
+        21.28363340659573,
+        63.32000155746937
+      ],
+      "geodeticMax": [
+        -157.83592820924838,
+        21.283948067118846,
+        112.32003642991185
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.20056720077991486
+    },
+    {
+      "tile": "s98_z20_x64557_y460818_h0.r3d",
+      "sourceSHA256": "35ded240db1b4abf9a4ed353552fbb58946b6e225386ef4c2affc202424b3d98",
+      "vertices": 4162,
+      "polygonFaces": 6610,
+      "splatRecords": 6211,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.814364404775006e-06,
+      "maxSplatFrameRoundingMeters": 3.814289456727238e-06,
+      "geodeticMin": [
+        -157.83612749009274,
+        21.283283513106046,
+        16.800038183107972
+      ],
+      "geodeticMax": [
+        -157.83575436896197,
+        21.28362960783749,
+        42.56001298315823
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 8.1866455078125
+    },
+    {
+      "tile": "s98_z20_x64557_y460819_h0.r3d",
+      "sourceSHA256": "87ba172c76865d33b69b16122fed2f47ce0c11b038c5017b01f7c99ba812ecb7",
+      "vertices": 4024,
+      "polygonFaces": 6470,
+      "splatRecords": 657,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8109051416768125e-06,
+      "maxSplatFrameRoundingMeters": 3.813769566818337e-06,
+      "geodeticMin": [
+        -157.8361217078503,
+        21.28297588933748,
+        16.960037294775248
+      ],
+      "geodeticMax": [
+        -157.83576554732173,
+        21.283309339501866,
+        46.320046273991466
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.21606916189193726
+    },
+    {
+      "tile": "s98_z20_x64557_y460819_h1.r3d",
+      "sourceSHA256": "71ed8c7ec2f0a17eb3332adec8e5ad691ad13c601e33185cd76fe007791b22bc",
+      "vertices": 1333,
+      "polygonFaces": 2172,
+      "splatRecords": 157,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8108337747644327e-06,
+      "maxSplatFrameRoundingMeters": 3.814621564401932e-06,
+      "geodeticMin": [
+        -157.83611862261807,
+        21.28296721946056,
+        46.3200296536088
+      ],
+      "geodeticMax": [
+        -157.83607044136713,
+        21.283081379590453,
+        73.800027907826
+      ],
+      "surfaceDistanceSampleCount": 156,
+      "surfaceDistanceMedianMeters": 0.06616237014532089
+    },
+    {
+      "tile": "s98_z20_x64557_y460819_h2.r3d",
+      "sourceSHA256": "adac1459dcf56ada230edbe2715f99057d4ccf374c6d0a11cc660ed16f70b1c4",
+      "vertices": 1778,
+      "polygonFaces": 2892,
+      "splatRecords": 182,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8140683358278693e-06,
+      "maxSplatFrameRoundingMeters": 3.8120861773904835e-06,
+      "geodeticMin": [
+        -157.83611630928047,
+        21.28297589036578,
+        72.80003374349326
+      ],
+      "geodeticMax": [
+        -157.8360708257848,
+        21.28308390887867,
+        104.92002821993083
+      ],
+      "surfaceDistanceSampleCount": 182,
+      "surfaceDistanceMedianMeters": 0.07994072884321213
+    },
+    {
+      "tile": "s98_z20_x64557_y460819_h3.r3d",
+      "sourceSHA256": "ac216a54478211791f89e7318cd45c7971a28961a6cee6d950b70f84e9da2692",
+      "vertices": 1632,
+      "polygonFaces": 2491,
+      "splatRecords": 347,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.814685896941228e-06,
+      "maxSplatFrameRoundingMeters": 3.8109639177719146e-06,
+      "geodeticMin": [
+        -157.8361193918346,
+        21.282962163779025,
+        104.00004435610026
+      ],
+      "geodeticMax": [
+        -157.83604577111228,
+        21.283084631585748,
+        127.76003228966147
+      ],
+      "surfaceDistanceSampleCount": 342,
+      "surfaceDistanceMedianMeters": 0.12982045114040375
+    },
+    {
+      "tile": "s98_z20_x64557_y460820_h0.r3d",
+      "sourceSHA256": "2aeb099991ad8bf8ec4d7759b0e6250a935e0ee3e3ca53e7ff01869590f9fb22",
+      "vertices": 5958,
+      "polygonFaces": 9378,
+      "splatRecords": 770,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8136241471420362e-06,
+      "maxSplatFrameRoundingMeters": 3.813782029737922e-06,
+      "geodeticMin": [
+        -157.83612401940007,
+        21.282642614670333,
+        30.320034941658378
+      ],
+      "geodeticMax": [
+        -157.83575552620775,
+        21.28297931558668,
+        59.96001134254038
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.2755393981933594
+    },
+    {
+      "tile": "s98_z20_x64557_y460820_h1.r3d",
+      "sourceSHA256": "468aed4fa5ccd299d923d8de99c6b25b501cdd263edf3e70d11f3e1948412fcd",
+      "vertices": 4134,
+      "polygonFaces": 6209,
+      "splatRecords": 456,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8125692469748174e-06,
+      "maxSplatFrameRoundingMeters": 3.814421177139593e-06,
+      "geodeticMin": [
+        -157.83612132039787,
+        21.28264658963394,
+        57.44004158116877
+      ],
+      "geodeticMax": [
+        -157.83575629846757,
+        21.28298039898753,
+        86.76000766828656
+      ],
+      "surfaceDistanceSampleCount": 446,
+      "surfaceDistanceMedianMeters": 0.1851232498884201
+    },
+    {
+      "tile": "s98_z20_x64557_y460820_h2.r3d",
+      "sourceSHA256": "0050c4c32a562c1bb77b998939012924b0d9a94d29dbe17a81470ceddd1532e4",
+      "vertices": 6705,
+      "polygonFaces": 10364,
+      "splatRecords": 1395,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8142547396091686e-06,
+      "maxSplatFrameRoundingMeters": 3.8136709008540493e-06,
+      "geodeticMin": [
+        -157.83612478793535,
+        21.282640810949015,
+        84.00000780075788
+      ],
+      "geodeticMax": [
+        -157.8357562996588,
+        21.282990873941387,
+        127.56002201139927
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.14672952890396118
+    },
+    {
+      "tile": "s98_z20_x64557_y460821_h0.r3d",
+      "sourceSHA256": "bf63d1fe599dc54e719ee9217c4fcf1d35e1b510951db8c975587bfe00d640f5",
+      "vertices": 8070,
+      "polygonFaces": 13398,
+      "splatRecords": 1632,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.81425341799968e-06,
+      "maxSplatFrameRoundingMeters": 3.814606145624566e-06,
+      "geodeticMin": [
+        -157.83612363395483,
+        21.282331376833174,
+        16.560026148334146
+      ],
+      "geodeticMax": [
+        -157.83575976692737,
+        21.28266771623851,
+        53.40000789612532
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.2879489064216614
+    },
+    {
+      "tile": "s98_z20_x64557_y460821_h1.r3d",
+      "sourceSHA256": "7cf0336c7ae46daf31dfe7354f1c0979abb8d42c9c569777f8b5a1787b565552",
+      "vertices": 6301,
+      "polygonFaces": 10496,
+      "splatRecords": 1523,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.813229469074031e-06,
+      "maxSplatFrameRoundingMeters": 3.8142770364402168e-06,
+      "geodeticMin": [
+        -157.836129029167,
+        21.282322345726534,
+        50.20001305826008
+      ],
+      "geodeticMax": [
+        -157.8357690177095,
+        21.28266554830261,
+        87.36000510957092
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.19422376155853271
+    },
+    {
+      "tile": "s98_z20_x64557_y460821_h2.r3d",
+      "sourceSHA256": "cd5dbe3b22a0dc59d31b23ca6f40c2626b1f821188970d0e98c01e88add2f958",
+      "vertices": 8545,
+      "polygonFaces": 14688,
+      "splatRecords": 3373,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.612370524157086e-06,
+      "maxSplatFrameRoundingMeters": 7.613723425947683e-06,
+      "geodeticMin": [
+        -157.8360079970256,
+        21.282423139543077,
+        84.68000806309283
+      ],
+      "geodeticMax": [
+        -157.8357589980673,
+        21.28267060412952,
+        130.24002726748586
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.2111775130033493
+    },
+    {
+      "tile": "s98_z20_x64557_y460822_h0.r3d",
+      "sourceSHA256": "af7e79df34f5363bcf1fd1629524049e674ed9fc5d4d77bdb47503c106802e85",
+      "vertices": 6385,
+      "polygonFaces": 10940,
+      "splatRecords": 4309,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.81395278736818e-06,
+      "maxSplatFrameRoundingMeters": 3.814637580035196e-06,
+      "geodeticMin": [
+        -157.8361263313522,
+        21.28200532557132,
+        16.200022690929472
+      ],
+      "geodeticMax": [
+        -157.83575398500398,
+        21.282345639380942,
+        48.08000202104449
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 8.422847747802734
+    },
+    {
+      "tile": "s98_z20_x64557_y460822_h1.r3d",
+      "sourceSHA256": "3922137ba7e7b3fd61c2df7128b406ab5b60699845455578126f1bd2b8f435f7",
+      "vertices": 2146,
+      "polygonFaces": 3621,
+      "splatRecords": 827,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8134722899485496e-06,
+      "maxSplatFrameRoundingMeters": 3.8146952903161946e-06,
+      "geodeticMin": [
+        -157.83612710166835,
+        21.28217584387427,
+        46.44000463094562
+      ],
+      "geodeticMax": [
+        -157.83584649359452,
+        21.282349612818017,
+        66.08002950344235
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.23738186061382294
+    },
+    {
+      "tile": "s98_z20_x64557_y460823_h0.r3d",
+      "sourceSHA256": "0cb6f5159e5b2d40f863dfc946cf6e1e633c2c119fd9ab712aa9cc3ae2bca8f6",
+      "vertices": 3160,
+      "polygonFaces": 5161,
+      "splatRecords": 8167,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 3.8142906078064698e-06,
+      "maxSplatFrameRoundingMeters": 3.8146135636907275e-06,
+      "geodeticMin": [
+        -157.83612517514024,
+        21.281681802821748,
+        16.280046535655856
+      ],
+      "geodeticMax": [
+        -157.83575783949215,
+        21.2820325939079,
+        44.960028475150466
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 7.964919090270996
+    },
+    {
+      "tile": "s98_z20_x64557_y460824_h0.r3d",
+      "sourceSHA256": "f0dabe34990fdbc776efe04b6bb2bb31aac7e76bb03b182171fe9698ec944fd5",
+      "vertices": 3554,
+      "polygonFaces": 5795,
+      "splatRecords": 8091,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.6270881663731416e-06,
+      "maxSplatFrameRoundingMeters": 7.629043210499731e-06,
+      "geodeticMin": [
+        -157.8361271016501,
+        21.28136369862825,
+        16.200026443228126
+      ],
+      "geodeticMax": [
+        -157.83575205829843,
+        21.281709432058424,
+        43.64002724271268
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 10.401774406433105
+    },
+    {
+      "tile": "s98_z20_x64558_y460816_h0.r3d",
+      "sourceSHA256": "64f52d28ef1d317e4f30aedfb0d3878c12cc4a452f4ba3638e54eb368f168be0",
+      "vertices": 2006,
+      "polygonFaces": 3269,
+      "splatRecords": 7872,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.628790370972638e-06,
+      "maxSplatFrameRoundingMeters": 7.629366734818177e-06,
+      "geodeticMin": [
+        -157.8357845536453,
+        21.283924047865966,
+        16.000031269155443
+      ],
+      "geodeticMax": [
+        -157.83540988863203,
+        21.28426689107051,
+        35.64005113672465
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 9.872303009033203
+    },
+    {
+      "tile": "s98_z20_x64558_y460817_h0.r3d",
+      "sourceSHA256": "aa229f4a5b0e63d5614738194cadd59c70aa42f3e91152a9aaedd5caa917d84d",
+      "vertices": 1603,
+      "polygonFaces": 2552,
+      "splatRecords": 5517,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.618899388717182e-06,
+      "maxSplatFrameRoundingMeters": 7.628751149013624e-06,
+      "geodeticMin": [
+        -157.8357864799555,
+        21.283602335968972,
+        16.000028803944588
+      ],
+      "geodeticMax": [
+        -157.8354137434365,
+        21.283949875462035,
+        37.32000992633402
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 10.57718276977539
+    },
+    {
+      "tile": "s98_z20_x64558_y460818_h0.r3d",
+      "sourceSHA256": "2452f10d307622bcdca73ca41358861dd82f974123e79273013e0dc8f848b595",
+      "vertices": 3909,
+      "polygonFaces": 6322,
+      "splatRecords": 7377,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.628686745420055e-06,
+      "maxSplatFrameRoundingMeters": 7.628818821103778e-06,
+      "geodeticMin": [
+        -157.83578069805114,
+        21.28328315204892,
+        16.12002420052886
+      ],
+      "geodeticMax": [
+        -157.8354256927484,
+        21.28363141392135,
+        33.84002973418683
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 6.762816429138184
+    },
+    {
+      "tile": "s98_z20_x64558_y460819_h0.r3d",
+      "sourceSHA256": "57dbb564295f6fd32f91082b05d0f061806818a65fdf4c3a0299b052048aead6",
+      "vertices": 4596,
+      "polygonFaces": 7591,
+      "splatRecords": 2370,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.628624388189564e-06,
+      "maxSplatFrameRoundingMeters": 7.628226086353607e-06,
+      "geodeticMin": [
+        -157.8357733737754,
+        21.282965773811632,
+        16.20003122650087
+      ],
+      "geodeticMax": [
+        -157.8354172136009,
+        21.28331042297942,
+        36.120052909478545
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 1.9188640117645264
+    },
+    {
+      "tile": "s98_z20_x64558_y460820_h0.r3d",
+      "sourceSHA256": "2b0fb33c886190adf59e96b7f20d70fe337127bd20c6677180ae5d9b2d49c7df",
+      "vertices": 5018,
+      "polygonFaces": 7962,
+      "splatRecords": 626,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.625898973628864e-06,
+      "maxSplatFrameRoundingMeters": 7.624804624128956e-06,
+      "geodeticMin": [
+        -157.83578108222923,
+        21.282655981396246,
+        17.64003119710833
+      ],
+      "geodeticMax": [
+        -157.83541490162798,
+        21.282987625052385,
+        46.48001635167748
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.29392266273498535
+    },
+    {
+      "tile": "s98_z20_x64558_y460820_h1.r3d",
+      "sourceSHA256": "e87c8f096775985d4e97ae140b113987a6aefd065539a955f511813c32c77d56",
+      "vertices": 5201,
+      "polygonFaces": 8142,
+      "splatRecords": 613,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.61622695222286e-06,
+      "maxSplatFrameRoundingMeters": 7.62905273177239e-06,
+      "geodeticMin": [
+        -157.8357783832351,
+        21.282655981791926,
+        45.44002100545913
+      ],
+      "geodeticMax": [
+        -157.83541490190393,
+        21.282903810713936,
+        74.12003195658326
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.17356079816818237
+    },
+    {
+      "tile": "s98_z20_x64558_y460820_h2.r3d",
+      "sourceSHA256": "732c8a7443bb574a2a97faa5536e13184637196d84c5e6eea340bcfdce6c200e",
+      "vertices": 5732,
+      "polygonFaces": 8836,
+      "splatRecords": 854,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.629013339283119e-06,
+      "maxSplatFrameRoundingMeters": 7.614415807211117e-06,
+      "geodeticMin": [
+        -157.8357818513247,
+        21.28265526048569,
+        72.44001817237586
+      ],
+      "geodeticMax": [
+        -157.83541567408716,
+        21.282904894043,
+        103.32002097833902
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.1628628969192505
+    },
+    {
+      "tile": "s98_z20_x64558_y460820_h3.r3d",
+      "sourceSHA256": "65027a26bf12d9f19903b59d7f5f915265aa56309907bbb776c357fa6227d52e",
+      "vertices": 8072,
+      "polygonFaces": 13305,
+      "splatRecords": 3161,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.628261414538429e-06,
+      "maxSplatFrameRoundingMeters": 7.62916451435558e-06,
+      "geodeticMin": [
+        -157.83578185042995,
+        21.28264406222343,
+        100.40002316515893
+      ],
+      "geodeticMax": [
+        -157.83541528969369,
+        21.28292945935396,
+        130.8000265378505
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.18783344328403473
+    },
+    {
+      "tile": "s98_z20_x64558_y460821_h0.r3d",
+      "sourceSHA256": "535daa07652633ed6e273ecd159a97c6307bd32385c1a91911fc99a444798867",
+      "vertices": 7421,
+      "polygonFaces": 12371,
+      "splatRecords": 2660,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.6269303406206745e-06,
+      "maxSplatFrameRoundingMeters": 7.629118783825106e-06,
+      "geodeticMin": [
+        -157.83578108138855,
+        21.282325596570292,
+        16.04002653248608
+      ],
+      "geodeticMax": [
+        -157.8354106620761,
+        21.282659045637125,
+        52.52002945821732
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.6138932704925537
+    },
+    {
+      "tile": "s98_z20_x64558_y460821_h1.r3d",
+      "sourceSHA256": "20260077278ccd7b0680bd60a3dd06150110a0d55d20552ce5138aced647904e",
+      "vertices": 3330,
+      "polygonFaces": 5482,
+      "splatRecords": 471,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.627164904988604e-06,
+      "maxSplatFrameRoundingMeters": 7.618543122589472e-06,
+      "geodeticMin": [
+        -157.83577028885014,
+        21.282436866726492,
+        50.5200315322727
+      ],
+      "geodeticMax": [
+        -157.83541914235946,
+        21.282657600118565,
+        74.56001427304
+      ],
+      "surfaceDistanceSampleCount": 461,
+      "surfaceDistanceMedianMeters": 0.17758244276046753
+    },
+    {
+      "tile": "s98_z20_x64558_y460821_h2.r3d",
+      "sourceSHA256": "c0632eb9185abb134f2fe473658fdecb3e17f81a16ea1caf7532b3b664a7f95a",
+      "vertices": 4601,
+      "polygonFaces": 7560,
+      "splatRecords": 418,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.620463122748333e-06,
+      "maxSplatFrameRoundingMeters": 7.617044673224882e-06,
+      "geodeticMin": [
+        -157.8357702882347,
+        21.28250767492963,
+        72.92002320848405
+      ],
+      "geodeticMax": [
+        -157.83541220538413,
+        21.282656877440925,
+        103.08004001807421
+      ],
+      "surfaceDistanceSampleCount": 411,
+      "surfaceDistanceMedianMeters": 0.1476118564605713
+    },
+    {
+      "tile": "s98_z20_x64558_y460821_h3.r3d",
+      "sourceSHA256": "5dc7756509d04520b28d2d8eabd13dcbd3534e9fe8f5f3d7c5f4ec7a6459e3cc",
+      "vertices": 6110,
+      "polygonFaces": 10041,
+      "splatRecords": 2096,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.6255436738392746e-06,
+      "maxSplatFrameRoundingMeters": 7.629079817661477e-06,
+      "geodeticMin": [
+        -157.83578146481506,
+        21.282468658511437,
+        102.72002977319062
+      ],
+      "geodeticMax": [
+        -157.83541182072875,
+        21.28266879778814,
+        131.04001312796026
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 0.16370856761932373
+    },
+    {
+      "tile": "s98_z20_x64558_y460822_h0.r3d",
+      "sourceSHA256": "38326b371fda9ea11b0e32223a99c0e90b1dede7de86b257138bbd068c6eb282",
+      "vertices": 4286,
+      "polygonFaces": 7038,
+      "splatRecords": 7772,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.622788444905382e-06,
+      "maxSplatFrameRoundingMeters": 7.6291815389595286e-06,
+      "geodeticMin": [
+        -157.83578185236473,
+        21.282003519385732,
+        16.040022619068623
+      ],
+      "geodeticMax": [
+        -157.83541104740306,
+        21.2823506970591,
+        46.28003214485943
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 9.043570518493652
+    },
+    {
+      "tile": "s98_z20_x64558_y460823_h0.r3d",
+      "sourceSHA256": "dfe487538fd0f26fedd78ea22ed8fcbaac3fbbc513f133208ad7a1fdd0de3ff2",
+      "vertices": 2152,
+      "polygonFaces": 3473,
+      "splatRecords": 4697,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.626643537150812e-06,
+      "maxSplatFrameRoundingMeters": 7.629243697238053e-06,
+      "geodeticMin": [
+        -157.83578416497528,
+        21.281681080330344,
+        19.760040626861155
+      ],
+      "geodeticMax": [
+        -157.83541528781456,
+        21.28202789735878,
+        44.96000169031322
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 8.456619262695312
+    },
+    {
+      "tile": "s98_z20_x64558_y460824_h0.r3d",
+      "sourceSHA256": "a99b6d94a230986ffc2ed4a9eb1f628c6b5d4e5552815d279609804977fe3932",
+      "vertices": 3420,
+      "polygonFaces": 5597,
+      "splatRecords": 2474,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.628047228536161e-06,
+      "maxSplatFrameRoundingMeters": 7.628812937809926e-06,
+      "geodeticMin": [
+        -157.8357864771899,
+        21.281370201500106,
+        17.00002618599683
+      ],
+      "geodeticMax": [
+        -157.83540873573426,
+        21.28171304448675,
+        36.560011241585016
+      ],
+      "surfaceDistanceSampleCount": 512,
+      "surfaceDistanceMedianMeters": 2.287714719772339
+    },
+    {
+      "tile": "s98_z20_x64558_y460824_h1.r3d",
+      "sourceSHA256": "86b2ede8723683b3f6199dfede416677d48ddbcdb2be37ab9e97e1031876c5db",
+      "vertices": 130,
+      "polygonFaces": 164,
+      "splatRecords": 27,
+      "finite": true,
+      "indicesExact": true,
+      "uvExact": true,
+      "textureRGBPixelsExact": true,
+      "sharedCoordinateFrame": true,
+      "maxMeshFrameRoundingMeters": 7.543111621544085e-06,
+      "maxSplatFrameRoundingMeters": 7.529286847329786e-06,
+      "geodeticMin": [
+        -157.83544072922015,
+        21.281359725734713,
+        46.64005035813898
+      ],
+      "geodeticMax": [
+        -157.8354210711928,
+        21.28141752822139,
+        67.40005545318127
+      ],
+      "surfaceDistanceSampleCount": 27,
+      "surfaceDistanceMedianMeters": 0.12938015162944794
+    }
+  ]
+}

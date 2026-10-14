@@ -219,13 +219,18 @@ def decode_topology(src: bytes, at: int = 20) -> dict:
     face_count, at = read_signed(src, at)
     token_bytes, at = read_signed(src, at)
     integer_count, at = read_signed(src, at)
-    if not 0 < face_count <= 10_000_000 or token_bytes < (face_count + 7) // 8:
+    if not 0 <= face_count <= 10_000_000 or token_bytes < (face_count + 7) // 8:
         raise ValueError("Invalid TRICO topology sizes")
     first_count = (face_count + 7) // 8
     bitmap, at = read_block(src, at, first_count, 1)
     extra, at = read_block(src, at, token_bytes - first_count, 1)
     header, at = read_block(src, at, integer_count, 4)
     integers = [x[0] for x in struct.iter_unpack('<i', header)]
+    if face_count==0:
+        if token_bytes!=0 or integers!=[0x5a4c0000,0,0,0]:
+            raise ValueError('Invalid empty mesh topology')
+        return {'faces':[],'opposite':[],'vertices':0,'faceCount':0,'nextOffset':at,
+                'tokenBytes':0,'integerCount':4}
     faces, opposite, vertices = rebuild_topology(face_count, bitmap + extra, integers)
     return {'faces': faces, 'opposite': opposite, 'vertices': vertices,
             'faceCount': face_count, 'nextOffset': at,

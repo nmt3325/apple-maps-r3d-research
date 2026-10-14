@@ -6,12 +6,13 @@ import json
 import math
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
 import time
 import numpy as np
-from acquisition import plan_area, tile_name, load_config, fetch_area
+from acquisition import plan_area, tile_name, load_config, fetch_area, discover_height_tiles
 from build_viewer import build_viewer
 from export_scene import export
 from geography import origin_frame
@@ -23,6 +24,7 @@ def main():
     ap.add_argument('--lat',type=float,required=True);ap.add_argument('--lon',type=float,required=True)
     ap.add_argument('--radius-m',type=float,required=True);ap.add_argument('--zoom',type=int,default=20)
     ap.add_argument('--max-tiles',type=int,default=4096);ap.add_argument('--workers',type=int,default=4)
+    ap.add_argument('--max-height-requests',type=int,default=32768,help='Bound conservative vertical-layer candidate requests')
     ap.add_argument('--out-dir',type=Path,required=True);ap.add_argument('--config',type=Path,default=os.environ.get('R3D_FETCH_CONFIG'))
     ap.add_argument('--source-dir',type=Path,help='Offline raw-R3D source, selects planned coordinates; no native output')
     ap.add_argument('--refresh',action='store_true');ap.add_argument('--export',action='store_true')
@@ -32,13 +34,29 @@ def main():
     if not args.source_dir and not args.config: ap.error('Live acquisition requires --config or R3D_FETCH_CONFIG')
     output = args.out_dir.resolve();output.mkdir(parents=True,exist_ok=True)
     raw = output/'raw';raw.mkdir(exist_ok=True)
-    expected = {tile_name(c) for c in plan['tiles']}
-    if set(p.name for p in raw.glob('*.r3d'))-expected: raise ValueError('Output raw directory contains a different area; choose a fresh out-dir')
-    (output/'plan.json').write_text(json.dumps(plan,indent=2)+'\n')
     report = {'schemaVersion':1,'plan':plan,'nativeRuntimeInvoked':False,'nativeGoldenInput':False,'steps':[],
               'mode':'offline-original-R3D' if args.source_dir else 'live-Linux-HTTPS','startedUTC':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime())}
     started = time.monotonic()
     try:
+        if args.source_dir:
+            horizontal=plan['tiles'];xy={(t['z'],t['x'],t['y']) for t in horizontal};selected=[]
+            for source in sorted(args.source_dir.glob('*.r3d')):
+                match=re.fullmatch(r's98_z(\d+)_x(\d+)_y(\d+)_h(\d+)\.r3d',source.name)
+                if match:
+                    z,x,y,h=map(int,match.groups())
+                    if (z,x,y) in xy:selected.append({'z':z,'x':x,'y':y,'h':h})
+            if {(t['z'],t['x'],t['y']) for t in selected}!=xy:
+                raise ValueError('Offline originals do not cover the requested horizontal tiles')
+            plan={**plan,'horizontalTiles':horizontal,'tiles':selected,
+                  'heightSelection':'All heights in supplied originals; offline source may lack upper layers'}
+        else:
+            plan=discover_height_tiles(plan,load_config(args.config),output/'height-index',args.max_height_requests,refresh=args.refresh)
+            report['steps'].append({'step':'height-index','candidateTiles':len(plan['tiles']),'pass':True})
+        expected={tile_name(c) for c in plan['tiles']}
+        if set(p.name for p in raw.glob('*.r3d'))-expected:
+            raise ValueError('Output raw directory contains a different area; choose a fresh out-dir')
+        report['plan']=plan
+        (output/'plan.json').write_text(json.dumps(plan,indent=2)+'\n')
         if args.source_dir:
             for coord in plan['tiles']:
                 name = tile_name(coord);source = args.source_dir/name
@@ -47,7 +65,11 @@ def main():
             report['steps'].append({'step':'original-input-selection','tiles':len(expected),'pass':True})
         else:
             fetched = fetch_area(plan,load_config(args.config),raw,refresh=args.refresh)
-            report['steps'].append({'step':'fetch','tiles':len(fetched['files']),'freshResponses':fetched['freshResponses'],'pass':True})
+            plan={**plan,'tiles':[f['tile'] for f in fetched['files']]}
+            report['plan']=plan;expected={tile_name(c) for c in plan['tiles']}
+            (output/'plan.json').write_text(json.dumps(plan,indent=2)+'\n')
+            report['steps'].append({'step':'fetch','tiles':len(fetched['files']),'emptyTiles':len(fetched['emptyTiles']),
+                                   'freshResponses':fetched['freshResponses'],'pass':True})
         command = [sys.executable,str(REPO/'codec/nativefree_decode_r3d.py'),str(raw),'--out-dir',str(output/'decoded'),'--workers',str(args.workers)]
         with (output/'decode.log').open('w') as log:
             code = subprocess.run(command,stdout=log,stderr=subprocess.STDOUT).returncode

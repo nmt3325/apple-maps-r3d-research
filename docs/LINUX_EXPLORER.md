@@ -1,5 +1,7 @@
 # Linuxの取得・独立復号・表示・出力
 
+**高さ層の取得漏れ修正と135タイルのOahu再現は [HEIGHT_LAYERS.md](HEIGHT_LAYERS.md)。旧Oahu72のh0表示には上部の欠落がありました。現在のライブ入口は高さ層を自動収集します。**
+
 入口は `pipeline/r3d_explorer.py`。R3D原本から元ポリゴンとSplatを復元し、静的Webビューアと任意のGLB/PLYを生成する。Appleライブラリ、Simulator、native goldenは実行時に読まない。
 
 ## 依存関係
@@ -34,7 +36,9 @@ http://127.0.0.1:8973/ を開く。WASDで水平移動、E/Q（Space/Ctrlでも�
 
 `--radius-m` は球面半径を含む緯度経度の矩形を計画し、交差する完全なタイルを取得する。境界の外にもタイル全体のgeometryを表示する。Mercator緯度±85.0511287798066度、経度±180度、半径0より大きく100km以下、既定最大4096タイル。日付変更線はxをwrapする。広い範囲はメモリと時間を要する。`--zoom` は既定20、公式の正確なLOD選択は行わない。`--max-tiles`で件数上限を変更できる。
 
-既存出力のrawタイルはcacheとして使う。`--refresh`で新しい署名によるHTTPS再取得。同じout-dirに別の領域の原本を混ぜるとrejectする。HTTP失敗、非R3D、上限超過、復号失敗、地理原点と要求タイル中心の0.5m超のずれは処理を失敗させる。空白を推定meshで埋めない。
+ライブではstyle100のC3MM占有インデックスを取得し、XY範囲の全高さ候補を要求する。保守的な候補の空応答は記録して省略し、空の下層でも上層を探索する。対応インデックスがなければ成功扱いしない。`--max-tiles`は平面XYの上限、`--max-height-requests`は高さを含む候補要求の上限（既定32768）。offlineは供給した同じXYの全h原本を使うが、原本にない上層は補えない。
+
+既存出力のrawタイルはcacheとして使う。`--refresh`で占有インデックス・空応答・非空R3Dを新しい署名でHTTPS再取得。同じout-dirに別の領域の原本を混ぜるとrejectする。HTTP失敗、非R3D、上限超過、復号失敗、地理原点と要求タイル中心の0.5m超のずれは処理を失敗させる。空白を推定meshで埋めない。
 
 出力は `plan.json`、`raw/*.r3d`、`raw/fetch.json`、`decoded/manifest.json`と全配列、`decode.log`、`viewer/`、`run.json`。`--export`は `export/scene.glb`、`splats.ply`、`export.json`も生成する。run.jsonは失敗時も保存する。
 
@@ -53,7 +57,7 @@ http://127.0.0.1:8973/ を開く。WASDで水平移動、E/Q（Space/Ctrlでも�
 
 helperは成功したstyle98/z20/h0要求からtemplateを抽出し、保存accessKeyを除く。設定はmode 0600、既存ファイルを上書きしない。その後の実行にキャプチャやmitmproxyは不要。設定templateが古い場合、対象地域のFlyoverがない場合、APIが変更された場合はHTTPエラーになり得る。現在の設定は東京、Oahu、ニューヨークで成功した。任意の地理入力を受け付けるが、サービス側の全世界coverageや未知のcodec variantを保証しない。
 
-## 原本だけからOahu72を再現
+## 旧h0原本だけからOahu72を再現
 
 Release `snapshot-20261014` の `oahu-and-fetch-results.tar.gz` を展開する。これは原本であり、native goldenはOahuの実行に不要。
 
@@ -97,7 +101,7 @@ GLBは共通east/up/southメートル座標で、元のポリゴン面、UV、�
 
 実装fb259cfを別Ubuntu24.04/aarch64でfresh cloneし、system-site-packages=falseのvenvと上記依存からOahu72、viewer、GLB/PLY、全region/export監査、原本破損/別座標reject、座標入口のoffline原本経路を再現した。936配列/画像のSHA一覧digestと、完成GLB/PLYのSHAはLinux x86_64と完全一致。[検証証拠](../reports/validation-20261014/linux-arm-reproduction.json) / [環境間照合](../reports/validation-20261014/cross-platform-comparison.json)。ライブ署名取得はCT104 Linuxで東京4/ニューヨーク2を検証している。
 
-完成viewerと出力はprivate Release `linux-explorer-20261014` にある。全依存なしで完成viewerを表示する例：
+以下は旧h0表示の再現。全高さ修正版はprivate Release `linux-explorer-height-layers-20261014` と [HEIGHT_LAYERS.md](HEIGHT_LAYERS.md) を参照。旧完成viewerと出力はprivate Release `linux-explorer-20261014` にある。全依存なしで完成viewerを表示する例：
 
 ```bash
 gh release download linux-explorer-20261014 --repo nmt3325/apple-maps-r3d-research \
@@ -110,7 +114,7 @@ python3 -m http.server 8972 --bind 127.0.0.1 --directory oahu-viewer
 
 ## Web地図から任意地点を取得
 
-現在のWeb入口で「地図から場所を選ぶ」を押し、OpenStreetMap上をクリックするか緯度/経度を入力。範囲を決めてタイル数を確認し、「取得して3D表示」を押す。完了後に取得したポリゴン/Splatシーンへ切り替わる。表示された中心/範囲に交差する全タイルを処理する。z20、範囲5〜300m、1回最大24タイル。設定・coverage・R3D形式が未対応ならエラーを表示する。
+現在のWeb入口で「地図から場所を選ぶ」を押し、OpenStreetMap上をクリックするか緯度/経度を入力。範囲を決めてタイル数を確認し、「取得して3D表示」を押す。完了後に取得したポリゴン/Splatシーンへ切り替わる。表示された中心/範囲に交差する全タイルを処理する。z20、範囲5〜300m、1回最大24平面タイル＋全高さ層（候補要求上限1536）。設定・coverage・R3D形式が未対応ならエラーを表示する。
 
 Leaflet 1.9.4のJS/CSSはローカル配信する。通常の地図閲覧に限り、背景地図タイルは `https://tile.openstreetmap.org/{z}/{x}/{y}.png` からブラウザが読み込む。帰属表示を常時表示し、標準ブラウザのReferer/キャッシュに従う。[OpenStreetMap標準タイル利用条件](https://operations.osmfoundation.org/policies/tiles/)に沿っており、地図の先読み/保存/一括取得はしない。
 

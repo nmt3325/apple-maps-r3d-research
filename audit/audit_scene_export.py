@@ -26,18 +26,23 @@ def audit(viewer, decoded, output):
         return array if channels==1 else array.reshape(-1,channels)
     def equal(actual,expected): assert actual.dtype==expected.dtype and actual.shape==expected.shape and actual.tobytes()==expected.tobytes()
     expected_xyz=[];expected_rgba=[];expected_attrs=[];faces=0
-    assert len(gltf['meshes'])==2*len(scene['tiles']) and len(gltf['images'])==len(scene['tiles'])
+    polygon_count=sum(t['triangles']>0 for t in scene['tiles'])
+    assert len(gltf['meshes'])==polygon_count+len(scene['tiles']) and len(gltf['images'])==polygon_count
+    mesh_by_name={m['name']:m for m in gltf['meshes']}
+    image_cursor=0
     for i,tile in enumerate(scene['tiles']):
         xyz,uv,normals,idx = geometry(viewer/tile['mesh']);faces+=len(idx)//3
-        uv=uv.copy();uv[:,1]=np.float32(1)-uv[:,1]
-        polygon = gltf['meshes'][2*i]['primitives'][0];attr=polygon['attributes']
-        equal(read_accessor(attr['POSITION']),xyz);equal(read_accessor(attr['NORMAL']),normals)
-        equal(read_accessor(attr['TEXCOORD_0']),uv);equal(read_accessor(polygon['indices']),idx)
-        image = gltf['images'][i];v = gltf['bufferViews'][image['bufferView']]
-        png = binary[v['byteOffset']:v['byteOffset']+v['byteLength']]
-        assert png==(viewer/tile['texture']).read_bytes()
+        if len(idx):
+            uv=uv.copy();uv[:,1]=np.float32(1)-uv[:,1]
+            polygon = mesh_by_name[tile['source']+' polygons']['primitives'][0];attr=polygon['attributes']
+            equal(read_accessor(attr['POSITION']),xyz);equal(read_accessor(attr['NORMAL']),normals)
+            equal(read_accessor(attr['TEXCOORD_0']),uv);equal(read_accessor(polygon['indices']),idx)
+            image = gltf['images'][image_cursor];v = gltf['bufferViews'][image['bufferView']]
+            png = binary[v['byteOffset']:v['byteOffset']+v['byteLength']]
+            assert png==(viewer/tile['texture']).read_bytes()
+            image_cursor+=1
         xyz,rgba = geometry(viewer/tile['splats'],True);rgba=np.repeat(rgba,3,axis=0)
-        splat = gltf['meshes'][2*i+1]['primitives'][0]['attributes']
+        splat = mesh_by_name[tile['source']+' splats']['primitives'][0]['attributes']
         equal(read_accessor(splat['POSITION']),xyz);equal(read_accessor(splat['COLOR_0']),rgba)
         row = source[tile['sourceSHA256']]
         attrs = np.fromfile(decoded/row['directory']/'splat-attributes-f32le.bin',dtype='<f4').reshape(-1,8)

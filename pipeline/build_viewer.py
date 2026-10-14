@@ -74,7 +74,7 @@ def build_viewer(decoded, output, lat, lon, title='R3D · 3D explorer'):
         inn = read_array(directory, tile, 'mesh-normal-indices-u32le.bin', '<u4')
         if len(ip) != len(iu) or len(ip) != len(inn) or len(ip) != 3*tile['meshTriangles']:
             raise ValueError('Mesh index shape mismatch')
-        if ip.max() >= len(local) or iu.max() >= len(uv) or inn.max() >= len(normals):
+        if len(ip) and (ip.max() >= len(local) or iu.max() >= len(uv) or inn.max() >= len(normals)):
             raise ValueError('Mesh index out of range')
         world = world_positions(local, tile['georeference'], frame)
         transformed_normals = world_normals(normals, tile['georeference'], frame)
@@ -100,13 +100,16 @@ def build_viewer(decoded, output, lat, lon, title='R3D · 3D explorer'):
         splats += splat_world.tobytes()+material[:,:4].tobytes()
         (output/geometry_name).write_bytes(geometry)
         (output/splat_name).write_bytes(splats)
-        atlas = (directory/'atlas-0.heic').read_bytes()
-        if hashlib.sha256(atlas).hexdigest() != tile['arrays']['atlas-0.heic']['sha256']:
-            raise ValueError('Original HEIC integrity mismatch')
-        with Image.open(directory/'atlas-0.heic') as image:
-            if list(image.size) != tile['atlasDimensions']:
-                raise ValueError('HEIC decoded dimensions differ from UV atlas dimensions')
-            image.convert('RGB').save(output/texture_name)
+        if tile['meshTriangles']:
+            atlas = (directory/'atlas-0.heic').read_bytes()
+            if hashlib.sha256(atlas).hexdigest() != tile['arrays']['atlas-0.heic']['sha256']:
+                raise ValueError('Original HEIC integrity mismatch')
+            with Image.open(directory/'atlas-0.heic') as image:
+                if list(image.size) != tile['atlasDimensions']:
+                    raise ValueError('HEIC decoded dimensions differ from UV atlas dimensions')
+                image.convert('RGB').save(output/texture_name)
+        else:
+            texture_name=None
         both = np.concatenate([world, splat_world])
         bounds_min = np.minimum(bounds_min, both.min(axis=0))
         bounds_max = np.maximum(bounds_max, both.max(axis=0))

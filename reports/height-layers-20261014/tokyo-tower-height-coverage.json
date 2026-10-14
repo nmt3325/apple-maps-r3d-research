@@ -1,0 +1,156 @@
+{
+  "pass": true,
+  "nativeGoldenInput": false,
+  "candidateRequests": 32,
+  "nonemptyTiles": 18,
+  "emptyResponses": 14,
+  "everyCandidateAccountedFor": true,
+  "allOriginalHashesMatch": true,
+  "baselineArraysAndImagesPreserved": 26,
+  "layers": {
+    "0": {
+      "tiles": 2,
+      "meshTriangles": 18666,
+      "splatRecords": 5616,
+      "visibleSplatRecords": 2525,
+      "meshHeight": [
+        54.479949951171875,
+        102.60000610351562
+      ],
+      "visibleSplatHeight": [
+        59.599937438964844,
+        103.59994506835938
+      ]
+    },
+    "1": {
+      "tiles": 2,
+      "meshTriangles": 30481,
+      "splatRecords": 10612,
+      "visibleSplatRecords": 4377,
+      "meshHeight": [
+        98.15998840332031,
+        155.00003051757812
+      ],
+      "visibleSplatHeight": [
+        96.71998596191406,
+        156.91998291015625
+      ]
+    },
+    "12": {
+      "tiles": 2,
+      "meshTriangles": 1328,
+      "splatRecords": 5734,
+      "visibleSplatRecords": 2335,
+      "meshHeight": [
+        294.2799987792969,
+        305.3999938964844
+      ],
+      "visibleSplatHeight": [
+        292.55999755859375,
+        317.3999938964844
+      ]
+    },
+    "13": {
+      "tiles": 2,
+      "meshTriangles": 0,
+      "splatRecords": 2323,
+      "visibleSplatRecords": 965,
+      "meshHeight": null,
+      "visibleSplatHeight": [
+        313.8800354003906,
+        339.91998291015625
+      ]
+    },
+    "2": {
+      "tiles": 2,
+      "meshTriangles": 11186,
+      "splatRecords": 3229,
+      "visibleSplatRecords": 1294,
+      "meshHeight": [
+        153.6400146484375,
+        187.52000427246094
+      ],
+      "visibleSplatHeight": [
+        152.4399871826172,
+        188.8400115966797
+      ]
+    },
+    "3": {
+      "tiles": 2,
+      "meshTriangles": 0,
+      "splatRecords": 10905,
+      "visibleSplatRecords": 4677,
+      "meshHeight": null,
+      "visibleSplatHeight": [
+        184.15997314453125,
+        214.1599884033203
+      ]
+    },
+    "8": {
+      "tiles": 2,
+      "meshTriangles": 2224,
+      "splatRecords": 10762,
+      "visibleSplatRecords": 4759,
+      "meshHeight": [
+        233.00001525878906,
+        241.36001586914062
+      ],
+      "visibleSplatHeight": [
+        211.1199951171875,
+        254.40000915527344
+      ]
+    },
+    "9": {
+      "tiles": 2,
+      "meshTriangles": 4975,
+      "splatRecords": 7036,
+      "visibleSplatRecords": 2851,
+      "meshHeight": [
+        266.1199951171875,
+        291.2799987792969
+      ],
+      "visibleSplatHeight": [
+        251.08001708984375,
+        294.0799865722656
+      ]
+    },
+    "14": {
+      "tiles": 1,
+      "meshTriangles": 0,
+      "splatRecords": 1747,
+      "visibleSplatRecords": 799,
+      "meshHeight": null,
+      "visibleSplatHeight": [
+        336.3999938964844,
+        362.03997802734375
+      ]
+    },
+    "15": {
+      "tiles": 1,
+      "meshTriangles": 0,
+      "splatRecords": 770,
+      "visibleSplatRecords": 368,
+      "meshHeight": null,
+      "visibleSplatHeight": [
+        359.44000244140625,
+        384.3199768066406
+      ]
+    }
+  },
+  "totals": {
+    "tiles": 18,
+    "meshTriangles": 68860,
+    "splatRecords": 58734,
+    "visibleSplatRecords": 24950
+  },
+  "heightRangesMeters": {
+    "mesh": [
+      54.479949951171875,
+      305.3999938964844
+    ],
+    "visibleSplat": [
+      59.599937438964844,
+      384.3199768066406
+    ]
+  }
+}

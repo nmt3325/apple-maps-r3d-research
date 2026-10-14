@@ -19,7 +19,7 @@ async function main(){
     await page.screenshot({path:path.join(output,'hybrid.png')});
     const checks=[];
     const assert=(name,condition,evidence)=>{checks.push({name,pass:!!condition,evidence});if(!condition)throw Error(name);};
-    assert('all tiles loaded',initial.loaded>0&&initial.loaded===initial.polygonTiles&&initial.loaded===initial.splatTiles,initial);
+    assert('all tiles loaded',initial.loaded>0&&initial.polygonTiles===initial.expectedPolygonTiles&&initial.loaded===initial.splatTiles,initial);
     assert('WebGL draws original geometry',initial.drawCalls>0&&initial.triangles>0,initial);
     await page.locator('#splats').uncheck();let s=await snapshot();assert('Splat display toggle',!s.splatsVisible&&s.polygonsVisible,s);
     await page.screenshot({path:path.join(output,'polygons.png')});
@@ -43,7 +43,8 @@ async function main(){
     const before=await snapshot();await page.mouse.move(1100,550);await page.waitForTimeout(100);const after=await snapshot();
     assert('mouse view changes camera orientation',distance(before.quaternion,after.quaternion)>.001,{before:before.quaternion,after:after.quaternion});
     await page.keyboard.press('Escape');await page.waitForFunction(()=>!window.r3dViewer.snapshot().pointerLocked,{},{timeout:30000});s=await snapshot();assert('Escape releases mouse lock',!s.pointerLocked,s);
-    await page.locator('#reset').click();await page.screenshot({path:path.join(output,'reset.png')});
+    await page.locator('#reset').click({force:true});await page.screenshot({path:path.join(output,'reset.png')});
+    s=await snapshot();assert('reset restores initial camera',distance(s.position,initial.position)<.01,s);
     assert('no browser/shader errors',errors.length===0,errors);
     const report={url,initial,checks,errors,source:'Independently decoded R3D; actual browser UI events'};
     fs.writeFileSync(path.join(output,'browser.json'),JSON.stringify(report,null,2)+'\n');

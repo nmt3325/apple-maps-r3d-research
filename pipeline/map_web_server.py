@@ -85,7 +85,7 @@ class Handler(SimpleHTTPRequestHandler):
             self.send_json(400,{'error':'緯度・経度・範囲を確認してください。指定上限は範囲300m、1回24タイルです。'});return
         if route=='/api/plan':
             self.send_json(200,{'center':plan['center'],'radiusMeters':radius,'zoom':zoom,
-                                'tileCount':len(plan['tiles']),'bounds':plan['boundsUnwrappedSWNE']});return
+                                'tileCount':len(plan['tiles']),'heightLayers':'auto','bounds':plan['boundsUnwrappedSWNE']});return
         if route!='/api/jobs':self.send_json(404,{'error':'APIが見つかりません'});return
         global ACTIVE
         with LOCK:
@@ -116,7 +116,7 @@ def run_job(job_id,plan,run_dir):
     try:
         RUN_ROOT.mkdir(parents=True,exist_ok=True)
         run_dir.mkdir(parents=True,exist_ok=False)
-        with LOCK:JOBS[job_id]['status']='running';JOBS[job_id]['stage']='R3D取得・独立復号・3D生成'
+        with LOCK:JOBS[job_id]['status']='running';JOBS[job_id]['stage']='全高さ層のR3D取得・独立復号・3D生成'
         # Reuse the exact interpreter serving this API and pass its package path
         # explicitly. The API and worker must not silently resolve different
         # Python environments under systemd.
@@ -127,6 +127,7 @@ def run_job(job_id,plan,run_dir):
         command=[sys.executable,str(REPO/'pipeline/r3d_explorer.py'),
                  '--lat',str(plan['center'][0]),'--lon',str(plan['center'][1]),
                  '--radius-m',str(plan['radiusMeters']),'--zoom','20','--max-tiles',str(MAX_TILES),
+                 '--max-height-requests','1536',
                  '--out-dir',str(run_dir),'--config',str(CONFIG)]
         with (run_dir/'web-run.log').open('w') as log:
             result=subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,timeout=900,check=False,env=child_env)

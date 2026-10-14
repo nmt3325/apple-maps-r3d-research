@@ -58,12 +58,16 @@ def dissect(b:bytes):
     if struct.unpack_from('<I',b,4)[0]!=2 or b[8:11]!=PREFIX:raise ValueError("R3D v2 header mismatch")
     top=want(fields(b,11,len(b)),[1,2,3])
     major_a=want(fields(b,top[0][1]+1,top[0][1]+top[0][2]),[1,1,4,2,3])
-    major_b=want(fields(b,top[1][1]+1,top[1][1]+top[1][2]),[1,1,2,3])
-    material=want(fields(b,major_b[3][1],major_b[3][1]+major_b[3][2]),[1,3,5,6,8])
+    major_b=fields(b,top[1][1]+1,top[1][1]+top[1][2])
+    if [f[0] for f in major_b] not in ([1,1,2,3],[1,1,2]):
+        raise ValueError('Unexpected mesh/texture TLV tags')
+    material=want(fields(b,major_b[3][1],major_b[3][1]+major_b[3][2]),[1,3,5,6,8]) if len(major_b)==4 else []
     soup_position=major_a[4][1];soup_size=major_a[4][2]
     mesh_position=major_b[2][1];mesh_size=major_b[2][2]
     soup=b[soup_position:soup_position+soup_size]
     mesh=b[mesh_position:mesh_position+mesh_size]
+    if not material and (len(mesh)<=20 or mesh[20]!=0):
+        raise ValueError('Nonempty polygon mesh has no texture container')
     if soup[:4]!=SOUP_MAGIC or mesh[:4]!=MESH_MAGIC:
         raise ValueError("Unexpected TRICO stream magic")
     soup_version=struct.unpack_from("<I",soup,4)[0]
@@ -139,7 +143,7 @@ def dissect(b:bytes):
         "textureTags":[t for t,p,n in material],
         "splatStream":{"offset":soup_position,"bytes":soup_size,"magic":SOUP_MAGIC.hex(),"codecVersion":soup_version,"pointCount":n_splats,"channelCount":splat_channels,"quantizationSteps":[round(q,7) for q in soup_scales],"blocks":soup_blocks},
         "meshStream":{"offset":mesh_position,"bytes":mesh_size,"magic":MESH_MAGIC.hex(),"codecVersion":mesh_version,"quantizationSteps":[round(q,7) for q in mesh_scales]},
-        "textureContainer":{"offset":major_b[3][1],"bytes":major_b[3][2]}
+        "textureContainer":{"offset":major_b[3][1],"bytes":major_b[3][2]} if material else None
     }
 
 def main():

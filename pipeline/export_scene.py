@@ -60,17 +60,18 @@ def export(viewer, decoded, output):
     for tile in scene['tiles']:
         row = by_hash[tile['sourceSHA256']]
         xyz, uv, normals, indices = geometry(viewer/tile['mesh'])
-        uv = uv.copy();uv[:,1] = np.float32(1)-uv[:,1]  # glTF image coordinate origin is top-left
-        image = len(gltf['images'])
-        gltf['images'].append({'bufferView':view((viewer/tile['texture']).read_bytes()),'mimeType':'image/png'})
-        texture = len(gltf['textures']);gltf['textures'].append({'sampler':0,'source':image})
-        material = len(gltf['materials'])
-        gltf['materials'].append({'name':tile['source']+' original atlas','doubleSided':True,
-              'pbrMetallicRoughness':{'baseColorTexture':{'index':texture},'metallicFactor':0,'roughnessFactor':1},
-              'extensions':{'KHR_materials_unlit':{}}})
-        add_mesh(tile['source']+' polygons',{'attributes':{'POSITION':accessor(xyz,'VEC3',bounds=True),
-                    'TEXCOORD_0':accessor(uv,'VEC2'),'NORMAL':accessor(normals,'VEC3')},
-                    'indices':accessor(indices,'SCALAR',5125),'material':material,'mode':4},'polygon')
+        if len(indices):
+            uv = uv.copy();uv[:,1] = np.float32(1)-uv[:,1]  # glTF image coordinate origin is top-left
+            image = len(gltf['images'])
+            gltf['images'].append({'bufferView':view((viewer/tile['texture']).read_bytes()),'mimeType':'image/png'})
+            texture = len(gltf['textures']);gltf['textures'].append({'sampler':0,'source':image})
+            material = len(gltf['materials'])
+            gltf['materials'].append({'name':tile['source']+' original atlas','doubleSided':True,
+                  'pbrMetallicRoughness':{'baseColorTexture':{'index':texture},'metallicFactor':0,'roughnessFactor':1},
+                  'extensions':{'KHR_materials_unlit':{}}})
+            add_mesh(tile['source']+' polygons',{'attributes':{'POSITION':accessor(xyz,'VEC3',bounds=True),
+                        'TEXCOORD_0':accessor(uv,'VEC2'),'NORMAL':accessor(normals,'VEC3')},
+                        'indices':accessor(indices,'SCALAR',5125),'material':material,'mode':4},'polygon')
         splat_xyz, rgba = geometry(viewer/tile['splats'], True)
         add_mesh(tile['source']+' splats',{'attributes':{'POSITION':accessor(splat_xyz,'VEC3',bounds=True),
                     'COLOR_0':accessor(np.repeat(rgba,3,axis=0),'VEC4',5121,True)},'material':0,'mode':4},'splat')

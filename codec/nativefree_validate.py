@@ -29,6 +29,13 @@ def validate_arrays(soup, mesh):
         if len(mesh[key]) != 3 * mesh['faceCount'] or any(not 0 <= v < count for v in mesh[key]):
             raise ValueError(f'{key} shape/index bounds mismatch')
     uv = [v[0] for v in struct.iter_unpack('<f', mesh['uv_f32'])]
+    if mesh['faceCount']==0:
+        if mesh['vertices'] or mesh['uvCount'] or mesh['normalCount']:
+            raise ValueError('Nonempty arrays in empty polygon mesh')
+        return {'finiteGeometry':True,'indexBounds':True,'emptyMesh':True,
+                'uvMin':None,'uvMax':None,'normalLengthMin':None,'normalLengthMax':None,
+                'missingColorComponents':missing_colors,
+                'missingColorPolicy':'Preserve canonical NaNs in raw attributes; render missing RGB as zero'}
     if not uv or min(uv) < -1e-6 or max(uv) > 1.001:
         raise ValueError("UV coordinates outside original atlas")
     normal_lengths = [math.sqrt(sum(v*v for v in xyz))

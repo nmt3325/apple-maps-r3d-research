@@ -32,3 +32,5 @@
 C3MM＋u16 version2＋u16 subtype3＋u32 section count6/7。各recordはu8 tagとu32 LE total bytesでtagを長さに含む。通常tags [0,8,9,1,5,6]、optional tag4 inlineを先頭に置く場合あり。圧縮recordはcodec flag1、u32 decoded length、LZMA-alone stream。EOSがない場合も宣言長で停止する。
 
 tag0 headerはsubZoom、flippedYOrigin、xOrigin、leafZoom、N。subZoom=z+4、leafZoom=z+7、xOrigin=16*x、flippedYOrigin=2^subZoom-16*(y+1)。N packed u32 indexesの局所XYは(value>>8)&15と(value>>20)&15。low bitsの階層意味は未確定。
+
+高さ層の取得ではtag0の占有セルを保守的に全高さの子へ展開する。h0固定要求は地域上部を欠く。Splat-only上層の空mesh/textureなしの検証も含め、現行の取得・復号仕様は[HEIGHT_LAYERS.md](HEIGHT_LAYERS.md)。

@@ -95,34 +95,35 @@ def audit(decoded, viewer, raw_dir, bounds):
         rgba=np.frombuffer(data,'u1',4*sn,16+36*sn).reshape(-1,4)
         if not np.array_equal(actual_splat,expected_splat.astype('<f4')) or not np.array_equal(rgba,material[:,:4]):
             raise ValueError('Rendered Splat geometry/color mismatch')
-        with Image.open(directory/'atlas-0.heic') as image:
-            source=np.asarray(image.convert('RGB'))
-        with Image.open(viewer/render['texture']) as image:
-            texture=np.asarray(image.convert('RGB'))
-        if not np.array_equal(source,texture):
-            raise ValueError('PNG texture pixels differ from the original HEIC decode')
+        if f:
+            with Image.open(directory/'atlas-0.heic') as image:
+                source=np.asarray(image.convert('RGB'))
+            with Image.open(viewer/render['texture']) as image:
+                texture=np.asarray(image.convert('RGB'))
+            if not np.array_equal(source,texture):
+                raise ValueError('PNG texture pixels differ from the original HEIC decode')
         combined=np.concatenate([actual,actual_splat])
-        if not np.isfinite(combined).all() or not np.isfinite(actual_uv).all() or indices.max()>=n:
+        if not np.isfinite(combined).all() or not np.isfinite(actual_uv).all() or (len(indices) and indices.max()>=n):
             raise ValueError('Nonfinite or invalid rendered geometry')
         geo=ecef_to_geodetic(combined.astype(np.float64)@frame[1]+frame[0])
         if not ((geo[:,0]>=west)&(geo[:,0]<=east)&(geo[:,1]>=south)&(geo[:,1]<=north)).all():
             raise ValueError('Decoded geometry is outside expected geographic region')
         # Float32 display conversion is the only layer placement error allowed.
-        mesh_error=float(np.max(np.abs(actual.astype(np.float64)-expected[unique[:,0]])))
+        mesh_error=float(np.max(np.abs(actual.astype(np.float64)-expected[unique[:,0]]))) if len(actual) else 0.0
         splat_error=float(np.max(np.abs(actual_splat.astype(np.float64)-expected_splat)))
         if max(mesh_error,splat_error)>0.001:
             raise ValueError('Layer coordinate conversion exceeds 1 mm')
         visible=np.flatnonzero(rgba[:,3]>0)
         selected=visible[np.linspace(0,len(visible)-1,min(512,len(visible)),dtype=int)] if len(visible) else visible
         centers=actual_splat.reshape(-1,3,3)[selected].mean(axis=1)
-        distances=surface_distances(centers,actual[indices.reshape(-1,3)]) if len(centers) else np.empty(0)
+        distances=surface_distances(centers,actual[indices.reshape(-1,3)]) if len(centers) and f else np.empty(0)
         all_distances.extend(distances.tolist())
         rows.append({'tile':tile['source'],'sourceSHA256':tile['sourceSHA256'],
                      'vertices':n,'polygonFaces':f,'splatRecords':sn,'finite':True,'indicesExact':True,'uvExact':True,
                      'textureRGBPixelsExact':True,'sharedCoordinateFrame':True,
                      'maxMeshFrameRoundingMeters':mesh_error,'maxSplatFrameRoundingMeters':splat_error,
                      'geodeticMin':geo.min(axis=0).tolist(),'geodeticMax':geo.max(axis=0).tolist(),
-                     'surfaceDistanceSampleCount':len(centers),
+                     'surfaceDistanceSampleCount':len(distances),
                      'surfaceDistanceMedianMeters':float(np.median(distances)) if len(distances) else None})
     distance=np.array(all_distances)
     return {'tiles':len(rows),'origin':scene['origin'],'geographicBoundsSWNE':bounds,

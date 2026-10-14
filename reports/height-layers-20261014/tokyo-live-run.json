@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 1,
+  "plan": {
+    "center": [
+      35.6586,
+      139.7454
+    ],
+    "radiusMeters": 1.0,
+    "rangeMeaning": "Bounding square enclosing requested spherical radius; complete intersecting tiles",
+    "zoom": 20,
+    "style": 98,
+    "tiles": [
+      {
+        "z": 20,
+        "x": 931325,
+        "y": 412987,
+        "h": 0
+      },
+      {
+        "z": 20,
+        "x": 931325,
+        "y": 412987,
+        "h": 1
+      },
+      {
+        "z": 20,
+        "x": 931325,
+        "y": 412987,
+        "h": 2
+      },
+      {
+        "z": 20,
+        "x": 931325,
+        "y": 412987,
+        "h": 3
+      },
+      {
+        "z": 20,
+        "x": 931325,
+        "y": 412987,
+        "h": 8
+      },
+      {
+        "z": 20,
+        "x": 931325,
+        "y": 412987,
+        "h": 9
+      },
+      {
+        "z": 20,
+        "x": 931325,
+        "y": 412987,
+        "h": 12
+      },
+      {
+        "z": 20,
+        "x": 931325,
+        "y": 412987,
+        "h": 13
+      },
+      {
+        "z": 20,
+        "x": 931326,
+        "y": 412987,
+        "h": 0
+      },
+      {
+        "z": 20,
+        "x": 931326,
+        "y": 412987,
+        "h": 1
+      },
+      {
+        "z": 20,
+        "x": 931326,
+        "y": 412987,
+        "h": 2
+      },
+      {
+        "z": 20,
+        "x": 931326,
+        "y": 412987,
+        "h": 3
+      },
+      {
+        "z": 20,
+        "x": 931326,
+        "y": 412987,
+        "h": 8
+      },
+      {
+        "z": 20,
+        "x": 931326,
+        "y": 412987,
+        "h": 9
+      },
+      {
+        "z": 20,
+        "x": 931326,
+        "y": 412987,
+        "h": 12
+      },
+      {
+        "z": 20,
+        "x": 931326,
+        "y": 412987,
+        "h": 13
+      },
+      {
+        "z": 20,
+        "x": 931326,
+        "y": 412987,
+        "h": 14
+      },
+      {
+        "z": 20,
+        "x": 931326,
+        "y": 412987,
+        "h": 15
+      }
+    ],
+    "boundsUnwrappedSWNE": [
+      35.65859101684716,
+      139.7453889438794,
+      35.65860898315284,
+      139.7454110561206
+    ],
+    "lodSelection": "Explicit zoom; Apple exact LOD selection is an additional goal",
+    "horizontalTiles": [
+      {
+        "z": 20,
+        "x": 931325,
+        "y": 412987,
+        "h": 0
+      },
+      {
+        "z": 20,
+        "x": 931326,
+        "y": 412987,
+        "h": 0
+      }
+    ],
+    "heightDiscovery": {
+      "selection": "All vertical children of occupied C3MM coarse cells; empty responses omitted",
+      "indexZoom": 13,
+      "coarseZoom": 17,
+      "targetZoom": 20,
+      "horizontalTileCount": 2,
+      "candidateCount": 32,
+      "indexes": [
+        {
+          "file": "s100_z13_x7275_y3226_h0.c3mm",
+          "sha256": "8eed37e830185294a728b971a8fb58ea1a850c0793fa480467f6b0fdc030d12b",
+          "cells": 259
+        }
+      ]
+    }
+  },
+  "nativeRuntimeInvoked": false,
+  "nativeGoldenInput": false,
+  "steps": [
+    {
+      "step": "height-index",
+      "candidateTiles": 32,
+      "pass": true
+    },
+    {
+      "step": "fetch",
+      "tiles": 18,
+      "emptyTiles": 14,
+      "freshResponses": 32,
+      "pass": true
+    },
+    {
+      "step": "independent-decode",
+      "exitCode": 0,
+      "log": "decode.log",
+      "pass": true
+    },
+    {
+      "step": "requested-coordinate-check",
+      "tiles": 18,
+      "maxECEFOriginErrorMeters": 6.812037359144442e-09,
+      "toleranceMeters": 0.5,
+      "pass": true
+    },
+    {
+      "step": "hybrid-viewer",
+      "counts": {
+        "tiles": 18,
+        "meshTriangles": 68860,
+        "splatRecords": 58734,
+        "visibleSplatRecords": 24950
+      },
+      "pass": true
+    }
+  ],
+  "mode": "live-Linux-HTTPS",
+  "startedUTC": "2026-10-14T03:21:13Z",
+  "pass": true,
+  "elapsedSeconds": 15.23
+}

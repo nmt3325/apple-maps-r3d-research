@@ -51,10 +51,13 @@ function splatGeometry(data){
   g.computeBoundingSphere();return g;
 }
 async function loadTile(tile){
-  const [geometry, splatData, texture]=await Promise.all([buffer(tile.mesh),buffer(tile.splats),loader.loadAsync(tile.texture)]);
-  texture.colorSpace=THREE.SRGBColorSpace;texture.flipY=true;texture.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
-  const p=new THREE.Mesh(meshGeometry(geometry),new THREE.MeshBasicMaterial({map:texture,side:THREE.DoubleSide}));
-  p.name=tile.source;polygons.add(p);
+  const [geometry, splatData, texture]=await Promise.all([buffer(tile.mesh),buffer(tile.splats),tile.texture?loader.loadAsync(tile.texture):null]);
+  if(tile.triangles){
+    if(!texture)throw Error('ポリゴンの元テクスチャがありません');
+    texture.colorSpace=THREE.SRGBColorSpace;texture.flipY=true;texture.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
+    const p=new THREE.Mesh(meshGeometry(geometry),new THREE.MeshBasicMaterial({map:texture,side:THREE.DoubleSide}));
+    p.name=tile.source;polygons.add(p);
+  }
   const s=new THREE.Mesh(splatGeometry(splatData),splatMaterial);s.name=tile.source;s.renderOrder=1;splats.add(s);
   loaded++;el('status').textContent=`読み込み ${loaded} / ${metadata.tiles.length} タイル`;
 }
@@ -105,12 +108,12 @@ function selection(){const lat=+latInput.value,lon=+lonInput.value,radius=+radiu
  if(Math.abs(lat)>85.05112878||Math.abs(lon)>180||radius<5||radius>300)throw Error('緯度±85.05、経度±180、範囲5〜300mで指定してください');
  return {lat,lon,radiusMeters:radius,zoom:20};}
 el('preview-area').addEventListener('click',async()=>{const button=el('preview-area');button.disabled=true;lastPlan=null;el('fetch-location').disabled=true;
- try{const selected=selection(),plan=await postJSON('/api/plan',selected);if(selection().lat!==selected.lat||selection().lon!==selected.lon||selection().radiusMeters!==selected.radiusMeters)throw Error('位置が変わったため、タイル数を再計算してください');lastPlan=plan;el('tile-preview').textContent=`z${plan.zoom} · ${plan.tileCount}タイル · 取得範囲 ±${plan.radiusMeters}m`;
-   el('fetch-location').textContent=`${plan.tileCount}タイルを取得して3D表示`;el('fetch-location').disabled=false;el('picker-message').textContent='この範囲のR3D取得と復号を開始できます。';}
+ try{const selected=selection(),plan=await postJSON('/api/plan',selected);if(selection().lat!==selected.lat||selection().lon!==selected.lon||selection().radiusMeters!==selected.radiusMeters)throw Error('位置が変わったため、タイル数を再計算してください');lastPlan=plan;el('tile-preview').textContent=`z${plan.zoom} · 平面${plan.tileCount}タイル + 全高さ層 · 取得範囲 ±${plan.radiusMeters}m`;
+   el('fetch-location').textContent=`全高さ層を取得して3D表示`;el('fetch-location').disabled=false;el('picker-message').textContent='この範囲のR3D取得と復号を開始できます。';}
  catch(error){el('tile-preview').textContent=String(error.message||error);el('picker-message').textContent='範囲を調整して再計算してください。';}
  finally{button.disabled=false;}});
 el('fetch-location').addEventListener('click',async()=>{if(!lastPlan)return;const button=el('fetch-location');button.disabled=true;el('preview-area').disabled=true;
- try{const job=await postJSON('/api/jobs',selection());activeJob=job.id;el('picker-message').textContent=`${job.tileCount}タイルを取得中…`;
+ try{const job=await postJSON('/api/jobs',selection());activeJob=job.id;el('picker-message').textContent=`平面${job.tileCount}タイルの全高さ層を取得中…`;
    while(true){await new Promise(resolve=>setTimeout(resolve,1200));const response=await fetch(`/api/jobs/${encodeURIComponent(activeJob)}`);const state=await response.json();
      if(state.status==='failed')throw Error(state.message||'取得または復号に失敗しました');
      el('picker-message').textContent=state.status==='ready'?'3Dシーンを開いています…':`${state.stage||'取得中'} · ${state.tileCount}タイル`;
@@ -141,7 +144,7 @@ renderer.setAnimationLoop(()=>{
 });
 window.r3dViewer={snapshot:()=>({ready,loaded,flying,pointerLocked:document.pointerLockElement===renderer.domElement,
   position:camera.position.toArray(),quaternion:camera.quaternion.toArray(),polygonsVisible:polygons.visible,splatsVisible:splats.visible,
-  polygonTiles:polygons.children.length,splatTiles:splats.children.length,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles})};
+  expectedPolygonTiles:metadata?.tiles.filter(t=>t.triangles>0).length,polygonTiles:polygons.children.length,splatTiles:splats.children.length,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles})};
 try{
   const r=await fetch('./scene.json');if(!r.ok)throw Error('scene.jsonを読み込めません');metadata=await r.json();
   document.title=metadata.title;el('title').textContent=metadata.title;el('location').textContent=`${metadata.origin[0].toFixed(6)}, ${metadata.origin[1].toFixed(6)}`;

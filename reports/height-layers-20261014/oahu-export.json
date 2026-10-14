@@ -1,0 +1,13 @@
+{
+  "pass": true,
+  "tiles": 135,
+  "polygonTriangles": 1064079,
+  "splatTriangles": 382128,
+  "GLB": "All XYZ, normals, indices, flipped UV, RGBA and PNG bytes exact",
+  "PLY": "All XYZ, RGBA, eight attribute float bits including NaN, and triangle indices exact",
+  "nativeGoldenInput": false,
+  "SHA256": {
+    "scene.glb": "66bdf8299da71adb499769585ced2408f9ce77190d043b9a2fb2fabd325db24e",
+    "splats.ply": "aafa0e8a21ec9634bee46935a7a011db2ea907fe4379e42de3724ecc26fe83ec"
+  }
+}

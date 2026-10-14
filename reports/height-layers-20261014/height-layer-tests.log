@@ -1,0 +1,13 @@
+test_empty_lower_layer_does_not_hide_upper_geometry (audit.test_height_layers.HeightLayerTests.test_empty_lower_layer_does_not_hide_upper_geometry) ... fetch 2/8 s98_z20_x64556_y460816_h1.r3d bytes=243226
+fetch 2/8 s98_z20_x64556_y460816_h1.r3d bytes=243226
+ok
+test_offline_entry_preserves_original_upper_mesh_and_splats (audit.test_height_layers.HeightLayerTests.test_offline_entry_preserves_original_upper_mesh_and_splats) ... ok
+test_original_splat_only_upper_tile_and_corrupted_empty_mesh (audit.test_height_layers.HeightLayerTests.test_original_splat_only_upper_tile_and_corrupted_empty_mesh) ... ok
+test_real_index_discovers_upper_layers_and_enforces_limit (audit.test_height_layers.HeightLayerTests.test_real_index_discovers_upper_layers_and_enforces_limit) ... ok
+test_dateline_and_invalid_requests (audit.test_pipeline.PipelineTests.test_dateline_and_invalid_requests) ... ok
+test_original_r3d_corruption_and_wrong_location (audit.test_pipeline.PipelineTests.test_original_r3d_corruption_and_wrong_location) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 3.568s
+
+OK

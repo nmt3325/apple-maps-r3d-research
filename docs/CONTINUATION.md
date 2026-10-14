@@ -1,5 +1,7 @@
 # 次の解析の引継ぎ
 
+**高さ層の追補（2026-10-14）：** 旧Oahu72はh0原本の復号・配列検証であり、地域上部の取得が不足していた。高さ占有インデックスから全層を取得する修正で135タイルへ補完し、配列・表示・出力を再検証。旧数値証拠は有効だが、旧72だけで高層部分まで表示できるとは扱わない。[修正後の証拠](../reports/height-layers-20261014/README.md)。
+
 ## 作業場所
 
 このrepoを解析の新しい基点にする。元の /opt/flyover-viewer と別スレッドの取得labは参照用のまま保持している。研究checkpointは research/nativefree-lab-20261013/、独立監査履歴は research/independent-audit/、HUFF中間監査は reports/historical/。
