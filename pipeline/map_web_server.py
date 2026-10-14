@@ -10,6 +10,7 @@ import secrets
 import shutil
 import subprocess
 import sys
+import sysconfig
 import threading
 import time
 from urllib.parse import unquote, urlsplit
@@ -20,7 +21,6 @@ REPO = Path(__file__).resolve().parents[1]
 WEB_ROOT = Path(os.environ.get('R3D_WEB_ROOT',REPO/'reports/generated/web-root')).resolve()
 RUN_ROOT = Path(os.environ.get('R3D_WEB_RUNS',REPO/'reports/generated/web-runs')).resolve()
 CONFIG = Path(os.environ.get('R3D_FETCH_CONFIG','/nonexistent')).resolve()
-PYTHON = Path(os.environ.get('R3D_PYTHON',REPO/'.venv/bin/python')).resolve()
 PUBLIC_ORIGIN = os.environ.get('R3D_ALLOWED_ORIGIN','https://ct104.taila8c9c.ts.net:8972').rstrip('/')
 MAX_TILES = 24
 MAX_RADIUS = 300
@@ -117,12 +117,19 @@ def run_job(job_id,plan,run_dir):
         RUN_ROOT.mkdir(parents=True,exist_ok=True)
         run_dir.mkdir(parents=True,exist_ok=False)
         with LOCK:JOBS[job_id]['status']='running';JOBS[job_id]['stage']='R3D取得・独立復号・3D生成'
-        command=[str(PYTHON),str(REPO/'pipeline/r3d_explorer.py'),
+        # Reuse the exact interpreter serving this API and pass its package path
+        # explicitly. The API and worker must not silently resolve different
+        # Python environments under systemd.
+        child_env=os.environ.copy()
+        package_path=sysconfig.get_path('purelib')
+        existing=child_env.get('PYTHONPATH')
+        child_env['PYTHONPATH']=os.pathsep.join(p for p in (package_path,str(REPO/'pipeline'),existing) if p)
+        command=[sys.executable,str(REPO/'pipeline/r3d_explorer.py'),
                  '--lat',str(plan['center'][0]),'--lon',str(plan['center'][1]),
                  '--radius-m',str(plan['radiusMeters']),'--zoom','20','--max-tiles',str(MAX_TILES),
                  '--out-dir',str(run_dir),'--config',str(CONFIG)]
         with (run_dir/'web-run.log').open('w') as log:
-            result=subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,timeout=900,check=False)
+            result=subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,timeout=900,check=False,env=child_env)
         manifest=run_dir/'run.json'
         if result.returncode or not manifest.is_file():
             output=(run_dir/'web-run.log').read_text(errors='replace')
