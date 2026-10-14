@@ -82,22 +82,27 @@ struct CameraState: Sendable {
 }
 
 struct TilePlanner {
-    static func requestRank(_ key: TileKey, distance: Double, alignment: Double, coarse: Bool) -> Double {
+    static func requestRank(_ key: TileKey, distance: Double, alignment: Double, coarse: Bool,
+                            futureDistance: Double = 0) -> Double {
         if key.style == 100 { return -10000+Double(key.z) }
         // Give fallback geometry a local head start. An unbounded coarse
         // preference makes every distant root delay nearby fine geometry.
-        return distance+(1-alignment)*120-(coarse ? 150 : 0)+Double(key.h)*0.01
+        return distance+(1-alignment)*180-(coarse ? 150 : 0)+futureDistance*0.8+Double(key.h)*0.01
     }
-    // Quadtree leaves partition the view: close tiles z20, middle z19, distant z18.
+    // Quadtree leaves partition the entire loading region, independently of yaw.
     // C3MM expands *every* occupied vertical cell, including discontinuous towers.
-    static func plan(origin: GeoOrigin, camera: CameraState, distance: Double) -> [TileKey] {
+    static func plan(origin: GeoOrigin, camera: CameraState, distance: Double,
+                     previous: Set<TileKey> = [], maximumZoom: Int = 20) -> [TileKey] {
         let location = origin.coordinate(east: camera.eye.x, south: camera.eye.z)
         let n = 1 << 18
         let xx = Int(floor((location.longitude+180)/360*Double(n)))
         let yy = Int(floor((1-asinh(tan(location.latitude * .pi/180)) / .pi)/2*Double(n)))
         let width = origin.tileWidth(18)
         let radius = Int(ceil(distance/width))+1
-        let horizontalHalfFOV = atan(tan(camera.fov/2)*max(0.1,camera.aspect))
+        var refined = Set<TileKey>()
+        for leaf in previous where leaf.z > 18 {
+            for z in 18..<leaf.z { refined.insert(TileKey(z:z,x:leaf.x>>(leaf.z-z),y:leaf.y>>(leaf.z-z))) }
+        }
         var leaves = [TileKey]()
         func visit(_ key: TileKey) {
             let center = origin.tileCenter(key)
@@ -105,14 +110,9 @@ struct TilePlanner {
             let halfDiagonal = origin.tileWidth(key.z)*0.71
             let length = simd_length(delta)
             guard length-halfDiagonal <= distance else { return }
-            if length > halfDiagonal+90 && camera.pitch > -0.9 {
-                let ahead = SIMD2(sin(camera.yaw),-cos(camera.yaw))
-                let angle = acos(min(1,max(-1,simd_dot(delta/length,ahead))))
-                // Generous guard band prevents missing edges while rotating.
-                if angle > horizontalHalfFOV+0.35+asin(min(1,halfDiagonal/length)) { return }
-            }
             let minimumDistance = max(0,length-halfDiagonal)
-            if key.z < 20 && minimumDistance < (key.z == 18 ? 200 : 85) {
+            let threshold = key.z == 18 ? (refined.contains(key) ? 240.0 : 200.0) : (refined.contains(key) ? 120.0 : 85.0)
+            if key.z < maximumZoom && minimumDistance < threshold {
                 for dy in 0..<2 { for dx in 0..<2 {
                     visit(TileKey(z:key.z+1,x:key.x*2+dx,y:key.y*2+dy))
                 }}
@@ -127,6 +127,45 @@ struct TilePlanner {
             return simd_length(origin.tileCenter(a)-eye) < simd_length(origin.tileCenter(b)-eye)
         }
     }
+}
+
+enum StreamingPolicy {
+    static func textureLimit(zoom: Int, source: Int, constrained: Bool, headroom: Int) -> Int {
+        let lodLimit = zoom >= 20 ? min(source,8192) : (zoom == 19 ? 2048 : 1024)
+        var limit = min(source, constrained ? (zoom >= 20 ? 1024 : 512) : lodLimit)
+        // Reserve mip storage and a replacement alongside the currently displayed atlas.
+        while limit > 512 && Double(limit)*Double(limit)*4*1.34 > Double(max(0,headroom)) { limit /= 2 }
+        return max(1,limit)
+    }
+    static func retention(distance: Double) -> Double { distance <= 130 ? 60 : (distance <= 350 ? 40 : 20) }
+    static func evictionScore(distance: Double, zoom: Int, age: Double, bytes: Int, needed: Bool, visible: Bool) -> Double {
+        distance*4 + Double(max(0,zoom-18))*600 + min(age,120)*5 + Double(bytes)/1048576*8
+            - (needed ? 800 : 0) - (visible ? 1600 : 0)
+    }
+}
+
+// Packed geometry plus the original compressed atlas, never a full-size CPU bitmap.
+// Independent byte and lifetime bounds apply even while corresponding GPU tiles live.
+struct DecodedTileCache {
+    struct Entry { var data: [String:Data]; var cost: Int; var used: Double }
+    private(set) var entries: [TileKey:Entry] = [:]
+    private(set) var bytes = 0
+    mutating func value(for key: TileKey, now: Double) -> [String:Data]? {
+        guard var entry = entries[key] else { return nil }
+        entry.used = now; entries[key] = entry; return entry.data
+    }
+    mutating func insert(_ data: [String:Data], for key: TileKey, now: Double, budget: Int) {
+        if let old = entries.removeValue(forKey:key) { bytes -= old.cost }
+        let cost = data.values.reduce(0){$0+$1.count}
+        if cost <= budget { entries[key] = Entry(data:data,cost:cost,used:now); bytes += cost }
+        trim(now:now,budget:budget)
+    }
+    mutating func trim(now: Double, budget: Int) {
+        for (key,entry) in entries.sorted(by:{$0.value.used<$1.value.used}) {
+            if bytes > budget || now-entry.used > 60 { entries.removeValue(forKey:key); bytes -= entry.cost }
+        }
+    }
+    mutating func removeAll() { entries.removeAll(); bytes = 0 }
 }
 
 struct TileInfo: Decodable, Sendable {

@@ -10,59 +10,6 @@ struct FrameUniforms {
     var parameters: SIMD4<Float>
 }
 
-struct GPUTile: @unchecked Sendable {
-    let key: TileKey
-    let vertices: MTLBuffer?
-    let indices: MTLBuffer?
-    let splats: MTLBuffer?
-    let atlas: MTLTexture?
-    let model: simd_float4x4
-    let center: SIMD3<Float>
-    let radius: Float
-    let triangles: Int
-    let splatVertices: Int
-    let cost: Int
-}
-
-final class GPUFactory: @unchecked Sendable {
-    let device: MTLDevice
-    init(device: MTLDevice) { self.device = device }
-    func prepare(key: TileKey, decoded: [String:Data], origin: GeoOrigin, textureLimit: Int) throws -> GPUTile {
-        guard let json = decoded["json"], let vb = decoded["vertices"], let ib = decoded["indices"],
-              let sb = decoded["splats"], let image = decoded["atlas"] else { throw StreamError.invalidGeometry }
-        let info = try JSONDecoder().decode(TileInfo.self,from:json)
-        guard vb.count == info.vertexCount*32, ib.count == info.meshTriangles*12,
-              sb.count == info.splatVertices*40, info.transform.matrixR3x3.count == 9,
-              info.transform.ecefTranslation.count == 3, info.min.count == 3, info.max.count == 3,
-              vb.count+ib.count+sb.count <= 64*1024*1024 else { throw StreamError.invalidGeometry }
-        func buffer(_ data: Data) throws -> MTLBuffer? {
-            guard !data.isEmpty else { return nil }
-            let result = data.withUnsafeBytes { bytes in device.makeBuffer(bytes:bytes.baseAddress!,length:data.count,options:.storageModeShared) }
-            guard let result else { throw StreamError.gpuBudget }
-            return result
-        }
-        let vertices = try buffer(vb), indices = try buffer(ib), splats = try buffer(sb)
-        var texture: MTLTexture?
-        if info.meshTriangles > 0 {
-            guard let source = CGImageSourceCreateWithData(image as CFData,nil),
-                  let bitmap = CGImageSourceCreateThumbnailAtIndex(source,0,[
-                    kCGImageSourceCreateThumbnailFromImageAlways:true,
-                    kCGImageSourceThumbnailMaxPixelSize:textureLimit,
-                    kCGImageSourceShouldCacheImmediately:true] as CFDictionary) else { throw StreamError.invalidGeometry }
-            texture = try MTKTextureLoader(device:device).newTexture(cgImage:bitmap,options:[
-                .SRGB:true,.generateMipmaps:true,.textureStorageMode:MTLStorageMode.private.rawValue])
-        }
-        let model = info.model(origin:origin)
-        let lower = SIMD3<Float>(Float(info.min[0]),Float(info.min[1]),Float(info.min[2]))
-        let upper = SIMD3<Float>(Float(info.max[0]),Float(info.max[1]),Float(info.max[2]))
-        let center = model*SIMD4((lower+upper)/2,1)
-        let textureBytes = texture.map { Int(Double($0.width*$0.height*4)*1.34) } ?? 0
-        return GPUTile(key:key,vertices:vertices,indices:indices,splats:splats,atlas:texture,
-            model:model,center:SIMD3(center.x,center.y,center.z),radius:simd_length(upper-lower)/2,
-            triangles:info.meshTriangles,splatVertices:info.splatVertices,cost:vb.count+ib.count+sb.count+textureBytes)
-    }
-}
-
 @MainActor
 final class MetalRenderer: NSObject, MTKViewDelegate {
     let device: MTLDevice
@@ -78,6 +25,14 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
     var lastTime = CACurrentMediaTime()
     var frameTime = 0.0
     var frameCount = 0
+    var frameID = 0
+    var skippedGPU = 0
+    var skippedDrawable = 0
+    var lastReport = CACurrentMediaTime()
+    var intervalFrames = 0
+    var maximumFrameMS = 0.0
+    var totalCPUms = 0.0
+    var lastSubmitted = Set<TileKey>()
     let started = CACurrentMediaTime()
     init(device: MTLDevice) throws {
         self.device = device
@@ -110,9 +65,11 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
         transparentDepth = depth(.lessEqual,write:false)
         skyDepth = depth(.always,write:false)
         super.init()
+        DiagnosticsLog.shared.event("render.initialized",fields:["device":device.name,"in_flight_limit":3])
     }
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         world?.camera.aspect = size.width/max(1,size.height)
+        DiagnosticsLog.shared.event("render.resize",fields:["width":size.width,"height":size.height])
     }
     func draw(in view: MTKView) {
         let now = CACurrentMediaTime(), elapsed = now-lastTime
@@ -120,20 +77,28 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
         lastTime = now
         guard let world, world.active else { return }
         world.step(dt:dt,now:now)
+        frameID += 1
+        let currentFrame = frameID, cpuStart = DiagnosticsLog.now
+        maximumFrameMS = max(maximumFrameMS,elapsed*1000)
+        let report = now-lastReport >= 1
+        if report {
+            DiagnosticsLog.shared.event("render.interval",fields:["frame":currentFrame,"frames_submitted":intervalFrames,
+                "interval_s":now-lastReport,"gpu_backpressure_skips":skippedGPU,"drawable_skips":skippedDrawable,
+                "max_frame_interval_ms":maximumFrameMS,"cpu_total_ms":totalCPUms])
+            lastReport = now; intervalFrames = 0; skippedGPU = 0; skippedDrawable = 0; maximumFrameMS = 0; totalCPUms = 0
+        }
         // Do not block the main thread if the GPU is behind.
-        guard inFlight.wait(timeout:.now()) == .success else { return }
+        guard inFlight.wait(timeout:.now()) == .success else { skippedGPU += 1; return }
         guard let drawable = view.currentDrawable, let pass = view.currentRenderPassDescriptor,
               let command = queue.makeCommandBuffer(), let encoder = command.makeRenderCommandEncoder(descriptor:pass) else {
-            inFlight.signal(); return
+            skippedDrawable += 1; inFlight.signal(); return
         }
-        let semaphore = inFlight
-        command.addCompletedHandler { _ in semaphore.signal() }
         let camera = world.camera
-        let vp = camera.projection(far:world.viewDistance)*camera.view
+        let vp = camera.projection(far:world.renderDistance)*camera.view
         var frame = FrameUniforms(viewProjection:vp,eye:SIMD4(SIMD3<Float>(camera.eye),1),
             forward:SIMD4(SIMD3<Float>(camera.forward),0),right:SIMD4(SIMD3<Float>(camera.right),0),
             up:SIMD4(SIMD3<Float>(simd_cross(camera.right,camera.forward)),0),
-            parameters:SIMD4(Float(camera.aspect),Float(tan(camera.fov/2)),Float(now-started),Float(world.viewDistance)))
+            parameters:SIMD4(Float(camera.aspect),Float(tan(camera.fov/2)),Float(now-started),Float(world.renderDistance)))
         encoder.setVertexBytes(&frame,length:MemoryLayout<FrameUniforms>.stride,index:1)
         encoder.setFragmentBytes(&frame,length:MemoryLayout<FrameUniforms>.stride,index:1)
         encoder.setCullMode(.none)
@@ -167,7 +132,43 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
             encoder.setVertexBuffer(vertices,offset:0,index:0)
             encoder.drawPrimitives(type:.triangle,vertexStart:0,vertexCount:tile.splatVertices)
         }
-        encoder.endEncoding(); command.present(drawable); command.commit()
+        encoder.endEncoding(); command.present(drawable)
+        let submittedAt = DiagnosticsLog.now
+        let semaphore = inFlight
+        command.addCompletedHandler { completed in
+            semaphore.signal()
+            if report || completed.status == .error {
+                var fields: [String:Any] = ["frame":currentFrame,"status":completed.status.rawValue,
+                    "submit_to_complete_ms":DiagnosticsLog.milliseconds(since:submittedAt),
+                    "gpu_ms":max(0,completed.gpuEndTime-completed.gpuStartTime)*1000]
+                if let error = completed.error { fields.merge(DiagnosticsLog.errorFields(error),uniquingKeysWith:{$1}) }
+                DiagnosticsLog.shared.event("render.gpu_complete",fields:fields)
+            }
+        }
+        command.commit(); intervalFrames += 1
+        totalCPUms += DiagnosticsLog.milliseconds(since:cpuStart)
+        world.didSubmitTiles(tiles,frame:currentFrame)
+        let submitted = Set(tiles.map(\.key))
+        if submitted != lastSubmitted {
+            let appeared = submitted.subtracting(lastSubmitted).sorted().map(\.name)
+            let disappeared = lastSubmitted.subtracting(submitted).sorted().map(\.name)
+            // Chunk changes so even a relocation cannot exceed a single record's bound.
+            for (kind,keys) in [("appeared",appeared),("disappeared",disappeared)] {
+                for offset in stride(from:0,to:keys.count,by:128) {
+                    DiagnosticsLog.shared.event("render.visibility",fields:["frame":currentFrame,"change":kind,
+                        "tiles":Array(keys[offset..<min(offset+128,keys.count)])])
+                }
+            }
+            lastSubmitted = submitted
+        }
+        if report {
+            DiagnosticsLog.shared.event("render.frame",fields:["frame":currentFrame,"selected_tiles":selection.tiles.count,
+                "frustum_culled_tiles":selection.tiles.count-tiles.count,"submitted_tiles":tiles.count,
+                "triangles":tiles.reduce(0){$0+$1.triangles},"splat_vertices":tiles.reduce(0){$0+$1.splatVertices},
+                "coverage_masks":selection.masks.count,"drawable_width":view.drawableSize.width,
+                "drawable_height":view.drawableSize.height,"target_fps":view.preferredFramesPerSecond,
+                "camera":world.cameraLogFields()])
+        }
         frameTime += elapsed; frameCount += 1
         if frameTime >= 1 {
             world.fps = Double(frameCount)/frameTime

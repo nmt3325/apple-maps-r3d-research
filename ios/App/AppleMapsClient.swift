@@ -128,30 +128,66 @@ actor RawCache {
         if let entry = entries.removeValue(forKey:name) { bytes -= entry.size }
         try? FileManager.default.removeItem(at:directory.appendingPathComponent(name))
     }
-    func write(_ key: TileKey, _ data: Data) {
-        guard data.count <= budget else { return }
+    func write(_ key: TileKey, _ data: Data) -> Bool {
+        guard data.count <= budget else { return false }
         let name = key.name+".bin"
         remove(name)
         while bytes+data.count > budget, let oldest = entries.min(by:{$0.value.touched<$1.value.touched}) { remove(oldest.key) }
         do {
             try data.write(to:directory.appendingPathComponent(name),options:.atomic)
             entries[name] = Entry(size:data.count,touched:Date()); bytes += data.count
-        } catch { /* A cache write failure does not prevent live rendering. */ }
+            return true
+        } catch {
+            DiagnosticsLog.shared.event("cache.disk_write_error",tile:key.name,fields:DiagnosticsLog.errorFields(error)); return false
+        }
     }
     func clear() { for name in Array(entries.keys) { remove(name) } }
 }
 
 final class DownloadLimit: NSObject, URLSessionDownloadDelegate, @unchecked Sendable {
     let limit = 16_000_000
+    let tile: String
+    let trace: String
+    let attempt: Int
+    private var lastProgress = 0.0
+    init(tile: String, trace: String, attempt: Int) { self.tile = tile; self.trace = trace; self.attempt = attempt }
+    func urlSession(_ session: URLSession, task: URLSessionTask, didFinishCollecting metrics: URLSessionTaskMetrics) {
+        func ms(_ start: Date?, _ end: Date?) -> Any {
+            guard let start, let end else { return NSNull() }; return end.timeIntervalSince(start)*1000
+        }
+        for (index,m) in metrics.transactionMetrics.enumerated() {
+            DiagnosticsLog.shared.event("network.metrics",tile:tile,trace:trace,fields:[
+                "attempt":attempt,"transaction":index,"task_ms":metrics.taskInterval.duration*1000,
+                "dns_ms":ms(m.domainLookupStartDate,m.domainLookupEndDate),
+                "connect_ms":ms(m.connectStartDate,m.connectEndDate),
+                "tls_ms":ms(m.secureConnectionStartDate,m.secureConnectionEndDate),
+                "request_ms":ms(m.requestStartDate,m.requestEndDate),
+                "ttfb_ms":ms(m.requestEndDate,m.responseStartDate),
+                "transfer_ms":ms(m.responseStartDate,m.responseEndDate),
+                "protocol":m.networkProtocolName ?? "unknown","connection_reused":m.isReusedConnection,
+                "proxy":m.isProxyConnection,"fetch_type":m.resourceFetchType.rawValue,
+                "response_bytes":m.countOfResponseBodyBytesReceived,"redirects":metrics.redirectCount])
+        }
+    }
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask,
                     didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        if totalBytesWritten > limit || totalBytesExpectedToWrite > limit { downloadTask.cancel() }
+        let now = DiagnosticsLog.now
+        if now-lastProgress >= 1 || totalBytesWritten == totalBytesExpectedToWrite {
+            lastProgress = now
+            DiagnosticsLog.shared.event("network.progress",tile:tile,trace:trace,fields:["attempt":attempt,
+                "received_bytes":totalBytesWritten,"expected_bytes":totalBytesExpectedToWrite])
+        }
+        if totalBytesWritten > limit || totalBytesExpectedToWrite > limit {
+            DiagnosticsLog.shared.event("network.limit_exceeded",tile:tile,trace:trace,fields:["limit_bytes":limit])
+            downloadTask.cancel()
+        }
     }
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {}
     func urlSession(_ session: URLSession, task: URLSessionTask,
                     willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest,
                     completionHandler: @escaping (URLRequest?) -> Void) {
         // A signed request must never be forwarded to another origin.
+        DiagnosticsLog.shared.event("network.redirect_rejected",tile:tile,trace:trace,fields:["status":response.statusCode])
         completionHandler(nil)
     }
 }
@@ -170,59 +206,99 @@ actor AppleMapsClient {
         settings.urlCache = nil
         session = URLSession(configuration:settings)
     }
-    func fetch(_ key: TileKey) async throws -> Data? {
-        try Task.checkCancellation()
-        if let until = empty[key], until > Date() { return nil }
-        if let cached = await cache.read(key) { return cached }
-        for attempt in 0..<3 {
+    func fetch(_ key: TileKey, trace: String = UUID().uuidString) async throws -> Data? {
+        let start = DiagnosticsLog.now
+        var outcome = "error"
+        DiagnosticsLog.shared.event("fetch.begin",tile:key.name,trace:trace)
+        defer { DiagnosticsLog.shared.event("fetch.end",tile:key.name,trace:trace,fields:["outcome":outcome,"total_ms":DiagnosticsLog.milliseconds(since:start)]) }
+        do {
             try Task.checkCancellation()
-            var request = URLRequest(url:try config.signedURL(key))
-            request.cachePolicy = .reloadIgnoringLocalCacheData
-            for (name,value) in config.headers ?? [:] where !["host","authorization","cookie"].contains(name.lowercased()) {
-                request.setValue(value,forHTTPHeaderField:name)
+            if let until = empty[key], until > Date() {
+                outcome = "negative_cache_hit"; return nil
             }
-            let (file,response) = try await session.download(for:request,delegate:DownloadLimit())
-            defer { try? FileManager.default.removeItem(at:file) }
-            guard let http = response as? HTTPURLResponse else { throw StreamError.http(0) }
-            if [401,403].contains(http.statusCode) { throw StreamError.authentication }
-            if http.statusCode == 429 || http.statusCode >= 500 {
-                if attempt < 2 {
-                    let retry = min(20,max(1,Double(http.value(forHTTPHeaderField:"Retry-After") ?? "") ?? pow(2,Double(attempt+1))))
-                    try await Task.sleep(for:.seconds(retry)); continue
+            let readStart = DiagnosticsLog.now
+            let cached = await cache.read(key)
+            DiagnosticsLog.shared.event("cache.disk_read",tile:key.name,trace:trace,fields:["hit":cached != nil,
+                "bytes":cached?.count ?? 0,"duration_ms":DiagnosticsLog.milliseconds(since:readStart)])
+            if let cached { outcome = "disk_cache_hit"; return cached }
+            for attempt in 0..<3 {
+                try Task.checkCancellation()
+                let signingStart = DiagnosticsLog.now
+                var request = URLRequest(url:try config.signedURL(key))
+                DiagnosticsLog.shared.event("network.begin",tile:key.name,trace:trace,fields:["attempt":attempt+1,
+                    "signing_ms":DiagnosticsLog.milliseconds(since:signingStart),"request_timeout_s":25,"resource_timeout_s":40])
+                request.cachePolicy = .reloadIgnoringLocalCacheData
+                for (name,value) in config.headers ?? [:] where !["host","authorization","cookie"].contains(name.lowercased()) {
+                    request.setValue(value,forHTTPHeaderField:name)
                 }
+                let networkStart = DiagnosticsLog.now
+                let (file,response) = try await session.download(for:request,delegate:DownloadLimit(tile:key.name,trace:trace,attempt:attempt+1))
+                defer { try? FileManager.default.removeItem(at:file) }
+                guard let http = response as? HTTPURLResponse else { throw StreamError.http(0) }
+                DiagnosticsLog.shared.event("network.response",tile:key.name,trace:trace,fields:["attempt":attempt+1,
+                    "status":http.statusCode,"duration_ms":DiagnosticsLog.milliseconds(since:networkStart),
+                    "expected_bytes":response.expectedContentLength])
+                if [401,403].contains(http.statusCode) { throw StreamError.authentication }
+                if http.statusCode == 429 || http.statusCode >= 500 {
+                    if attempt < 2 {
+                        let retry = min(20,max(1,Double(http.value(forHTTPHeaderField:"Retry-After") ?? "") ?? pow(2,Double(attempt+1))))
+                        DiagnosticsLog.shared.event("network.retry",tile:key.name,trace:trace,fields:["attempt":attempt+1,"status":http.statusCode,"backoff_s":retry])
+                        try await Task.sleep(for:.seconds(retry)); continue
+                    }
+                }
+                if http.statusCode == 404 || http.statusCode == 204 {
+                    if key.style == 100 { throw StreamError.http(http.statusCode) }
+                    rememberEmpty(key); outcome = "empty"; return nil
+                }
+                guard http.statusCode == 200 else { throw StreamError.http(http.statusCode) }
+                let size = try file.resourceValues(forKeys:[.fileSizeKey]).fileSize ?? Int.max
+                guard size <= 16_000_000 else { throw StreamError.responseTooLarge }
+                let data = try Data(contentsOf:file)
+                if data.isEmpty {
+                    if key.style == 100 { throw StreamError.invalidIndex }
+                    rememberEmpty(key); outcome = "empty"; return nil
+                }
+                try Task.checkCancellation()
+                let writeStart = DiagnosticsLog.now
+                let stored = await cache.write(key,data)
+                DiagnosticsLog.shared.event("cache.disk_write_complete",tile:key.name,trace:trace,fields:["stored":stored,"bytes":data.count,"duration_ms":DiagnosticsLog.milliseconds(since:writeStart)])
+                outcome = "downloaded"
+                return data
             }
-            if http.statusCode == 404 || http.statusCode == 204 {
-                if key.style == 100 { throw StreamError.http(http.statusCode) }
-                rememberEmpty(key); return nil
-            }
-            guard http.statusCode == 200 else { throw StreamError.http(http.statusCode) }
-            let size = try file.resourceValues(forKeys:[.fileSizeKey]).fileSize ?? Int.max
-            guard size <= 16_000_000 else { throw StreamError.responseTooLarge }
-            let data = try Data(contentsOf:file)
-            if data.isEmpty {
-                if key.style == 100 { throw StreamError.invalidIndex }
-                rememberEmpty(key); return nil
-            }
-            try Task.checkCancellation()
-            await cache.write(key,data)
-            return data
+            throw StreamError.http(429)
+        } catch {
+            outcome = error is CancellationError || (error as? URLError)?.code == .cancelled ? "cancelled" : "error"
+            DiagnosticsLog.shared.event("fetch.error",tile:key.name,trace:trace,fields:DiagnosticsLog.errorFields(error))
+            throw error
         }
-        throw StreamError.http(429)
     }
     private func rememberEmpty(_ key: TileKey) {
         if empty.count >= 4096 { empty = empty.filter{$0.value > Date()} }
         if empty.count >= 4096, let oldest = empty.min(by:{$0.value<$1.value}) { empty.removeValue(forKey:oldest.key) }
         empty[key] = Date().addingTimeInterval(60)
     }
-    func rejectCached(_ key: TileKey) async { await cache.remove(key.name+".bin") }
+    func rejectCached(_ key: TileKey) async {
+        DiagnosticsLog.shared.event("cache.disk_reject",tile:key.name)
+        await cache.remove(key.name+".bin")
+    }
     func clearCache() async { empty.removeAll(); await cache.clear() }
 }
 
 actor TileDecoder {
-    func invoke(_ function: String, data: Data) throws -> [String:Data] {
-        try Task.checkCancellation()
-        let result = try R3DPythonBridge.invoke(function,data:data)
-        try Task.checkCancellation()
-        return result
+    func invoke(_ function: String, data: Data, tile: String? = nil, trace: String? = nil, queuedAt: Double? = nil) throws -> [String:Data] {
+        let start = DiagnosticsLog.now
+        DiagnosticsLog.shared.event("decode.begin",tile:tile,trace:trace,fields:["function":function,"input_bytes":data.count,
+            "actor_wait_ms":queuedAt.map{(start-$0)*1000} ?? 0])
+        do {
+            try Task.checkCancellation()
+            let result = try R3DPythonBridge.invoke(function,data:data)
+            try Task.checkCancellation()
+            DiagnosticsLog.shared.event("decode.end",tile:tile,trace:trace,fields:["duration_ms":DiagnosticsLog.milliseconds(since:start),
+                "output_bytes":result.mapValues{$0.count}])
+            return result
+        } catch {
+            var fields = DiagnosticsLog.errorFields(error); fields["duration_ms"] = DiagnosticsLog.milliseconds(since:start)
+            DiagnosticsLog.shared.event("decode.error",tile:tile,trace:trace,fields:fields); throw error
+        }
     }
 }

@@ -1,5 +1,17 @@
 # iOS取得最適化・Macへの引き継ぎ（2026-10-14 JST）
 
+## Macでの継続状況（2026-10-14 JST）
+
+- 添付ログ全文8,534行を再集計し、下記の件数・中央値・p95・最大値が一致することを確認。復号エラー3件もすべてキャンセル。
+- `main` の `69a4ffd` までを統合。診断ログ、CPUキャッシュ、動的テクスチャ更新、周囲360度の先読み、LOD hysteresis、メモリ制御を含む最新実装に復号最適化を適用した。ログから実行commitそのものは特定できない。
+- 古いportrait FOV制限は、最新の周囲先読みと競合するため適用しない。縦横画面で同じ周囲を取得することを検査。キュー順位は候補ごとに1回計算し、移動先の予測距離・前方優先・atlas再取得・診断イベントを保持。coarse優先の150m調整を適用した。
+- Xcode 27.0 / build 27A266aで、World / Navigation / Pipeline / Diagnostics / GPU検査がすべて成功。GPU検査は実際のMetalデバイスでpreview・原寸atlas・geometry保持・mip縮小を検証した。
+- Swiftのキュー計算で型検査時間上限に当たった式を、型付き変数・ループ・個別sortへ分割。Simulator Debug / iPhone arm64 Releaseの両ビルドが成功。既存のMetal Sendable警告と実機版orientation警告は残る。
+- Python 3.12.11で数値codec検査10件成功、Release reference corpus依存の1件はskip。mobile decoderは取得済み5原本で全3検査成功。
+- Simulator保存の223原本でもmobile decoder全3検査成功（319.681秒）。mesh位置・法線・UV・indexとSplat位置が元のdecoder配列と一致。これはnative golden再監査ではない。
+- `main`（`69a4ffd`）と統合後で取得済み5原本を復号し、JSON / vertices / indices / splats / atlasの全SHA-256が一致。[Mac検証記録](../reports/diagnostic-fetch-optimization-20261014/mac-validation.json)。各1回・全件検査との並行実行だったため、この計測から速度改善率を主張しない。
+- 署名なしIPAを生成・検証済み。実機へのインストールには署名が必要。端末上の改善率、冷/温キャッシュ、150m調整後の表示穴は実機再計測が残る。
+
 ## 依頼と保存状態
 
 ユーザーの依頼は「データの取得が遅いので最適化してください」。途中で「ここまでをブランチでリモートにプッシュし、次はMacで続ける」に切り替わったため、ここは検証途中のチェックポイント。

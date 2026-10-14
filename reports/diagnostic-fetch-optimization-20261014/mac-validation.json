@@ -1,0 +1,79 @@
+{
+  "baselineCommit": "69a4ffd6efc7bfb91f4d51f275e28b3a8bd08eef",
+  "python": "3.12.11",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "scope": "Output equality only; single-round timings under concurrent corpus validation are excluded",
+  "tiles": [
+    {
+      "tile": "s98_z18_x232831_y103246_h0.r3d",
+      "sourceSHA256": "c27e4c836637c011b445654ab58d75af61e37b7a7a10df775aff1dca90536b1a",
+      "sourceBytes": 546290,
+      "outputsMatchBaseline": true,
+      "outputs": {
+        "json": "c89e7a9daa67061656370ca97a1281a33ca6afe6c020ad02abdf8cb42590258d",
+        "vertices": "c36df2582666655908bcc638983e99ea5eb1e145201fee483cf71391c7109f0e",
+        "indices": "0d2a1a76748450554b963b8e5e3076c7be420a7a3867bb10ad67c033b6d1a375",
+        "splats": "575582050c0e2343db22de37f05ca91f3ba2b9dbbfd3e849927f05c0910fc435",
+        "atlas": "72e491e5b497a5932eb0299d90ca964161bda3c3a851b8a35c08bf80ffb4e825"
+      }
+    },
+    {
+      "tile": "s98_z19_x465662_y206493_h0.r3d",
+      "sourceSHA256": "a69cfa475e295ffd4d5ad376a56d696296392205a5daac38409cdc03af008e14",
+      "sourceBytes": 373822,
+      "outputsMatchBaseline": true,
+      "outputs": {
+        "json": "a6a8d2523171b92e73471d833b2e3246d2e0e9f317e965ded310047cac23074a",
+        "vertices": "f9d6eb96368ffcdb6361f26c01137a79f194bab3a75373f52b126c8ea0595f2b",
+        "indices": "656476bf37d8edd49638e63cce9b57174e8bbf654900f8703e85213dcfb3fbb0",
+        "splats": "dacee425dc8f53bbb992a15921aa67c3a1a1d35616fbc186c6a37c81a4be4b3d",
+        "atlas": "2b97c253b95675394ae8bf467d21070408052948cc8d0173ea5c8454212b566a"
+      }
+    },
+    {
+      "tile": "s98_z19_x465663_y206493_h0.r3d",
+      "sourceSHA256": "c7362bab0c0cf931c66e9e5896a47ab6df98b60fd4daef294df9427164ab006b",
+      "sourceBytes": 416970,
+      "outputsMatchBaseline": true,
+      "outputs": {
+        "json": "9a5580e1bbb8b39c353658b569a6aaf0a5a6aee75e9d8476785ea1e317b9d50a",
+        "vertices": "56351fffb4a7e129f8e3fd8d5bd6584883a2400b471660936603b61c31795abf",
+        "indices": "e412cb836a608154a51b2bd65001783182d8bb27cac207ac98bef8edaf17fbd4",
+        "splats": "9400a29f946818c92e8b597c658deb81156be925a6e1230c6932cd40527a098c",
+        "atlas": "2b3c85a6d9cfc9f3a10b878e24e60d8fe97e61680f4e0e81192309aecc921f73"
+      }
+    },
+    {
+      "tile": "s98_z20_x931325_y412987_h0.r3d",
+      "sourceSHA256": "3974ea9a6ce7962ef7377e88ba2e3f8e0c05adf10f9ab5823b5ac7157e5a0edd",
+      "sourceBytes": 157192,
+      "outputsMatchBaseline": true,
+      "outputs": {
+        "json": "55033e714157e837d08d390abce65297cc4292225ba453ac14d87c0cd5c9aa75",
+        "vertices": "3cfae722c2c892fe0acdaeccc293582a28df44b2f19393b332d65fae8020cf70",
+        "indices": "f20300c9b5ae387054d5f75350673d8eec1e69ce96584193e00f35ad082fb56c",
+        "splats": "7ad6c566724e0689049fbaf6a2e25af75922bc3e63662742eeabd853a1d3d96b",
+        "atlas": "397d0e8f192f44c4b0d0af8f653d8d6784f1db5bb5064b90e9977486eb611484"
+      }
+    },
+    {
+      "tile": "s98_z20_x931326_y412987_h0.r3d",
+      "sourceSHA256": "a2a45143b71eee4ce6c7d0132ad670a0349763fcf0c55aa3a1296637c81d9899",
+      "sourceBytes": 160685,
+      "outputsMatchBaseline": true,
+      "outputs": {
+        "json": "832bbbb1da6572b2629f7ba126c43353a91ec231c3d5073912c8592a548e3b67",
+        "vertices": "82888be8eb35b0c7b4efcbd625370f76d6342b07dd72b2b1ab1f8094e2011fee",
+        "indices": "a3557a2d26e3da4be3e5598525a6810d3724b9b8e1065020ec1f2387294a07c1",
+        "splats": "d5568d0c7046d9943e18554fcfcb3746092e04147efea3275bfc978bb20de1ea",
+        "atlas": "d3a3f9964076118eadf4a3c797df6f46b27e1ff9cc22cb610e3ffe5da4169ac1"
+      }
+    }
+  ],
+  "mobilePackingCorpus": {
+    "tiles": 223,
+    "seconds": 319.681,
+    "result": "PASS",
+    "scope": "Mesh positions, normals, UV, indices and Splat positions compared to source decoder arrays; not a native golden audit"
+  }
+}
