@@ -33,7 +33,9 @@ import simd
         var wrong = heights; wrong.tile.x += 1
         do { _ = try wrong.expand(fine); preconditionFailure("Coordinate mismatch must fail") } catch { }
         let initial = CameraState(), ahead = initial.eye+initial.forward*100
-        let clip = initial.projection(far:350)*initial.view*SIMD4(SIMD3<Float>(ahead),1)
+        let viewProjection = initial.projection(far:350)*initial.view
+        let point = SIMD4<Float>(SIMD3<Float>(ahead),1)
+        let clip = simd_mul(viewProjection,point)
         precondition(abs(clip.x/clip.w) < 0.001 && abs(clip.y/clip.w) < 0.001 && clip.z/clip.w > 0 && clip.z/clip.w < 1)
         let info = TileInfo(transform:.init(matrixR3x3:[1,0,0,0,1,0,0,0,1],ecefTranslation:[origin.ecef.x,origin.ecef.y,origin.ecef.z]),
             min:[0,0,0],max:[1,1,1],meshTriangles:0,splatVertices:0,vertexCount:0)
