@@ -1,0 +1,16 @@
+{
+  "assets": [
+    {
+      "file": "independent-oahu-viewer-and-exports.tar.gz",
+      "bytes": 143194860,
+      "sha256": "34cceb23b17b92cee52153330ccbe158b12c8f7d7c5f38d1b4e684e01bf8d4f6"
+    },
+    {
+      "file": "fresh-coordinate-regressions.tar.gz",
+      "bytes": 10078991,
+      "sha256": "b70770e99a2f4c896a20ac7a8f17c9cfe8643b270f3ad4c0f76370ee6584ff82"
+    }
+  ],
+  "nativeGoldenInput": false,
+  "note": "Independent decoder outputs, original textures, portable viewer, GLB/PLY, six freshly fetched raw R3D regression inputs; no credentials or capture"
+}

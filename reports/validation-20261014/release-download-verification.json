@@ -1,0 +1,8 @@
+{
+  "release": "linux-explorer-20261014",
+  "remoteHost": "Ubuntu24.04 Linux aarch64",
+  "operation": "gh release download, then sha256sum -c SHA256SUMS",
+  "jobID": "a684bd33c3b441fe",
+  "exitCode": 0,
+  "output": "independent-oahu-viewer-and-exports.tar.gz: OK\nfresh-coordinate-regressions.tar.gz: OK\n"
+}

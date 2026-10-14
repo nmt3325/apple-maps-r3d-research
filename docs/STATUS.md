@@ -1,6 +1,6 @@
 # 2026-10-14 JSTの状態
 
-主要目標は未達。[ACCEPTANCE.md](ACCEPTANCE.md)の6項目をすべて満たした時点で達成とする。以下の部分的な成果はその判定と区別する。
+対応するR3Dについて主要目標の6条件を達成。証拠は[validation-20261014](../reports/validation-20261014/README.md)。[ACCEPTANCE.md](ACCEPTANCE.md)の6項目をすべて満たした時点で達成とする。以下の部分的な成果はその判定と区別する。
 
 ## 完了した経路
 
@@ -27,12 +27,14 @@ Oahu72も原本だけから304,527 Splatと581,186元ポリゴン面を復号し
 
 C3MM v2は6つのサンプルで36圧縮区画が宣言長どおり復号でき、元タイルz/x/yをbinaryから復元できています。局所16x16のpacked XYとcoverage照合は実装済みですが、low-bit markerとh1/階層・tag1/tag6の意味は未確定です。
 
-## まだできていないこと
+## 再現と保存
 
-1. 別のLinuxマシンの隔離venvで、固定依存・取得済みR3D原本から完全経路を再現する。
-2. 最終の実装・検証・制約・表示/出力成果物をGitHubに保存し、再現コマンドと証拠を添えて6条件を監査する。
+別Ubuntu24.04/aarch64でfresh cloneと隔離venvからOahu72と座標入口を再現しました。936配列/画像hash、GLB/PLYのSHAはx86_64と完全一致。原本破損/別座標のrejectと全region/export監査も通過。独立成果物と新しい座標取得原本はprivate Release linux-explorer-20261014へ保存しました。手順は[LINUX_EXPLORER.md](LINUX_EXPLORER.md)。
 
-座標入口は`pipeline/r3d_explorer.py`。東京タワー4タイルとニューヨーク2タイルで、新しいHTTPS署名取得→独立復号→ハイブリッドviewer→GLB/PLYの成功を記録しました。[LINUX_EXPLORER.md](LINUX_EXPLORER.md)にセットアップ、ローカル取得設定、再現コマンド、範囲と制約を記録しています。
-5. 追加目標：Apple公式表示のpixel parity、uniform、tile accumulation、color transfer、正確なLOD選択。
+ユーザー指定でOahuサーバーをsystemdに起動し、Tailscale HTTPS8972で公開。別LinuxからTLS検証付きscene GETも成功。URL：https://ct104.taila8c9c.ts.net:8972/。
 
-過去メモの「polygon未取得」「222/223 origin」「native-free geometry未完成」は、その時点の履歴です。独立した数値復号は今回実装・照合済みですが、取得から表示までの主要目標は引き続き未達です。
+## 残る追加目標・制約
+
+Apple公式pixel parity、正確なLOD、独自tile accumulation/color transferは未達です。ブラウザはbarycentric alpha、GLBは標準alpha blendなので同じ表示にはなりません。取得にはローカル設定が必要で、coverage/API/versionに依存します。decoderは既知のR3D v2/TRICO mesh v3等に対応し、未知variantは明示rejectします。全世界のサービスcoverageを保証するという意味での完了ではありません。
+
+過去メモの未達・部分復号という記述は探索時点の履歴です。現在の判断はREADME、ACCEPTANCEと実証レポートを優先します。

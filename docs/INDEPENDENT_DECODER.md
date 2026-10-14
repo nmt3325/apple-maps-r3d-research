@@ -73,4 +73,4 @@ R3D v2、TRICO soup v1、TRICO mesh v3、BYET/J kind0..6、single/chained Huff8/
 
 HUFFはレーン内compact整数から出力symbol数を取得し、表とentropyをword境界で区別する。symbol消費後のentropy長とゼロpaddingを検証する。各BYET/TLVブロックの長さ、meshの全index範囲、XYZ/UV/法線の有限値、法線長、UV範囲を検証する。
 
-参照命令列とGhidra出力は`research/static-codec/`の解析資料であり、実装とは別物。実行時には不要。全体の完了判定は[ACCEPTANCE.md](ACCEPTANCE.md)による。Oahuの表示、取得から表示への統合、GLB/PLY出力、新しいLinux環境での完全経路の再現は引き続き必要。
+参照命令列とGhidra出力は`research/static-codec/`の解析資料であり、実装とは別物。実行時には不要。全体の完了判定は[ACCEPTANCE.md](ACCEPTANCE.md)による。Oahu表示、座標入力からのLinux取得→表示、GLB/PLY、別Linuxでの再現も完了。[LINUX_EXPLORER.md](LINUX_EXPLORER.md)とreports/validation-20261014/を参照。

@@ -92,3 +92,22 @@ GLBは共通east/up/southメートル座標で、元のポリゴン面、UV、�
 ブラウザは元三角形にbarycentric alphaを付ける。GLBは標準alpha blendで、専用shaderを表現しない。Apple公式のpixel一致・正確なLOD・タイル累積/色変換は未達の追加目標。レイヤーは元の異なるgeometryであり、Splat中心がポリゴン面と完全一致するという意味ではない。原本の同じR/ECEF transformと共通ENUを適用したことを全配列で検証する。
 
 実証は [reports/validation-20261014](../reports/validation-20261014/) に保存。東京全golden比較は [INDEPENDENT_DECODER.md](INDEPENDENT_DECODER.md)。
+
+## 再現済み環境と配布成果物
+
+実装fb259cfを別Ubuntu24.04/aarch64でfresh cloneし、system-site-packages=falseのvenvと上記依存からOahu72、viewer、GLB/PLY、全region/export監査、原本破損/別座標reject、座標入口のoffline原本経路を再現した。936配列/画像のSHA一覧digestと、完成GLB/PLYのSHAはLinux x86_64と完全一致。[検証証拠](../reports/validation-20261014/linux-arm-reproduction.json) / [環境間照合](../reports/validation-20261014/cross-platform-comparison.json)。ライブ署名取得はCT104 Linuxで東京4/ニューヨーク2を検証している。
+
+完成viewerと出力はprivate Release `linux-explorer-20261014` にある。全依存なしで完成viewerを表示する例：
+
+```bash
+gh release download linux-explorer-20261014 --repo nmt3325/apple-maps-r3d-research \
+  --dir release-assets/linux-explorer
+cd release-assets/linux-explorer
+sha256sum -c SHA256SUMS
+tar -xzf independent-oahu-viewer-and-exports.tar.gz
+python3 -m http.server 8972 --bind 127.0.0.1 --directory oahu-viewer
+```
+
+`fresh-coordinate-regressions.tar.gz` は東京タワー4とニューヨーク2の新原本と独立出力を含む。例えば展開後の `live-new-york/raw` を `--source-dir` に指定すれば、同じ座標/半径で入口を再現できる。取得設定は含まれない。
+
+ユーザー指定によりCT104ではsystemdのtransient unit `r3d-oahu-independent-viewer.service` でOahuサーバーを稼働させ、`tailscale serve --bg --yes --https=8972 http://127.0.0.1:8972`でtailnetに公開した。アクセス先は `https://ct104.taila8c9c.ts.net:8972/`。別Tailscale LinuxからTLS検証付きGETで72タイルsceneを確認済み。serviceはshell終了後も動くがマシン再起動時には自動起動しない。状態は `systemctl status r3d-oahu-independent-viewer.service` と `tailscale serve status`、停止は `systemctl stop r3d-oahu-independent-viewer.service` と `tailscale serve --https=8972 off`。

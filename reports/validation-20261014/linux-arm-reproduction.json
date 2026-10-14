@@ -1,0 +1,154 @@
+{
+  "testedCommit": "fb259cf3577958f8010df5297772e07915f9ffd4",
+  "platform": "Linux-6.17.0-1019-oracle-aarch64-with-glibc2.39",
+  "osRelease": "PRETTY_NAME=\"Ubuntu 24.04.2 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.2 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n",
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "pythonExecutable": "/tmp/r3d-repro-source-20261014/.venv/bin/python",
+  "venvConfiguration": "home = /usr/bin\ninclude-system-site-packages = false\nversion = 3.12.3\nexecutable = /usr/bin/python3.12\ncommand = /usr/bin/python3 -m venv /tmp/r3d-repro-source-20261014/.venv\n",
+  "dependencies": {
+    "numpy": "2.5.3",
+    "Pillow": "12.2.0",
+    "pillow-heif": "1.8.1",
+    "scipy": "1.18.1",
+    "cryptography": "43.0.0"
+  },
+  "node": "v26.10.0",
+  "npm": "11.19.1",
+  "inputRelease": "snapshot-20261014 / oahu-and-fetch-results.tar.gz",
+  "inputArchiveSHA256": "e6319904c18e9ccd1bb5e75da12708fc3426e55476f070d4207ccfcd702037fe",
+  "tiles": 72,
+  "meshTriangles": 581186,
+  "splatRecords": 304527,
+  "nativeRuntimeInvoked": false,
+  "nativeGoldenInput": false,
+  "decodedArrayHashCount": 936,
+  "decodedArrayHashDigest": "c611991c4e9fed360b3153ffba33c534021fecb930c96b9d05d8e7051980e116",
+  "regionAudit": {
+    "tiles": 72,
+    "origin": [
+      21.2828,
+      -157.8369,
+      0
+    ],
+    "geographicBoundsSWNE": [
+      21.27,
+      -157.85,
+      21.3,
+      -157.82
+    ],
+    "polygonFaces": 581186,
+    "splatRecords": 304527,
+    "allGeometryFinite": true,
+    "allIndicesAndUVExact": true,
+    "allTexturesDecodedRGBExact": true,
+    "sharedFramePlacementVerified": true,
+    "nativeGoldenInput": false,
+    "surfaceDistanceSampleCount": 36158,
+    "surfaceDistanceMetersPercentiles": {
+      "p50": 2.8460663557052612,
+      "p90": 11.79014377593994,
+      "p95": 13.996932840347293,
+      "p99": 18.56091148376465,
+      "max": 26.02534294128418
+    },
+    "surfaceDistanceScope": "Deterministic samples of visible Splat centroids to original mesh triangles among 24 nearest centroids; diagnostic, not equality of the two distinct geometry layers"
+  },
+  "exportAudit": {
+    "pass": true,
+    "tiles": 72,
+    "polygonTriangles": 581186,
+    "splatTriangles": 304527,
+    "GLB": "All XYZ, normals, indices, flipped UV, RGBA and PNG bytes exact",
+    "PLY": "All XYZ, RGBA, eight attribute float bits including NaN, and triangle indices exact",
+    "nativeGoldenInput": false,
+    "SHA256": {
+      "scene.glb": "ad48cfe9d1127d728b0c239faa25afb5dd3c3a08dadb4bf04850171d3f609cf2",
+      "splats.ply": "3eeb7b569cad8168ef3e0e0a026e6fa12ca0566e61d10a7f7c5e83ca83aed5d1"
+    }
+  },
+  "gltfValidation": {
+    "numErrors": 0,
+    "numWarnings": 0,
+    "numInfos": 70
+  },
+  "coordinateEntry": {
+    "schemaVersion": 1,
+    "plan": {
+      "center": [
+        21.2828,
+        -157.8369
+      ],
+      "radiusMeters": 5,
+      "rangeMeaning": "Bounding square enclosing requested spherical radius; complete intersecting tiles",
+      "zoom": 20,
+      "style": 98,
+      "tiles": [
+        {
+          "z": 20,
+          "x": 64554,
+          "y": 460820,
+          "h": 0
+        }
+      ],
+      "boundsUnwrappedSWNE": [
+        21.282755084235795,
+        -157.83694820321207,
+        21.28284491576421,
+        -157.83685179678795
+      ],
+      "lodSelection": "Explicit zoom; Apple exact LOD selection is an additional goal"
+    },
+    "nativeRuntimeInvoked": false,
+    "nativeGoldenInput": false,
+    "steps": [
+      {
+        "step": "original-input-selection",
+        "tiles": 1,
+        "pass": true
+      },
+      {
+        "step": "independent-decode",
+        "exitCode": 0,
+        "log": "decode.log",
+        "pass": true
+      },
+      {
+        "step": "requested-coordinate-check",
+        "tiles": 1,
+        "maxECEFOriginErrorMeters": 1.0557271585571239e-8,
+        "toleranceMeters": 0.5,
+        "pass": true
+      },
+      {
+        "step": "hybrid-viewer",
+        "counts": {
+          "tiles": 1,
+          "meshTriangles": 7486,
+          "splatRecords": 7847,
+          "visibleSplatRecords": 7779
+        },
+        "pass": true
+      },
+      {
+        "step": "GLB/PLY",
+        "outputs": {
+          "scene.glb": {
+            "bytes": 1099676,
+            "sha256": "856e9665f0d5b1ea6c33ef204bace2f0a7b8a9d4285fb5b99b3aa9fcc0f7e824"
+          },
+          "splats.ply": {
+            "bytes": 1232570,
+            "sha256": "7aa27ee38b5eefc821bb0b2412a89660b7e21e220a0c12f3955998b387eaaade"
+          }
+        },
+        "pass": true
+      }
+    ],
+    "mode": "offline-original-R3D",
+    "startedUTC": "2026-10-14T02:08:01Z",
+    "pass": true,
+    "elapsedSeconds": 1.423
+  },
+  "pipelineRegressionLog": "test_dateline_and_invalid_requests (audit.test_pipeline.PipelineTests.test_dateline_and_invalid_requests) ... ok\ntest_original_r3d_corruption_and_wrong_location (audit.test_pipeline.PipelineTests.test_original_r3d_corruption_and_wrong_location) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 1.412s\n\nOK\n",
+  "reproductionJobExitCode": 0
+}

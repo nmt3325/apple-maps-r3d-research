@@ -4,14 +4,15 @@
 
 このrepoを解析の新しい基点にする。元の /opt/flyover-viewer と別スレッドの取得labは参照用のまま保持している。研究checkpointは research/nativefree-lab-20261013/、独立監査履歴は research/independent-audit/、HUFF中間監査は reports/historical/。
 
-## 次の順番
+## 主要目標達成後の引継ぎ
 
-1. Oahu72の表示・地理/全viewer配列・GLB/PLY・ブラウザ15操作検証は完了。座標入力による東京4/ニューヨーク2のLinux HTTPS取得→独立復号→表示生成も完了。
-2. 別Linux（Ubuntu 24.04 aarch64）の隔離venvで、固定依存から全経路を再現する。
-3. 最終の実装・検証証拠・viewer/export成果物をGitHubへ保存し、README/ACCEPTANCEと6条件の監査を揃える。
-4. 追加目標の公式pixel一致、正確なLOD、Apple独自の累積・色変換は未達として追跡する。
+主要6条件は対応するR3Dについて達成済み。別Ubuntu24.04/aarch64でもOahu72を再現し、936配列/画像hashとGLB/PLY SHAが一致。証拠はreports/validation-20261014/、成果物はprivate Release linux-explorer-20261014。
 
-完全経路のコマンドと制約は[LINUX_EXPLORER.md](LINUX_EXPLORER.md)。新しい証拠はreports/validation-20261014/。
+Oahuサーバーはユーザー指定で https://ct104.taila8c9c.ts.net:8972/ に稼働中。systemd transient unitなのでshell終了後も動作するが、マシン再起動時の自動起動は未設定。詳細はLINUX_EXPLORER.md。
+
+次に追跡するのは追加目標の公式pixel一致、正確なLOD、Apple独自の累積・色変換。現状のbarycentric alpha/GLB standard blendの差を維持して明記する。未知codec/primary atlas variantやAPI template更新が必要な地域は明示rejectし、代用meshやnative再表示へfallbackしない。
+
+完全経路のコマンドと取得設定/coverage/対応形式の制約は[LINUX_EXPLORER.md](LINUX_EXPLORER.md)。
 
 数値codecと東京223全配列検証は[INDEPENDENT_DECODER.md](INDEPENDENT_DECODER.md)に記録済み。Splatの全3*N頂点と8属性/material20は完全一致、ポリゴンXYZ/UV/全index/primary HEICも一致。法線271個の1 ULP差は個別の数値証拠付きで説明済み。旧`.decoded`の位置は全配列の先頭N頂点だけなので、これを中心点として再利用しない。
 

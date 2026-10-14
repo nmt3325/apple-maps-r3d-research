@@ -2,9 +2,11 @@
 
 Apple Maps iOS 27のR3Dを調査し、**元のテクスチャ付きポリゴンとsoft triangle Splatを復元・表示する研究**の成果をまとめたスナップショットです。2026-10-14 JST時点。
 
-**Linuxの独立decoder、東京223の全配列照合、Oahu72の元テクスチャ付きポリゴン＋Splat表示、座標入力からの取得・復号・表示・GLB/PLY出力を実装・検証しました。別Linuxでの再現と最終保存を確認中で、主要目標はまだ未達です。** soft triangle Splatを通常の楕円3D Gaussian Splattingと同一とは断定していません。
+**Linuxの独立decoder、東京223の全配列照合、Oahu72の元テクスチャ付きポリゴン＋Splat表示、座標入力からの取得・復号・表示・GLB/PLY出力を実装・検証しました。別Ubuntu24.04 ARM Linuxでも再現し、936配列/画像とGLB/PLYのhashが一致しました。GitHub Releaseへ成果物を保存済みで、対応するR3Dについて主要6条件を達成しました。** soft triangle Splatを通常の楕円3D Gaussian Splattingと同一とは断定していません。
 
 主要目標は任意の緯度・経度・範囲からLinuxだけで取得・完全復号・自由移動表示まで実行することです。[6項目の完了条件](docs/ACCEPTANCE.md)をすべて満たした場合に達成と判定します。公式表示とのpixel一致、正確なLOD、タイル累積・色変換の完全再現は別の追加目標として追跡します。
+
+稼働中のOahuビューア（Tailscale内）：**https://ct104.taila8c9c.ts.net:8972/**。完成成果物は [Linux explorer Release](https://github.com/nmt3325/apple-maps-r3d-research/releases/tag/linux-explorer-20261014)、[6条件の検証証拠](reports/validation-20261014/README.md)、[再現手順](docs/LINUX_EXPLORER.md)。ローカル取得設定、サービスcoverageと対応codecの制約は手順に明記しています。
 
 ## 現在の成果
 

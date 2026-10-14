@@ -1,0 +1,9 @@
+{
+  "platform": "local Linux x86_64",
+  "decodedArrayHashCount": 936,
+  "decodedArrayHashDigest": "c611991c4e9fed360b3153ffba33c534021fecb930c96b9d05d8e7051980e116",
+  "exportSHA256": {
+    "scene.glb": "ad48cfe9d1127d728b0c239faa25afb5dd3c3a08dadb4bf04850171d3f609cf2",
+    "splats.ply": "3eeb7b569cad8168ef3e0e0a026e6fa12ca0566e61d10a7f7c5e83ca83aed5d1"
+  }
+}

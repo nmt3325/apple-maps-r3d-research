@@ -1,0 +1,19 @@
+{
+  "viewerURL": "https://ct104.taila8c9c.ts.net:8972/",
+  "service": "r3d-oahu-independent-viewer.service",
+  "backend": "http://127.0.0.1:8972",
+  "directory": "/opt/apple-maps-r3d-research/reports/generated/oahu-viewer",
+  "systemdStateObserved": "active/running",
+  "lifetime": "Transient systemd unit, continues after shell exits; does not auto-start after a machine reboot",
+  "tailscaleServe": "HTTPS 8972, tailnet only",
+  "remoteCheck": {
+    "host": "Separate Ubuntu 24.04 Linux aarch64",
+    "method": "TLS-verified curl GET /scene.json over Tailnet",
+    "jobID": "b95ed0e8a1b542f1",
+    "exitCode": 0,
+    "tiles": 72,
+    "meshTriangles": 581186,
+    "splatRecords": 304527,
+    "decoder": "independent-python"
+  }
+}
