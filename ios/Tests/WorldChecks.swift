@@ -54,6 +54,31 @@ import simd
         precondition(StreamingPolicy.textureLimit(zoom:20,source:4096,constrained:true,headroom:96*1048576) == 1024)
         precondition(StreamingPolicy.textureLimit(zoom:19,source:4096,constrained:true,headroom:96*1048576) == 512)
         precondition(StreamingPolicy.textureLimit(zoom:20,source:4096,constrained:false,headroom:2*1048576) == 512)
+        // Replay the observed 896 <-> 448 cycle against a fixed set of other residents.
+        func atlasBytes(_ pixels: Int) -> Int { Int(Double(pixels)*Double(pixels)*4*1.34) }
+        let textureBudget = 192*1048576
+        let otherResidents = textureBudget-atlasBytes(896)-200_000
+        var currentLimit = 896, transitions = 0
+        for _ in 0..<1000 {
+            let ownBytes = atlasBytes(currentLimit)
+            let resident = otherResidents+ownBytes
+            let target = StreamingPolicy.textureTarget(zoom:20,source:896,current:currentLimit,
+                headroom:textureBudget-resident+ownBytes,constrained:false,pressure:true,upgradeAllowed:true)
+            if target != currentLimit { currentLimit = target; transitions += 1 }
+        }
+        precondition(transitions <= 1, "Stable pressure must not cycle an atlas between two resolutions")
+        precondition(StreamingPolicy.textureTarget(zoom:20,source:896,current:448,
+            headroom:192*1048576,constrained:false,pressure:true,upgradeAllowed:true) == 448,
+            "Pressure must not regrow an already reduced atlas")
+        precondition(StreamingPolicy.textureTarget(zoom:20,source:896,current:448,
+            headroom:192*1048576,constrained:false,pressure:false,upgradeAllowed:false) == 448,
+            "Wait before regrowing after a reduction or a distance change")
+        precondition(StreamingPolicy.textureTarget(zoom:20,source:896,current:448,
+            headroom:192*1048576,constrained:false,pressure:false,upgradeAllowed:true) == 896,
+            "Restore detail when pressure and the cooldown have ended")
+        precondition(StreamingPolicy.textureTarget(zoom:20,source:4096,current:4096,
+            headroom:0,constrained:true,pressure:true,upgradeAllowed:false) == 512,
+            "Cooldown must not block a further emergency reduction")
         let farHigh = StreamingPolicy.evictionScore(distance:500,zoom:20,age:20,bytes:8*1048576,needed:true,visible:false)
         let nearCoarse = StreamingPolicy.evictionScore(distance:60,zoom:18,age:0,bytes:1048576,needed:true,visible:true)
         precondition(farHigh > nearCoarse)

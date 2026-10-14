@@ -16,6 +16,15 @@ All textures retain mipmaps and trilinear, derivative-selected sampling. Under
 pressure z20 uses 512–1024 and other LODs use up to 512. Resident mips are copied
 to smaller atlases without requiring the original CPU cache entry.
 
+Resolution selection excludes the atlas being replaced from resident usage;
+upload admission still reserves space for both the old and replacement atlas.
+Distant atlases can only shrink during active texture pressure. After a successful
+reduction, upgrades wait ten seconds, including when camera movement brings the
+tile closer. Further emergency reductions remain available immediately. Once
+pressure and the upgrade delay end, the ordinary refinement policy can restore
+detail. Stored texture resolution reflects the actual mip dimensions (for example,
+an 896 px atlas reduced to a 512 px cap becomes 448 px), rather than the requested cap.
+
 The resident model budget is 192 MiB standard / 96 MiB constrained. Texture
 replacement memory is reserved against other uploads. At 80% usage or allocation
 failure, distant textures are reduced first; geometry eviction ranks distance,
@@ -39,6 +48,8 @@ Metal frames can temporarily retain additional allocations.
 
 WorldChecks covers 360-degree rotation invariance, four-quadrant acquisition,
 partitioning with hysteresis, pressure LOD limits, texture policy, eviction order,
-and CPU LRU byte/lifetime bounds. GitHub's iOS workflow compiles both simulator
+and CPU LRU byte/lifetime bounds, plus stable texture targets, upgrade delays and
+restoration after pressure. GPUChecks verifies actual non-power-of-two mip sizes.
+GitHub's iOS workflow compiles both simulator
 Debug and unsigned iPhone Release, and packages an unsigned IPA. Hardware visual
 quality, memory-warning behavior and frame rate still require device validation.

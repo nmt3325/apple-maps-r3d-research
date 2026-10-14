@@ -130,6 +130,12 @@ struct TilePlanner {
 }
 
 enum StreamingPolicy {
+    static func textureTarget(zoom: Int, source: Int, current: Int, headroom: Int,
+                              constrained: Bool, pressure: Bool, upgradeAllowed: Bool) -> Int {
+        let target = textureLimit(zoom:zoom,source:source,constrained:constrained || pressure,headroom:headroom)
+        if pressure || !upgradeAllowed { return min(current,target) }
+        return constrained ? target : max(current,target)
+    }
     static func textureLimit(zoom: Int, source: Int, constrained: Bool, headroom: Int) -> Int {
         let lodLimit = zoom >= 20 ? min(source,8192) : (zoom == 19 ? 2048 : 1024)
         var limit = min(source, constrained ? (zoom >= 20 ? 1024 : 512) : lodLimit)

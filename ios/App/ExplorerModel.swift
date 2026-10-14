@@ -64,6 +64,7 @@ final class ExplorerModel: ObservableObject {
     var textureKey: TileKey?
     var textureReservation = 0
     var textureRetry: [TileKey:Double] = [:]
+    var textureUpgradeAfter: [TileKey:Double] = [:]
     var texturePressureUntil = 0.0
     var velocity = SIMD2<Double>.zero
     var previousEye: SIMD2<Double>?
@@ -112,7 +113,7 @@ final class ExplorerModel: ObservableObject {
         queuedAt.removeAll(); neededAt.removeAll(); tileReadyAt.removeAll(); tileTraces.removeAll(); awaitingFirstDraw.removeAll()
         generation += 1
         textureTask?.cancel(); textureTask = nil; textureKey = nil; textureReservation = 0
-        textureRetry.removeAll(); decodedCache.removeAll()
+        textureRetry.removeAll(); textureUpgradeAfter.removeAll(); decodedCache.removeAll()
         previousEye = nil; velocity = .zero
         pending.values.forEach{$0.cancel()}; pending.removeAll(); fetching.removeAll(); queue.removeAll()
         tiles.removeAll(); knownBounds.removeAll(); accessed.removeAll(); empty.removeAll(); failures.removeAll()
@@ -433,6 +434,7 @@ final class ExplorerModel: ObservableObject {
             "bytes":tiles[key]?.cost ?? 0,"distance_m":tileDistance(key),"lod":key.z,"needed":needed.contains(key),
             "in_frustum":inView(key),"unused_s":CACurrentMediaTime()-(accessed[key] ?? CACurrentMediaTime())])
         tiles.removeValue(forKey:key); accessed.removeValue(forKey:key)
+        textureUpgradeAfter.removeValue(forKey:key)
         tileReadyAt.removeValue(forKey:key); tileTraces.removeValue(forKey:key); awaitingFirstDraw.remove(key)
     }
     func tileDistance(_ key: TileKey) -> Double {
@@ -450,12 +452,13 @@ final class ExplorerModel: ObservableObject {
     }
     func targetTextureLimit(_ tile: GPUTile, now: Double) -> Int {
         let pressure = now < texturePressureUntil && tileDistance(tile.key) > 130
-        let headroom = min(budget-residentBytes,Int(os_proc_available_memory())/4)
-        let target = StreamingPolicy.textureLimit(zoom:tile.key.z,source:tile.sourcePixels,
-            constrained:constrained || pressure,headroom:headroom)
-        // Low headroom alone must not repeatedly shrink and regrow near atlases.
-        if !constrained && !pressure { return max(tile.textureLimit,target) }
-        return target
+        // Choose against other residents, so replacing this atlas cannot flip
+        // its own target. Upload admission still reserves both live textures.
+        let atlasBytes = tile.atlas?.allocatedSize ?? 0
+        let headroom = min(budget-residentBytes+atlasBytes,Int(os_proc_available_memory())/4)
+        return StreamingPolicy.textureTarget(zoom:tile.key.z,source:tile.sourcePixels,
+            current:tile.textureLimit,headroom:headroom,constrained:constrained,pressure:pressure,
+            upgradeAllowed:now >= (textureUpgradeAfter[tile.key] ?? 0))
     }
     func updateTextures(now: Double) {
         guard active, !paused, textureTask == nil, let factory else { return }
@@ -500,6 +503,7 @@ final class ExplorerModel: ObservableObject {
                     let replacement = current.replacing(atlas:atlas,limit:limit)
                     if self.residentBytes-current.cost+replacement.cost <= self.budget {
                         self.tiles[key] = replacement
+                        if reducing { self.textureUpgradeAfter[key] = CACurrentMediaTime()+10 }
                         DiagnosticsLog.shared.event("texture.replaced",tile:key.name,trace:trace,fields:["duration_ms":DiagnosticsLog.milliseconds(since:textureStart),
                             "old_bytes":current.cost,"new_bytes":replacement.cost,"width":atlas.width,"height":atlas.height,"mip_levels":atlas.mipmapLevelCount])
                     } else {

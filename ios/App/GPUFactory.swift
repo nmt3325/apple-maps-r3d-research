@@ -20,7 +20,8 @@ struct GPUTile: @unchecked Sendable {
     func replacing(atlas: MTLTexture, limit: Int) -> GPUTile {
         GPUTile(key:key,vertices:vertices,indices:indices,splats:splats,atlas:atlas,model:model,
             center:center,radius:radius,triangles:triangles,splatVertices:splatVertices,
-            cost:geometryCost+atlas.allocatedSize,sourcePixels:sourcePixels,textureLimit:limit)
+            cost:geometryCost+atlas.allocatedSize,sourcePixels:sourcePixels,
+            textureLimit:min(limit,max(atlas.width,atlas.height)))
     }
 }
 
@@ -85,7 +86,7 @@ final class GPUFactory: @unchecked Sendable {
         return GPUTile(key:key,vertices:vertices,indices:indices,splats:splats,atlas:texture,
             model:model,center:SIMD3(center.x,center.y,center.z),radius:simd_length(upper-lower)/2,
             triangles:info.meshTriangles,splatVertices:info.splatVertices,cost:vb.count+ib.count+sb.count+textureBytes,
-            sourcePixels:sourcePixels,textureLimit:min(sourcePixels,textureLimit))
+            sourcePixels:sourcePixels,textureLimit:texture.map{max($0.width,$0.height)} ?? 0)
     }
 }
 

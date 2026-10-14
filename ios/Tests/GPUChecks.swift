@@ -39,6 +39,16 @@ import UniformTypeIdentifiers
         let reduced = try factory.reducedTexture(original,limit:512)
         precondition(reduced.width == 512 && reduced.height == 256 && reduced.mipmapLevelCount == 10)
         precondition(reduced.allocatedSize < original.allocatedSize)
+        let oddDescriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat:.rgba8Unorm,
+            width:896,height:832,mipmapped:true)
+        oddDescriptor.storageMode = .private; oddDescriptor.usage = .shaderRead
+        let oddAtlas = device.makeTexture(descriptor:oddDescriptor)!
+        let oddReduced = try factory.reducedTexture(oddAtlas,limit:512)
+        let oddReplacement = preview.replacing(atlas:oddReduced,limit:512)
+        precondition(oddReduced.width == 448 && oddReduced.height == 416)
+        precondition(oddReplacement.textureLimit == 448, "Record the actual mip size, not the requested cap")
+        precondition(StreamingPolicy.textureTarget(zoom:20,source:896,current:oddReplacement.textureLimit,
+            headroom:192*1048576,constrained:false,pressure:true,upgradeAllowed:true) == 448)
         print("PASS: full resolution, preview, retained geometry, atomic atlas replacement, resident mip reduction, allocation cost")
     }
 }
