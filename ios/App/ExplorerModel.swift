@@ -164,15 +164,28 @@ final class ExplorerModel: ObservableObject {
             let beforeTrim = decodedCache.bytes
             decodedCache.trim(now:now,budget:cpuBudget)
             var state = cameraLogFields()
-            state.merge(["resident_bytes":residentBytes,"resident_tiles":tiles.count,"cpu_cache_bytes":decodedCache.bytes,
-                "cpu_cache_trimmed_bytes":beforeTrim-decodedCache.bytes,"gpu_budget_bytes":budget,
-                "cpu_budget_bytes":cpuBudget,"metal_allocated_bytes":device?.currentAllocatedSize ?? 0,
-                "process_footprint_bytes":Self.processFootprint(),"available_memory_bytes":os_proc_available_memory(),
-                "queue":queue.count,"oldest_queue_wait_ms":queuedAt.values.min().map{(DiagnosticsLog.now-$0)*1000} ?? 0,
-                "pending":pending.count,"fetching":fetching.count,"preparing":processing.active,
-                "failures":failures.count,"fps":fps,"drawn_tiles":drawnTiles,"texture_reservation_bytes":textureReservation,
-                "paused":paused,"authentication_failed":authFailed,"thermal_state":ProcessInfo.processInfo.thermalState.rawValue,
-                "low_power":ProcessInfo.processInfo.isLowPowerModeEnabled],uniquingKeysWith:{$1})
+            state["resident_bytes"] = residentBytes
+            state["resident_tiles"] = tiles.count
+            state["cpu_cache_bytes"] = decodedCache.bytes
+            state["cpu_cache_trimmed_bytes"] = beforeTrim-decodedCache.bytes
+            state["gpu_budget_bytes"] = budget
+            state["cpu_budget_bytes"] = cpuBudget
+            state["metal_allocated_bytes"] = device?.currentAllocatedSize ?? 0
+            state["process_footprint_bytes"] = Self.processFootprint()
+            state["available_memory_bytes"] = os_proc_available_memory()
+            state["queue"] = queue.count
+            state["oldest_queue_wait_ms"] = queuedAt.values.min().map{(DiagnosticsLog.now-$0)*1000} ?? 0
+            state["pending"] = pending.count
+            state["fetching"] = fetching.count
+            state["preparing"] = processing.active
+            state["failures"] = failures.count
+            state["fps"] = fps
+            state["drawn_tiles"] = drawnTiles
+            state["texture_reservation_bytes"] = textureReservation
+            state["paused"] = paused
+            state["authentication_failed"] = authFailed
+            state["thermal_state"] = ProcessInfo.processInfo.thermalState.rawValue
+            state["low_power"] = ProcessInfo.processInfo.isLowPowerModeEnabled
             DiagnosticsLog.shared.event("stream.state",fields:state)
             if now-lastResidencyLog >= 5 {
                 lastResidencyLog = now
