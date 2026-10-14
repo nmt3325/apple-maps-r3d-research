@@ -81,7 +81,16 @@ enum CredentialStore {
             try? save(data)
             return config
         }
-        return nil
+        // The researched service uses shared, published signing constants.
+        // Assemble defaults on the device; no external JSON or CI secret is needed.
+        let standard = FetchConfiguration.standard
+        guard (try? standard.validate()) != nil else { return nil }
+        return standard
+    }
+    static func restoreStandard() {
+        let query: [String:Any] = [kSecClass as String:kSecClassGenericPassword,
+            kSecAttrService as String:service,kSecAttrAccount as String:"fetch"]
+        SecItemDelete(query as CFDictionary)
     }
 }
 

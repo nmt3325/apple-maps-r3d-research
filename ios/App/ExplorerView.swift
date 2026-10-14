@@ -168,6 +168,7 @@ struct SettingsView: View {
                     LabeledContent("データ取得",value:"Apple Maps へ直接接続")
                     LabeledContent("状態",value:model.configured ? "設定済み" : "未設定")
                     Button("再接続") { model.retry() }
+                    Button("標準の接続設定に戻す") { model.restoreStandardConfiguration() }
                     Button("取得設定を更新") { dismiss(); importing = true }
                     Button("キャッシュを消去",role:.destructive) { model.clearCache() }
                 }

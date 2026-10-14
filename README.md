@@ -4,7 +4,7 @@
 
 `ios/R3DExplorer.xcodeproj` に SwiftUI + Metal の iPhone / iPad アプリを追加。Apple Maps の R3D / C3MM を端末から直接取得し、独立 decoder を端末内で実行する。カメラ移動に応じた取得、全高さ、距離別 LOD、視界外モデルの解放、容量制限付きキャッシュ、青空・太陽・雲を実装している。既存の研究用 Web ビューアも保持する。
 
-セットアップ・操作・検証・制約は [IOS_STREAMING.md](docs/IOS_STREAMING.md)。`bash ios/Scripts/bootstrap.sh` 後に Xcode project を開く。取得設定は既存の調査方式を使い、公開コードには含めない。
+セットアップ・操作・検証・制約は [IOS_STREAMING.md](docs/IOS_STREAMING.md)。`bash ios/Scripts/bootstrap.sh` 後に Xcode project を開く。標準の配信情報と公開済みの共通定数から端末内で署名し、外部の取得設定や GitHub Secrets なしで起動できる。Actions の `R3DExplorer-unsigned-ipa` artifact にインストール用 IPA を提供する。
 
 Apple Maps iOS 27のR3Dを調査し、**元のテクスチャ付きポリゴンとsoft triangle Splatを復元・表示する研究**の成果をまとめたスナップショットです。2026-10-14 JST時点。
 

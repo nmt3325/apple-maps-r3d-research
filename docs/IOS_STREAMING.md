@@ -37,13 +37,19 @@ bootstrap は SHA-256 を固定して Python 3.13-b13 の iOS support package �
 
 実機では Xcode の Signing & Capabilities で本人の Development Team を選び、接続した iPhone / iPad を Run 対象にする。iOS 17 以上、Metal 対応端末が必要。実機向けの Release / arm64 コンパイルと simulator の実行は別の検証であり、実機での fps やメモリ挙動は未検証。
 
-調査環境と同じ取得設定を使う。作業環境では既存の `/tmp/r3d-explorer-20261014.credentials.json` を安全に転送し、アプリから直接接続して検証した。設定・署名素材・実データは git / source ZIP に含めない。ローカルで既に設定したプロジェクトでは `ios/Local.xcconfig` が次の設定を持つ。
+初回起動から標準設定で Apple の配信先へ接続する。外部 JSON、Apple ID、個人用 API キー、GitHub Secrets は不要。配信先・データ版・共通の署名定数から iOS 内で `FetchConfiguration` を組み立て、各リクエストの nonce・有効期限・AES 署名を端末内で生成する。
+
+共通定数は MIT ライセンスで公開済みの [Apple-3D-RE-Lightweight](https://github.com/SynArchive/Apple-3D-RE-Lightweight/blob/df3e354d1c0f2dc7a35ecb425b0f49973b7d46ee/main.go) と一致することを確認して使用する。個人の認証情報や保存済み accessKey ではない。配信先 `gspe11-ssl.ls.apple.com/tile`、style 98 / 100、v714、region0 は現在の調査で取得・復号を確認した値であり、Apple のサービス変更で更新が必要になることがある。
+
+GitHub Actions の `iOS native build` の Artifacts から `R3DExplorer-unsigned-ipa` をダウンロードし、ZIP 内の `R3DExplorer-unsigned.ipa` を利用中の方法で署名・インストールする。起動すると東京タワーの取得が始まる。「取得設定を更新」は標準値を上書きするための追加機能で、通常起動には使わない。以前の設定が残っている場合は「標準の接続設定に戻す」で復帰できる。
+
+独自設定を同梱して開発する場合だけ、git 管理しない `ios/Local.xcconfig` に次の値を指定する。
 
 ```xcconfig
 R3D_FETCH_CONFIG = /absolute/private/path/maps.credentials.json
 ```
 
-build phase はこの設定をアプリの初期設定として同梱する。署名済みアプリは初回に Keychain へ保存する。開発用の未署名 simulator は Keychain が利用できない場合も有効な同梱設定で起動できる。設定はアプリの「取得設定を更新」から取り込むことも可能。未設定・失効を黙って成功として表示しない。
+個別に読み込んだ設定は Keychain に保存する。設定を読み込まず、Keychain が利用できない環境でも標準設定で起動できる。個別の設定ファイル・保存済み署名 URL・取得済み実データは git に含めない。
 
 画面ドラッグで視点を回転、左のスティックで前後左右移動、右のボタンで上昇 / 下降、ピンチで前後移動。設定画面から東京タワー・ワイキキ・任意の緯度経度へ移動できる。端末 GPS の現在地への追従ではなく、アプリ内のカメラ位置を追従する。
 

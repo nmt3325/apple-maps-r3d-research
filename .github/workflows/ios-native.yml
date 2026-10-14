@@ -42,19 +42,7 @@ jobs:
         run: |
           set -euo pipefail
           app="$RUNNER_TEMP/DeviceBuild/Build/Products/Release-iphoneos/R3DExplorer.app"
-          test -d "$app"
-          test -f "$app/Info.plist"
-          test -f "$app/R3DExplorer"
-          # Keep the entire built bundle (embedded Python, frameworks, shaders,
-          # and resources) inside the standard IPA Payload/ layout.
-          mkdir -p "$RUNNER_TEMP/ipa/Payload" "$RUNNER_TEMP/ipa-output"
-          ditto "$app" "$RUNNER_TEMP/ipa/Payload/R3DExplorer.app"
-          (
-            cd "$RUNNER_TEMP/ipa"
-            zip -qry "$RUNNER_TEMP/ipa-output/R3DExplorer-unsigned.ipa" Payload
-          )
-          unzip -tq "$RUNNER_TEMP/ipa-output/R3DExplorer-unsigned.ipa"
-          unzip -Z1 "$RUNNER_TEMP/ipa-output/R3DExplorer-unsigned.ipa" | grep -q '^Payload/R3DExplorer.app/Info.plist$'
+          python ios/Scripts/package_unsigned_ipa.py "$app" "$RUNNER_TEMP/ipa-output/R3DExplorer-unsigned.ipa"
           echo "IPA_PATH=$RUNNER_TEMP/ipa-output/R3DExplorer-unsigned.ipa" >> "$GITHUB_ENV"
       - name: Upload unsigned IPA
         uses: actions/upload-artifact@v4

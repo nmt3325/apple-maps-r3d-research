@@ -308,6 +308,10 @@ final class ExplorerModel: ObservableObject {
         authFailed = false; failures.removeAll(); lastPlan = 0
         message = "Apple Maps に再接続中"
     }
+    func restoreStandardConfiguration() {
+        CredentialStore.restoreStandard()
+        configure(.standard)
+    }
     func clearCache() {
         invalidate()
         if let client { Task { await client.clearCache(); self.lastPlan = 0 } }
