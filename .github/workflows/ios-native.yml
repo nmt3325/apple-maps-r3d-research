@@ -1,5 +1,6 @@
 name: iOS native build
 on:
+  workflow_dispatch:
   pull_request:
     paths: ['ios/**', 'codec/**', '.github/workflows/ios-native.yml']
   push:
@@ -29,10 +30,36 @@ jobs:
           -destination 'generic/platform=iOS Simulator'
           -derivedDataPath "$RUNNER_TEMP/SimulatorBuild"
           ARCHS=arm64 CODE_SIGNING_ALLOWED=NO build
-      - name: Build iPhone arm64
+      - name: Build unsigned iPhone arm64
         run: >-
           xcodebuild -project ios/R3DExplorer.xcodeproj -scheme R3DExplorer
           -configuration Release -sdk iphoneos
           -destination 'generic/platform=iOS'
           -derivedDataPath "$RUNNER_TEMP/DeviceBuild"
           ARCHS=arm64 CODE_SIGNING_ALLOWED=NO build
+      - name: Package unsigned IPA
+        shell: bash
+        run: |
+          set -euo pipefail
+          app="$RUNNER_TEMP/DeviceBuild/Build/Products/Release-iphoneos/R3DExplorer.app"
+          test -d "$app"
+          test -f "$app/Info.plist"
+          test -f "$app/R3DExplorer"
+          # Keep the entire built bundle (embedded Python, frameworks, shaders,
+          # and resources) inside the standard IPA Payload/ layout.
+          mkdir -p "$RUNNER_TEMP/ipa/Payload" "$RUNNER_TEMP/ipa-output"
+          ditto "$app" "$RUNNER_TEMP/ipa/Payload/R3DExplorer.app"
+          (
+            cd "$RUNNER_TEMP/ipa"
+            zip -qry "$RUNNER_TEMP/ipa-output/R3DExplorer-unsigned.ipa" Payload
+          )
+          unzip -tq "$RUNNER_TEMP/ipa-output/R3DExplorer-unsigned.ipa"
+          unzip -Z1 "$RUNNER_TEMP/ipa-output/R3DExplorer-unsigned.ipa" | grep -q '^Payload/R3DExplorer.app/Info.plist$'
+          echo "IPA_PATH=$RUNNER_TEMP/ipa-output/R3DExplorer-unsigned.ipa" >> "$GITHUB_ENV"
+      - name: Upload unsigned IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: R3DExplorer-unsigned-ipa
+          path: ${{ env.IPA_PATH }}
+          if-no-files-found: error
+          retention-days: 30
