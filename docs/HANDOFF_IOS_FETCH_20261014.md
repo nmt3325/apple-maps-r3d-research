@@ -1,5 +1,25 @@
 # iOS取得最適化・Macへの引き継ぎ（2026-10-14 JST）
 
+## 2026-10-15 JST: 0.1秒目標は継続中
+
+追加依頼は「軽量モデルの読み込み・描画を0.1秒以内」「描画距離は上下位置を無視して水平距離だけで判定」。**水平距離対応は検証済みだが、0.1秒の全経路目標は未達。完了扱いにしない。** 以下の2026-10-14節は過去のチェックポイント。
+
+- 実装commitは `d002100`。独立Python decoderの配列処理をC++ / CPython組込みmoduleに移した。Appleの非公開decoderは使わず、Pythonによるframing・variant確認と配列の検証、source-only fallbackを残す。
+- 2つのdecoder workerでC++ループ中のみGILを解放。入力寿命と例外時のGIL復帰を検査。GPU/通信の枠は各2、pending上限4を維持。
+- 初期表示はサーバーの原本z16 + 256px atlas。詳細は従来のz18/19/20へ切り替える。高さインデックスはz17の4セルと親高さを集約し、飛び飛びの上層も保持。coarseのmaskは256矩形のGPU bufferへ拡張。
+- 軽量atlasを先に抽出して形状復号と画像準備を重ね、検証済みモデルのGPU準備で同じtextureを再利用する。初期化のwarmup、欠けたcoarseの優先、50msごとのplan、キューの末尾popも追加。
+- 描画は無限far projection + XZ距離のfragment clipping。CPU可視判定とpickingも水平距離。実際のMetal pixel readbackでMesh/Splatの高度10km/20km、範囲外、256個目のmaskを確認した。
+- `needed`時間は水平地点がplanに入った時から取り、高さインデックス取得とキュー待ちを含む。`app.model_init.latency_origin = horizontal_plan` で区別。旧ログは高さ展開後からなので直接比較しない。計画tickまでの待ちやplan前の起動時間は別に残る。
+- 223原本すべてのmobile出力dictがPython版とバイト単位で一致。並列原本復号、不正入力、数値codec、Swift World/Navigation/Pipeline/Diagnostics、Metal GPU検査が成功。release reference corpus依存の数値検査1件はskipで、native goldenの再監査ではない。
+- Simulator Debug / iPhone arm64 Releaseの両ビルド成功。既存警告は残る。最新IPAは `/tmp/r3d-fetch-device/R3DExplorer-lightweight-native-unsigned.ipa`。署名なしで、実機実行には署名が必要。古いtexture-stable IPAと混同しない。
+- 実通信したSimulatorの初回GPU描画完了は、冷キャッシュ中央値253.7ms / p95 302.5ms / 最大385.8ms（6件）、原本ディスクキャッシュ再起動は171.3ms / 218.7ms / 252.6ms（6件）。両方とも100ms以内は0件。画面提示完了の証明ではなく、実機速度でもない。
+- どちらも初期設定600mから既存メモリ制御で約120mへ縮小したセッション。固定600mでの性能試験ではない。初回のモデル通信は最大107.4msで、それだけでも100msを超えた。試行開始後だけの温キャッシュ79.8msを目標達成として扱わない。
+- 2セッションともtexture交換は57件・各tile1回、非キャンセルエラーなし。前の往復交換修正は保持。生ログ・原本・署名URLはcommitしていない。
+
+詳細・セッション別集計・IPA hashは [2026-10-15検証記録](../reports/ios-lightweight-latency-20261015/README.md)。このMac上の試験用Simulatorは `R3D-Latency-20261015` (`23EF76AC-D8B8-4111-A563-B12FB858D978`)。既存の別Simulatorやユーザーの保存原本を消さない。
+
+次は署名した実機で、未取得地点・原本ディスクキャッシュ・GPU常駐時の移動を分けて再計測する。実機は `render.tile_first_presented`、Simulatorは `render.tile_first_completed`。インデックス発見待ち、準備枠待ち、軽量の準備済みデータ再利用も改善余地がある。初回未取得地点も100msの対象か確認は未回答だが、勝手に条件を温キャッシュへ狭めない。外部通信を含む無条件100msはクライアントだけでは保証できない。
+
 ## Macでの継続状況（2026-10-14 JST）
 
 - 追加ログの最新40秒セッションで、テクスチャ交換1,852件、同じ896 px atlasの896 / 448往復730件（約4.09秒）を確認。自身のatlas使用量で目標サイズが変わる判定を修正し、圧迫中の再拡大を禁止、縮小後の拡大に10秒待機を追加。実際のmipサイズを記録し、緊急の追加縮小と圧迫解除後の画質復元は維持。修正後の実機ログ確認が必要。

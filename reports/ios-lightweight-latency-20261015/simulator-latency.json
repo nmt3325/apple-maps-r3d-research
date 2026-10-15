@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "sessions": [
+    {
+      "session": "C0EC84AC-270C-4E9D-8250-C754A800A237",
+      "startUTC": "2026-10-15T06:40:38.690067+00:00",
+      "hasSessionStart": true,
+      "wallSpanSeconds": 56.71039605140686,
+      "records": 10869,
+      "compiledDecoder": true,
+      "coarseZoom": 16,
+      "latencyOrigin": "horizontal_plan",
+      "coarseMetrics": {
+        "decode.end": {
+          "count": 12,
+          "medianMs": 32.77966666064458,
+          "p95Ms": 40.53524999471847,
+          "maxMs": 44.171041663503274,
+          "atMost100Ms": 12
+        },
+        "pipeline.begin": {
+          "count": 12,
+          "medianMs": 169.08110416989075,
+          "p95Ms": 330.38549999764655,
+          "maxMs": 369.0056666673627,
+          "atMost100Ms": 4
+        },
+        "network.response": {
+          "count": 12,
+          "medianMs": 71.62275000155205,
+          "p95Ms": 86.50491666048765,
+          "maxMs": 107.36733333033044,
+          "atMost100Ms": 11
+        },
+        "processing.begin": {
+          "count": 12,
+          "medianMs": 0.016020829207263887,
+          "p95Ms": 0.02133334055542946,
+          "maxMs": 0.027125002816319466,
+          "atMost100Ms": 12
+        },
+        "atlas.prepare_end": {
+          "count": 12,
+          "medianMs": 21.18589583551511,
+          "p95Ms": 22.64199999626726,
+          "maxMs": 36.405666658538394,
+          "atMost100Ms": 12
+        },
+        "gpu.prepare_end": {
+          "count": 12,
+          "medianMs": 0.493166662636213,
+          "p95Ms": 2.2247916786000133,
+          "maxMs": 20.58533333183732,
+          "atMost100Ms": 12
+        },
+        "gpu.resident": {
+          "count": 12,
+          "medianMs": 358.2488958418253,
+          "p95Ms": 550.0367916683899,
+          "maxMs": 572.6368333416758,
+          "atMost100Ms": 0
+        },
+        "render.tile_first_submitted": {
+          "count": 6,
+          "medianMs": 251.68910417414736,
+          "p95Ms": 300.4588750045514,
+          "maxMs": 383.61658333451487,
+          "atMost100Ms": 0
+        },
+        "render.tile_first_completed": {
+          "count": 6,
+          "medianMs": 253.65327084000455,
+          "p95Ms": 302.5106666755164,
+          "maxMs": 385.8170833409531,
+          "atMost100Ms": 0
+        },
+        "render.tile_first_presented": null
+      },
+      "coarseAttemptToResident": {
+        "count": 12,
+        "medianMs": 108.77470833656844,
+        "p95Ms": 128.64583333430346,
+        "maxMs": 144.68170833424665,
+        "atMost100Ms": 5
+      },
+      "textureUpdates": 57,
+      "maximumTextureUpdatesPerTile": 1,
+      "nonCancellationErrors": {},
+      "measurement": "Needed-to-event includes the queue; attempt-to-resident excludes it. Simulator completion is not confirmed screen presentation."
+    },
+    {
+      "session": "0A1F89E6-CCB2-482F-96A9-A5F11FCDB6FD",
+      "startUTC": "2026-10-15T06:41:36.953283+00:00",
+      "hasSessionStart": true,
+      "wallSpanSeconds": 32.36359715461731,
+      "records": 10078,
+      "compiledDecoder": true,
+      "coarseZoom": 16,
+      "latencyOrigin": "horizontal_plan",
+      "coarseMetrics": {
+        "decode.end": {
+          "count": 12,
+          "medianMs": 42.458020834601484,
+          "p95Ms": 47.34029166866094,
+          "maxMs": 47.530291660223156,
+          "atMost100Ms": 12
+        },
+        "pipeline.begin": {
+          "count": 12,
+          "medianMs": 75.333437504014,
+          "p95Ms": 164.3435000005411,
+          "maxMs": 181.3959166611312,
+          "atMost100Ms": 8
+        },
+        "network.response": null,
+        "processing.begin": {
+          "count": 12,
+          "medianMs": 44.80583333497634,
+          "p95Ms": 50.32604165899102,
+          "maxMs": 50.67287500423845,
+          "atMost100Ms": 12
+        },
+        "atlas.prepare_end": {
+          "count": 12,
+          "medianMs": 20.43768749717856,
+          "p95Ms": 48.21920832910109,
+          "maxMs": 49.03249999915715,
+          "atMost100Ms": 12
+        },
+        "gpu.prepare_end": {
+          "count": 12,
+          "medianMs": 0.5518958350876346,
+          "p95Ms": 4.716249997727573,
+          "maxMs": 14.456708333455026,
+          "atMost100Ms": 12
+        },
+        "gpu.resident": {
+          "count": 12,
+          "medianMs": 232.29408332554158,
+          "p95Ms": 343.3684583287686,
+          "maxMs": 354.83591665979475,
+          "atMost100Ms": 0
+        },
+        "render.tile_first_submitted": {
+          "count": 6,
+          "medianMs": 169.17412499606144,
+          "p95Ms": 217.33045832661446,
+          "maxMs": 250.68454166466836,
+          "atMost100Ms": 0
+        },
+        "render.tile_first_completed": {
+          "count": 6,
+          "medianMs": 171.2602916668402,
+          "p95Ms": 218.72458333382383,
+          "maxMs": 252.5854583218461,
+          "atMost100Ms": 0
+        },
+        "render.tile_first_presented": null
+      },
+      "coarseAttemptToResident": {
+        "count": 12,
+        "medianMs": 79.8129374961718,
+        "p95Ms": 97.96258332789876,
+        "maxMs": 99.54870834189933,
+        "atMost100Ms": 12
+      },
+      "textureUpdates": 57,
+      "maximumTextureUpdatesPerTile": 1,
+      "nonCancellationErrors": {},
+      "measurement": "Needed-to-event includes the queue; attempt-to-resident excludes it. Simulator completion is not confirmed screen presentation."
+    }
+  ]
+}
