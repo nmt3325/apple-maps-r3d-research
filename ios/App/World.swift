@@ -70,6 +70,10 @@ struct CameraState: Sendable {
     var right: SIMD3<Double> { SIMD3(cos(yaw), 0, sin(yaw)) }
     func projection(far: Double) -> simd_float4x4 {
         let y = Float(1/tan(fov/2)), x = y/Float(max(0.1,aspect)), near: Float = 0.5, f = Float(far)
+        if far == .infinity {
+            return simd_float4x4(columns:(SIMD4(x,0,0,0),SIMD4(0,y,0,0),
+                SIMD4(0,0,-1,-1),SIMD4(0,0,-near,0)))
+        }
         return simd_float4x4(columns: (SIMD4(x,0,0,0), SIMD4(0,y,0,0),
             SIMD4(0,0,f/(near-f),-1), SIMD4(0,0,near*f/(near-f),0)))
     }
@@ -82,6 +86,11 @@ struct CameraState: Sendable {
 }
 
 struct TilePlanner {
+    static func requestTier(_ key: TileKey, uncoveredRoots: Set<TileKey>) -> Int {
+        if key.style == 100 { return 0 }
+        if uncoveredRoots.contains(key.horizontal) { return 1 }
+        return 2
+    }
     static func requestRank(_ key: TileKey, distance: Double, alignment: Double, coarse: Bool,
                             futureDistance: Double = 0) -> Double {
         if key.style == 100 { return -10000+Double(key.z) }
@@ -130,6 +139,8 @@ struct TilePlanner {
 }
 
 enum StreamingPolicy {
+    static let coarseZoom = 16
+    static let maximumCoverageRectangles = 256
     static func textureTarget(zoom: Int, source: Int, current: Int, headroom: Int,
                               constrained: Bool, pressure: Bool, upgradeAllowed: Bool) -> Int {
         let target = textureLimit(zoom:zoom,source:source,constrained:constrained || pressure,headroom:headroom)
@@ -202,14 +213,47 @@ struct TileInfo: Decodable, Sendable {
 
 struct TileSphere: Sendable { var center: SIMD3<Float>; var radius: Float }
 
+struct TileDrawTiming: Sendable {
+    var key: TileKey
+    var trace: String?
+    var neededAt: Double
+}
+
+enum RenderVisibility {
+    static func withinDistance(_ position: SIMD3<Float>, eye: SIMD3<Float>, distance: Float,
+                               radius: Float = 0) -> Bool {
+        simd_length(SIMD2(position.x-eye.x,position.z-eye.z))-radius <= distance
+    }
+    static func visible(_ tile: TileSphere, viewProjection m: simd_float4x4,
+                        eye: SIMD3<Float>, distance: Float) -> Bool {
+        guard withinDistance(tile.center,eye:eye,distance:distance,radius:tile.radius) else { return false }
+        let r0 = SIMD4(m[0,0],m[1,0],m[2,0],m[3,0])
+        let r1 = SIMD4(m[0,1],m[1,1],m[2,1],m[3,1])
+        let r2 = SIMD4(m[0,2],m[1,2],m[2,2],m[3,2])
+        let r3 = SIMD4(m[0,3],m[1,3],m[2,3],m[3,3])
+        // The shader clips the horizontal radius. There is no vertical far plane.
+        for p in [r3+r0,r3-r0,r3+r1,r3-r1,r2] {
+            if simd_dot(p,SIMD4(tile.center,1)) < -tile.radius*simd_length(SIMD3(p.x,p.y,p.z)) { return false }
+        }
+        return true
+    }
+}
+
 struct HeightIndex: Decodable, Sendable {
     struct Position: Decodable, Sendable { var z: Int; var x: Int; var y: Int }
     var tile: Position
     var cells: [[Int]]
     func expand(_ key: TileKey) throws -> [TileKey] {
-        guard (17...20).contains(key.z), tile.z == key.index.z,
+        guard (16...20).contains(key.z), tile.z == key.index.z,
               tile.x == key.index.x && tile.y == key.index.y,
               cells.allSatisfy({ $0.count == 3 }) else { throw StreamError.invalidIndex }
+        if key.z == 16 {
+            let localX = key.x*2%16, localY = 15-key.y*2%16
+            let heights = Set(cells.filter {
+                (localX..<localX+2).contains($0[0]) && (localY-1...localY).contains($0[1])
+            }.map { $0[2]/2 })
+            return heights.map { TileKey(z:key.z,x:key.x,y:key.y,h:$0) }.sorted()
+        }
         let multiplier = 1 << (key.z-17)
         let localX = key.x/multiplier%16, localY = 15-key.y/multiplier%16
         return cells.filter { $0[0] == localX && $0[1] == localY }.flatMap { cell in

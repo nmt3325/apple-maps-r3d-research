@@ -7,14 +7,18 @@ struct Frame {
     float4 forward;
     float4 right;
     float4 up;
-    float4 parameters; // aspect, tan(fov/2), time, far distance
+    float4 parameters; // aspect, tan(fov/2), time, horizontal draw radius
 };
 struct MeshVertex { packed_float3 position; packed_float3 normal; packed_float2 uv; };
 struct SplatVertex { packed_float3 position; packed_float4 rgba; packed_float3 bary; };
 struct MeshOut { float4 position [[position]]; float2 uv; float3 world; };
 struct SplatOut { float4 position [[position]]; float4 rgba; float3 bary; float3 world; };
 struct SkyOut { float4 position [[position]]; float2 uv; };
-struct Coverage { float4 meta; float4 rectangles[16]; };
+struct Coverage { float4 meta; float4 rectangles[256]; };
+bool outsideRange(float3 world, constant Frame &frame) {
+    float2 delta=world.xz-frame.eye.xz;
+    return dot(delta,delta)>frame.parameters.w*frame.parameters.w;
+}
 bool refined(float3 world, constant Coverage &coverage) {
     for (uint i=0; i<uint(coverage.meta.x); ++i) {
         float4 r=coverage.rectangles[i];
@@ -56,7 +60,7 @@ vertex MeshOut meshVertex(uint id [[vertex_id]], constant MeshVertex *v [[buffer
 }
 fragment float4 meshFragment(MeshOut in [[stage_in]], texture2d<float> atlas [[texture(0)]],
                               constant Frame &f [[buffer(1)]], constant Coverage &coverage [[buffer(3)]]) {
-    if (refined(in.world,coverage)) discard_fragment();
+    if (outsideRange(in.world,f) || refined(in.world,coverage)) discard_fragment();
     constexpr sampler s(address::clamp_to_edge, filter::linear, mip_filter::linear, max_anisotropy(4));
     float3 rgb=atlas.sample(s,in.uv).rgb;
     return float4(rgb,1);
@@ -69,7 +73,7 @@ vertex SplatOut splatVertex(uint id [[vertex_id]], constant SplatVertex *v [[buf
 }
 fragment float4 splatFragment(SplatOut in [[stage_in]], constant Frame &f [[buffer(1)]],
                               constant Coverage &coverage [[buffer(3)]]) {
-    if (refined(in.world,coverage)) discard_fragment();
+    if (outsideRange(in.world,f) || refined(in.world,coverage)) discard_fragment();
     float product=in.bary.x*in.bary.y*in.bary.z;
     float alpha=min(0.99,in.rgba.a*product*81.0);
     if (alpha < 0.003) discard_fragment();

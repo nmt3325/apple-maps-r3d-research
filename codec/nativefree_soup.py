@@ -15,6 +15,7 @@ import struct
 from nativefree_bytes import decode_byet
 from nativefree_r3d_codec_streams import dissect
 from nativefree_trico_size import read_size
+from nativefree_accel import accelerator
 
 
 @dataclass(frozen=True)
@@ -37,6 +38,8 @@ def decode_quantized(src: bytes, count: int, channels: int,
     origins = struct.unpack('<' + 'i' * channels,
                             decode_byet(src[at:end], channels, 4))
     integers = decode_byet(src[end:], count, channels * 4)
+    if accelerator is not None:
+        return accelerator.quantize(integers,origins,steps,channels), origins
     out = bytearray(count * channels * 4)
     for i, (delta,) in enumerate(struct.iter_unpack('<i', integers)):
         # -1 is the quantized missing-value sentinel before origin addition.

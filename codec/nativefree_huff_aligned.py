@@ -11,6 +11,7 @@ data for unsupported variants.
 from dataclasses import dataclass
 from collections import Counter
 import struct
+from nativefree_accel import accelerator
 
 class Huff816Error(ValueError): pass
 
@@ -90,6 +91,11 @@ def build_tree(entries):
     return root
 
 def decode_symbols(data:bytes,width:int,count:int):
+    if accelerator is not None:
+        try:
+            return accelerator.decode_huff(data,width,count)
+        except ValueError as error:
+            raise Huff816Error(str(error)) from error
     if count<0 or count>20000000:raise Huff816Error('unreasonable output count')
     if len(data)<4:raise Huff816Error('truncated Huff816 header')
     hdr=struct.unpack_from('<I',data)[0]

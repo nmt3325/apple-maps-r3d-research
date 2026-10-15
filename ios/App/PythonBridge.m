@@ -1,12 +1,17 @@
 #import "PythonBridge.h"
 #include <Python/Python.h>
 #include <CommonCrypto/CommonCryptor.h>
+extern PyObject *PyInit__r3d_accel(void);
 
 @implementation R3DPythonBridge
 + (BOOL)initializeRuntime:(NSError **)error {
     static dispatch_once_t once;
     static NSString *failure;
     dispatch_once(&once, ^{
+        if (PyImport_AppendInittab("_r3d_accel", PyInit__r3d_accel) < 0) {
+            failure = @"復号エンジンの高速化モジュールを登録できませんでした";
+            return;
+        }
         NSString *base = NSBundle.mainBundle.resourcePath;
         PyPreConfig pre;
         PyPreConfig_InitIsolatedConfig(&pre);

@@ -15,13 +15,14 @@ def array(values): return '(' + ','.join(values) + ',)'
 
 sources, references = [], []
 for path in sorted((ROOT/'App').iterdir()):
-    kind = {'.swift':'sourcecode.swift','.m':'sourcecode.c.objc','.h':'sourcecode.c.h',
+    kind = {'.swift':'sourcecode.swift','.m':'sourcecode.c.objc','.cpp':'sourcecode.cpp.cpp','.h':'sourcecode.c.h',
             '.metal':'sourcecode.metal','.plist':'text.plist.xml'}.get(path.suffix)
     if not kind: continue
     ref = add(str(path.relative_to(ROOT)), f'isa = PBXFileReference; lastKnownFileType = {kind}; path = {quote(path.relative_to(ROOT))}; sourceTree = "<group>";')
     references.append(ref)
-    if path.suffix in ('.swift','.m','.metal'):
-        sources.append(add('build:'+path.name, f'isa = PBXBuildFile; fileRef = {ref};'))
+    if path.suffix in ('.swift','.m','.cpp','.metal'):
+        flags = ' settings = { COMPILER_FLAGS = "-std=c++17 -O3 -ffp-contract=off"; };' if path.suffix == '.cpp' else ''
+        sources.append(add('build:'+path.name, f'isa = PBXBuildFile; fileRef = {ref};{flags}'))
 xc = add('python', 'isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Vendor/Python.xcframework; sourceTree = "<group>";')
 cfg = add('config', 'isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Build.xcconfig; sourceTree = "<group>";')
 link = add('link-python', f'isa = PBXBuildFile; fileRef = {xc};')

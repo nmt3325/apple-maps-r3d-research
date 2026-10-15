@@ -293,7 +293,7 @@ actor TileDecoder {
             try Task.checkCancellation()
             let result = try R3DPythonBridge.invoke(function,data:data)
             try Task.checkCancellation()
-            DiagnosticsLog.shared.event("decode.end",tile:tile,trace:trace,fields:["duration_ms":DiagnosticsLog.milliseconds(since:start),
+            DiagnosticsLog.shared.event("decode.end",tile:tile,trace:trace,fields:["function":function,"duration_ms":DiagnosticsLog.milliseconds(since:start),
                 "output_bytes":result.mapValues{$0.count}])
             return result
         } catch {

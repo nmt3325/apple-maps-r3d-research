@@ -1,14 +1,24 @@
 # iOS surrounding streaming and memory policy
 
-The default loading radius is 600 m. Loading covers 360 degrees and does not
+The default loading radius is 600 m, measured horizontally. Camera and model
+altitude do not shorten this radius. The projection has no finite far plane;
+mesh and Splat fragments outside the horizontal circle are discarded. Camera
+frustum side/near planes still apply normally. Loading covers 360 degrees and does not
 change when the camera rotates. z20 enters at 85 m and remains through 120 m;
 z19 enters at 200 m and remains through 240 m. The rest uses z18. Requests
 prioritize coarse coverage, facing direction and a two-second motion prediction.
-The renderer separately applies the camera frustum, including the far plane.
+The renderer separately applies the camera frustum side and near planes.
 Models outside the loading region remain for 60 / 40 / 20 seconds according to
 distance; needed offscreen models do not expire. Memory pressure may evict sooner.
 
-First display uploads a 1024 px atlas (512 under pressure). A single background
+Initial coverage uses original server z16 models and 256 px atlases, ahead of
+detail requests. The z17 occupancy cells are merged across the four horizontal
+children and their vertical parents, preserving discontinuous upper layers.
+Completed detail leaves mask the coarse fragments with up to 256 rectangles in
+a GPU buffer; incomplete heights do not hide the coarse coverage. Regular leaves
+keep the existing z18/z19/z20 partition and hysteresis.
+
+Regular leaves first upload a 1024 px atlas (512 under pressure). A single background
 job replaces only the atlas; geometry and the previous atlas remain renderable
 until the replacement is ready. z20 targets the original image, subject to an
 8192 px hardware-safe ceiling and available memory; z19 targets 2048 and z18 1024.
@@ -24,6 +34,20 @@ tile closer. Further emergency reductions remain available immediately. Once
 pressure and the upgrade delay end, the ordinary refinement policy can restore
 detail. Stored texture resolution reflects the actual mip dimensions (for example,
 an 896 px atlas reduced to a 512 px cap becomes 448 px), rather than the requested cap.
+
+The independent decoder's array loops are compiled into the iOS app as a built-in
+CPython module. The shared Python framing/variant checks and all array invariants
+remain active. Source-only tools can still use the Python implementation; host
+parity tests build the same C++ module with `ios/Scripts/build_decoder_accel.py`.
+The decoder and texture loader are warmed concurrently at startup. Planning runs
+on the frame path at most every 50 ms; occupancy arrival expands it immediately.
+Other request completions pump the existing queue instead of rebuilding the
+entire plan for each empty response.
+Two decoder workers release the Python lock during independent C++ loops; all
+Python-object access still holds that lock. Lightweight atlas extraction starts
+texture preparation before geometry decoding, and the final GPU upload reuses
+the completed atlas. The two processing slots continue to bound both operations;
+failed or cancelled geometry never becomes resident.
 
 The resident model budget is 192 MiB standard / 96 MiB constrained. Texture
 replacement memory is reserved against other uploads. At 80% usage or allocation

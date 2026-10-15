@@ -8,6 +8,7 @@ from __future__ import annotations
 import struct
 from nativefree_bytes import decode_byet
 from nativefree_trico_size import read_size
+from nativefree_accel import accelerator
 
 
 def read_signed(src: bytes, at: int) -> tuple[int, int]:
@@ -51,6 +52,8 @@ def prev_corner(corner: int) -> int:
 
 def rebuild_topology(face_count: int, tokens: bytes, integers: list[int]
                      ) -> tuple[list[int], list[int], int]:
+    if accelerator is not None:
+        return accelerator.topology(face_count,tokens,integers)
     if len(integers) < 4 or integers[0] != 0x5a4c0000:
         raise ValueError("Unknown TRICO topology header")
     if integers[1] != face_count or (len(integers) - 4) % 2:

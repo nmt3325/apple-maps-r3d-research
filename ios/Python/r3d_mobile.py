@@ -14,8 +14,13 @@ from nativefree_extract_heic import find_heic_payloads, metadata
 from nativefree_splat_material import pack_material20
 from nativefree_validate import validate_arrays
 from c3mm_v2_parser import parse
+from nativefree_accel import accelerator
 
 MAX_RAW = 16_000_000
+
+
+def warmup(raw):
+    return {'json': json.dumps({'compiled': accelerator is not None}).encode()}
 
 
 def unpack_response(raw):
@@ -36,6 +41,14 @@ def height_index(raw):
                                 'cells': sorted(cells)}).encode()}
 
 
+def atlas_payload(raw):
+    raw = unpack_response(raw)
+    if not raw.startswith(bytes.fromhex('3d96592e02000000')):
+        raise ValueError('Unsupported R3D version')
+    images = find_heic_payloads(raw)
+    return {'atlas': images[0][1] if images else b''}
+
+
 def decode_tile(raw):
     raw = unpack_response(raw)
     if not raw.startswith(bytes.fromhex('3d96592e02000000')):
@@ -44,6 +57,8 @@ def decode_tile(raw):
     validate_arrays(soup, mesh)
     if mesh['faceCount'] > 500_000 or soup.count > 500_000:
         raise ValueError('Tile geometry budget exceeded')
+    if accelerator is not None:
+        return _finish_tile(raw,mesh,*accelerator.pack_mobile(soup.xyz_f32,soup.attributes_f32,mesh))
     positions = list(struct.iter_unpack('<3f', mesh['positions_f32']))
     position_bytes, normal_bytes, uv_bytes = (mesh[k] for k in
         ('positions_f32', 'normals_f32', 'uv_f32'))
@@ -80,12 +95,16 @@ def decode_tile(raw):
         raise ValueError('Nonfinite or missing tile geometry')
     lower = [min(p[k] for p in all_points) for k in range(3)]
     upper = [max(p[k] for p in all_points) for k in range(3)]
+    return _finish_tile(raw,mesh,bytes(vertices),indices.tobytes(),bytes(splats),lower,upper,len(unique))
+
+
+def _finish_tile(raw, mesh, vertices, indices, splats, lower, upper, vertex_count):
     images = find_heic_payloads(raw)
     info = {'transform': metadata(raw), 'min': lower, 'max': upper,
             'meshTriangles': mesh['faceCount'], 'splatVertices': len(splats)//40,
-            'vertexCount': len(unique), 'atlasDimensions': mesh['atlasDimensions']}
-    return {'json': json.dumps(info).encode(), 'vertices': bytes(vertices),
-            'indices': indices.tobytes(), 'splats': bytes(splats),
+            'vertexCount': vertex_count, 'atlasDimensions': mesh['atlasDimensions']}
+    return {'json': json.dumps(info).encode(), 'vertices': vertices,
+            'indices': indices, 'splats': splats,
             'atlas': images[0][1] if mesh['faceCount'] else b''}
 
 

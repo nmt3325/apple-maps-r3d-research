@@ -1,9 +1,12 @@
 """Pack original Splat attributes into native-compatible RGBA/material records."""
 import math
 import struct
+from nativefree_accel import accelerator
 
 
 def pack_material20(attributes_f32: bytes) -> bytes:
+    if accelerator is not None:
+        return accelerator.material20(attributes_f32)
     if len(attributes_f32) % 32:
         raise ValueError("Splat attributes must have eight float32 channels")
     out = bytearray()

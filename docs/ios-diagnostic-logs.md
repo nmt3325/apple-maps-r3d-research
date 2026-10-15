@@ -44,7 +44,10 @@ are excluded; errors record domain, code and cancellation status.
   Metrics callbacks can arrive after `fetch.end`; correlate by trace, not adjacency.
 - `processing.queued/begin` measure preparation-slot waiting. `decode.begin`
   measures decoder actor waiting, and `decode.end` measures codec execution and
-  output sizes. CPU-cache hits skip fetch and codec work entirely.
+  output sizes. The `function` distinguishes geometry decoding from early atlas
+  extraction. CPU-cache hits skip fetch and codec work entirely.
+- `atlas.prepare_begin/end` measure lightweight atlas preparation, overlapping
+  geometry decoding. GPU preparation later reuses that same texture.
 - `gpu.prepare_begin/worker_begin/end` separate background dispatch waiting from
   total preparation, with model bytes, triangles, atlas dimensions and mip count.
   `gpu.resident` measures needed-to-resident latency. Admission may instead emit
@@ -52,6 +55,18 @@ are excluded; errors record domain, code and cancellation status.
 - `render.tile_first_submitted` measures resident-to-draw and needed-to-draw time.
   It means submitted to Metal, not confirmed onscreen. `render.gpu_complete`
   reports sampled command completion, GPU duration, errors and frame ID.
+- `render.tile_first_presented` records the hardware drawable presentation
+  callback, including needed-to-presentation milliseconds, a 100 ms deadline,
+  and whether the tile belongs to the initial lightweight LOD. The callback's
+  observation time is a conservative upper bound. Simulator SDKs lack that
+  callback; `render.tile_first_completed` records GPU completion there instead
+  and does not claim screen presentation. Both measurements include queue waits.
+- `decoder.ready.compiled` confirms whether the compiled array loops loaded.
+  `app.model_init.coarse_zoom` and `stream.state.coarse_zoom` identify the
+  lightweight LOD even when exports contain several launches or rotated segments.
+  `app.model_init.latency_origin = horizontal_plan` means model latency begins
+  when its horizontal location enters the plan, including occupancy-index
+  discovery. Older logs start after expansion into individual height layers.
 - `pipeline.end` terminates every attempt, including cancellation/stale generation,
   with outcome, final stage and total duration. Failed network/codec/GPU work
   also emits error events. `pipeline.cancel_requested` explains plan cancellation.
@@ -80,3 +95,9 @@ CI's `DiagnosticsChecks.swift` verifies concurrent ordering, parseable JSONL,
 immutable export, byte retention, recovery after partial writes, error redaction,
 invalid record counts and surfaced export failure. The iOS workflow also compiles
 simulator Debug and unsigned iPhone Release including the share sheet.
+
+`python3 audit/summarize_ios_latency.py /path/to/log.jsonl.zip --out /tmp/latency.json`
+summarizes each session separately without exporting location coordinates.
+Needed-to-event timings include queue time and, for `horizontal_plan` logs,
+occupancy discovery. Attempt-to-resident timings exclude
+queue time and must not be used to claim the 100 ms end-to-end target.

@@ -20,6 +20,7 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
     let solidDepth: MTLDepthStencilState
     let transparentDepth: MTLDepthStencilState
     let skyDepth: MTLDepthStencilState
+    let emptyCoverage: MTLBuffer
     let inFlight = DispatchSemaphore(value:3)
     weak var world: ExplorerModel?
     var lastTime = CACurrentMediaTime()
@@ -38,6 +39,10 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
         self.device = device
         guard let queue = device.makeCommandQueue(), let library = device.makeDefaultLibrary() else { throw StreamError.gpuBudget }
         self.queue = queue
+        guard let emptyCoverage = device.makeBuffer(length:(StreamingPolicy.maximumCoverageRectangles+1)*16,
+            options:.storageModeShared) else { throw StreamError.gpuBudget }
+        emptyCoverage.contents().initializeMemory(as:UInt8.self,repeating:0,count:emptyCoverage.length)
+        self.emptyCoverage = emptyCoverage
         func pipeline(_ vertex: String, _ fragment: String, blend: Bool = false) throws -> MTLRenderPipelineState {
             let descriptor = MTLRenderPipelineDescriptor()
             descriptor.vertexFunction = library.makeFunction(name:vertex)
@@ -94,7 +99,7 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
             skippedDrawable += 1; inFlight.signal(); return
         }
         let camera = world.camera
-        let vp = camera.projection(far:world.renderDistance)*camera.view
+        let vp = camera.projection(far:.infinity)*camera.view
         var frame = FrameUniforms(viewProjection:vp,eye:SIMD4(SIMD3<Float>(camera.eye),1),
             forward:SIMD4(SIMD3<Float>(camera.forward),0),right:SIMD4(SIMD3<Float>(camera.right),0),
             up:SIMD4(SIMD3<Float>(simd_cross(camera.right,camera.forward)),0),
@@ -105,12 +110,21 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
         encoder.setRenderPipelineState(skyPipeline); encoder.setDepthStencilState(skyDepth)
         encoder.drawPrimitives(type:.triangle,vertexStart:0,vertexCount:3)
         let selection = world.selection()
-        let tiles = selection.tiles.filter { Self.visible($0,viewProjection:vp) }
+        let tiles = selection.tiles.filter {
+            RenderVisibility.visible(TileSphere(center:$0.center,radius:$0.radius),viewProjection:vp,
+                eye:SIMD3<Float>(camera.eye),distance:Float(world.renderDistance))
+        }
+        var coverageBuffers: [TileKey:MTLBuffer] = [:]
+        for (key,mask) in selection.masks {
+            precondition(mask.count <= StreamingPolicy.maximumCoverageRectangles+1)
+            let padded = mask+Array(repeating:SIMD4<Float>.zero,
+                count:StreamingPolicy.maximumCoverageRectangles+1-mask.count)
+            let buffer = padded.withUnsafeBytes { device.makeBuffer(bytes:$0.baseAddress!,length:$0.count,options:.storageModeShared) }
+            guard let buffer else { encoder.endEncoding(); inFlight.signal(); return }
+            coverageBuffers[key] = buffer
+        }
         func coverage(_ tile: GPUTile) {
-            // Metal reads at most 16 child rectangles under a z18 root.
-            let mask = selection.masks[tile.key.horizontal] ?? [SIMD4<Float>.zero]
-            let padded = mask+Array(repeating:SIMD4<Float>.zero,count:max(0,17-mask.count))
-            padded.withUnsafeBytes { bytes in encoder.setFragmentBytes(bytes.baseAddress!,length:bytes.count,index:3) }
+            encoder.setFragmentBuffer(coverageBuffers[tile.key.horizontal] ?? emptyCoverage,offset:0,index:3)
         }
         encoder.setRenderPipelineState(meshPipeline); encoder.setDepthStencilState(solidDepth)
         for tile in tiles where tile.triangles > 0 {
@@ -133,6 +147,32 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
             encoder.drawPrimitives(type:.triangle,vertexStart:0,vertexCount:tile.splatVertices)
         }
         encoder.endEncoding(); command.present(drawable)
+        let firstDraws = world.didSubmitTiles(tiles,frame:currentFrame)
+        if !firstDraws.isEmpty {
+            #if !targetEnvironment(simulator)
+            drawable.addPresentedHandler { presented in
+                let now = DiagnosticsLog.now
+                for timing in firstDraws {
+                    let latency = (now-timing.neededAt)*1000
+                    DiagnosticsLog.shared.event("render.tile_first_presented",tile:timing.key.name,trace:timing.trace,
+                        fields:["frame":currentFrame,"needed_to_presented_ms":latency,
+                                "lightweight":timing.key.z == StreamingPolicy.coarseZoom,"deadline_ms":100,
+                                "deadline_met":latency <= 100,"presented_time_s":presented.presentedTime])
+                }
+            }
+            #else
+            command.addCompletedHandler { completed in
+                guard completed.status == .completed else { return }
+                let now = DiagnosticsLog.now
+                for timing in firstDraws {
+                    let latency = (now-timing.neededAt)*1000
+                    DiagnosticsLog.shared.event("render.tile_first_completed",tile:timing.key.name,trace:timing.trace,
+                        fields:["frame":currentFrame,"needed_to_completed_ms":latency,
+                                "lightweight":timing.key.z == StreamingPolicy.coarseZoom,"deadline_ms":100,"deadline_met":latency <= 100])
+                }
+            }
+            #endif
+        }
         let submittedAt = DiagnosticsLog.now
         let semaphore = inFlight
         command.addCompletedHandler { completed in
@@ -147,7 +187,6 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
         }
         command.commit(); intervalFrames += 1
         totalCPUms += DiagnosticsLog.milliseconds(since:cpuStart)
-        world.didSubmitTiles(tiles,frame:currentFrame)
         let submitted = Set(tiles.map(\.key))
         if submitted != lastSubmitted {
             let appeared = submitted.subtracting(lastSubmitted).sorted().map(\.name)
@@ -175,18 +214,5 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
             world.drawnTiles = tiles.count
             frameTime = 0; frameCount = 0
         }
-    }
-    static func visible(_ tile: GPUTile, viewProjection m: simd_float4x4) -> Bool {
-        visible(TileSphere(center:tile.center,radius:tile.radius),viewProjection:m)
-    }
-    static func visible(_ tile: TileSphere, viewProjection m: simd_float4x4) -> Bool {
-        let r0 = SIMD4(m[0,0],m[1,0],m[2,0],m[3,0])
-        let r1 = SIMD4(m[0,1],m[1,1],m[2,1],m[3,1])
-        let r2 = SIMD4(m[0,2],m[1,2],m[2,2],m[3,2])
-        let r3 = SIMD4(m[0,3],m[1,3],m[2,3],m[3,3])
-        for p in [r3+r0,r3-r0,r3+r1,r3-r1,r2,r3-r2] {
-            if simd_dot(p,SIMD4(tile.center,1)) < -tile.radius*simd_length(SIMD3(p.x,p.y,p.z)) { return false }
-        }
-        return true
     }
 }

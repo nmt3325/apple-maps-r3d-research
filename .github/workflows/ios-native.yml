@@ -2,9 +2,9 @@ name: iOS native build
 on:
   workflow_dispatch:
   pull_request:
-    paths: ['ios/**', 'codec/**', '.github/workflows/ios-native.yml']
+    paths: ['ios/**', 'codec/**', 'audit/summarize_ios_latency.py', 'audit/test_ios_latency.py', '.github/workflows/ios-native.yml']
   push:
-    paths: ['ios/**', 'codec/**', '.github/workflows/ios-native.yml']
+    paths: ['ios/**', 'codec/**', 'audit/summarize_ios_latency.py', 'audit/test_ios_latency.py', '.github/workflows/ios-native.yml']
 jobs:
   native:
     runs-on: macos-15
@@ -27,6 +27,7 @@ jobs:
           "$RUNNER_TEMP/pipeline-checks"
       - name: Check diagnostic log persistence and export
         run: |
+          python -m unittest audit.test_ios_latency -v
           swiftc ios/App/DiagnosticsLog.swift ios/Tests/DiagnosticsChecks.swift -o "$RUNNER_TEMP/diagnostics-checks"
           "$RUNNER_TEMP/diagnostics-checks"
       - name: Check atlas refinement and resident mip reduction
@@ -35,6 +36,11 @@ jobs:
           "$RUNNER_TEMP/gpu-checks"
       - name: Check decoder rejection and size bounds
         run: python ios/Tests/test_mobile_decoder.py -v
+      - name: Check compiled decoder parity and rejection
+        run: |
+          python ios/Scripts/build_decoder_accel.py --out "$RUNNER_TEMP/r3d-accel"
+          PYTHONPATH="$RUNNER_TEMP/r3d-accel" python -m unittest audit.test_numeric_codec -v
+          PYTHONPATH="$RUNNER_TEMP/r3d-accel" python ios/Tests/test_accelerated_decoder.py -v
       - name: Build simulator
         run: >-
           xcodebuild -project ios/R3DExplorer.xcodeproj -scheme R3DExplorer

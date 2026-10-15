@@ -6,6 +6,7 @@ import math
 from nativefree_extract_heic import find_heic_payloads, image_dimensions
 from nativefree_r3d_codec_streams import dissect
 from nativefree_mesh_topology import decode_topology, read_block, read_signed, next_corner, prev_corner
+from nativefree_accel import accelerator
 
 
 def f32(value: float) -> float:
@@ -18,6 +19,8 @@ def signed_half(value: int) -> int:
 
 def reconstruct_quantized(faces: list[int], opposite: list[int], residuals: bytes,
                           channels: int) -> bytes:
+    if accelerator is not None:
+        return accelerator.predict_mesh(faces,opposite,residuals,channels)
     if len(residuals) % (channels * 4):
         raise ValueError("Invalid mesh residual shape")
     count = len(residuals) // (channels * 4)
@@ -79,12 +82,14 @@ def decode_mesh_positions(raw: bytes) -> dict:
     residuals, at = read_block(src, topology['nextOffset'], topology['vertices'], 12)
     quantized = reconstruct_quantized(topology['faces'], topology['opposite'], residuals, 3)
     vertices = b''.join(struct.pack('<f', f32(v[0]) * steps[0])
-                        for v in struct.iter_unpack('<i', quantized))
+                        for v in struct.iter_unpack('<i', quantized)) if accelerator is None else accelerator.scale_floats(quantized,(steps[0],),1)
     return {**topology, 'positions_f32': vertices, 'nextOffset': at,
             'steps': steps, 'src': src}
 
 
 def build_adjacency(faces: list[int]) -> list[int]:
+    if accelerator is not None:
+        return accelerator.adjacency(faces)
     from collections import defaultdict, deque
     pending = defaultdict(deque)
     opposite = [-1] * len(faces)
@@ -103,6 +108,8 @@ def build_adjacency(faces: list[int]) -> list[int]:
 
 def rebuild_uv_indices(faces: list[int], opposite: list[int], mask: bytes,
                        patch_materials: list[int]) -> tuple[list[int], list[int], int]:
+    if accelerator is not None:
+        return accelerator.uv_indices(faces,opposite,mask,patch_materials)
     triangles = len(faces) // 3
     if len(mask) != (triangles + 1) // 2:
         raise ValueError("UV seam mask length mismatch")
@@ -172,14 +179,14 @@ def decode_mesh_uv(raw: bytes) -> dict:
     residuals, at = read_block(src, at, count, 8)
     quantized = reconstruct_quantized(indices, adjacency, residuals, 2)
     uv = b''.join(struct.pack('<f', f32(v[0]) * mesh['steps'][1])
-                  for v in struct.iter_unpack('<i', quantized))
+                  for v in struct.iter_unpack('<i', quantized)) if accelerator is None else accelerator.scale_floats(quantized,(mesh['steps'][1],),1)
     images = find_heic_payloads(raw)
     if not images or any(v != 0 for v in face_materials):
         raise ValueError("Unsupported mesh material atlas assignment")
     width, height = image_dimensions(images[0][1])
     reciprocal = (f32(1 / width), f32(1 / height))
     normalized = b''.join(struct.pack('<f', v[0] * reciprocal[i % 2])
-                          for i, v in enumerate(struct.iter_unpack('<f', uv)))
+                          for i, v in enumerate(struct.iter_unpack('<f', uv))) if accelerator is None else accelerator.scale_floats(uv,reciprocal,0)
     return {**mesh, 'uv_f32': normalized, 'uv_pixels_f32': uv,
             'atlasDimensions': (width, height),
             'uv_indices': indices, 'face_materials': face_materials,
@@ -205,6 +212,10 @@ def decode_mesh(raw: bytes) -> dict:
     selectors, at = read_block(src, at, selector_count, 1)
     if at != len(src):
         raise ValueError("Mesh streams do not cover input")
+    if accelerator is not None:
+        normals, indices = accelerator.normals(mesh['faces'],packed,selectors,mesh['vertices'],normal_count,mesh['steps'][2])
+        return {**mesh,'normals_f32':normals,'normal_indices':indices,'normalCount':normal_count,
+                'normalWords':packed,'nextOffset':at}
     per_vertex = [[] for _ in range(mesh['vertices'])]
     indices = []
     cursor = count = 0

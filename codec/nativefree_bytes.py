@@ -9,6 +9,7 @@ import struct
 from nativefree_trico_size import read_size
 from nativefree_byet_jdescriptor import split_j
 from nativefree_huff_aligned import decode_symbols
+from nativefree_accel import accelerator
 
 
 def decode_huff(src: bytes, count: int, width: int) -> bytes:
@@ -86,7 +87,12 @@ def decode_lane(src: bytes, kind: int, count: int) -> tuple[bytes, int]:
         if end != len(src):
             raise ValueError("Lane values do not cover input")
         raw = decode_huff(src[at:end], symbols, width)
+        if accelerator is not None:
+            return accelerator.expand_lane(raw,bitmap,kind,count), stride
         values = list(raw) if width == 8 else list(struct.unpack('<' + 'H' * symbols, raw))
+    if accelerator is not None:
+        packed = bytes(values) if width == 8 else struct.pack('<'+'H'*len(values),*values)
+        return accelerator.expand_lane(packed,bitmap,kind,count), stride
     mask = (1 << width) - 1
     value = values[0]
     out = bytearray(value.to_bytes(stride, 'little'))

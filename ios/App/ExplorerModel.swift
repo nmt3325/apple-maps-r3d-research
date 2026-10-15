@@ -35,6 +35,8 @@ final class ExplorerModel: ObservableObject {
     var device: MTLDevice?
     var factory: GPUFactory?
     let decoder = TileDecoder()
+    let secondDecoder = TileDecoder()
+    var nextDecoder = 0
     var client: AppleMapsClient?
     var tiles: [TileKey:GPUTile] = [:]
     var knownBounds: [TileKey:TileSphere] = [:]
@@ -70,6 +72,7 @@ final class ExplorerModel: ObservableObject {
     var previousEye: SIMD2<Double>?
     var previousMotionTime = 0.0
     var queuedAt: [TileKey:Double] = [:]
+    var horizontalNeededAt: [TileKey:Double] = [:]
     var neededAt: [TileKey:Double] = [:]
     var tileReadyAt: [TileKey:Double] = [:]
     var tileTraces: [TileKey:String] = [:]
@@ -83,7 +86,17 @@ final class ExplorerModel: ObservableObject {
         device = MTLCreateSystemDefaultDevice()
         if let device { factory = GPUFactory(device:device) }
         else { rendererError = "この端末では Metal を使用できません。" }
-        DiagnosticsLog.shared.event("app.model_init",fields:["metal_available":device != nil,"device":device?.name ?? "none"])
+        let decoder = decoder, warmFactory = factory
+        Task.detached(priority:.userInitiated) {
+            if let response = try? await decoder.invoke("warmup",data:Data()), let data = response["json"],
+               let state = try? JSONSerialization.jsonObject(with:data) as? [String:Bool] {
+                DiagnosticsLog.shared.event("decoder.ready",fields:["compiled":state["compiled"] ?? false,
+                    "lightweight_deadline_ms":100])
+            }
+        }
+        Task.detached(priority:.utility) { try? warmFactory?.warmup() }
+        DiagnosticsLog.shared.event("app.model_init",fields:["metal_available":device != nil,"device":device?.name ?? "none",
+            "coarse_zoom":StreamingPolicy.coarseZoom,"latency_origin":"horizontal_plan"])
         if let config = CredentialStore.load() { configure(config) }
         else { message = StreamError.configuration.localizedDescription }
         #if DEBUG
@@ -110,7 +123,7 @@ final class ExplorerModel: ObservableObject {
     }
     func invalidate() {
         DiagnosticsLog.shared.event("stream.invalidate",fields:["generation":generation,"pending":pending.count,"resident":tiles.count])
-        queuedAt.removeAll(); neededAt.removeAll(); tileReadyAt.removeAll(); tileTraces.removeAll(); awaitingFirstDraw.removeAll()
+        queuedAt.removeAll(); horizontalNeededAt.removeAll(); neededAt.removeAll(); tileReadyAt.removeAll(); tileTraces.removeAll(); awaitingFirstDraw.removeAll()
         generation += 1
         textureTask?.cancel(); textureTask = nil; textureKey = nil; textureReservation = 0
         textureRetry.removeAll(); textureUpgradeAfter.removeAll(); decodedCache.removeAll()
@@ -150,7 +163,7 @@ final class ExplorerModel: ObservableObject {
             if simd_length(velocity) > 60 { velocity = simd_normalize(velocity)*60 }
         }
         previousEye = eye; previousMotionTime = now
-        if now-lastPlan > 0.25 && configured && !paused && !authFailed {
+        if now-lastPlan > 0.05 && configured && !paused && !authFailed {
             lastPlan = now; updatePlan(now:now)
         }
         if now-lastStatistics > 1 {
@@ -165,6 +178,7 @@ final class ExplorerModel: ObservableObject {
             let beforeTrim = decodedCache.bytes
             decodedCache.trim(now:now,budget:cpuBudget)
             var state = cameraLogFields()
+            state["coarse_zoom"] = StreamingPolicy.coarseZoom
             state["resident_bytes"] = residentBytes
             state["resident_tiles"] = tiles.count
             state["cpu_cache_bytes"] = decodedCache.bytes
@@ -203,11 +217,15 @@ final class ExplorerModel: ObservableObject {
         }
     }
     func updatePlan(now: Double) {
+        let timingNow = DiagnosticsLog.now
         let oldDesired = Set(desired)
         desired = TilePlanner.plan(origin:origin,camera:camera,distance:renderDistance,
             previous:oldDesired,maximumZoom:constrained && adaptiveDistance < 350 ? 19 : 20)
-        roots = Set(desired.map { key in TileKey(z:18,x:key.x>>(key.z-18),y:key.y>>(key.z-18)) })
+        let coarseZoom = StreamingPolicy.coarseZoom
+        roots = Set(desired.map { key in TileKey(z:coarseZoom,x:key.x>>(key.z-coarseZoom),y:key.y>>(key.z-coarseZoom)) })
         let horizontal = Set(desired).union(roots)
+        horizontalNeededAt = horizontalNeededAt.filter { horizontal.contains($0.key) }
+        for key in horizontal where horizontalNeededAt[key] == nil { horizontalNeededAt[key] = timingNow }
         // Occupancy indexes use distinct zooms for each LOD. Keep a bounded set.
         let activeIndices = Set(horizontal.map(\.index))
         for key in indices.keys where !activeIndices.contains(key) && now-(indexAccess[key] ?? 0) > 20 {
@@ -230,9 +248,9 @@ final class ExplorerModel: ObservableObject {
             }
         }
         let added = newNeeded.subtracting(needed), removed = needed.subtracting(newNeeded)
-        let timingNow = DiagnosticsLog.now
         neededAt = neededAt.filter { newNeeded.contains($0.key) }
-        for key in added { neededAt[key] = timingNow }
+        // Include occupancy discovery, not only the queue after height expansion.
+        for key in added { neededAt[key] = horizontalNeededAt[key.horizontal] ?? timingNow }
         if !added.isEmpty || !removed.isEmpty || now-lastPlanLog >= 1 {
             lastPlanLog = now
             DiagnosticsLog.shared.event("plan.update",fields:["generation":generation,"desired_leaves":desired.count,
@@ -260,6 +278,9 @@ final class ExplorerModel: ObservableObject {
     func rebuildQueue() {
         let eye = SIMD2(camera.eye.x,camera.eye.z)
         let frameOrigin = origin, coarseRoots = roots
+        let uncoveredRoots = Set(coarseRoots.filter { root in
+            !(expanded[root] ?? []).contains { tiles[$0] != nil }
+        })
         let direction = SIMD2(sin(camera.yaw),-cos(camera.yaw))
         let predicted = eye+velocity*2
         let now = CACurrentMediaTime()
@@ -271,7 +292,7 @@ final class ExplorerModel: ObservableObject {
             return pending[key] == nil && (tiles[key] == nil || refreshAtlas) && empty[key] == nil && failures[key] == nil && indices[key] == nil
         }
         // Compute geographic distances once per candidate before sorting.
-        var ranked: [(key:TileKey,rank:Double)] = []
+        var ranked: [(key:TileKey,tier:Int,rank:Double)] = []
         ranked.reserveCapacity(candidates.count)
         for key in candidates {
             let center: SIMD2<Double> = frameOrigin.tileCenter(key)
@@ -282,15 +303,16 @@ final class ExplorerModel: ObservableObject {
             let coarse: Bool = coarseRoots.contains(key.horizontal)
             let rank = TilePlanner.requestRank(key,distance:distance,alignment:alignment,
                 coarse:coarse,futureDistance:futureDistance)
-            ranked.append((key:key,rank:rank))
+            ranked.append((key:key,tier:TilePlanner.requestTier(key,uncoveredRoots:uncoveredRoots),rank:rank))
         }
         ranked.sort { a,b in
-            a.rank == b.rank ? a.key < b.key : a.rank < b.rank
+            if a.tier != b.tier { return a.tier < b.tier }
+            return a.rank == b.rank ? a.key < b.key : a.rank < b.rank
         }
-        queue = ranked.map(\.key)
+        queue = ranked.reversed().map(\.key)
         let eligible = Set(queue)
         queuedAt = queuedAt.filter { eligible.contains($0.key) }
-        for (position,key) in queue.enumerated() where queuedAt[key] == nil {
+        for (position,key) in queue.reversed().enumerated() where queuedAt[key] == nil {
             queuedAt[key] = DiagnosticsLog.now
             DiagnosticsLog.shared.event("pipeline.queued",tile:key.name,fields:["generation":generation,"position":position,
                 "queue_size":queue.count,"lod":key.z,"height_layer":key.h,"distance_m":tileDistance(key),"in_frustum":inView(key)])
@@ -299,8 +321,12 @@ final class ExplorerModel: ObservableObject {
     func pump() {
         guard active && !paused && !authFailed, let client, let factory else { return }
         while pending.count < 4 && fetching.count < 2 && !queue.isEmpty {
-            let key = queue.removeFirst(), epoch = generation, frameOrigin = origin, texture = constrained ? 512 : 1024
-            let decoder = decoder
+            let key = queue.removeLast(), epoch = generation, frameOrigin = origin
+            let texture = key.z == StreamingPolicy.coarseZoom ? 256 : (constrained ? 512 : 1024)
+            guard needed.contains(key), pending[key] == nil, empty[key] == nil, failures[key] == nil,
+                  indices[key] == nil else { continue }
+            let decoder = nextDecoder == 0 ? decoder : secondDecoder
+            nextDecoder = (nextDecoder+1)%2
             let trace = UUID().uuidString, pipelineStart = DiagnosticsLog.now
             let wait = (pipelineStart-(queuedAt.removeValue(forKey:key) ?? pipelineStart))*1000
             let cached = decodedCache.value(for:key,now:CACurrentMediaTime())
@@ -327,9 +353,24 @@ final class ExplorerModel: ObservableObject {
                             stage = "decode"
                             try Task.checkCancellation()
                             let decoded: [String:Data]
+                            var atlasPreparation: Task<PreparedAtlas?,Error>?
+                            defer { atlasPreparation?.cancel() }
                             do {
                                 if let cached { decoded = cached }
-                                else { decoded = try await decoder.invoke(key.style == 100 ? "height_index" : "decode_tile",data:raw,tile:key.name,trace:trace,queuedAt:DiagnosticsLog.now) }
+                                else {
+                                    if key.style == 98 && key.z == StreamingPolicy.coarseZoom {
+                                        let payload = try await decoder.invoke("atlas_payload",data:raw,tile:key.name,trace:trace,queuedAt:DiagnosticsLog.now)
+                                        let image = payload["atlas"] ?? Data(), atlasStart = DiagnosticsLog.now
+                                        DiagnosticsLog.shared.event("atlas.prepare_begin",tile:key.name,trace:trace)
+                                        atlasPreparation = Task.detached(priority:.userInitiated) {
+                                            let atlas = try factory.prepareAtlas(image:image,limit:texture)
+                                            DiagnosticsLog.shared.event("atlas.prepare_end",tile:key.name,trace:trace,
+                                                fields:["duration_ms":DiagnosticsLog.milliseconds(since:atlasStart)])
+                                            return atlas
+                                        }
+                                    }
+                                    decoded = try await decoder.invoke(key.style == 100 ? "height_index" : "decode_tile",data:raw,tile:key.name,trace:trace,queuedAt:DiagnosticsLog.now)
+                                }
                             }
                             catch {
                                 if !(error is CancellationError) { await client.rejectCached(key) }
@@ -365,10 +406,12 @@ final class ExplorerModel: ObservableObject {
                                 stage = "gpu_prepare"
                                 let gpuStart = DiagnosticsLog.now
                                 DiagnosticsLog.shared.event("gpu.prepare_begin",tile:key.name,trace:trace,fields:["texture_limit":texture])
-                                let preparation = Task.detached(priority:.utility) {
+                                let preparedAtlas = try await atlasPreparation?.value
+                                let priority: TaskPriority = key.z == StreamingPolicy.coarseZoom ? .userInitiated : .utility
+                                let preparation = Task.detached(priority:priority) {
                                     DiagnosticsLog.shared.event("gpu.worker_begin",tile:key.name,trace:trace,fields:["dispatch_wait_ms":DiagnosticsLog.milliseconds(since:gpuStart)])
                                     try Task.checkCancellation()
-                                    return try factory.prepare(key:key,decoded:decoded,origin:frameOrigin,textureLimit:texture)
+                                    return try factory.prepare(key:key,decoded:decoded,origin:frameOrigin,textureLimit:texture,preparedAtlas:preparedAtlas)
                                 }
                                 let tile = try await withTaskCancellationHandler(operation:{try await preparation.value},onCancel:{preparation.cancel()})
                                 DiagnosticsLog.shared.event("gpu.prepare_end",tile:key.name,trace:trace,fields:["duration_ms":DiagnosticsLog.milliseconds(since:gpuStart),
@@ -421,7 +464,10 @@ final class ExplorerModel: ObservableObject {
                 self.fetching.remove(key)
                 self.pending.removeValue(forKey:key)
                 if self.active && !self.paused && !self.authFailed {
-                    self.updatePlan(now:CACurrentMediaTime())
+                    // Index arrival expands the plan immediately. Other results
+                    // use the frame's plan instead of re-sorting on every empty response.
+                    if outcome == "index_ready" { self.updatePlan(now:CACurrentMediaTime()) }
+                    else { self.pump() }
                     if self.pending.isEmpty && self.queue.isEmpty && self.failures.isEmpty {
                         self.message = self.tiles.isEmpty ? "この範囲には対応する 3D データがありません" : "視界内の 3D モデルを表示中"
                     }
@@ -547,7 +593,8 @@ final class ExplorerModel: ObservableObject {
     }
     func inView(_ key: TileKey) -> Bool {
         guard let sphere = knownBounds[key] else { return true }
-        return MetalRenderer.visible(sphere,viewProjection:camera.projection(far:renderDistance)*camera.view)
+        return RenderVisibility.visible(sphere,viewProjection:camera.projection(far:.infinity)*camera.view,
+            eye:SIMD3<Float>(camera.eye),distance:Float(renderDistance))
     }
     func renderTiles() -> [GPUTile] {
         selection().tiles
@@ -559,18 +606,22 @@ final class ExplorerModel: ObservableObject {
          "focus_m":[navigation.focus.x,navigation.focus.y,navigation.focus.z],
          "inertia_mps":[navigation.velocity.x,navigation.velocity.y,navigation.velocity.z]]
     }
-    func didSubmitTiles(_ submitted: [GPUTile], frame: Int) {
+    func didSubmitTiles(_ submitted: [GPUTile], frame: Int) -> [TileDrawTiming] {
+        var first: [TileDrawTiming] = []
         for tile in submitted where awaitingFirstDraw.remove(tile.key) != nil {
             let now = DiagnosticsLog.now
+            let neededTime = neededAt[tile.key] ?? now
+            first.append(TileDrawTiming(key:tile.key,trace:tileTraces[tile.key],neededAt:neededTime))
             DiagnosticsLog.shared.event("render.tile_first_submitted",tile:tile.key.name,trace:tileTraces[tile.key],fields:[
                 "frame":frame,"ready_to_draw_ms":(now-(tileReadyAt[tile.key] ?? now))*1000,
                 "needed_to_draw_ms":(now-(neededAt[tile.key] ?? now))*1000,
                 "triangles":tile.triangles,"splat_vertices":tile.splatVertices,"texture_limit":tile.textureLimit])
         }
+        return first
     }
     func centerFocus() -> SIMD3<Double> {
         let displayed = selection(), eye = SIMD3<Float>(camera.eye), direction = SIMD3<Float>(camera.forward)
-        var nearest = Float(viewDistance), point: SIMD3<Double>?
+        var nearest = Float.greatestFiniteMagnitude, point: SIMD3<Double>?
         for tile in displayed.tiles where NavigationPicking.sphere(origin:eye,direction:direction,center:tile.center,radius:tile.radius) {
             let inverse = simd_inverse(tile.model)
             let localEye4 = inverse*SIMD4(eye,1), localDirection4 = inverse*SIMD4(direction,0)
@@ -579,6 +630,7 @@ final class ExplorerModel: ObservableObject {
             func accept(_ hit: SIMD3<Float>, alpha: Float? = nil) {
                 guard hit.x < nearest else { return }
                 let worldPoint = eye+direction*hit.x
+                guard RenderVisibility.withinDistance(worldPoint,eye:eye,distance:Float(renderDistance)) else { return }
                 guard !masks.contains(where:{worldPoint.x >= $0.x && worldPoint.x < $0.y && worldPoint.z >= $0.z && worldPoint.z < $0.w}) else { return }
                 if let alpha {
                     guard min(0.99,alpha*81*(1-hit.y-hit.z)*hit.y*hit.z) >= 0.003 else { return }
@@ -658,7 +710,7 @@ final class ExplorerModel: ObservableObject {
         var selected = Set<TileKey>()
         var masks = [TileKey:[SIMD4<Float>]]()
         for root in roots {
-            let children = desired.filter { $0.x>>($0.z-18) == root.x && $0.y>>($0.z-18) == root.y }
+            let children = desired.filter { $0.x>>($0.z-root.z) == root.x && $0.y>>($0.z-root.z) == root.y }
             let fineReady = children.filter{ $0 != root && complete($0) }
             // Render each arriving coarse height instead of waiting for every
             // height (including empty layers) before showing the first model.

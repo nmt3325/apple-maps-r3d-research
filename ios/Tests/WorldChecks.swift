@@ -16,6 +16,11 @@ import simd
             "Aspect changes must preserve the surrounding preload region")
         let nearFine = TileKey(z:20,x:931326,y:412987)
         let fallback = TileKey(z:18,x:232831,y:103246)
+        precondition(TilePlanner.requestTier(fallback,uncoveredRoots:[fallback])
+            < TilePlanner.requestTier(nearFine,uncoveredRoots:[fallback]),
+            "Missing lightweight coverage must not wait behind detail requests")
+        precondition(TilePlanner.requestTier(nearFine.index,uncoveredRoots:[fallback])
+            < TilePlanner.requestTier(fallback,uncoveredRoots:[fallback]))
         func rank(_ key: TileKey, _ distance: Double, _ coarse: Bool) -> Double {
             TilePlanner.requestRank(key,distance:distance,alignment:1,coarse:coarse)
         }
@@ -108,9 +113,33 @@ import simd
         let coarseCandidates = try heights.expand(coarse)
         precondition(Set(coarseCandidates.map(\.h)) == Set([0,1,4,5]))
         precondition(fine.index == coarse.index)
+        let overview = TileKey(z:16,x:fine.x>>4,y:fine.y>>4)
+        let overviewCandidates = try heights.expand(overview)
+        precondition(Set(overviewCandidates.map(\.h)) == Set([0,1]),
+            "z16 merges all occupied z17 cells and vertical parents without duplicates")
+        var overviewHeights = heights
+        overviewHeights.cells = [[localX,localY,0],[localX,localY,6],[localX^1,localY^1,7]]
+        let discontinuousOverview = try overviewHeights.expand(overview)
+        precondition(Set(discontinuousOverview.map(\.h)) == Set([0,3]),
+            "z16 must preserve discontinuous upper layers across all four horizontal children")
+        precondition(StreamingPolicy.maximumCoverageRectangles == 1 << (2*(20-StreamingPolicy.coarseZoom)))
         var wrong = heights; wrong.tile.x += 1
         do { _ = try wrong.expand(fine); preconditionFailure("Coordinate mismatch must fail") } catch { }
         let initial = CameraState(), ahead = initial.eye+initial.forward*100
+        let elevatedPoint = SIMD3<Float>(100,10000,100)
+        precondition(RenderVisibility.withinDistance(elevatedPoint,eye:SIMD3(0,-10000,0),distance:150))
+        precondition(!RenderVisibility.withinDistance(SIMD3(151,0,0),eye:SIMD3(0,10000,0),distance:150))
+        var overhead = CameraState()
+        overhead.eye = SIMD3(0,10000,0); overhead.pitch = -.pi/2
+        let overheadVP = overhead.projection(far:.infinity)*overhead.view
+        precondition(RenderVisibility.visible(TileSphere(center:SIMD3(0,0,0),radius:1),
+            viewProjection:overheadVP,eye:SIMD3<Float>(overhead.eye),distance:150),
+            "A model directly below remains visible regardless of altitude")
+        var upward = CameraState()
+        upward.eye = SIMD3(0,0,0); upward.pitch = .pi/2
+        precondition(RenderVisibility.visible(TileSphere(center:elevatedPoint,radius:1),
+            viewProjection:upward.projection(far:.infinity)*upward.view,
+            eye:SIMD3<Float>(upward.eye),distance:150), "Height must not impose a far distance")
         let viewProjection = initial.projection(far:350)*initial.view
         let point = SIMD4<Float>(SIMD3<Float>(ahead),1)
         let clip = simd_mul(viewProjection,point)

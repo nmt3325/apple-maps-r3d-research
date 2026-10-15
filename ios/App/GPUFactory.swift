@@ -25,9 +25,23 @@ struct GPUTile: @unchecked Sendable {
     }
 }
 
+struct PreparedAtlas: @unchecked Sendable {
+    let texture: MTLTexture
+    let sourcePixels: Int
+}
+
 final class GPUFactory: @unchecked Sendable {
     let device: MTLDevice
     init(device: MTLDevice) { self.device = device }
+    func warmup() throws {
+        let pixel = Data([0,0,0,255])
+        guard let provider = CGDataProvider(data:pixel as CFData),
+              let image = CGImage(width:1,height:1,bitsPerComponent:8,bitsPerPixel:32,bytesPerRow:4,
+                  space:CGColorSpaceCreateDeviceRGB(),bitmapInfo:CGBitmapInfo(rawValue:CGImageAlphaInfo.noneSkipLast.rawValue),
+                  provider:provider,decode:nil,shouldInterpolate:false,intent:.defaultIntent) else { return }
+        _ = try MTKTextureLoader(device:device).newTexture(cgImage:image,options:[
+            .SRGB:true,.generateMipmaps:true,.textureStorageMode:MTLStorageMode.private.rawValue])
+    }
     func texture(image: Data, limit: Int) throws -> MTLTexture {
         try Task.checkCancellation()
         guard let source = CGImageSourceCreateWithData(image as CFData,nil),
@@ -37,6 +51,17 @@ final class GPUFactory: @unchecked Sendable {
                 kCGImageSourceShouldCacheImmediately:true] as CFDictionary) else { throw StreamError.invalidGeometry }
         return try MTKTextureLoader(device:device).newTexture(cgImage:bitmap,options:[
             .SRGB:true,.generateMipmaps:true,.textureStorageMode:MTLStorageMode.private.rawValue])
+    }
+    func prepareAtlas(image: Data, limit: Int) throws -> PreparedAtlas? {
+        try Task.checkCancellation()
+        guard !image.isEmpty else { return nil }
+        guard let source = CGImageSourceCreateWithData(image as CFData,nil),
+              let properties = CGImageSourceCopyPropertiesAtIndex(source,0,nil) as? [CFString:Any],
+              let width = properties[kCGImagePropertyPixelWidth] as? Int,
+              let height = properties[kCGImagePropertyPixelHeight] as? Int else { throw StreamError.invalidGeometry }
+        let atlas = try texture(image:image,limit:limit)
+        try Task.checkCancellation()
+        return PreparedAtlas(texture:atlas,sourcePixels:max(width,height))
     }
     // Reuse resident mips under pressure, even after the CPU cache entry expired.
     func reducedTexture(_ source: MTLTexture, limit: Int) throws -> MTLTexture {
@@ -53,7 +78,9 @@ final class GPUFactory: @unchecked Sendable {
         guard command.status == .completed else { throw StreamError.gpuBudget }
         return target
     }
-    func prepare(key: TileKey, decoded: [String:Data], origin: GeoOrigin, textureLimit: Int) throws -> GPUTile {
+    func prepare(key: TileKey, decoded: [String:Data], origin: GeoOrigin, textureLimit: Int,
+                 preparedAtlas: PreparedAtlas? = nil) throws -> GPUTile {
+        try Task.checkCancellation()
         guard let json = decoded["json"], let vb = decoded["vertices"], let ib = decoded["indices"],
               let sb = decoded["splats"], let image = decoded["atlas"] else { throw StreamError.invalidGeometry }
         let info = try JSONDecoder().decode(TileInfo.self,from:json)
@@ -71,12 +98,9 @@ final class GPUFactory: @unchecked Sendable {
         var texture: MTLTexture?
         var sourcePixels = 0
         if info.meshTriangles > 0 {
-            guard let source = CGImageSourceCreateWithData(image as CFData,nil),
-                  let properties = CGImageSourceCopyPropertiesAtIndex(source,0,nil) as? [CFString:Any],
-                  let width = properties[kCGImagePropertyPixelWidth] as? Int,
-                  let height = properties[kCGImagePropertyPixelHeight] as? Int else { throw StreamError.invalidGeometry }
-            sourcePixels = max(width,height)
-            texture = try self.texture(image:image,limit:textureLimit)
+            guard let atlas = try preparedAtlas ?? prepareAtlas(image:image,limit:textureLimit) else { throw StreamError.invalidGeometry }
+            sourcePixels = atlas.sourcePixels
+            texture = atlas.texture
         }
         let model = info.model(origin:origin)
         let lower = SIMD3<Float>(Float(info.min[0]),Float(info.min[1]),Float(info.min[2]))

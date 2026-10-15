@@ -1,9 +1,12 @@
 """Array invariants for independently decoded R3D geometry."""
 import math
 import struct
+from nativefree_accel import accelerator
 
 
 def validate_arrays(soup, mesh):
+    if accelerator is not None:
+        return accelerator.validate(soup.xyz_f32,soup.attributes_f32,soup.count,mesh)
     if len(soup.xyz_f32) != 36 * soup.count or len(soup.attributes_f32) != 32 * soup.count:
         raise ValueError("Splat array shape mismatch")
     for (v,) in struct.iter_unpack('<f', soup.xyz_f32):

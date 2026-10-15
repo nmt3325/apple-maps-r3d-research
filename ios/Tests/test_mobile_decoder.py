@@ -8,7 +8,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT/'codec'),str(ROOT/'ios/Python')]
-from r3d_mobile import decode_tile, height_index, unpack_response
+from r3d_mobile import atlas_payload, decode_tile, height_index, unpack_response
 from nativefree_mesh import decode_mesh
 from nativefree_soup import decode_soup
 from nativefree_splat_material import pack_material20
@@ -21,7 +21,7 @@ class MobileDecoderChecks(unittest.TestCase):
         with self.assertRaises(ValueError): unpack_response(gzip.compress(bytes(16_000_001)))
 
     def test_invalid_tile_and_index(self):
-        for function in (decode_tile,height_index):
+        for function in (decode_tile,height_index,atlas_payload):
             with self.assertRaises(ValueError): function(bytes(300))
 
     @unittest.skipUnless(os.environ.get('R3D_TEST_FIXTURES'),'Set R3D_TEST_FIXTURES to acquired raw fixtures')
@@ -50,6 +50,8 @@ class MobileDecoderChecks(unittest.TestCase):
                 for corner in range(3): self.assertEqual(splats[3*i+corner][:3],original_xyz[3*record+corner])
             info = json.loads(mobile['json'])
             self.assertEqual(info['meshTriangles'],mesh['faceCount'])
+            if mesh['faceCount']:
+                self.assertEqual(atlas_payload(raw)['atlas'],mobile['atlas'])
 
 
 if __name__ == '__main__': unittest.main()
