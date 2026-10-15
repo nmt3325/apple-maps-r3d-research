@@ -1,0 +1,10 @@
+{
+  "dyld_slide" : "0x19110000",
+  "live_header" : "0x1db3aa000",
+  "live_text_prefix4096_sha256" : "5f01f254a3d92127ad27e5d87b18af9a0bb3da0cbffcd2ce269ee5017c43cc19",
+  "original_text_segment_vmaddr" : "0x1c229a000",
+  "path" : "\/System\/Library\/PrivateFrameworks\/VectorKit.framework\/Versions\/A\/VectorKit",
+  "scope" : "Separate process loading the system VectorKit; not Maps.app attachment",
+  "text_section_vmaddr" : "0x1c229b9f0",
+  "uuid" : "118C1225-42FA-3428-AD31-F414C80C326E"
+}

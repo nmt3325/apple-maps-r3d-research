@@ -1,0 +1,2044 @@
+{
+  "scope": "macOS binaries; static VM addresses are build-specific",
+  "binaries": {
+    "Maps": {
+      "bytes": 49468688,
+      "sha256": "b9cc2305fc7e984ab8316a1240d957f54fc4239ac58bad4eebb97b07677a6af6",
+      "slices": [
+        {
+          "cpu": "0x100000c",
+          "subtype": "0x80000002",
+          "filetype": 2,
+          "file_offset": 16384,
+          "size": 24910960,
+          "segments": [
+            {
+              "name": "__PAGEZERO",
+              "address": 0,
+              "vm_size": 4294967296,
+              "offset": 0,
+              "file_size": 0
+            },
+            {
+              "name": "__TEXT",
+              "address": 4294967296,
+              "vm_size": 20824064,
+              "offset": 0,
+              "file_size": 20824064
+            },
+            {
+              "name": "__DATA_CONST",
+              "address": 4315791360,
+              "vm_size": 917504,
+              "offset": 20824064,
+              "file_size": 917504
+            },
+            {
+              "name": "__DATA",
+              "address": 4316708864,
+              "vm_size": 2244608,
+              "offset": 21741568,
+              "file_size": 2064384
+            },
+            {
+              "name": "__LINKEDIT",
+              "address": 4318953472,
+              "vm_size": 1114112,
+              "offset": 23805952,
+              "file_size": 1105008
+            }
+          ],
+          "sections": [
+            {
+              "name": "__text",
+              "segment": "__TEXT",
+              "address": 4294989224,
+              "size": 15458876,
+              "offset": 21928
+            },
+            {
+              "name": "__auth_stubs",
+              "segment": "__TEXT",
+              "address": 4310448100,
+              "size": 49984,
+              "offset": 15480804
+            },
+            {
+              "name": "__objc_stubs",
+              "segment": "__TEXT",
+              "address": 4310498112,
+              "size": 855296,
+              "offset": 15530816
+            },
+            {
+              "name": "__objc_methlist",
+              "segment": "__TEXT",
+              "address": 4311353408,
+              "size": 636304,
+              "offset": 16386112
+            },
+            {
+              "name": "__const",
+              "segment": "__TEXT",
+              "address": 4311989712,
+              "size": 251600,
+              "offset": 17022416
+            },
+            {
+              "name": "__constg_swiftt",
+              "segment": "__TEXT",
+              "address": 4312241312,
+              "size": 97580,
+              "offset": 17274016
+            },
+            {
+              "name": "__swift5_typeref",
+              "segment": "__TEXT",
+              "address": 4312338892,
+              "size": 306604,
+              "offset": 17371596
+            },
+            {
+              "name": "__objc_methname",
+              "segment": "__TEXT",
+              "address": 4312645504,
+              "size": 1368816,
+              "offset": 17678208
+            },
+            {
+              "name": "__swift5_capture",
+              "segment": "__TEXT",
+              "address": 4314014320,
+              "size": 53152,
+              "offset": 19047024
+            },
+            {
+              "name": "__objc_classname",
+              "segment": "__TEXT",
+              "address": 4314067472,
+              "size": 120827,
+              "offset": 19100176
+            },
+            {
+              "name": "__objc_methtype",
+              "segment": "__TEXT",
+              "address": 4314188304,
+              "size": 225596,
+              "offset": 19221008
+            },
+            {
+              "name": "__swift5_builtin",
+              "segment": "__TEXT",
+              "address": 4314413900,
+              "size": 3020,
+              "offset": 19446604
+            },
+            {
+              "name": "__swift5_reflstr",
+              "segment": "__TEXT",
+              "address": 4314416928,
+              "size": 77807,
+              "offset": 19449632
+            },
+            {
+              "name": "__swift5_fieldmd",
+              "segment": "__TEXT",
+              "address": 4314494736,
+              "size": 70692,
+              "offset": 19527440
+            },
+            {
+              "name": "__swift5_assocty",
+              "segment": "__TEXT",
+              "address": 4314565428,
+              "size": 13184,
+              "offset": 19598132
+            },
+            {
+              "name": "__oslogstring",
+              "segment": "__TEXT",
+              "address": 4314578624,
+              "size": 299717,
+              "offset": 19611328
+            },
+            {
+              "name": "__swift5_proto",
+              "segment": "__TEXT",
+              "address": 4314878344,
+              "size": 5352,
+              "offset": 19911048
+            },
+            {
+              "name": "__swift5_types",
+              "segment": "__TEXT",
+              "address": 4314883696,
+              "size": 4748,
+              "offset": 19916400
+            },
+            {
+              "name": "__swift_as_entry",
+              "segment": "__TEXT",
+              "address": 4314888444,
+              "size": 1560,
+              "offset": 19921148
+            },
+            {
+              "name": "__swift_as_ret",
+              "segment": "__TEXT",
+              "address": 4314890004,
+              "size": 1796,
+              "offset": 19922708
+            },
+            {
+              "name": "__cstring",
+              "segment": "__TEXT",
+              "address": 4314891808,
+              "size": 490669,
+              "offset": 19924512
+            },
+            {
+              "name": "__swift_as_cont",
+              "segment": "__TEXT",
+              "address": 4315382480,
+              "size": 3948,
+              "offset": 20415184
+            },
+            {
+              "name": "__swift5_mpenum",
+              "segment": "__TEXT",
+              "address": 4315386428,
+              "size": 324,
+              "offset": 20419132
+            },
+            {
+              "name": "__swift5_protos",
+              "segment": "__TEXT",
+              "address": 4315386752,
+              "size": 188,
+              "offset": 20419456
+            },
+            {
+              "name": "__gcc_except_tab",
+              "segment": "__TEXT",
+              "address": 4315386940,
+              "size": 79232,
+              "offset": 20419644
+            },
+            {
+              "name": "__ustring",
+              "segment": "__TEXT",
+              "address": 4315466172,
+              "size": 5496,
+              "offset": 20498876
+            },
+            {
+              "name": "__dlopen_cstrs",
+              "segment": "__TEXT",
+              "address": 4315471668,
+              "size": 264,
+              "offset": 20504372
+            },
+            {
+              "name": "__unwind_info",
+              "segment": "__TEXT",
+              "address": 4315471932,
+              "size": 218872,
+              "offset": 20504636
+            },
+            {
+              "name": "__eh_frame",
+              "segment": "__TEXT",
+              "address": 4315690808,
+              "size": 85824,
+              "offset": 20723512
+            },
+            {
+              "name": "__const",
+              "segment": "__DATA_CONST",
+              "address": 4315791360,
+              "size": 384680,
+              "offset": 20824064
+            },
+            {
+              "name": "__cfstring",
+              "segment": "__DATA_CONST",
+              "address": 4316176040,
+              "size": 374016,
+              "offset": 21208744
+            },
+            {
+              "name": "__objc_classlist",
+              "segment": "__DATA_CONST",
+              "address": 4316550056,
+              "size": 21672,
+              "offset": 21582760
+            },
+            {
+              "name": "__objc_catlist",
+              "segment": "__DATA_CONST",
+              "address": 4316571728,
+              "size": 1440,
+              "offset": 21604432
+            },
+            {
+              "name": "__objc_protolist",
+              "segment": "__DATA_CONST",
+              "address": 4316573168,
+              "size": 10360,
+              "offset": 21605872
+            },
+            {
+              "name": "__objc_imageinfo",
+              "segment": "__DATA_CONST",
+              "address": 4316583528,
+              "size": 8,
+              "offset": 21616232
+            },
+            {
+              "name": "__objc_protorefs",
+              "segment": "__DATA_CONST",
+              "address": 4316583536,
+              "size": 3456,
+              "offset": 21616240
+            },
+            {
+              "name": "__objc_superrefs",
+              "segment": "__DATA_CONST",
+              "address": 4316586992,
+              "size": 13952,
+              "offset": 21619696
+            },
+            {
+              "name": "__objc_intobj",
+              "segment": "__DATA_CONST",
+              "address": 4316600944,
+              "size": 11952,
+              "offset": 21633648
+            },
+            {
+              "name": "__objc_arraydata",
+              "segment": "__DATA_CONST",
+              "address": 4316612896,
+              "size": 3528,
+              "offset": 21645600
+            },
+            {
+              "name": "__objc_arrayobj",
+              "segment": "__DATA_CONST",
+              "address": 4316616424,
+              "size": 3120,
+              "offset": 21649128
+            },
+            {
+              "name": "__objc_dictobj",
+              "segment": "__DATA_CONST",
+              "address": 4316619544,
+              "size": 1000,
+              "offset": 21652248
+            },
+            {
+              "name": "__objc_doubleobj",
+              "segment": "__DATA_CONST",
+              "address": 4316620544,
+              "size": 992,
+              "offset": 21653248
+            },
+            {
+              "name": "__objc_floatobj",
+              "segment": "__DATA_CONST",
+              "address": 4316621536,
+              "size": 160,
+              "offset": 21654240
+            },
+            {
+              "name": "__auth_got",
+              "segment": "__DATA_CONST",
+              "address": 4316621696,
+              "size": 25016,
+              "offset": 21654400
+            },
+            {
+              "name": "__got",
+              "segment": "__DATA_CONST",
+              "address": 4316646712,
+              "size": 30064,
+              "offset": 21679416
+            },
+            {
+              "name": "__auth_ptr",
+              "segment": "__DATA_CONST",
+              "address": 4316676776,
+              "size": 16320,
+              "offset": 21709480
+            },
+            {
+              "name": "__objc_const",
+              "segment": "__DATA",
+              "address": 4316708864,
+              "size": 1206752,
+              "offset": 21741568
+            },
+            {
+              "name": "__objc_selrefs",
+              "segment": "__DATA",
+              "address": 4317915616,
+              "size": 261888,
+              "offset": 22948320
+            },
+            {
+              "name": "__objc_ivar",
+              "segment": "__DATA",
+              "address": 4318177504,
+              "size": 44380,
+              "offset": 23210208
+            },
+            {
+              "name": "__objc_data",
+              "segment": "__DATA",
+              "address": 4318221888,
+              "size": 298376,
+              "offset": 23254592
+            },
+            {
+              "name": "__data",
+              "segment": "__DATA",
+              "address": 4318520272,
+              "size": 245152,
+              "offset": 23552976
+            },
+            {
+              "name": "__objc_stublist",
+              "segment": "__DATA",
+              "address": 4318765424,
+              "size": 16,
+              "offset": 23798128
+            },
+            {
+              "name": "__bss",
+              "segment": "__DATA",
+              "address": 4318765440,
+              "size": 180664,
+              "offset": 0
+            },
+            {
+              "name": "__common",
+              "segment": "__DATA",
+              "address": 4318946112,
+              "size": 4520,
+              "offset": 0
+            }
+          ],
+          "uuid": "1CA0CC9D-9EE5-3A22-97B7-291C0884651B",
+          "build": {
+            "platform": 6,
+            "minimum": "27.0.0",
+            "sdk": "27.0.0"
+          }
+        },
+        {
+          "cpu": "0x100000c",
+          "subtype": "0x8000000c",
+          "filetype": 2,
+          "file_offset": 24936448,
+          "size": 24532240,
+          "segments": [
+            {
+              "name": "__PAGEZERO",
+              "address": 0,
+              "vm_size": 4294967296,
+              "offset": 0,
+              "file_size": 0
+            },
+            {
+              "name": "__TEXT",
+              "address": 4294967296,
+              "vm_size": 20447232,
+              "offset": 0,
+              "file_size": 20447232
+            },
+            {
+              "name": "__DATA_CONST",
+              "address": 4315414528,
+              "vm_size": 917504,
+              "offset": 20447232,
+              "file_size": 917504
+            },
+            {
+              "name": "__DATA",
+              "address": 4316332032,
+              "vm_size": 2244608,
+              "offset": 21364736,
+              "file_size": 2064384
+            },
+            {
+              "name": "__LINKEDIT",
+              "address": 4318576640,
+              "vm_size": 1114112,
+              "offset": 23429120,
+              "file_size": 1103120
+            }
+          ],
+          "sections": [
+            {
+              "name": "__text",
+              "segment": "__TEXT",
+              "address": 4294989224,
+              "size": 15041260,
+              "offset": 21928
+            },
+            {
+              "name": "__auth_stubs",
+              "segment": "__TEXT",
+              "address": 4310030484,
+              "size": 49984,
+              "offset": 15063188
+            },
+            {
+              "name": "__objc_stubs",
+              "segment": "__TEXT",
+              "address": 4310080480,
+              "size": 855296,
+              "offset": 15113184
+            },
+            {
+              "name": "__objc_methlist",
+              "segment": "__TEXT",
+              "address": 4310935776,
+              "size": 636304,
+              "offset": 15968480
+            },
+            {
+              "name": "__const",
+              "segment": "__TEXT",
+              "address": 4311572080,
+              "size": 251600,
+              "offset": 16604784
+            },
+            {
+              "name": "__constg_swiftt",
+              "segment": "__TEXT",
+              "address": 4311823680,
+              "size": 97580,
+              "offset": 16856384
+            },
+            {
+              "name": "__swift5_typeref",
+              "segment": "__TEXT",
+              "address": 4311921260,
+              "size": 306604,
+              "offset": 16953964
+            },
+            {
+              "name": "__objc_methname",
+              "segment": "__TEXT",
+              "address": 4312227872,
+              "size": 1368816,
+              "offset": 17260576
+            },
+            {
+              "name": "__swift5_capture",
+              "segment": "__TEXT",
+              "address": 4313596688,
+              "size": 53152,
+              "offset": 18629392
+            },
+            {
+              "name": "__objc_classname",
+              "segment": "__TEXT",
+              "address": 4313649840,
+              "size": 120827,
+              "offset": 18682544
+            },
+            {
+              "name": "__objc_methtype",
+              "segment": "__TEXT",
+              "address": 4313770672,
+              "size": 225596,
+              "offset": 18803376
+            },
+            {
+              "name": "__swift5_builtin",
+              "segment": "__TEXT",
+              "address": 4313996268,
+              "size": 3020,
+              "offset": 19028972
+            },
+            {
+              "name": "__swift5_reflstr",
+              "segment": "__TEXT",
+              "address": 4313999296,
+              "size": 77807,
+              "offset": 19032000
+            },
+            {
+              "name": "__swift5_fieldmd",
+              "segment": "__TEXT",
+              "address": 4314077104,
+              "size": 70692,
+              "offset": 19109808
+            },
+            {
+              "name": "__swift5_assocty",
+              "segment": "__TEXT",
+              "address": 4314147796,
+              "size": 13184,
+              "offset": 19180500
+            },
+            {
+              "name": "__oslogstring",
+              "segment": "__TEXT",
+              "address": 4314160992,
+              "size": 299717,
+              "offset": 19193696
+            },
+            {
+              "name": "__swift5_proto",
+              "segment": "__TEXT",
+              "address": 4314460712,
+              "size": 5352,
+              "offset": 19493416
+            },
+            {
+              "name": "__swift5_types",
+              "segment": "__TEXT",
+              "address": 4314466064,
+              "size": 4748,
+              "offset": 19498768
+            },
+            {
+              "name": "__swift_as_entry",
+              "segment": "__TEXT",
+              "address": 4314470812,
+              "size": 1560,
+              "offset": 19503516
+            },
+            {
+              "name": "__swift_as_ret",
+              "segment": "__TEXT",
+              "address": 4314472372,
+              "size": 1796,
+              "offset": 19505076
+            },
+            {
+              "name": "__cstring",
+              "segment": "__TEXT",
+              "address": 4314474176,
+              "size": 490669,
+              "offset": 19506880
+            },
+            {
+              "name": "__swift_as_cont",
+              "segment": "__TEXT",
+              "address": 4314964848,
+              "size": 3948,
+              "offset": 19997552
+            },
+            {
+              "name": "__swift5_mpenum",
+              "segment": "__TEXT",
+              "address": 4314968796,
+              "size": 324,
+              "offset": 20001500
+            },
+            {
+              "name": "__swift5_protos",
+              "segment": "__TEXT",
+              "address": 4314969120,
+              "size": 188,
+              "offset": 20001824
+            },
+            {
+              "name": "__gcc_except_tab",
+              "segment": "__TEXT",
+              "address": 4314969308,
+              "size": 79232,
+              "offset": 20002012
+            },
+            {
+              "name": "__ustring",
+              "segment": "__TEXT",
+              "address": 4315048540,
+              "size": 5496,
+              "offset": 20081244
+            },
+            {
+              "name": "__dlopen_cstrs",
+              "segment": "__TEXT",
+              "address": 4315054036,
+              "size": 264,
+              "offset": 20086740
+            },
+            {
+              "name": "__unwind_info",
+              "segment": "__TEXT",
+              "address": 4315054300,
+              "size": 265984,
+              "offset": 20087004
+            },
+            {
+              "name": "__eh_frame",
+              "segment": "__TEXT",
+              "address": 4315320288,
+              "size": 85864,
+              "offset": 20352992
+            },
+            {
+              "name": "__const",
+              "segment": "__DATA_CONST",
+              "address": 4315414528,
+              "size": 384680,
+              "offset": 20447232
+            },
+            {
+              "name": "__cfstring",
+              "segment": "__DATA_CONST",
+              "address": 4315799208,
+              "size": 374016,
+              "offset": 20831912
+            },
+            {
+              "name": "__objc_classlist",
+              "segment": "__DATA_CONST",
+              "address": 4316173224,
+              "size": 21672,
+              "offset": 21205928
+            },
+            {
+              "name": "__objc_catlist",
+              "segment": "__DATA_CONST",
+              "address": 4316194896,
+              "size": 1440,
+              "offset": 21227600
+            },
+            {
+              "name": "__objc_protolist",
+              "segment": "__DATA_CONST",
+              "address": 4316196336,
+              "size": 10360,
+              "offset": 21229040
+            },
+            {
+              "name": "__objc_imageinfo",
+              "segment": "__DATA_CONST",
+              "address": 4316206696,
+              "size": 8,
+              "offset": 21239400
+            },
+            {
+              "name": "__objc_protorefs",
+              "segment": "__DATA_CONST",
+              "address": 4316206704,
+              "size": 3456,
+              "offset": 21239408
+            },
+            {
+              "name": "__objc_superrefs",
+              "segment": "__DATA_CONST",
+              "address": 4316210160,
+              "size": 13952,
+              "offset": 21242864
+            },
+            {
+              "name": "__objc_intobj",
+              "segment": "__DATA_CONST",
+              "address": 4316224112,
+              "size": 11952,
+              "offset": 21256816
+            },
+            {
+              "name": "__objc_arraydata",
+              "segment": "__DATA_CONST",
+              "address": 4316236064,
+              "size": 3528,
+              "offset": 21268768
+            },
+            {
+              "name": "__objc_arrayobj",
+              "segment": "__DATA_CONST",
+              "address": 4316239592,
+              "size": 3120,
+              "offset": 21272296
+            },
+            {
+              "name": "__objc_dictobj",
+              "segment": "__DATA_CONST",
+              "address": 4316242712,
+              "size": 1000,
+              "offset": 21275416
+            },
+            {
+              "name": "__objc_doubleobj",
+              "segment": "__DATA_CONST",
+              "address": 4316243712,
+              "size": 992,
+              "offset": 21276416
+            },
+            {
+              "name": "__objc_floatobj",
+              "segment": "__DATA_CONST",
+              "address": 4316244704,
+              "size": 160,
+              "offset": 21277408
+            },
+            {
+              "name": "__auth_got",
+              "segment": "__DATA_CONST",
+              "address": 4316244864,
+              "size": 25016,
+              "offset": 21277568
+            },
+            {
+              "name": "__got",
+              "segment": "__DATA_CONST",
+              "address": 4316269880,
+              "size": 30064,
+              "offset": 21302584
+            },
+            {
+              "name": "__auth_ptr",
+              "segment": "__DATA_CONST",
+              "address": 4316299944,
+              "size": 16320,
+              "offset": 21332648
+            },
+            {
+              "name": "__objc_const",
+              "segment": "__DATA",
+              "address": 4316332032,
+              "size": 1206752,
+              "offset": 21364736
+            },
+            {
+              "name": "__objc_selrefs",
+              "segment": "__DATA",
+              "address": 4317538784,
+              "size": 261888,
+              "offset": 22571488
+            },
+            {
+              "name": "__objc_ivar",
+              "segment": "__DATA",
+              "address": 4317800672,
+              "size": 44380,
+              "offset": 22833376
+            },
+            {
+              "name": "__objc_data",
+              "segment": "__DATA",
+              "address": 4317845056,
+              "size": 298376,
+              "offset": 22877760
+            },
+            {
+              "name": "__data",
+              "segment": "__DATA",
+              "address": 4318143440,
+              "size": 245152,
+              "offset": 23176144
+            },
+            {
+              "name": "__objc_stublist",
+              "segment": "__DATA",
+              "address": 4318388592,
+              "size": 16,
+              "offset": 23421296
+            },
+            {
+              "name": "__bss",
+              "segment": "__DATA",
+              "address": 4318388608,
+              "size": 180664,
+              "offset": 0
+            },
+            {
+              "name": "__common",
+              "segment": "__DATA",
+              "address": 4318569280,
+              "size": 4520,
+              "offset": 0
+            }
+          ],
+          "uuid": "93E821BD-B7EC-3CFD-BF19-91ED63B954AB",
+          "build": {
+            "platform": 6,
+            "minimum": "27.0.0",
+            "sdk": "27.0.0"
+          }
+        }
+      ]
+    },
+    "VectorKit": {
+      "bytes": 36043736,
+      "sha256": "bf432e44cd40bd1330f9e63db5ea71044461047321ea2ec6feb25d648290153c",
+      "slices": [
+        {
+          "cpu": "0x100000c",
+          "subtype": "0x80000002",
+          "filetype": 6,
+          "file_offset": 0,
+          "size": 36043736,
+          "segments": [
+            {
+              "name": "__TEXT",
+              "address": 7552475136,
+              "vm_size": 21004288,
+              "offset": 0,
+              "file_size": 21004288
+            },
+            {
+              "name": "__DATA_CONST",
+              "address": 8083324312,
+              "vm_size": 212992,
+              "offset": 21004288,
+              "file_size": 212992
+            },
+            {
+              "name": "__AUTH_CONST",
+              "address": 8277197232,
+              "vm_size": 737280,
+              "offset": 21217280,
+              "file_size": 737280
+            },
+            {
+              "name": "__AUTH",
+              "address": 8183489576,
+              "vm_size": 16384,
+              "offset": 21954560,
+              "file_size": 16384
+            },
+            {
+              "name": "__DATA",
+              "address": 8145273024,
+              "vm_size": 262144,
+              "offset": 21970944,
+              "file_size": 262144
+            },
+            {
+              "name": "__DATA_DIRTY",
+              "address": 8168452576,
+              "vm_size": 393216,
+              "offset": 22233088,
+              "file_size": 393216
+            },
+            {
+              "name": "__LINKEDIT",
+              "address": 12181291008,
+              "vm_size": 13418496,
+              "offset": 22626304,
+              "file_size": 13417432
+            }
+          ],
+          "sections": [
+            {
+              "name": "__text",
+              "segment": "__TEXT",
+              "address": 7552481776,
+              "size": 19026964,
+              "offset": 6640
+            },
+            {
+              "name": "__objc_methlist",
+              "segment": "__TEXT",
+              "address": 7571508744,
+              "size": 69532,
+              "offset": 19033608
+            },
+            {
+              "name": "__const",
+              "segment": "__TEXT",
+              "address": 7571578288,
+              "size": 496240,
+              "offset": 19103152
+            },
+            {
+              "name": "__gcc_except_tab",
+              "segment": "__TEXT",
+              "address": 7572074528,
+              "size": 479268,
+              "offset": 19599392
+            },
+            {
+              "name": "__oslogstring",
+              "segment": "__TEXT",
+              "address": 7572553796,
+              "size": 69757,
+              "offset": 20078660
+            },
+            {
+              "name": "__cstring",
+              "segment": "__TEXT",
+              "address": 7572623560,
+              "size": 635701,
+              "offset": 20148424
+            },
+            {
+              "name": "__ustring",
+              "segment": "__TEXT",
+              "address": 7573259262,
+              "size": 248,
+              "offset": 20784126
+            },
+            {
+              "name": "__unwind_info",
+              "segment": "__TEXT",
+              "address": 7573259512,
+              "size": 212848,
+              "offset": 20784376
+            },
+            {
+              "name": "__eh_frame",
+              "segment": "__TEXT",
+              "address": 7573472360,
+              "size": 360,
+              "offset": 20997224
+            },
+            {
+              "name": "__objc_stubs",
+              "segment": "__TEXT",
+              "address": 7573472720,
+              "size": 0,
+              "offset": 0
+            },
+            {
+              "name": "__auth_stubs",
+              "segment": "__TEXT",
+              "address": 7573472720,
+              "size": 0,
+              "offset": 0
+            },
+            {
+              "name": "__objc_classname",
+              "segment": "__TEXT",
+              "address": 7573472720,
+              "size": 0,
+              "offset": 0
+            },
+            {
+              "name": "__objc_methname",
+              "segment": "__TEXT",
+              "address": 7573472720,
+              "size": 0,
+              "offset": 0
+            },
+            {
+              "name": "__objc_methtype",
+              "segment": "__TEXT",
+              "address": 7573472720,
+              "size": 0,
+              "offset": 0
+            },
+            {
+              "name": "__const",
+              "segment": "__DATA_CONST",
+              "address": 8083324312,
+              "size": 167296,
+              "offset": 21004288
+            },
+            {
+              "name": "__objc_classlist",
+              "segment": "__DATA_CONST",
+              "address": 8083491608,
+              "size": 1368,
+              "offset": 21171584
+            },
+            {
+              "name": "__objc_catlist",
+              "segment": "__DATA_CONST",
+              "address": 8083492976,
+              "size": 56,
+              "offset": 21172952
+            },
+            {
+              "name": "__objc_protolist",
+              "segment": "__DATA_CONST",
+              "address": 8083493032,
+              "size": 304,
+              "offset": 21173008
+            },
+            {
+              "name": "__objc_imageinfo",
+              "segment": "__DATA_CONST",
+              "address": 8083493336,
+              "size": 8,
+              "offset": 21173312
+            },
+            {
+              "name": "__weak_got",
+              "segment": "__DATA_CONST",
+              "address": 8083493344,
+              "size": 16,
+              "offset": 21173320
+            },
+            {
+              "name": "__objc_selrefs",
+              "segment": "__DATA_CONST",
+              "address": 8083493360,
+              "size": 37600,
+              "offset": 21173336
+            },
+            {
+              "name": "__objc_superrefs",
+              "segment": "__DATA_CONST",
+              "address": 8083530960,
+              "size": 1280,
+              "offset": 21210936
+            },
+            {
+              "name": "__objc_arraydata",
+              "segment": "__DATA_CONST",
+              "address": 8083532240,
+              "size": 1680,
+              "offset": 21212216
+            },
+            {
+              "name": "__got",
+              "segment": "__DATA_CONST",
+              "address": 8083533920,
+              "size": 2712,
+              "offset": 21213896
+            },
+            {
+              "name": "__const",
+              "segment": "__AUTH_CONST",
+              "address": 8277197232,
+              "size": 566688,
+              "offset": 21217280
+            },
+            {
+              "name": "__cfstring",
+              "segment": "__AUTH_CONST",
+              "address": 8277763920,
+              "size": 32256,
+              "offset": 21783968
+            },
+            {
+              "name": "__objc_const",
+              "segment": "__AUTH_CONST",
+              "address": 8277796176,
+              "size": 126504,
+              "offset": 21816224
+            },
+            {
+              "name": "__weak_auth_got",
+              "segment": "__AUTH_CONST",
+              "address": 8277922680,
+              "size": 48,
+              "offset": 21942728
+            },
+            {
+              "name": "__objc_intobj",
+              "segment": "__AUTH_CONST",
+              "address": 8277922728,
+              "size": 1248,
+              "offset": 21942776
+            },
+            {
+              "name": "__objc_arrayobj",
+              "segment": "__AUTH_CONST",
+              "address": 8277923976,
+              "size": 96,
+              "offset": 21944024
+            },
+            {
+              "name": "__objc_doubleobj",
+              "segment": "__AUTH_CONST",
+              "address": 8277924072,
+              "size": 576,
+              "offset": 21944120
+            },
+            {
+              "name": "__objc_dictobj",
+              "segment": "__AUTH_CONST",
+              "address": 8277924648,
+              "size": 80,
+              "offset": 21944696
+            },
+            {
+              "name": "__auth_got",
+              "segment": "__AUTH_CONST",
+              "address": 8277924728,
+              "size": 6656,
+              "offset": 21944776
+            },
+            {
+              "name": "__auth_ptr",
+              "segment": "__AUTH_CONST",
+              "address": 8277931392,
+              "size": 0,
+              "offset": 0
+            },
+            {
+              "name": "__objc_data",
+              "segment": "__AUTH",
+              "address": 8183489576,
+              "size": 5520,
+              "offset": 21954560
+            },
+            {
+              "name": "__data",
+              "segment": "__AUTH",
+              "address": 8183495096,
+              "size": 32,
+              "offset": 21960080
+            },
+            {
+              "name": "__thread_vars",
+              "segment": "__AUTH",
+              "address": 8183495128,
+              "size": 624,
+              "offset": 21960112
+            },
+            {
+              "name": "__thread_data",
+              "segment": "__AUTH",
+              "address": 8183495752,
+              "size": 561,
+              "offset": 21960736
+            },
+            {
+              "name": "__thread_bss",
+              "segment": "__AUTH",
+              "address": 8183496320,
+              "size": 384,
+              "offset": 0
+            },
+            {
+              "name": "__objc_ivar",
+              "segment": "__DATA",
+              "address": 8145273024,
+              "size": 8264,
+              "offset": 21970944
+            },
+            {
+              "name": "__data",
+              "segment": "__DATA",
+              "address": 8145281288,
+              "size": 206832,
+              "offset": 21979208
+            },
+            {
+              "name": "__bss",
+              "segment": "__DATA",
+              "address": 8145488128,
+              "size": 31656,
+              "offset": 0
+            },
+            {
+              "name": "__objc_data",
+              "segment": "__DATA_DIRTY",
+              "address": 8168452576,
+              "size": 8160,
+              "offset": 22233088
+            },
+            {
+              "name": "__data",
+              "segment": "__DATA_DIRTY",
+              "address": 8168460736,
+              "size": 24,
+              "offset": 22241248
+            },
+            {
+              "name": "__bss",
+              "segment": "__DATA_DIRTY",
+              "address": 8168460768,
+              "size": 374456,
+              "offset": 0
+            }
+          ],
+          "uuid": "118C1225-42FA-3428-AD31-F414C80C326E",
+          "build": {
+            "platform": 6,
+            "minimum": "27.0.0",
+            "sdk": "27.0.0"
+          }
+        }
+      ]
+    },
+    "default.metallib": {
+      "bytes": 2991304,
+      "sha256": "7cb9244f82b6c273c1e0d9d5dba6c21c8ae5ff18b5d20a88e5b785f4f2601b67"
+    }
+  },
+  "native_sample": {
+    "sha256": "cf52eea83b69a64320433120bdafe2ce081b531dc82520fc961386be3fa07f77",
+    "vector_kit_uuid": "118C1225-42FA-3428-AD31-F414C80C326E",
+    "vector_kit_version": "1.0 - 2043.20.6.12.18",
+    "vector_kit_live_base": "0x1db3aa000",
+    "extracted_segment_base_delta": "0x19110000",
+    "extracted_uuid_matches": true,
+    "physical_footprint": "431.5M",
+    "peak_footprint": "555.5M",
+    "caveat": "Short idle sample. Footprint is the whole app. Extracted segment base delta is not a verified dyld slide: extractors can rewrite segment headers."
+  },
+  "functions": [
+    {
+      "address": "0x1c24214e4",
+      "name": "ggl::FlyoverSplatsShader::typedReflection()"
+    },
+    {
+      "address": "0x1c24217bc",
+      "name": "ggl::FlyoverSplatsShader::vertexFunctionDescriptor()"
+    },
+    {
+      "address": "0x1c2421884",
+      "name": "ggl::FlyoverSplatsShader::fragmentFunctionDescriptor()"
+    },
+    {
+      "address": "0x1c2ee760c",
+      "name": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)"
+    },
+    {
+      "address": "0x1c2eec544",
+      "name": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)::$_0::operator()(std::__1::shared_ptr<std::__1::vector<unsigned char, std::__1::allocator<unsigned char>>> const&) const"
+    },
+    {
+      "address": "0x1c2eec6cc",
+      "name": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)::$_1::operator()(std::__1::shared_ptr<std::__1::vector<unsigned char, std::__1::allocator<unsigned char>>> const&) const"
+    },
+    {
+      "address": "0x1c3448550",
+      "name": "(anonymous namespace)::readTextureData(geo::ibytestream&, geo::c3m::TextureData&)"
+    },
+    {
+      "address": "0x1c34488e8",
+      "name": "(anonymous namespace)::readMeshChunkType0(geo::ibytestream, gm::Matrix<double, 3, 1> const&, gm::Matrix<double, 3, 1> const&, geo::c3m::Mesh&)"
+    },
+    {
+      "address": "0x1c3448ea8",
+      "name": "(anonymous namespace)::readMeshChunkType1(geo::ibytestream, gm::Matrix<double, 3, 1> const&, gm::Matrix<double, 3, 1> const&, geo::c3m::Mesh&)"
+    },
+    {
+      "address": "0x1c3449454",
+      "name": "(anonymous namespace)::readMeshChunkType2(geo::ibytestream, gm::Matrix<double, 3, 1> const&, gm::Matrix<double, 3, 1> const&, geo::c3m::Mesh&)"
+    },
+    {
+      "address": "0x1c3449e1c",
+      "name": "(anonymous namespace)::decodeEdgebreakerMesh(geo::c3m::EdgebreakerDecodeCache&, unsigned char const*, geo::c3m::LayerClass, eb_submesh_param_t, std::__1::vector<gm::Matrix<float, 3, 1>, std::__1::allocator<gm::Matrix<float, 3, 1>>>&, std::__1::vector<gm::Matrix<float, 2, 1>, std::__1::allocator<gm::Matrix<float, 2, 1>>>&, std::__1::vector<unsigned short, std::__1::allocator<unsigned short>>&, std::__1::vector<int, std::__1::allocator<int>>&, std::__1::vector<int, std::__1::allocator<int>>&, std::__1::vector<unsigned short, std::__1::allocator<unsigned short>>&, std::__1::vector<int, std::__1::allocator<int>>&, int&, unsigned char)"
+    },
+    {
+      "address": "0x1c344e10c",
+      "name": "_trico_mesh_decompress"
+    },
+    {
+      "address": "0x1c3452e84",
+      "name": "_trico_soup_decompress"
+    },
+    {
+      "address": "0x1c3453408",
+      "name": "_huff8_decompress"
+    },
+    {
+      "address": "0x1c3453848",
+      "name": "_huff16_decompress"
+    },
+    {
+      "address": "0x1c3453c78",
+      "name": "_huff816_decompress"
+    },
+    {
+      "address": "0x1c3454c88",
+      "name": "_byet_decompress"
+    },
+    {
+      "address": "0x1c3456010",
+      "name": "_key16_decompress"
+    },
+    {
+      "address": "0x1c3456294",
+      "name": "_bytes_decompress"
+    },
+    {
+      "address": "0x1c3458810",
+      "name": "_r3d_world_free"
+    },
+    {
+      "address": "0x1c34588c4",
+      "name": "_r3d_world_read_mem"
+    },
+    {
+      "address": "0x1c3465a7c",
+      "name": "(anonymous namespace)::createSplats(r3d_world_t const*, geo::r3d::Splats&)"
+    }
+  ],
+  "extracted_text_prefix4096_sha256": "5f01f254a3d92127ad27e5d87b18af9a0bb3da0cbffcd2ce269ee5017c43cc19",
+  "direct_bl_edges": [
+    {
+      "caller": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)",
+      "callsite": "0x1c2ee77b8",
+      "target": "0x1c34588c4",
+      "callee": "_r3d_world_read_mem"
+    },
+    {
+      "caller": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)",
+      "callsite": "0x1c2ee77c4",
+      "target": "0x1c3458810",
+      "callee": "_r3d_world_free"
+    },
+    {
+      "caller": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)",
+      "callsite": "0x1c2ee783c",
+      "target": "0x1c34588c4",
+      "callee": "_r3d_world_read_mem"
+    },
+    {
+      "caller": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)",
+      "callsite": "0x1c2ee7848",
+      "target": "0x1c3458810",
+      "callee": "_r3d_world_free"
+    },
+    {
+      "caller": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)",
+      "callsite": "0x1c2ee9148",
+      "target": "0x1c3465a7c",
+      "callee": "(anonymous namespace)::createSplats(r3d_world_t const*, geo::r3d::Splats&)"
+    },
+    {
+      "caller": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)",
+      "callsite": "0x1c2ee9154",
+      "target": "0x1c3458810",
+      "callee": "_r3d_world_free"
+    },
+    {
+      "caller": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)",
+      "callsite": "0x1c2eeaa9c",
+      "target": "0x1c3465a7c",
+      "callee": "(anonymous namespace)::createSplats(r3d_world_t const*, geo::r3d::Splats&)"
+    },
+    {
+      "caller": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)",
+      "callsite": "0x1c2eeaaa8",
+      "target": "0x1c3458810",
+      "callee": "_r3d_world_free"
+    },
+    {
+      "caller": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)",
+      "callsite": "0x1c2eeb50c",
+      "target": "0x1c2eec544",
+      "callee": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)::$_0::operator()(std::__1::shared_ptr<std::__1::vector<unsigned char, std::__1::allocator<unsigned char>>> const&) const"
+    },
+    {
+      "caller": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)",
+      "callsite": "0x1c2eeb618",
+      "target": "0x1c2eec544",
+      "callee": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)::$_0::operator()(std::__1::shared_ptr<std::__1::vector<unsigned char, std::__1::allocator<unsigned char>>> const&) const"
+    },
+    {
+      "caller": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)",
+      "callsite": "0x1c2eeb6b0",
+      "target": "0x1c2eec544",
+      "callee": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)::$_0::operator()(std::__1::shared_ptr<std::__1::vector<unsigned char, std::__1::allocator<unsigned char>>> const&) const"
+    },
+    {
+      "caller": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)",
+      "callsite": "0x1c2eeb798",
+      "target": "0x1c2eec6cc",
+      "callee": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)::$_1::operator()(std::__1::shared_ptr<std::__1::vector<unsigned char, std::__1::allocator<unsigned char>>> const&) const"
+    },
+    {
+      "caller": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)",
+      "callsite": "0x1c2eeb830",
+      "target": "0x1c2eec6cc",
+      "callee": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)::$_1::operator()(std::__1::shared_ptr<std::__1::vector<unsigned char, std::__1::allocator<unsigned char>>> const&) const"
+    },
+    {
+      "caller": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)",
+      "callsite": "0x1c2eeb8c8",
+      "target": "0x1c2eec6cc",
+      "callee": "md::R3dResourceDecoder::decode(gdc::ResourceKey const&, gdc::RawResourceSourceData const&)::$_1::operator()(std::__1::shared_ptr<std::__1::vector<unsigned char, std::__1::allocator<unsigned char>>> const&) const"
+    },
+    {
+      "caller": "_trico_mesh_decompress",
+      "callsite": "0x1c344e7a8",
+      "target": "0x1c3454c88",
+      "callee": "_byet_decompress"
+    },
+    {
+      "caller": "_trico_mesh_decompress",
+      "callsite": "0x1c344e8dc",
+      "target": "0x1c3454c88",
+      "callee": "_byet_decompress"
+    },
+    {
+      "caller": "_trico_mesh_decompress",
+      "callsite": "0x1c3450358",
+      "target": "0x1c3454c88",
+      "callee": "_byet_decompress"
+    },
+    {
+      "caller": "_trico_mesh_decompress",
+      "callsite": "0x1c3450508",
+      "target": "0x1c3454c88",
+      "callee": "_byet_decompress"
+    },
+    {
+      "caller": "_trico_mesh_decompress",
+      "callsite": "0x1c3450c0c",
+      "target": "0x1c3454c88",
+      "callee": "_byet_decompress"
+    },
+    {
+      "caller": "_trico_mesh_decompress",
+      "callsite": "0x1c3450d5c",
+      "target": "0x1c3454c88",
+      "callee": "_byet_decompress"
+    },
+    {
+      "caller": "_trico_mesh_decompress",
+      "callsite": "0x1c3452280",
+      "target": "0x1c3454c88",
+      "callee": "_byet_decompress"
+    },
+    {
+      "caller": "_trico_mesh_decompress",
+      "callsite": "0x1c34523b0",
+      "target": "0x1c3454c88",
+      "callee": "_byet_decompress"
+    },
+    {
+      "caller": "_trico_mesh_decompress",
+      "callsite": "0x1c3452798",
+      "target": "0x1c3454c88",
+      "callee": "_byet_decompress"
+    },
+    {
+      "caller": "_trico_mesh_decompress",
+      "callsite": "0x1c3452828",
+      "target": "0x1c3454c88",
+      "callee": "_byet_decompress"
+    },
+    {
+      "caller": "_huff8_decompress",
+      "callsite": "0x1c34535f0",
+      "target": "0x1c3453c78",
+      "callee": "_huff816_decompress"
+    },
+    {
+      "caller": "_huff8_decompress",
+      "callsite": "0x1c3453678",
+      "target": "0x1c3453c78",
+      "callee": "_huff816_decompress"
+    },
+    {
+      "caller": "_huff8_decompress",
+      "callsite": "0x1c345369c",
+      "target": "0x1c3453c78",
+      "callee": "_huff816_decompress"
+    },
+    {
+      "caller": "_huff8_decompress",
+      "callsite": "0x1c34537ac",
+      "target": "0x1c3453c78",
+      "callee": "_huff816_decompress"
+    },
+    {
+      "caller": "_huff8_decompress",
+      "callsite": "0x1c3453824",
+      "target": "0x1c3453c78",
+      "callee": "_huff816_decompress"
+    },
+    {
+      "caller": "_huff16_decompress",
+      "callsite": "0x1c3453a20",
+      "target": "0x1c3453c78",
+      "callee": "_huff816_decompress"
+    },
+    {
+      "caller": "_huff16_decompress",
+      "callsite": "0x1c3453aa8",
+      "target": "0x1c3453c78",
+      "callee": "_huff816_decompress"
+    },
+    {
+      "caller": "_huff16_decompress",
+      "callsite": "0x1c3453acc",
+      "target": "0x1c3453c78",
+      "callee": "_huff816_decompress"
+    },
+    {
+      "caller": "_huff16_decompress",
+      "callsite": "0x1c3453bdc",
+      "target": "0x1c3453c78",
+      "callee": "_huff816_decompress"
+    },
+    {
+      "caller": "_huff16_decompress",
+      "callsite": "0x1c3453c54",
+      "target": "0x1c3453c78",
+      "callee": "_huff816_decompress"
+    },
+    {
+      "caller": "_byet_decompress",
+      "callsite": "0x1c3455b64",
+      "target": "0x1c3456294",
+      "callee": "_bytes_decompress"
+    },
+    {
+      "caller": "_byet_decompress",
+      "callsite": "0x1c3455e48",
+      "target": "0x1c3456010",
+      "callee": "_key16_decompress"
+    },
+    {
+      "caller": "_key16_decompress",
+      "callsite": "0x1c34560b4",
+      "target": "0x1c3456010",
+      "callee": "_key16_decompress"
+    },
+    {
+      "caller": "_key16_decompress",
+      "callsite": "0x1c34560ec",
+      "target": "0x1c3456010",
+      "callee": "_key16_decompress"
+    },
+    {
+      "caller": "_key16_decompress",
+      "callsite": "0x1c3456104",
+      "target": "0x1c3456294",
+      "callee": "_bytes_decompress"
+    },
+    {
+      "caller": "_key16_decompress",
+      "callsite": "0x1c345611c",
+      "target": "0x1c3456294",
+      "callee": "_bytes_decompress"
+    },
+    {
+      "caller": "_key16_decompress",
+      "callsite": "0x1c3456138",
+      "target": "0x1c3456294",
+      "callee": "_bytes_decompress"
+    },
+    {
+      "caller": "_key16_decompress",
+      "callsite": "0x1c345618c",
+      "target": "0x1c3456294",
+      "callee": "_bytes_decompress"
+    },
+    {
+      "caller": "_key16_decompress",
+      "callsite": "0x1c34561a4",
+      "target": "0x1c3456294",
+      "callee": "_bytes_decompress"
+    },
+    {
+      "caller": "_bytes_decompress",
+      "callsite": "0x1c34576e0",
+      "target": "0x1c3453408",
+      "callee": "_huff8_decompress"
+    },
+    {
+      "caller": "_bytes_decompress",
+      "callsite": "0x1c3457968",
+      "target": "0x1c3453408",
+      "callee": "_huff8_decompress"
+    },
+    {
+      "caller": "_bytes_decompress",
+      "callsite": "0x1c34579f8",
+      "target": "0x1c3453408",
+      "callee": "_huff8_decompress"
+    },
+    {
+      "caller": "_bytes_decompress",
+      "callsite": "0x1c3457bcc",
+      "target": "0x1c3453408",
+      "callee": "_huff8_decompress"
+    },
+    {
+      "caller": "_bytes_decompress",
+      "callsite": "0x1c3457c60",
+      "target": "0x1c3453408",
+      "callee": "_huff8_decompress"
+    },
+    {
+      "caller": "_bytes_decompress",
+      "callsite": "0x1c3457e34",
+      "target": "0x1c3453408",
+      "callee": "_huff8_decompress"
+    },
+    {
+      "caller": "_bytes_decompress",
+      "callsite": "0x1c3457fd8",
+      "target": "0x1c3453408",
+      "callee": "_huff8_decompress"
+    },
+    {
+      "caller": "_bytes_decompress",
+      "callsite": "0x1c34580d0",
+      "target": "0x1c3453408",
+      "callee": "_huff8_decompress"
+    },
+    {
+      "caller": "_bytes_decompress",
+      "callsite": "0x1c34582b8",
+      "target": "0x1c3453848",
+      "callee": "_huff16_decompress"
+    },
+    {
+      "caller": "_bytes_decompress",
+      "callsite": "0x1c34584ac",
+      "target": "0x1c3453408",
+      "callee": "_huff8_decompress"
+    },
+    {
+      "caller": "_bytes_decompress",
+      "callsite": "0x1c3458540",
+      "target": "0x1c3453848",
+      "callee": "_huff16_decompress"
+    },
+    {
+      "caller": "_bytes_decompress",
+      "callsite": "0x1c345869c",
+      "target": "0x1c3453848",
+      "callee": "_huff16_decompress"
+    },
+    {
+      "caller": "_r3d_world_read_mem",
+      "callsite": "0x1c3458fac",
+      "target": "0x1c3452e84",
+      "callee": "_trico_soup_decompress"
+    },
+    {
+      "caller": "_r3d_world_read_mem",
+      "callsite": "0x1c34595a0",
+      "target": "0x1c344e10c",
+      "callee": "_trico_mesh_decompress"
+    },
+    {
+      "caller": "_r3d_world_read_mem",
+      "callsite": "0x1c345fe14",
+      "target": "0x1c3454c88",
+      "callee": "_byet_decompress"
+    },
+    {
+      "caller": "_r3d_world_read_mem",
+      "callsite": "0x1c3460d14",
+      "target": "0x1c3454c88",
+      "callee": "_byet_decompress"
+    },
+    {
+      "caller": "_r3d_world_read_mem",
+      "callsite": "0x1c3460ed8",
+      "target": "0x1c3452e84",
+      "callee": "_trico_soup_decompress"
+    },
+    {
+      "caller": "_r3d_world_read_mem",
+      "callsite": "0x1c34630c4",
+      "target": "0x1c344e10c",
+      "callee": "_trico_mesh_decompress"
+    },
+    {
+      "caller": "_r3d_world_read_mem",
+      "callsite": "0x1c3463fe4",
+      "target": "0x1c3454c88",
+      "callee": "_byet_decompress"
+    },
+    {
+      "caller": "_r3d_world_read_mem",
+      "callsite": "0x1c3464ab8",
+      "target": "0x1c3454c88",
+      "callee": "_byet_decompress"
+    }
+  ],
+  "shader_reflection": {
+    "Flyover::splat_vertex": {
+      "reflection_index": 51,
+      "structures": [
+        {
+          "node_type": "IndirectBufferArg",
+          "node": {
+            "function_constant": false,
+            "buffer_size": {
+              "value": 16
+            },
+            "location_index": {
+              "value": 0
+            },
+            "location_count": {
+              "value": 1
+            },
+            "access_qualifier": "Read",
+            "address_space": "Constant",
+            "struct_type_info": {
+              "id": 7
+            },
+            "type_size": {
+              "value": 16
+            },
+            "type_align": {
+              "value": 8
+            },
+            "type_name": "Flyover::SharedSplatsArgumentBuffer",
+            "name": "sharedArgBuffer",
+            "unused": false
+          }
+        },
+        {
+          "node_type": "BufferArg",
+          "node": {
+            "function_constant": false,
+            "location_index": {
+              "value": 1
+            },
+            "location_count": {
+              "value": 1
+            },
+            "access_qualifier": "Read",
+            "address_space": "Global",
+            "struct_type_info": {
+              "id": 11
+            },
+            "type_size": {
+              "value": 256
+            },
+            "type_align": {
+              "value": 16
+            },
+            "type_name": "FlyoverCommon::SplatConstants",
+            "name": "splatConstants",
+            "unused": false
+          }
+        },
+        {
+          "node_type": "IndirectBufferArg",
+          "node": {
+            "function_constant": false,
+            "buffer_size": {
+              "value": 393216
+            },
+            "location_index": {
+              "value": 1
+            },
+            "location_count": {
+              "value": 1
+            },
+            "access_qualifier": "Read",
+            "address_space": "Constant",
+            "struct_type_info": {
+              "id": 13
+            },
+            "type_size": {
+              "value": 393216
+            },
+            "type_align": {
+              "value": 8
+            },
+            "type_name": "Flyover::SplatsArgumentBuffer",
+            "name": "argBuffer",
+            "unused": false
+          }
+        },
+        {
+          "node_type": "BufferArg",
+          "node": {
+            "function_constant": false,
+            "location_index": {
+              "value": 0
+            },
+            "location_count": {
+              "value": 1
+            },
+            "access_qualifier": "Read",
+            "address_space": "Global",
+            "struct_type_info": {
+              "id": 19
+            },
+            "type_size": {
+              "value": 12
+            },
+            "type_align": {
+              "value": 4
+            },
+            "type_name": "FlyoverCommon::SplatProperties",
+            "name": "__elems",
+            "unused": false
+          }
+        }
+      ]
+    },
+    "Flyover::splat_fragment": {
+      "reflection_index": 55,
+      "structures": [
+        {
+          "node_type": "IndirectBufferArg",
+          "node": {
+            "function_constant": false,
+            "buffer_size": {
+              "value": 16
+            },
+            "location_index": {
+              "value": 0
+            },
+            "location_count": {
+              "value": 1
+            },
+            "access_qualifier": "Read",
+            "address_space": "Constant",
+            "struct_type_info": {
+              "id": 11
+            },
+            "type_size": {
+              "value": 16
+            },
+            "type_align": {
+              "value": 8
+            },
+            "type_name": "Flyover::SharedSplatsArgumentBuffer",
+            "name": "sharedArgBuffer",
+            "unused": true
+          }
+        },
+        {
+          "node_type": "BufferArg",
+          "node": {
+            "function_constant": false,
+            "location_index": {
+              "value": 1
+            },
+            "location_count": {
+              "value": 1
+            },
+            "access_qualifier": "Read",
+            "address_space": "Global",
+            "struct_type_info": {
+              "id": 15
+            },
+            "type_size": {
+              "value": 256
+            },
+            "type_align": {
+              "value": 16
+            },
+            "type_name": "FlyoverCommon::SplatConstants",
+            "name": "splatConstants",
+            "unused": false
+          }
+        }
+      ]
+    }
+  },
+  "shader_ir": {
+    "Flyover::screen_vertex": {
+      "sha256": "1f9ff62be0bf5b12a06721cb826d7e8eb7fd42315388ca6d08417b7484a988b5",
+      "bytes": 3549,
+      "target_triple": "air64_v29-apple-macosx27.0.0",
+      "function_constants": []
+    },
+    "Flyover::flyover_vertex": {
+      "sha256": "e70ca84d6b8586c5371b9e4c8f1120df23ae74064cbfcd16cae54df6c6f8bef3",
+      "bytes": 18342,
+      "target_triple": "air64_v29-apple-macosx27.0.0",
+      "function_constants": []
+    },
+    "Flyover::flyoverPolar_vertex": {
+      "sha256": "aedcc95305d9300bbe1039b847be8064e55961437f699ce73c93a384924d3484",
+      "bytes": 21997,
+      "target_triple": "air64_v29-apple-macosx27.0.0",
+      "function_constants": []
+    },
+    "Flyover::flyover_bindless_vertex": {
+      "sha256": "0b803cfdef0e4204b58ad3feb7a17a273958963d6dccd9c304ababdac015838f",
+      "bytes": 29949,
+      "target_triple": "air64_v29-apple-macosx27.0.0",
+      "function_constants": [
+        {
+          "name": "Flyover::usePbrRendering",
+          "index": 3
+        },
+        {
+          "name": "Flyover::useClipPlanes",
+          "index": 4
+        }
+      ]
+    },
+    "Flyover::splat_vertex": {
+      "sha256": "ac4b15c1eef176a461b9a26af207f407f8bfc56f112dcfdc1541b324e14b7f43",
+      "bytes": 48048,
+      "target_triple": "air64_v29-apple-macosx27.0.0",
+      "function_constants": [
+        {
+          "name": "Flyover::useMetalBarycentricCoordinate",
+          "index": 1
+        },
+        {
+          "name": "Flyover::colorAdjustmentEnabled",
+          "index": 2
+        },
+        {
+          "name": "Flyover::usePbrRendering",
+          "index": 3
+        },
+        {
+          "name": "Flyover::useClipPlanes",
+          "index": 4
+        }
+      ]
+    },
+    "Flyover::flyover_fragment": {
+      "sha256": "4ae700805660352c1531d2f15282d0e0a4de0c73ca2961538dd5e56b69aaefda",
+      "bytes": 22426,
+      "target_triple": "air64_v29-apple-macosx27.0.0",
+      "function_constants": [
+        {
+          "name": "Flyover::framebufferFetchEnabled",
+          "index": 0
+        },
+        {
+          "name": "Flyover::colorAdjustmentEnabled",
+          "index": 2
+        }
+      ]
+    },
+    "Flyover::flyover_bindless_fragment": {
+      "sha256": "31f5000f550d909e29958f208833a10500d702ae5996581098a063be5db40e00",
+      "bytes": 30482,
+      "target_triple": "air64_v29-apple-macosx27.0.0",
+      "function_constants": [
+        {
+          "name": "Flyover::colorAdjustmentEnabled",
+          "index": 2
+        },
+        {
+          "name": "Flyover::usePbrRendering",
+          "index": 3
+        }
+      ]
+    },
+    "Flyover::clear_tile": {
+      "sha256": "94b813d301fed2376a9fd76c878899bfc4390dfb4269a430b85da6c881440b42",
+      "bytes": 4061,
+      "target_triple": "air64_v29-apple-macosx27.0.0",
+      "function_constants": []
+    },
+    "Flyover::splat_fragment": {
+      "sha256": "21699317831c2f8c449881f2ad804ce272a7f85f4b3172218c1c0ee50fba2694",
+      "bytes": 13891,
+      "target_triple": "air64_v29-apple-macosx27.0.0",
+      "function_constants": [
+        {
+          "name": "Flyover::useMetalBarycentricCoordinate",
+          "index": 1
+        }
+      ]
+    },
+    "Flyover::intermediate_resolve_tile": {
+      "sha256": "1c79f550518520d869d7a2d0e7fd5b5fa7f32e64abff47f191da89a6f0a7c24c",
+      "bytes": 10627,
+      "target_triple": "air64_v29-apple-macosx27.0.0",
+      "function_constants": []
+    },
+    "Flyover::final_resolve_color": {
+      "sha256": "b09eaa955c95f06b776024dd2f2e3b2ce1e62042c33b8dea6dfd6967221f87c2",
+      "bytes": 6343,
+      "target_triple": "air64_v29-apple-macosx27.0.0",
+      "function_constants": []
+    },
+    "Flyover::final_resolve_depth": {
+      "sha256": "0d3cb0668614ae878108dd0eab452ad26248e65a5bdf616293d85ac2ee00936f",
+      "bytes": 3696,
+      "target_triple": "air64_v29-apple-macosx27.0.0",
+      "function_constants": []
+    }
+  }
+}

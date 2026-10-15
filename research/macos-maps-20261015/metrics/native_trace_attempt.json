@@ -1,0 +1,9 @@
+{
+  "source_sha256": "4eebf7f6f8acdb6452c67c0d666361bfcde879772ff0be3ff0815ba7b94be2bd",
+  "target_pid": 96162,
+  "total_gpu_rows": 1784,
+  "target_gpu_rows": 0,
+  "excluded_gpu_rows": 1784,
+  "has_target_gpu_activity": false,
+  "caveat": "System GPU tables include other processes even with --attach. A successful recording alone is not proof of target activity."
+}

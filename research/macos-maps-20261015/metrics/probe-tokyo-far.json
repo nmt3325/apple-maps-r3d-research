@@ -1,0 +1,278 @@
+{
+  "scope": "Instrumented macOS MapKit host; not Maps.app uniform capture",
+  "run": "probe-tokyo-far",
+  "events_sha256": "aec03b5ac89d3ecf7850a9d09a2c7baaba56844b8b2b048383064af5db69b314",
+  "scene": {
+    "device": "Apple M4",
+    "distance": 1800,
+    "latitude": 35.6586,
+    "longitude": 139.7454,
+    "os": "Version 27.0.1 (Build 26A434)",
+    "pitch": 65
+  },
+  "event_counts": {
+    "start": 1,
+    "hooks": 1,
+    "constant_hooks": 1,
+    "pipeline_created": 7,
+    "pipeline_bound": 7,
+    "draw": 28,
+    "function_specialized": 22,
+    "vertex_binding": 14,
+    "candidate_splat_constants": 2,
+    "splat_resource": 6,
+    "map_rendered": 1,
+    "capture_support": 1,
+    "summary": 1,
+    "image": 2
+  },
+  "summary": {
+    "candidate_constants": 2,
+    "constant_set_calls": 1536,
+    "draw_calls": 429,
+    "draw_calls_per_pipeline": {
+      " | Flyover::flyover_bindless_vertex | Flyover::flyover_bindless_fragment": 8,
+      " | Flyover::screen_vertex | Flyover::clear_tile": 15,
+      " | Flyover::screen_vertex | Flyover::final_resolve_color": 15,
+      " | Flyover::screen_vertex | Flyover::final_resolve_depth": 15,
+      " | Flyover::screen_vertex | Flyover::intermediate_resolve_tile": 15,
+      " | Flyover::splat_vertex | Flyover::splat_fragment": 166,
+      " | Grid::grid_vertex | Grid::grid_fragment": 195
+    },
+    "pipelines": 7,
+    "registered_buffers": 238
+  },
+  "uniforms": [
+    {
+      "splat_id": 0,
+      "sha256": "57a6270db84bf20a4626291d0d0a852d1510617ee740d6350871284c536ea6b3",
+      "alpha_concentration": 1.5,
+      "alpha_pre_factor": 148.16207885742188,
+      "alpha_concentration_u32": "0x3fc00000",
+      "alpha_pre_factor_u32": "0x4314297e",
+      "fragment_half_concentration": 1.5,
+      "fragment_half_pre_factor": 148.125,
+      "bounds_min": [
+        -513.2799682617188,
+        -509.44000244140625,
+        -275.1999816894531
+      ],
+      "bounds_scale": [
+        1029.119873046875,
+        1027.8399658203125,
+        244.47998046875
+      ],
+      "caveat": "First instance in a bound constant array; IDs are render slots, not geographic tile IDs."
+    },
+    {
+      "splat_id": 15,
+      "sha256": "36bb632d7024b30ba2c7c07bf28e69bd008d94086d9bfe14f35d6b5286984346",
+      "alpha_concentration": 1.5,
+      "alpha_pre_factor": 148.16207885742188,
+      "alpha_concentration_u32": "0x3fc00000",
+      "alpha_pre_factor_u32": "0x4314297e",
+      "fragment_half_concentration": 1.5,
+      "fragment_half_pre_factor": 148.125,
+      "bounds_min": [
+        -513.2799682617188,
+        -509.44000244140625,
+        -275.1999816894531
+      ],
+      "bounds_scale": [
+        1029.119873046875,
+        1027.8399658203125,
+        244.47998046875
+      ],
+      "caveat": "First instance in a bound constant array; IDs are render slots, not geographic tile IDs."
+    }
+  ],
+  "resources": [
+    {
+      "splat_id": 0,
+      "sha256": {
+        "positions-ushort4": "1a95d1eedef5f4529daec56dad0951fa7fdf9f08b744610c8d9e7886ab41b14f",
+        "properties-12": "9b1d995c9b21134617a9f1712109032102c1c764d706a343c4097474dd090b83",
+        "orders-int32": "6edbaa794e58fbd770290d746712e4ea5195b7745fc6f3533ebd7d4a64d2e667"
+      },
+      "bytes": {
+        "positions-ushort4": 188592,
+        "properties-12": 94296,
+        "orders-int32": 31432
+      },
+      "complete": true,
+      "records": 7858,
+      "vertices": 23574,
+      "order_is_permutation": true,
+      "order_first_16": [
+        2513,
+        2492,
+        2497,
+        2495,
+        2475,
+        2493,
+        2491,
+        2489,
+        2512,
+        2478,
+        2481,
+        2479,
+        2511,
+        2463,
+        2498,
+        2480
+      ],
+      "position_w_histogram": {
+        "0": 23574
+      },
+      "properties_padding_u16_histogram": {
+        "0": 7858
+      },
+      "first_ordered_triangle_index": 2513,
+      "first_ordered_triangle_local_xyz": [
+        [
+          -450.5607377291908,
+          337.9104184539019,
+          -232.9629733905718
+        ],
+        [
+          -453.12038584556586,
+          334.0678794804377,
+          -241.92369534198613
+        ],
+        [
+          -464.6466540505923,
+          358.39350375734784,
+          -241.92369534198613
+        ]
+      ],
+      "first_ordered_triangle_gpu_color_bytes": [
+        255,
+        150,
+        150,
+        132
+      ],
+      "first_ordered_triangle_rgba": [
+        132,
+        150,
+        150,
+        255
+      ],
+      "depth_order": {
+        "depth_min": -3457.04176451014,
+        "depth_max": -2537.3978119798435,
+        "adjacent_pairs": 7857,
+        "strict_front_to_back_inversions": 116,
+        "max_inversion": 0.00711560396484856,
+        "pairwise_two_quantization_steps": 0.030963160116757354,
+        "inversions_above_two_steps": 0,
+        "interpretation": "Consistent with approximately front-to-back view-z ordering if inversions stay within this bound; the CPU comparator is unproven."
+      },
+      "note": "Color byte reversal and q/65535*boundsScale+boundsMin follow this build’s AIR. Positions are tile-local, not latitude/longitude."
+    },
+    {
+      "splat_id": 15,
+      "sha256": {
+        "positions-ushort4": "1a95d1eedef5f4529daec56dad0951fa7fdf9f08b744610c8d9e7886ab41b14f",
+        "properties-12": "9b1d995c9b21134617a9f1712109032102c1c764d706a343c4097474dd090b83",
+        "orders-int32": "6edbaa794e58fbd770290d746712e4ea5195b7745fc6f3533ebd7d4a64d2e667"
+      },
+      "bytes": {
+        "positions-ushort4": 188592,
+        "properties-12": 94296,
+        "orders-int32": 31432
+      },
+      "complete": true,
+      "records": 7858,
+      "vertices": 23574,
+      "order_is_permutation": true,
+      "order_first_16": [
+        2513,
+        2492,
+        2497,
+        2495,
+        2475,
+        2493,
+        2491,
+        2489,
+        2512,
+        2478,
+        2481,
+        2479,
+        2511,
+        2463,
+        2498,
+        2480
+      ],
+      "position_w_histogram": {
+        "0": 23574
+      },
+      "properties_padding_u16_histogram": {
+        "0": 7858
+      },
+      "first_ordered_triangle_index": 2513,
+      "first_ordered_triangle_local_xyz": [
+        [
+          -450.5607377291908,
+          337.9104184539019,
+          -232.9629733905718
+        ],
+        [
+          -453.12038584556586,
+          334.0678794804377,
+          -241.92369534198613
+        ],
+        [
+          -464.6466540505923,
+          358.39350375734784,
+          -241.92369534198613
+        ]
+      ],
+      "first_ordered_triangle_gpu_color_bytes": [
+        255,
+        150,
+        150,
+        132
+      ],
+      "first_ordered_triangle_rgba": [
+        132,
+        150,
+        150,
+        255
+      ],
+      "depth_order": {
+        "depth_min": -3457.04176451014,
+        "depth_max": -2537.3978119798435,
+        "adjacent_pairs": 7857,
+        "strict_front_to_back_inversions": 116,
+        "max_inversion": 0.00711560396484856,
+        "pairwise_two_quantization_steps": 0.030963160116757354,
+        "inversions_above_two_steps": 0,
+        "interpretation": "Consistent with approximately front-to-back view-z ordering if inversions stay within this bound; the CPU comparator is unproven."
+      },
+      "note": "Color byte reversal and q/65535*boundsScale+boundsMin follow this build’s AIR. Positions are tile-local, not latitude/longitude."
+    }
+  ],
+  "specialization_variants": {
+    "Flyover::splat_vertex": [
+      {
+        "useMetalBarycentricCoordinate": true,
+        "colorAdjustmentEnabled": false,
+        "usePbrRendering": false,
+        "useClipPlanes": false
+      }
+    ],
+    "Flyover::splat_fragment": [
+      {
+        "useMetalBarycentricCoordinate": true
+      }
+    ]
+  },
+  "render_passes": [],
+  "capture": null,
+  "limitations": [
+    "Hooks retain bounded buffer objects and affect scheduling/lifetimes; this is not a performance benchmark.",
+    "No R3D tile ID, exact LOD policy, native decoder parity, or final frame parity is established by these checks.",
+    "Constant sampling deduplicates by render slot and alpha pair; it is not every draw or every instance.",
+    "Specialization variants are observed successful function creations; unobserved values are omitted, not assumed false."
+  ]
+}

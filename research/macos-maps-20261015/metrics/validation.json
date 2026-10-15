@@ -1,0 +1,43 @@
+{
+  "baseline_commit": "9d93a5e98adb005be4e5b75ed98931b33d92dbef",
+  "tests": [
+    {
+      "command": "python3 research/macos-maps-20261015/test_audit.py",
+      "tests": 6,
+      "passed": 6,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    {
+      "command": "python3 -m unittest audit.test_numeric_codec -v",
+      "tests": 11,
+      "passed": 10,
+      "skipped": 1,
+      "exit_code": 0,
+      "reason": "Release reference corpus not installed"
+    },
+    {
+      "command": "python3 research/ios27-metal-splat-20261014/test_metrics.py",
+      "tests": 5,
+      "passed": 5,
+      "skipped": 0,
+      "exit_code": 0
+    }
+  ],
+  "compile": {
+    "mapkit_probe": "clang++ build succeeded with -Wall -Wextra",
+    "image_identity": "clang++ build succeeded with -Wall -Wextra",
+    "python": "compileall succeeded"
+  },
+  "evidence_checks": {
+    "completed_probe_runs": 6,
+    "uniform_snapshots": 12,
+    "complete_resource_groups": 12,
+    "live_extracted_uuid_and_text_fingerprint_match": true,
+    "source_executable_hashes_match": true,
+    "local_markdown_links_exist": true,
+    "capture_has_commands": true,
+    "native_maps_trace_has_target_events": false
+  },
+  "caveat": "Original full R3D/native reference array corpus was not rerun; this records the listed checks actually executed in this session."
+}

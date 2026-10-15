@@ -1,5 +1,17 @@
 # 次の解析の引継ぎ
 
+## macOS実行時解析からの継続（2026-10-15）
+
+[macOS報告](../research/macos-maps-20261015/README.md) と `research/macos-maps-20261015/metrics/` を新しい起点にする。macOS 27.0.1の純正MapsでロードされたVectorKit UUIDを同定済み。同じbuildのMapKitホストで実際のSplat定数 `1.5 / 148.16207885742188` とGPU用3配列、function constants、render passを取得した。旧実験の `1 / 20`、imageblock 28、RGBA16Fは実験設定として残す。
+
+1. `tools/mapkit_probe.mm` と `tools/audit_probe.py` で現在のbuild・選択したsceneを再確認する。取得できたのはfirst instanceと重複排除したrender slotで、地理tile IDや全drawではない。
+2. 同じcameraのcaptureから最終color/depthを取り出し、実uniform・実function constant・BGRA8Unorm_sRGB / Depth32Float_Stencil8 / imageblock 32の条件で独立rendererと比較する。既存の単一triangleテストと公式frame parityを区別する。
+3. native R3D入力、CPU出力、量子化GPU頂点・12-byte属性・orderを同時に対応付ける。shader側の復元式と全CPU→GPU変換の証明は別。
+4. カメラを連続して動かし、slot再利用・tile境界・LOD・tile間sortを追う。今回の概ねfront-to-backという観測から、正確なsort comparatorやLODを断定しない。
+5. 純正Maps.appで同じ観測が可能なら比較する。今回のLLDB attachはtimeoutで理由未確定。純正MapsのMetal System Traceはtarget GPUイベント0件であり、成功済みとして引き継がない。
+
+生バッファ・capture・AIRはローカルの `reports/generated/macos-maps-20261015/` にありGit対象外。今回の `.gputrace` は約1.2 GiB。Gitにはツール・hash・構造・数値レポートを保存している。以下の元の引継ぎはそのまま維持する。
+
 **高さ層の追補（2026-10-14）：** 旧Oahu72はh0原本の復号・配列検証であり、地域上部の取得が不足していた。高さ占有インデックスから全層を取得する修正で135タイルへ補完し、配列・表示・出力を再検証。旧数値証拠は有効だが、旧72だけで高層部分まで表示できるとは扱わない。[修正後の証拠](../reports/height-layers-20261014/README.md)。
 
 ## 作業場所

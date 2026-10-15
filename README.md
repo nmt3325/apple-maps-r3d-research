@@ -1,5 +1,11 @@
 # Apple Maps R3D / Flyover research
 
+## macOS実行時・GPU解析の追補（2026-10-15）
+
+純正MapsでロードされたVectorKitのUUIDを抽出バイナリと照合し、同じbuildを使う解析用MapKitアプリで、実際のSplat drawに結び付くGPUバッファと定数を取得しました。東京の距離別条件とOahuの標本で **alphaConcentration=1.5、alphaPreFactor=148.16207885742188** を観測。頂点ushort4・12-byte属性・描画順序の対応、概ね手前から奥への順序、shader function constants、**imageblock 32 / BGRA8Unorm_sRGB / Depth32Float_Stencil8** の実passも記録しています。command dataを含むGPU captureと再現用ツールを保存しました。
+
+**MapKitホストでの実測であり、純正Maps.appのuniform取得・iOS runtime・公式最終frame一致は未達です。** 純正MapsのTraceは対象GPUイベント0件だったため成功例に数えていません。[解析報告・再現手順・JSON証拠](research/macos-maps-20261015/README.md)。以下の2026-10-14の成果に対する追補です。
+
 ## iOS ネイティブ・視界に応じた直接取得
 
 `ios/R3DExplorer.xcodeproj` に SwiftUI + Metal の iPhone / iPad アプリを追加。Apple Maps の R3D / C3MM を端末から直接取得し、独立 decoder を端末内で実行する。カメラ移動に応じた取得、全高さ、距離別 LOD、視界外モデルの解放、容量制限付きキャッシュ、青空・太陽・雲を実装している。既存の研究用 Web ビューアも保持する。

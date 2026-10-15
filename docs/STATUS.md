@@ -1,5 +1,7 @@
 # 2026-10-14 JSTの状態
 
+**macOS実行時解析の追補（2026-10-15）：** 同じVectorKit buildの解析用MapKitホストからSplat drawの定数 `c=1.5 / p=148.16207885742188`、対応GPU配列、function constants、imageblock 32 / BGRA8Unorm_sRGB / Depth32Float_Stencil8のrender passを取得。東京450/900/1800mとOahuの標本を監査し、command dataを含むGPU captureも保存した。純正Mapsの初回sampleによるUUID・footprint取得は成功したが、LLDB attachはtimeout、純正MapsのTraceは対象GPUイベント0件。**純正Maps.appのuniformやiOS runtimeの確認、最終frame一致とは区別する。** [報告と再現手順](../research/macos-maps-20261015/README.md)。以下は前日までの成果と制約。
+
 **高さ層の追補（2026-10-14）：** 旧Oahu72はh0原本の復号・配列検証であり、地域上部の取得が不足していた。高さ占有インデックスから全層を取得する修正で135タイルへ補完し、配列・表示・出力を再検証。旧数値証拠は有効だが、旧72だけで高層部分まで表示できるとは扱わない。[修正後の証拠](../reports/height-layers-20261014/README.md)。
 
 対応するR3Dについて主要目標の6条件を達成。証拠は[validation-20261014](../reports/validation-20261014/README.md)。[ACCEPTANCE.md](ACCEPTANCE.md)の6項目をすべて満たした時点で達成とする。以下の部分的な成果はその判定と区別する。
