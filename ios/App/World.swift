@@ -194,6 +194,19 @@ struct TileInfo: Decodable, Sendable {
     var splatVertices: Int
     var vertexCount: Int
     var atlasDimensions: [Int]?
+    func validBuffers(_ data: [String:Data]) -> Bool {
+        guard (0...1_500_000).contains(vertexCount), (0...500_000).contains(meshTriangles),
+              (0...1_500_000).contains(splatVertices),
+              transform.matrixR3x3.count == 9, transform.ecefTranslation.count == 3,
+              min.count == 3, max.count == 3,
+              (transform.matrixR3x3+transform.ecefTranslation+min+max).allSatisfy({$0.isFinite}),
+              (0..<3).allSatisfy({min[$0] <= max[$0]}),
+              let vertices = data["vertices"], let indices = data["indices"], let splats = data["splats"],
+              vertices.count == vertexCount*32, indices.count == meshTriangles*12,
+              splats.count == splatVertices*40, data["atlas"] != nil,
+              vertices.count+indices.count+splats.count <= 64*1024*1024 else { return false }
+        return true
+    }
     func sphere(origin: GeoOrigin) -> TileSphere {
         let lower = SIMD3<Float>(Float(min[0]),Float(min[1]),Float(min[2]))
         let upper = SIMD3<Float>(Float(max[0]),Float(max[1]),Float(max[2]))
@@ -243,6 +256,11 @@ struct HeightIndex: Decodable, Sendable {
     struct Position: Decodable, Sendable { var z: Int; var x: Int; var y: Int }
     var tile: Position
     var cells: [[Int]]
+    func valid(for key: TileKey) -> Bool {
+        tile.z == key.z && tile.x == key.x && tile.y == key.y && cells.count <= 65535 &&
+            cells.allSatisfy { $0.count == 3 && (0..<16).contains($0[0]) &&
+                (0..<16).contains($0[1]) && (0..<256).contains($0[2]) } && Set(cells).count == cells.count
+    }
     func expand(_ key: TileKey) throws -> [TileKey] {
         guard (16...20).contains(key.z), tile.z == key.index.z,
               tile.x == key.index.x && tile.y == key.index.y,

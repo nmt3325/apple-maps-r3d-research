@@ -1,5 +1,6 @@
 import MetalKit
 import ImageIO
+import UniformTypeIdentifiers
 import simd
 
 struct GPUTile: @unchecked Sendable {
@@ -28,6 +29,7 @@ struct GPUTile: @unchecked Sendable {
 struct PreparedAtlas: @unchecked Sendable {
     let texture: MTLTexture
     let sourcePixels: Int
+    let bitmap: CGImage
 }
 
 final class GPUFactory: @unchecked Sendable {
@@ -49,7 +51,10 @@ final class GPUFactory: @unchecked Sendable {
                 kCGImageSourceCreateThumbnailFromImageAlways:true,
                 kCGImageSourceThumbnailMaxPixelSize:limit,
                 kCGImageSourceShouldCacheImmediately:true] as CFDictionary) else { throw StreamError.invalidGeometry }
-        return try MTKTextureLoader(device:device).newTexture(cgImage:bitmap,options:[
+        return try upload(bitmap)
+    }
+    private func upload(_ bitmap: CGImage) throws -> MTLTexture {
+        try MTKTextureLoader(device:device).newTexture(cgImage:bitmap,options:[
             .SRGB:true,.generateMipmaps:true,.textureStorageMode:MTLStorageMode.private.rawValue])
     }
     func prepareAtlas(image: Data, limit: Int) throws -> PreparedAtlas? {
@@ -58,10 +63,22 @@ final class GPUFactory: @unchecked Sendable {
         guard let source = CGImageSourceCreateWithData(image as CFData,nil),
               let properties = CGImageSourceCopyPropertiesAtIndex(source,0,nil) as? [CFString:Any],
               let width = properties[kCGImagePropertyPixelWidth] as? Int,
-              let height = properties[kCGImagePropertyPixelHeight] as? Int else { throw StreamError.invalidGeometry }
-        let atlas = try texture(image:image,limit:limit)
+              let height = properties[kCGImagePropertyPixelHeight] as? Int,
+              (1...32768).contains(width), (1...32768).contains(height),
+              let bitmap = CGImageSourceCreateThumbnailAtIndex(source,0,[
+                kCGImageSourceCreateThumbnailFromImageAlways:true,kCGImageSourceThumbnailMaxPixelSize:limit,
+                kCGImageSourceShouldCacheImmediately:true] as CFDictionary) else { throw StreamError.invalidGeometry }
+        let atlas = try upload(bitmap)
         try Task.checkCancellation()
-        return PreparedAtlas(texture:atlas,sourcePixels:max(width,height))
+        return PreparedAtlas(texture:atlas,sourcePixels:max(width,height),bitmap:bitmap)
+    }
+    static func previewData(_ atlas: PreparedAtlas) -> Data? {
+        guard !Task.isCancelled, max(atlas.bitmap.width,atlas.bitmap.height) <= 256 else { return nil }
+        let data = NSMutableData()
+        guard let destination = CGImageDestinationCreateWithData(data,UTType.png.identifier as CFString,1,nil) else { return nil }
+        CGImageDestinationAddImage(destination,atlas.bitmap,nil)
+        guard CGImageDestinationFinalize(destination) else { return nil }
+        return data as Data
     }
     // Reuse resident mips under pressure, even after the CPU cache entry expired.
     func reducedTexture(_ source: MTLTexture, limit: Int) throws -> MTLTexture {
@@ -84,10 +101,7 @@ final class GPUFactory: @unchecked Sendable {
         guard let json = decoded["json"], let vb = decoded["vertices"], let ib = decoded["indices"],
               let sb = decoded["splats"], let image = decoded["atlas"] else { throw StreamError.invalidGeometry }
         let info = try JSONDecoder().decode(TileInfo.self,from:json)
-        guard vb.count == info.vertexCount*32, ib.count == info.meshTriangles*12,
-              sb.count == info.splatVertices*40, info.transform.matrixR3x3.count == 9,
-              info.transform.ecefTranslation.count == 3, info.min.count == 3, info.max.count == 3,
-              vb.count+ib.count+sb.count <= 64*1024*1024 else { throw StreamError.invalidGeometry }
+        guard info.validBuffers(decoded) else { throw StreamError.invalidGeometry }
         func buffer(_ data: Data) throws -> MTLBuffer? {
             guard !data.isEmpty else { return nil }
             let result = data.withUnsafeBytes { bytes in device.makeBuffer(bytes:bytes.baseAddress!,length:data.count,options:.storageModeShared) }
@@ -98,7 +112,15 @@ final class GPUFactory: @unchecked Sendable {
         var texture: MTLTexture?
         var sourcePixels = 0
         if info.meshTriangles > 0 {
-            guard let atlas = try preparedAtlas ?? prepareAtlas(image:image,limit:textureLimit) else { throw StreamError.invalidGeometry }
+            var selected = preparedAtlas
+            if selected == nil, key.z == StreamingPolicy.coarseZoom, textureLimit <= 256,
+               let preview = decoded["preview_atlas"], let dimensions = info.atlasDimensions,
+               dimensions.count == 2, dimensions.allSatisfy({(1...32768).contains($0)}),
+               let cached = try? prepareAtlas(image:preview,limit:textureLimit) {
+                selected = PreparedAtlas(texture:cached.texture,sourcePixels:dimensions.max()!,bitmap:cached.bitmap)
+            }
+            try Task.checkCancellation()
+            guard let atlas = try selected ?? prepareAtlas(image:image,limit:textureLimit) else { throw StreamError.invalidGeometry }
             sourcePixels = atlas.sourcePixels
             texture = atlas.texture
         }

@@ -96,54 +96,6 @@ enum CredentialStore {
     }
 }
 
-actor RawCache {
-    struct Entry { var size: Int; var touched: Date }
-    let directory: URL
-    var entries: [String:Entry] = [:]
-    var bytes = 0
-    let budget: Int
-    init(namespace: String, budget: Int = 384*1024*1024) {
-        self.budget = budget
-        directory = FileManager.default.urls(for:.cachesDirectory,in:.userDomainMask)[0]
-            .appendingPathComponent("R3D/"+namespace,isDirectory:true)
-        try? FileManager.default.createDirectory(at:directory,withIntermediateDirectories:true)
-        let files = (try? FileManager.default.contentsOfDirectory(at:directory,includingPropertiesForKeys:[.fileSizeKey,.contentModificationDateKey])) ?? []
-        for file in files where file.pathExtension == "bin" {
-            if let info = try? file.resourceValues(forKeys:[.fileSizeKey,.contentModificationDateKey]), let size = info.fileSize {
-                entries[file.lastPathComponent] = Entry(size:size,touched:info.contentModificationDate ?? .distantPast)
-                bytes += size
-            }
-        }
-    }
-    func read(_ key: TileKey) -> Data? {
-        let name = key.name+".bin"
-        guard var entry = entries[name], Date().timeIntervalSince(entry.touched) < 3600,
-              let data = try? Data(contentsOf:directory.appendingPathComponent(name)), data.count == entry.size else {
-            remove(name); return nil
-        }
-        entry.touched = Date(); entries[name] = entry
-        return data
-    }
-    func remove(_ name: String) {
-        if let entry = entries.removeValue(forKey:name) { bytes -= entry.size }
-        try? FileManager.default.removeItem(at:directory.appendingPathComponent(name))
-    }
-    func write(_ key: TileKey, _ data: Data) -> Bool {
-        guard data.count <= budget else { return false }
-        let name = key.name+".bin"
-        remove(name)
-        while bytes+data.count > budget, let oldest = entries.min(by:{$0.value.touched<$1.value.touched}) { remove(oldest.key) }
-        do {
-            try data.write(to:directory.appendingPathComponent(name),options:.atomic)
-            entries[name] = Entry(size:data.count,touched:Date()); bytes += data.count
-            return true
-        } catch {
-            DiagnosticsLog.shared.event("cache.disk_write_error",tile:key.name,fields:DiagnosticsLog.errorFields(error)); return false
-        }
-    }
-    func clear() { for name in Array(entries.keys) { remove(name) } }
-}
-
 final class DownloadLimit: NSObject, URLSessionDownloadDelegate, @unchecked Sendable {
     let limit = 16_000_000
     let tile: String
@@ -195,10 +147,12 @@ final class DownloadLimit: NSObject, URLSessionDownloadDelegate, @unchecked Send
 actor AppleMapsClient {
     let config: FetchConfiguration
     let cache: RawCache
+    let preparedCache: RawCache
     let session: URLSession
     var empty: [TileKey:Date] = [:]
     init(_ config: FetchConfiguration) {
         self.config = config; cache = RawCache(namespace:config.cacheNamespace)
+        preparedCache = RawCache(namespace:config.cacheNamespace+"-prepared-v1",budget:64*1024*1024)
         let settings = URLSessionConfiguration.ephemeral
         settings.timeoutIntervalForRequest = 25
         settings.timeoutIntervalForResource = 40
@@ -280,8 +234,9 @@ actor AppleMapsClient {
     func rejectCached(_ key: TileKey) async {
         DiagnosticsLog.shared.event("cache.disk_reject",tile:key.name)
         await cache.remove(key.name+".bin")
+        await preparedCache.remove(key.name+".bin")
     }
-    func clearCache() async { empty.removeAll(); await cache.clear() }
+    func clearCache() async { empty.removeAll(); await preparedCache.clear(); await cache.clear() }
 }
 
 actor TileDecoder {

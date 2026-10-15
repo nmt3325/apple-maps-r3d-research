@@ -327,6 +327,7 @@ final class ExplorerModel: ObservableObject {
                   indices[key] == nil else { continue }
             let decoder = nextDecoder == 0 ? decoder : secondDecoder
             nextDecoder = (nextDecoder+1)%2
+            let preparedCache = client.preparedCache
             let trace = UUID().uuidString, pipelineStart = DiagnosticsLog.now
             let wait = (pipelineStart-(queuedAt.removeValue(forKey:key) ?? pipelineStart))*1000
             let cached = decodedCache.value(for:key,now:CACurrentMediaTime())
@@ -339,12 +340,21 @@ final class ExplorerModel: ObservableObject {
                 defer { DiagnosticsLog.shared.event("pipeline.end",tile:key.name,trace:trace,fields:["generation":epoch,
                     "outcome":outcome,"last_stage":stage,"duration_ms":DiagnosticsLog.milliseconds(since:pipelineStart)]) }
                 do {
-                    let raw = cached == nil ? try await client.fetch(key,trace:trace) : Data()
+                    let cacheStart = DiagnosticsLog.now
+                    let persistent = cached == nil && PreparedTileSnapshot.supports(key) ? await preparedCache.readPrepared(key) : nil
+                    let available = cached ?? persistent?.payload
+                    if let persistent {
+                        DiagnosticsLog.shared.event("cache.prepared_read",tile:key.name,trace:trace,
+                            fields:["hit":persistent.payload != nil,"duration_ms":DiagnosticsLog.milliseconds(since:cacheStart)])
+                    }
+                    let raw = available == nil ? try await client.fetch(key,trace:trace) : Data()
                     try Task.checkCancellation()
                     guard let self, self.generation == epoch else { return }
                     self.fetching.remove(key)
                     self.pump()
                     if let raw {
+                        var persist: [String:Data]?
+                        var persistAtlas: PreparedAtlas?
                         stage = "processing_wait"
                         let slotStart = DiagnosticsLog.now
                         DiagnosticsLog.shared.event("processing.queued",tile:key.name,trace:trace,fields:["active":self.processing.active])
@@ -356,7 +366,7 @@ final class ExplorerModel: ObservableObject {
                             var atlasPreparation: Task<PreparedAtlas?,Error>?
                             defer { atlasPreparation?.cancel() }
                             do {
-                                if let cached { decoded = cached }
+                                if let available { decoded = available }
                                 else {
                                     if key.style == 98 && key.z == StreamingPolicy.coarseZoom {
                                         let payload = try await decoder.invoke("atlas_payload",data:raw,tile:key.name,trace:trace,queuedAt:DiagnosticsLog.now)
@@ -380,10 +390,11 @@ final class ExplorerModel: ObservableObject {
                             if key.style == 100 {
                                 guard let data = decoded["json"] else { throw StreamError.invalidIndex }
                                 let index = try JSONDecoder().decode(HeightIndex.self,from:data)
-                                guard index.tile.z == key.z && index.tile.x == key.x && index.tile.y == key.y else { throw StreamError.invalidIndex }
+                                guard index.valid(for:key) else { throw StreamError.invalidIndex }
                                 if self.generation == epoch && self.needed.contains(key) {
                                     self.indices[key] = index; outcome = "index_ready"
                                     DiagnosticsLog.shared.event("index.ready",tile:key.name,trace:trace,fields:["occupied_cells":index.cells.count])
+                                    if available == nil { persist = decoded }
                                 }
                             } else {
                                 guard let json = decoded["json"] else { throw StreamError.invalidGeometry }
@@ -441,9 +452,25 @@ final class ExplorerModel: ObservableObject {
                                         self.tileReadyAt[key] = DiagnosticsLog.now; self.tileTraces[key] = trace; self.awaitingFirstDraw.insert(key)
                                         DiagnosticsLog.shared.event("gpu.resident",tile:key.name,trace:trace,fields:["resident_bytes":self.residentBytes,
                                             "needed_to_resident_ms":(DiagnosticsLog.now-(self.neededAt[key] ?? pipelineStart))*1000])
+                                        if available == nil && PreparedTileSnapshot.supports(key) {
+                                            persist = decoded; persistAtlas = preparedAtlas
+                                        }
                                     }
                                 }
                             }
+                        }
+                        if outcome == "index_ready" { self.updatePlan(now:CACurrentMediaTime()) }
+                        if let data = persist, let revision = persistent?.revision {
+                            stage = "persist"
+                            let atlas = persistAtlas, saveStart = DiagnosticsLog.now
+                            let writer = Task.detached(priority:.utility) {
+                                var payload = data
+                                if let atlas, let image = GPUFactory.previewData(atlas) { payload["preview_atlas"] = image }
+                                return await preparedCache.storePrepared(payload,for:key,revision:revision)
+                            }
+                            let stored = await withTaskCancellationHandler(operation:{await writer.value},onCancel:{writer.cancel()})
+                            DiagnosticsLog.shared.event("cache.prepared_write",tile:key.name,trace:trace,
+                                fields:["stored":stored,"duration_ms":DiagnosticsLog.milliseconds(since:saveStart)])
                         }
                     } else if self.generation == epoch { self.empty[key] = Date().addingTimeInterval(60); outcome = "empty" }
                 } catch is CancellationError { outcome = "cancelled" }
@@ -466,8 +493,7 @@ final class ExplorerModel: ObservableObject {
                 if self.active && !self.paused && !self.authFailed {
                     // Index arrival expands the plan immediately. Other results
                     // use the frame's plan instead of re-sorting on every empty response.
-                    if outcome == "index_ready" { self.updatePlan(now:CACurrentMediaTime()) }
-                    else { self.pump() }
+                    self.pump()
                     if self.pending.isEmpty && self.queue.isEmpty && self.failures.isEmpty {
                         self.message = self.tiles.isEmpty ? "この範囲には対応する 3D データがありません" : "視界内の 3D モデルを表示中"
                     }
